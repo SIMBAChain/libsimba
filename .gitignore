@@ -1,0 +1,17 @@
+**__pycache__**
+**local_**
+/dist/
+**/build/
+docs/.doctrees
+
+**_token.json
+**.log
+
+**.env
+**.venv
+
+# Vim
+*.*~
+*.*.swp
+
+**/.DS_Store

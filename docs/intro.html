@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibSimba.py &mdash; libsimba 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="libsimba package" href="libsimba.html" />
+    <link rel="prev" title="Welcome to libsimba for SIMBA Blocks!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> libsimba
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LibSimba.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation"><em>Installation</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-from-package"><em>Install from package:</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-for-development"><em>Install for development</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternatively-using-virtualenv"><em>Alternatively, using virtualenv</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration"><em>Configuration</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#usage"><em>Usage</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#instantiate-the-simba-client"><em>Instantiate the SIMBA client</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-and-account-functions">User and Account Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#platform-functions">Platform Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#invoking-smart-contract-methods">Invoking Smart Contract Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#querying-smart-contract-methods">Querying Smart contract Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-file-bundle-information">Getting File Bundle Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contract-client-classes">Contract Client Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libsimba.html">libsimba package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libsimba</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>LibSimba.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/intro.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="libsimba-py">
+<h1>LibSimba.py<a class="headerlink" href="#libsimba-py" title="Permalink to this heading"></a></h1>
+<section id="installation">
+<h2><em>Installation</em><a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>Requires Python &gt;= 3.8</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">libsimba</span>
+</pre></div>
+</div>
+<section id="install-from-package">
+<h3><em>Install from package:</em><a class="headerlink" href="#install-from-package" title="Permalink to this heading"></a></h3>
+<p>View our <a class="reference external" href="https://github.com/SIMBAChain/libsimba/releases/">releases</a> and download the tarball for the chosen release.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">libsimba</span><span class="o">-</span><span class="mf">0.1.0</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+</section>
+<section id="install-for-development">
+<h3><em>Install for development</em><a class="headerlink" href="#install-for-development" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SIMBAChain</span><span class="o">/</span><span class="n">libsimba</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">libsimba</span>
+<span class="n">poetry</span> <span class="n">install</span>
+</pre></div>
+</div>
+</section>
+<section id="alternatively-using-virtualenv">
+<h3><em>Alternatively, using virtualenv</em><a class="headerlink" href="#alternatively-using-virtualenv" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SIMBAChain</span><span class="o">/</span><span class="n">libsimba</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">libsimba</span>
+<span class="n">virtualenv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span> <span class="o">.</span><span class="n">venv</span>
+<span class="n">source</span> <span class="o">.</span><span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">poetry</span> <span class="n">install</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configuration">
+<h2><em>Configuration</em><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Configuration is loaded consistent with other SIMBA client tools.
+The config file should be in dotenv format and should be called <code class="docutils literal notranslate"><span class="pre">.simbachain.env</span></code> or <code class="docutils literal notranslate"><span class="pre">simbachain.env</span></code>
+(i.e. a visible variant).</p>
+<p>This can be placed in the <code class="docutils literal notranslate"><span class="pre">libsimba</span></code> package, alongside the config module, or can be placed anywhere if the
+environment variable <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME</span></code> is set. This variable should point to the directory containing the
+<code class="docutils literal notranslate"><span class="pre">.simbachain.env</span></code> file. The <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME</span></code> variable defaults to the user’s home directory, e.g. <code class="docutils literal notranslate"><span class="pre">~/</span></code></p>
+<p>The search order for this file is:</p>
+<ul class="simple">
+<li><p>At <code class="docutils literal notranslate"><span class="pre">libsimba/.simbachain.env</span></code></p></li>
+<li><p>At <code class="docutils literal notranslate"><span class="pre">libsimba/simbachain.env</span></code></p></li>
+<li><p>At <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME/.simbachain.env</span></code></p></li>
+<li><p>At <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME/simbachain.env</span></code></p></li>
+</ul>
+<p>The config setup supports in memory env vars taking precedence over values in the file.
+All environment variables for libsimba are prefixed with <code class="docutils literal notranslate"><span class="pre">SIMBA_</span></code>.</p>
+<p>Two auth providers are currently supported: Blocks and KeyCloak. For Blocks the configuration will look something like
+below, i.e., the <code class="docutils literal notranslate"><span class="pre">SIMBA_AUTH_BASE_URL</span></code> and <code class="docutils literal notranslate"><span class="pre">SIMBA_API_BASE_URL</span></code> are the same:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">SIMBA_AUTH_CLIENT_SECRET</span><span class="o">=</span>...
+<span class="nv">SIMBA_AUTH_CLIENT_ID</span><span class="o">=</span>...
+<span class="nv">SIMBA_AUTH_BASE_URL</span><span class="o">=</span>https://my.blocks.server
+<span class="nv">SIMBA_API_BASE_URL</span><span class="o">=</span>https://my.blocks.server
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">SIMBA_AUTH_PROVIDER</span></code> is correctly configured for Blocks.</p>
+<p>For keycloak, the configuration will look more like, below, including a realm ID and setting the <code class="docutils literal notranslate"><span class="pre">AUTH_PROVIDER</span></code> to <code class="docutils literal notranslate"><span class="pre">KC</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">SIMBA_AUTH_CLIENT_SECRET</span><span class="o">=</span>...
+<span class="nv">SIMBA_AUTH_CLIENT_ID</span><span class="o">=</span>...
+<span class="nv">SIMBA_AUTH_REALM</span><span class="o">=</span>simbachain
+<span class="nv">SIMBA_API_BASE_URL</span><span class="o">=</span>https://my.blocks.server
+<span class="nv">SIMBA_AUTH_BASE_URL</span><span class="o">=</span>https://my.keycloak.server
+<span class="nv">SIMBA_AUTH_PROVIDER</span><span class="o">=</span>KC
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">AUTH_FLOW</span></code> should currently not be changed as only <code class="docutils literal notranslate"><span class="pre">client_credentials</span></code> is supported.</p>
+<p>These values can also be directly set an environment variables if you don’t use a dot env file.</p>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h3>
+<p>To configure logging, set the <code class="docutils literal notranslate"><span class="pre">SIMBA_LOG_CONFIG</span></code> environment variable pointing to a logging file.
+If you don’t set that the default <code class="docutils literal notranslate"><span class="pre">libsimba/logging.conf</span></code> configuration will be used. If you provide a logging
+config file that is json and has a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file extension, then it will be loaded as a dictionary config.
+Otherwise ini file format is assumed.</p>
+</section>
+</section>
+<section id="usage">
+<h2><em>Usage</em><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<section id="instantiate-the-simba-client">
+<h3><em>Instantiate the SIMBA client</em><a class="headerlink" href="#instantiate-the-simba-client" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libsimba.simba</span> <span class="kn">import</span> <span class="n">Simba</span>
+
+<span class="n">simba</span> <span class="o">=</span> <span class="n">Simba</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>The Simba client object runs asynchronously by default, so if you would like to run synchronous code instead, you should use the SimbaSync client:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libsimba.simba</span> <span class="kn">import</span> <span class="n">SimbaSync</span>
+
+<span class="n">simba_async</span> <span class="o">=</span> <span class="n">SimbaSync</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>All method signatures for both sync and async clients are the same except the async client functions are largely async and should be awaited.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libsimba</span> <span class="kn">import</span> <span class="n">Simba</span>
+
+<span class="n">simba</span> <span class="o">=</span> <span class="n">Simba</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="c1"># Using Simba&#39;s default async behavior</span>
+
+<span class="c1"># Using Simba and async/await</span>
+<span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">apps</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">get_applications</span><span class="p">()</span>
+        <span class="c1"># .. do something with apps</span>
+
+<span class="c1"># Using simba and asyncio</span>
+<span class="c1"># if you want to run directly from a file and see printed output, use soemthing like the following:</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">apps</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">get_applications</span><span class="p">()</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libsimba</span> <span class="kn">import</span> <span class="n">SimbaSync</span>
+
+<span class="n">simba_sync</span> <span class="o">=</span> <span class="n">SimbaSync</span><span class="p">()</span>
+
+<span class="c1"># Using SimbaSync with synchronous behavior</span>
+<span class="k">class</span> <span class="nc">SyncExample</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">apps</span> <span class="o">=</span> <span class="n">simba_sync</span><span class="o">.</span><span class="n">get_applications</span><span class="p">()</span>
+        <span class="c1"># .. do something with apps</span>
+
+<span class="c1"># Making a call and viewing printed result:</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">apps</span> <span class="o">=</span> <span class="n">simba_sync</span><span class="o">.</span><span class="n">get_applications</span><span class="p">()</span>
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>returned objects are currently not typed, i.e., the SDK returns <code class="docutils literal notranslate"><span class="pre">dict</span></code> instances.</p>
+</section>
+<section id="user-and-account-functions">
+<h3>User and Account Functions<a class="headerlink" href="#user-and-account-functions" title="Permalink to this heading"></a></h3>
+<p>The Simba class provides some functions focussed on users and accounts:</p>
+<ul class="simple">
+<li><p>Get the current user (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">whoami</span></code>)</p></li>
+<li><p>Get the balance of an address (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">balance</span></code>)</p></li>
+<li><p>Fund an address (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">fund</span></code>)</p></li>
+<li><p>Set the current user custodial wallet for a blockchain (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">set_wallet</span></code>)</p></li>
+<li><p>Get the current user custodial wallet (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">get_wallet</span></code>)</p></li>
+</ul>
+</section>
+<section id="platform-functions">
+<h3>Platform Functions<a class="headerlink" href="#platform-functions" title="Permalink to this heading"></a></h3>
+<p>The Simba class provides functions to list platform capabilities:</p>
+<ul class="simple">
+<li><p>List available blockchains (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">get_blockchains</span></code>)</p></li>
+<li><p>List available off chain storage (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">get_storage</span></code>)</p></li>
+</ul>
+</section>
+<section id="invoking-smart-contract-methods">
+<h3>Invoking Smart Contract Methods<a class="headerlink" href="#invoking-smart-contract-methods" title="Permalink to this heading"></a></h3>
+<p>The Simba class provides several methods for calling methods in smart contracts. These take the SIMBA <code class="docutils literal notranslate"><span class="pre">app</span></code> name,
+the contract API name and the method name. The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> parameter contains a dict of method parameter values
+keyed to their parameter names.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;person&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;The Laughing Gnome&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;street&quot;</span><span class="p">:</span> <span class="s2">&quot;Happy Street&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                    <span class="s2">&quot;town&quot;</span><span class="p">:</span> <span class="s2">&quot;Funsville&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+<span class="n">txn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">submit_contract_method</span><span class="p">(</span>
+    <span class="n">app_id</span><span class="o">=</span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span>
+    <span class="n">contract_name</span><span class="o">=</span><span class="s2">&quot;my-contract&quot;</span><span class="p">,</span>
+    <span class="n">method_name</span><span class="o">=</span><span class="s2">&quot;myMethod&quot;</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To submit a call to the method that accepts files, you add the <code class="docutils literal notranslate"><span class="pre">files</span></code> parameter and pass in a <code class="docutils literal notranslate"><span class="pre">FileDict</span></code> object. A
+<code class="docutils literal notranslate"><span class="pre">FileDict</span></code> takes one or more <code class="docutils literal notranslate"><span class="pre">File</span></code> objects. These encapsulate files on the local file system. <code class="docutils literal notranslate"><span class="pre">File</span></code> objects have
+a name, a mime type, and a path or file pointer. Typically, a path is passed in from which the file name, mime type
+are derived with the file pointer being opened before sending and closed after sending by the request object. If
+the <code class="docutils literal notranslate"><span class="pre">close_on_complete</span></code> field is set to false, the file pointer is not closed and should be closed by the application.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="n">FileDict</span><span class="p">(</span>
+    <span class="n">files</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;./data/file1.txt&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;f1.txt&quot;</span><span class="p">,</span> <span class="n">mime</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span><span class="p">),</span>
+        <span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;./data/file2.txt&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;f2.txt&quot;</span><span class="p">,</span> <span class="n">mime</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">txn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">submit_contract_method</span><span class="p">(</span>
+    <span class="n">app_id</span><span class="o">=</span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span>
+    <span class="n">contract_name</span><span class="o">=</span><span class="s2">&quot;my-contract&quot;</span><span class="p">,</span>
+    <span class="n">method_name</span><span class="o">=</span><span class="s2">&quot;myMethod&quot;</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span>
+    <span class="n">files</span><span class="o">=</span><span class="n">files</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Methods that allow file uploads have a special <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> parameter. This should be left empty when submitting the
+transaction along with files. Blocks takes the files and sends them to the configured off chain storage, hashing
+them along the way and producing a JSON manifest file of all files uploaded. This manifest file is then hashed, and
+that hash is put in the <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> field before writing to chain. This provides verifiability of file content.</p>
+<p>As we well as methods that create transactions, some contract methods are getter functions that return values
+from the contract and do not add to the chain. These can be called using HTTP GET:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">getter_result</span> <span class="o">=</span> <span class="n">simba</span><span class="o">.</span><span class="n">call_contract_method</span><span class="p">(</span>
+        <span class="n">app_id</span><span class="o">=</span><span class="n">app</span><span class="p">,</span>
+        <span class="n">contract_name</span><span class="o">=</span><span class="n">api_name</span><span class="p">,</span>
+        <span class="n">method_name</span><span class="o">=</span><span class="s2">&quot;tokenUri&quot;</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="n">MethodCallArgs</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tokenId&quot;</span><span class="p">:</span> <span class="s2">&quot;349873423984143&quot;</span><span class="p">}),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The MethodCallArgs class is a simple wrapper around a dict of args that is appended to the query string of the request.</p>
+</section>
+<section id="querying-smart-contract-methods">
+<h3>Querying Smart contract Methods<a class="headerlink" href="#querying-smart-contract-methods" title="Permalink to this heading"></a></h3>
+<p>For methods that are not getters, you can query for past transactions created by submitting transactions to the method.
+Query calls optionally take a SearchFilter object that has various fields that can filter responses.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">filters</span></code> field is a list of <code class="docutils literal notranslate"><span class="pre">FieldFilter</span></code> objects that point to a field, contain a value and an operator.
+For JSON field inputs, dotted paths can be used to target elements within the JSON.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">fields</span></code> field allows you to specify the fields to return.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">limit</span></code> and <code class="docutils literal notranslate"><span class="pre">offset</span></code> fields can be used to specify page size and start offset.</p></li>
+</ul>
+<p>Below we create a filter that filters on the <code class="docutils literal notranslate"><span class="pre">person.age</span></code> field of the transaction inputs, asking for results
+where that value is greater than 2. We limit page size to 2 and ask only for the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">transaction_hash</span></code>
+and <code class="docutils literal notranslate"><span class="pre">inputs</span></code> fields.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="n">SearchFilter</span><span class="p">(</span>
+    <span class="n">filters</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">FieldFilter</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s2">&quot;inputs.person.age&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">FilterOp</span><span class="o">.</span><span class="n">GT</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="s2">&quot;transaction_hash&quot;</span><span class="p">,</span> <span class="s2">&quot;inputs&quot;</span><span class="p">],</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">generator</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">list_transactions_by_method</span><span class="p">(</span>
+        <span class="n">app_id</span><span class="o">=</span><span class="n">app</span><span class="p">,</span>
+        <span class="n">contract_name</span><span class="o">=</span><span class="n">api_name</span><span class="p">,</span>
+        <span class="n">method_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">query_function</span><span class="p">(),</span>
+        <span class="n">query_args</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="k">async</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">generator</span><span class="p">:</span>
+    <span class="c1"># automatically pages</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that this call returns a generator that can be iterated. Functions that start with
+the prefix <code class="docutils literal notranslate"><span class="pre">list_</span></code> return generators that call the next page
+until no more results are available.</p>
+<p>Methods that retrieve multiple objects and start with the prefix <code class="docutils literal notranslate"><span class="pre">get_</span></code> return a list from a single page, and hence
+the number of results is limited to a single page size.</p>
+</section>
+<section id="getting-file-bundle-information">
+<h3>Getting File Bundle Information<a class="headerlink" href="#getting-file-bundle-information" title="Permalink to this heading"></a></h3>
+<p>The API allows you get a JSON manifest for a bundle, to download the bundle as a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file, or to download
+a particular file inside a bundle.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bundle_hash</span> <span class="o">=</span> <span class="s2">&quot;348374328746324783642343241&quot;</span>
+
+<span class="c1"># download the manifest JSON using the bundle hash</span>
+<span class="n">manifest</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">get_manifest_for_bundle_from_bundle_hash</span><span class="p">(</span>
+    <span class="n">app_id</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">contract_name</span><span class="o">=</span><span class="n">api_name</span><span class="p">,</span> <span class="n">bundle_hash</span><span class="o">=</span><span class="n">bundle_hash</span>
+<span class="p">)</span>
+
+<span class="c1"># download the bundle using the bundle hash</span>
+<span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">get_bundle</span><span class="p">(</span>
+    <span class="n">app_id</span><span class="o">=</span><span class="n">app</span><span class="p">,</span>
+    <span class="n">contract_name</span><span class="o">=</span><span class="n">api_name</span><span class="p">,</span>
+    <span class="n">bundle_hash</span><span class="o">=</span><span class="n">bundle_hash</span><span class="p">,</span>
+    <span class="n">download_location</span><span class="o">=</span><span class="s2">&quot;./bundle.tar.gz&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># download a file using the bundle hash and the file name</span>
+<span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">get_bundle_file</span><span class="p">(</span>
+    <span class="n">app_id</span><span class="o">=</span><span class="n">app</span><span class="p">,</span>
+    <span class="n">contract_name</span><span class="o">=</span><span class="n">api_name</span><span class="p">,</span>
+    <span class="n">bundle_hash</span><span class="o">=</span><span class="n">bundle_hash</span><span class="p">,</span>
+    <span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;my_file.txt&quot;</span><span class="p">,</span>
+    <span class="n">download_location</span><span class="o">=</span><span class="s2">&quot;./my_file.txt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="contract-client-classes">
+<h3>Contract Client Classes<a class="headerlink" href="#contract-client-classes" title="Permalink to this heading"></a></h3>
+<p>The library provides utilities that represent a single contract API via the <code class="docutils literal notranslate"><span class="pre">SimbaContractSync</span></code> and <code class="docutils literal notranslate"><span class="pre">SimbaContract</span></code>
+classes. These can be created via the respective sync and async Simba classes passing in the Simba instance
+as well as the contract app name and api name. As well as simplifyng calls to contract methods, they also
+perform validation on method inputs based on the contract metadata before making calls.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to libsimba for SIMBA Blocks!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="libsimba.html" class="btn btn-neutral float-right" title="libsimba package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, SIMBA Chain Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

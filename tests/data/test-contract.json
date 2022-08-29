@@ -1,0 +1,753 @@
+{
+  "metadata": {
+    "contract": {
+      "name": "TestContract",
+      "enums": {
+        "Counters.Counter": {
+          "components": [
+            {
+              "name": "_value",
+              "type": "uint256"
+            }
+          ]
+        }
+      },
+      "types": {
+        "Counters.Counter": {
+          "components": [
+            {
+              "name": "_value",
+              "type": "uint256"
+            }
+          ]
+        },
+        "TestContract.Addr": {
+          "components": [
+            {
+              "name": "street",
+              "type": "string"
+            },
+            {
+              "name": "number",
+              "type": "uint256"
+            },
+            {
+              "name": "town",
+              "type": "string"
+            }
+          ]
+        },
+        "TestContract.Person": {
+          "components": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "age",
+              "type": "uint256"
+            },
+            {
+              "name": "addr",
+              "type": "struct TestContract.Addr"
+            }
+          ]
+        },
+        "TestContract.TestData": {
+          "components": [
+            {
+              "name": "data",
+              "type": "string"
+            },
+            {
+              "name": "moreData",
+              "type": "string"
+            }
+          ]
+        },
+        "TestContract.AddressPerson": {
+          "components": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "age",
+              "type": "uint256"
+            },
+            {
+              "name": "addrs",
+              "type": "struct TestContract.Addr[]"
+            }
+          ]
+        }
+      },
+      "assets": {},
+      "events": {
+        "Approval": {
+          "params": [
+            {
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "name": "approved",
+              "type": "address"
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ]
+        },
+        "Transfer": {
+          "params": [
+            {
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ]
+        },
+        "ApprovalForAll": {
+          "params": [
+            {
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "name": "operator",
+              "type": "address"
+            },
+            {
+              "name": "approved",
+              "type": "bool"
+            }
+          ]
+        },
+        "OwnershipTransferred": {
+          "params": [
+            {
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "name": "newOwner",
+              "type": "address"
+            }
+          ]
+        }
+      },
+      "source": {
+        "lang": "solidity",
+        "version": "^0.8.11"
+      },
+      "methods": {
+        "mint": {
+          "emits": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "string"
+            },
+            {
+              "name": "moreData",
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "name": {
+          "emits": [],
+          "params": [],
+          "returns": [
+            {
+              "name": "",
+              "type": "string"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721Metadata-name}."
+            ]
+          }
+        },
+        "nowt": {
+          "emits": [],
+          "params": [],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "owner": {
+          "emits": [],
+          "params": [],
+          "returns": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "Returns the address of the current owner."
+            ]
+          }
+        },
+        "an_arr": {
+          "emits": [],
+          "params": [
+            {
+              "name": "first",
+              "type": "uint256[]"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "symbol": {
+          "emits": [],
+          "params": [],
+          "returns": [
+            {
+              "name": "",
+              "type": "string"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721Metadata-symbol}."
+            ]
+          }
+        },
+        "approve": {
+          "emits": [],
+          "params": [
+            {
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721-approve}."
+            ]
+          }
+        },
+        "ownerOf": {
+          "emits": [],
+          "params": [
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "returns": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721-ownerOf}."
+            ]
+          }
+        },
+        "tokenURI": {
+          "emits": [],
+          "params": [
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "returns": [
+            {
+              "name": "",
+              "type": "string"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721Metadata-tokenURI}."
+            ]
+          }
+        },
+        "two_arrs": {
+          "emits": [],
+          "params": [
+            {
+              "name": "first",
+              "type": "uint256[]"
+            },
+            {
+              "name": "second",
+              "type": "uint256[]"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "balanceOf": {
+          "emits": [],
+          "params": [
+            {
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "returns": [
+            {
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721-balanceOf}."
+            ]
+          }
+        },
+        "address_arr": {
+          "emits": [],
+          "params": [
+            {
+              "name": "first",
+              "type": "address[]"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "getApproved": {
+          "emits": [],
+          "params": [
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "returns": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721-getApproved}."
+            ]
+          }
+        },
+        "getTestData": {
+          "emits": [],
+          "params": [
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "returns": [
+            {
+              "name": "data",
+              "type": "string"
+            },
+            {
+              "name": "moreData",
+              "type": "string"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public"
+        },
+        "nested_arr_0": {
+          "emits": [],
+          "params": [
+            {
+              "name": "first",
+              "type": "uint256[][]"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "nested_arr_1": {
+          "emits": [],
+          "params": [
+            {
+              "name": "first",
+              "type": "uint256[][5]"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "nested_arr_2": {
+          "emits": [],
+          "params": [
+            {
+              "name": "first",
+              "type": "uint256[4][]"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "nested_arr_3": {
+          "emits": [],
+          "params": [
+            {
+              "name": "first",
+              "type": "uint256[3][3]"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "nested_arr_4": {
+          "emits": [],
+          "params": [
+            {
+              "name": "first",
+              "type": "uint256[3][3]"
+            },
+            {
+              "name": "_bundleHash",
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "structTest_1": {
+          "emits": [],
+          "params": [
+            {
+              "name": "people",
+              "type": "struct TestContract.Person[]"
+            },
+            {
+              "name": "test_bool",
+              "type": "bool"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "structTest_2": {
+          "emits": [],
+          "params": [
+            {
+              "name": "person",
+              "type": "struct TestContract.Person"
+            },
+            {
+              "name": "test_bool",
+              "type": "bool"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "structTest_3": {
+          "emits": [],
+          "params": [
+            {
+              "name": "person",
+              "type": "struct TestContract.AddressPerson"
+            },
+            {
+              "name": "_bundleHash",
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "structTest_4": {
+          "emits": [],
+          "params": [
+            {
+              "name": "persons",
+              "type": "struct TestContract.AddressPerson[]"
+            },
+            {
+              "name": "_bundleHash",
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "structTest_5": {
+          "emits": [],
+          "params": [
+            {
+              "name": "person",
+              "type": "struct TestContract.Person"
+            },
+            {
+              "name": "_bundleHash",
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "transferFrom": {
+          "emits": [],
+          "params": [
+            {
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721-transferFrom}."
+            ]
+          }
+        },
+        "clientContainer": {
+          "emits": [],
+          "params": [
+            {
+              "name": "person",
+              "type": "struct TestContract.Person"
+            },
+            {
+              "name": "_bundleHash",
+              "type": "string"
+            },
+            {
+              "name": "_bundlePath",
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public"
+        },
+        "isApprovedForAll": {
+          "emits": [],
+          "params": [
+            {
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "name": "operator",
+              "type": "address"
+            }
+          ],
+          "returns": [
+            {
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721-isApprovedForAll}."
+            ]
+          }
+        },
+        "safeTransferFrom": {
+          "emits": [],
+          "params": [
+            {
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "overloads": [
+            [
+              {
+                "name": "from",
+                "type": "address"
+              },
+              {
+                "name": "to",
+                "type": "address"
+              },
+              {
+                "name": "tokenId",
+                "type": "uint256"
+              },
+              {
+                "name": "_data",
+                "type": "bytes"
+              }
+            ]
+          ],
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721-safeTransferFrom}."
+            ]
+          }
+        },
+        "renounceOwnership": {
+          "emits": [],
+          "params": [],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "Leaves the contract without owner. It will not be possible to call",
+              "`onlyOwner` functions anymore. Can only be called by the current owner.",
+              "NOTE: Renouncing ownership will leave the contract without an owner,",
+              "thereby removing any functionality that is only available to the owner."
+            ]
+          }
+        },
+        "setApprovalForAll": {
+          "emits": [],
+          "params": [
+            {
+              "name": "operator",
+              "type": "address"
+            },
+            {
+              "name": "approved",
+              "type": "bool"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC721-setApprovalForAll}."
+            ]
+          }
+        },
+        "supportsInterface": {
+          "emits": [],
+          "params": [
+            {
+              "name": "interfaceId",
+              "type": "bytes4"
+            }
+          ],
+          "returns": [
+            {
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "accessor": true,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "See {IERC165-supportsInterface}."
+            ]
+          }
+        },
+        "transferOwnership": {
+          "emits": [],
+          "params": [
+            {
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "returns": [],
+          "accessor": false,
+          "visibility": "public",
+          "documentation": {
+            "dev": [
+              "Transfers ownership of the contract to a new account (`newOwner`).",
+              "Can only be called by the current owner."
+            ]
+          }
+        }
+      },
+      "abstract": false,
+      "constructor": {
+        "emits": [],
+        "params": [],
+        "returns": [],
+        "accessor": false,
+        "visibility": "public"
+      },
+      "inheritance": [
+        "ERC721",
+        "Ownable",
+        "Context",
+        "ERC165",
+        "IERC721",
+        "IERC721Metadata",
+        "IERC165"
+      ]
+    }
+  }
+}
