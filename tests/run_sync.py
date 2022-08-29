@@ -33,7 +33,7 @@ class Runner(object):
         self.templates = Templates()
 
     def file_paths(self) -> Tuple[str, str, str]:
-        data_dir = "output"
+        data_dir = os.path.join(os.path.dirname(__file__), "output")
         os.makedirs(data_dir, exist_ok=True)
         zip_path = os.path.join(data_dir, "out.tar.gz")
         file_path = os.path.join(data_dir, "out.txt")
@@ -43,20 +43,21 @@ class Runner(object):
         return "f1.txt"
 
     def check_files(self, data_dir: str, zip_path: str, file_path: str):
+        orig_dir = os.path.join(os.path.dirname(__file__), "data")
         tf = tarfile.open(zip_path)
         unzipped = os.path.join(data_dir, "out")
         os.makedirs(unzipped, exist_ok=True)
         tf.extractall(unzipped)
         with open(os.path.join(unzipped, "f1.txt"), "r") as f1, open(
-            "./data/file1.txt", "r"
+            os.path.join(orig_dir, "file1.txt"), "r"
         ) as f1_orig:
             assert f1.read() == f1_orig.read()
         with open(os.path.join(unzipped, "f2.txt"), "r") as f2, open(
-            "./data/file2.txt", "r"
+            os.path.join(orig_dir, "file2.txt"), "r"
         ) as f2_orig:
             assert f2.read() == f2_orig.read()
         with open(os.path.join(file_path), "r") as f1, open(
-            "./data/file1.txt", "r"
+            os.path.join(orig_dir, "file1.txt"), "r"
         ) as f1_orig:
             assert f1.read() == f1_orig.read()
         shutil.rmtree(data_dir)
@@ -77,6 +78,7 @@ class Runner(object):
         return "Transfer"
 
     def bundle_inputs(self) -> Tuple[dict, FileDict]:
+        orig_dir = os.path.join(os.path.dirname(__file__), "data")
         return (
             {
                 "person": {
@@ -91,8 +93,8 @@ class Runner(object):
             },
             FileDict(
                 files=[
-                    File(path="./data/file1.txt", name="f1.txt", mime="text/plain"),
-                    File(path="./data/file2.txt", name="f2.txt", mime="text/plain"),
+                    File(path=os.path.join(orig_dir, "file1.txt"), name="f1.txt", mime="text/plain"),
+                    File(path=os.path.join(orig_dir, "file2.txt"), name="f2.txt", mime="text/plain"),
                 ]
             ),
         )

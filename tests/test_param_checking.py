@@ -1,3 +1,4 @@
+import os
 import json
 import unittest
 from libsimba.param_checking import ParamChecking
@@ -5,7 +6,8 @@ import respx
 import re
 from httpx import Response
 
-with open("./data/test-contract.json") as md_file:
+data = os.path.join(os.path.dirname(__file__), "data", "test-contract.json")
+with open(data) as md_file:
     md = json.load(md_file)
 
 metadata_pattern = re.compile(r".*/v2/apps/[\w-]+/contract/[\w-]+/\?format=json$")

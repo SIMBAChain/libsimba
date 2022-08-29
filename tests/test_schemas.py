@@ -1,3 +1,4 @@
+import os
 import unittest
 from libsimba import SearchFilter, FilterOp, FieldFilter, FileDict, File
 from libsimba.utils import build_url
@@ -28,29 +29,30 @@ class SchemaTestCase(unittest.TestCase):
         )
 
     def test_files(self):
-        f1 = File(path="./data/file1.txt", mime="text/plain")
-        self.assertEquals("file1.txt", f1.name)
+        data_dir = os.path.join(os.path.dirname(__file__), "data")
+        f1 = File(path=os.path.join(data_dir, "file1.txt"), mime="text/plain")
+        self.assertEqual("file1.txt", f1.name)
         pointer = f1.open()
         # opened in binary mode so matches on bytes
-        self.assertEquals(b"Hello world", pointer.read())
+        self.assertEqual(b"Hello world", pointer.read())
         f1.close()
         f1.close()
-        f2 = File(path="./data/file2.txt")
-        self.assertEquals("file2.txt", f2.name)
-        self.assertEquals("text/plain", f2.mime)
+        f2 = File(path=os.path.join(data_dir, "file2.txt"))
+        self.assertEqual("file2.txt", f2.name)
+        self.assertEqual("text/plain", f2.mime)
         dict1 = FileDict(file=f1)
-        self.assertEquals(1, len(dict1.files))
+        self.assertEqual(1, len(dict1.files))
         dict2 = FileDict(files=[f1, f2])
-        self.assertEquals(2, len(dict2.files))
-        f3 = File(name="f1.txt", fp=open("./data/file1.txt"))
-        self.assertEquals("f1.txt", f3.name)
-        self.assertEquals("text/plain", f3.mime)
+        self.assertEqual(2, len(dict2.files))
+        f3 = File(name="f1.txt", fp=open(os.path.join(data_dir, "file1.txt")))
+        self.assertEqual("f1.txt", f3.name)
+        self.assertEqual("text/plain", f3.mime)
         pointer = f3.open()
         # opened in text mode (to be avoided) so matches on string
-        self.assertEquals("Hello world", pointer.read())
+        self.assertEqual("Hello world", pointer.read())
         f3.close()
 
-        pointer = open("./data/file1.txt")
+        pointer = open(os.path.join(data_dir, "file1.txt"))
         try:
             f4 = File(fp=pointer)
             self.assertFalse(True)
@@ -58,9 +60,9 @@ class SchemaTestCase(unittest.TestCase):
             pass
         pointer.close()
 
-        pointer = open("./data/file1.txt")
+        pointer = open(os.path.join(data_dir, "file1.txt"))
         try:
-            f5 = File(path="./data/file1.txt", fp=pointer)
+            f5 = File(path=os.path.join(data_dir, "file1.txt"), fp=pointer)
         except:
             self.assertFalse(True)
         pointer.close()

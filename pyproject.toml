@@ -43,10 +43,9 @@ known_first_party="poetry"
 [tool.taskipy.tasks]
 isort = { cmd = "isort libsimba", help = "Sort imports" }
 format = { cmd = "black libsimba", help = "Run black code formatting" }
+tests = { cmd = "pytest --pyargs tests --junitxml=junit.xml --verbose", help = "Run tests" }
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.scripts]
-test = 'libsimba.simba:Simba.test'
