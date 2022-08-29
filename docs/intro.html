@@ -129,13 +129,13 @@
 <p>Configuration is loaded consistent with other SIMBA client tools.
 The config file should be in dotenv format and should be called <code class="docutils literal notranslate"><span class="pre">.simbachain.env</span></code> or <code class="docutils literal notranslate"><span class="pre">simbachain.env</span></code>
 (i.e. a visible variant).</p>
-<p>This can be placed in the <code class="docutils literal notranslate"><span class="pre">libsimba</span></code> package, alongside the config module, or can be placed anywhere if the
+<p>This can be placed in the project root, alongside the <code class="docutils literal notranslate"><span class="pre">libsimba</span></code> package, or can be placed anywhere if the
 environment variable <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME</span></code> is set. This variable should point to the directory containing the
 <code class="docutils literal notranslate"><span class="pre">.simbachain.env</span></code> file. The <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME</span></code> variable defaults to the user’s home directory, e.g. <code class="docutils literal notranslate"><span class="pre">~/</span></code></p>
 <p>The search order for this file is:</p>
 <ul class="simple">
-<li><p>At <code class="docutils literal notranslate"><span class="pre">libsimba/.simbachain.env</span></code></p></li>
-<li><p>At <code class="docutils literal notranslate"><span class="pre">libsimba/simbachain.env</span></code></p></li>
+<li><p>At <code class="docutils literal notranslate"><span class="pre">project_root/.simbachain.env</span></code></p></li>
+<li><p>At <code class="docutils literal notranslate"><span class="pre">project_root/simbachain.env</span></code></p></li>
 <li><p>At <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME/.simbachain.env</span></code></p></li>
 <li><p>At <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME/simbachain.env</span></code></p></li>
 </ul>
