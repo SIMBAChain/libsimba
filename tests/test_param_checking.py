@@ -1,6 +1,6 @@
 import json
 import unittest
-from libsimba.param_checking_contract import ParamCheckingContract
+from libsimba.param_checking import ParamChecking
 import respx
 import re
 from httpx import Response
@@ -32,7 +32,7 @@ metadata_route = md_mock.route(method="GET", url=metadata_pattern).mock(
 class ParamTestCase(unittest.TestCase):
     @md_mock
     def test_struct(self):
-        pcc = ParamCheckingContract("my_app", "my_api")
+        pcc = ParamChecking("my_app", "my_api")
         pcc.validate_params(
             method_name="structTest_5",
             inputs={
@@ -70,7 +70,7 @@ class ParamTestCase(unittest.TestCase):
 
     @md_mock
     def test_arrs(self):
-        pcc = ParamCheckingContract("my_app", "my_api")
+        pcc = ParamChecking("my_app", "my_api")
         pcc.validate_params(
             method_name="nested_arr_1",
             inputs={"first": [[1, 2], [1, 2, 3, 4], [2], [], [1, 2, 3, 4, 5, 6, 7]]},
@@ -104,7 +104,7 @@ class ParamTestCase(unittest.TestCase):
 
     @md_mock
     def test_struct_arrs(self):
-        pcc = ParamCheckingContract("my_app", "my_api")
+        pcc = ParamChecking("my_app", "my_api")
 
         pcc.validate_params(
             method_name="structTest_4",
