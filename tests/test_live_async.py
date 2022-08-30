@@ -4,6 +4,6 @@ import pytest
 
 
 class GenTestCase(IsolatedAsyncioTestCase):
-    @pytest.mark.skip(reason="Requires Live server")
+    @pytest.mark.skipif("os.environ.get('SDK_QA') is None", eason="Requires Live server")
     async def test_all(self):
         await run_async.AsyncRunner().run()

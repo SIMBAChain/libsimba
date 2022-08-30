@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 class SimbaSync:
-    def __init__(self, base_url: str = settings.AUTH_BASE_URL):
+    def __init__(self, base_url: str = settings.API_BASE_URL):
         self.base_api_url = base_url
 
     def whoami(self, login: Login = None, config: ConnectionConfig = None) -> dict:
