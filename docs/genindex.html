@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; libsimba 0.1.2 documentation</title>
+  <title>Index &mdash; libsimba 0.1.4 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -229,10 +229,10 @@
 </li>
       <li><a href="libsimba.html#libsimba.schemas.ConnectionConfig">ConnectionConfig (class in libsimba.schemas)</a>
 </li>
-      <li><a href="libsimba.html#libsimba.schemas.FilterOp.CONTAINS">CONTAINS (libsimba.schemas.FilterOp attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="libsimba.html#libsimba.schemas.FilterOp.CONTAINS">CONTAINS (libsimba.schemas.FilterOp attribute)</a>
+</li>
       <li><a href="libsimba.html#libsimba.utils.Path.CONTRACT_ARTIFACT">CONTRACT_ARTIFACT (libsimba.utils.Path attribute)</a>
 </li>
       <li><a href="libsimba.html#libsimba.utils.Path.CONTRACT_ARTIFACTS">CONTRACT_ARTIFACTS (libsimba.utils.Path attribute)</a>
@@ -250,10 +250,6 @@
       <li><a href="libsimba.html#libsimba.utils.Path.CONTRACT_TXNS">CONTRACT_TXNS (libsimba.utils.Path attribute)</a>
 </li>
       <li><a href="libsimba.html#libsimba.utils.Path.CONTRACTS">CONTRACTS (libsimba.utils.Path attribute)</a>
-</li>
-      <li><a href="libsimba.html#libsimba.utils.convert_bytes32_to_string">convert_bytes32_to_string() (in module libsimba.utils)</a>
-</li>
-      <li><a href="libsimba.html#libsimba.utils.convert_to_bytes32_array">convert_to_bytes32_array() (in module libsimba.utils)</a>
 </li>
       <li><a href="libsimba.html#libsimba.simba.Simba.create_app">create_app() (libsimba.simba.Simba method)</a>
 
@@ -347,12 +343,10 @@
 </li>
       <li><a href="libsimba.html#libsimba.schemas.FilterOp.EQ">EQ (libsimba.schemas.FilterOp attribute)</a>
 </li>
-      <li><a href="libsimba.html#libsimba.exceptions.ErrorType">ErrorType (class in libsimba.exceptions)</a>
+      <li><a href="libsimba.html#libsimba.schemas.FilterOp.EXACT">EXACT (libsimba.schemas.FilterOp attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="libsimba.html#libsimba.schemas.FilterOp.EXACT">EXACT (libsimba.schemas.FilterOp attribute)</a>
-</li>
       <li><a href="libsimba.html#libsimba.param_checking.ParamChecking.expect_scalar">expect_scalar() (libsimba.param_checking.ParamChecking method)</a>
 </li>
       <li><a href="libsimba.html#libsimba.schemas.AuthToken.expires">expires (libsimba.schemas.AuthToken attribute)</a>
@@ -450,13 +444,27 @@
       <li><a href="libsimba.html#libsimba.simba.Simba.get_bundle">get_bundle() (libsimba.simba.Simba method)</a>
 
       <ul>
+        <li><a href="libsimba.html#libsimba.simba_contract.SimbaContract.get_bundle">(libsimba.simba_contract.SimbaContract method)</a>
+</li>
+        <li><a href="libsimba.html#libsimba.simba_contract_sync.SimbaContractSync.get_bundle">(libsimba.simba_contract_sync.SimbaContractSync method)</a>
+</li>
         <li><a href="libsimba.html#libsimba.simba_sync.SimbaSync.get_bundle">(libsimba.simba_sync.SimbaSync method)</a>
 </li>
       </ul></li>
       <li><a href="libsimba.html#libsimba.simba.Simba.get_bundle_file">get_bundle_file() (libsimba.simba.Simba method)</a>
 
       <ul>
+        <li><a href="libsimba.html#libsimba.simba_contract.SimbaContract.get_bundle_file">(libsimba.simba_contract.SimbaContract method)</a>
+</li>
+        <li><a href="libsimba.html#libsimba.simba_contract_sync.SimbaContractSync.get_bundle_file">(libsimba.simba_contract_sync.SimbaContractSync method)</a>
+</li>
         <li><a href="libsimba.html#libsimba.simba_sync.SimbaSync.get_bundle_file">(libsimba.simba_sync.SimbaSync method)</a>
+</li>
+      </ul></li>
+      <li><a href="libsimba.html#libsimba.simba_contract.SimbaContract.get_bundle_manifest">get_bundle_manifest() (libsimba.simba_contract.SimbaContract method)</a>
+
+      <ul>
+        <li><a href="libsimba.html#libsimba.simba_contract_sync.SimbaContractSync.get_bundle_manifest">(libsimba.simba_contract_sync.SimbaContractSync method)</a>
 </li>
       </ul></li>
       <li><a href="libsimba.auth.html#libsimba.auth.AuthProvider.get_cached_token">get_cached_token() (libsimba.auth.AuthProvider method)</a>
@@ -475,6 +483,8 @@
         <li><a href="libsimba.html#libsimba.simba_sync.SimbaSync.get_contract_transactions">(libsimba.simba_sync.SimbaSync method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="libsimba.html#libsimba.simba.Simba.get_contracts">get_contracts() (libsimba.simba.Simba method)</a>
 
       <ul>
@@ -483,8 +493,6 @@
       </ul></li>
       <li><a href="libsimba.html#libsimba.simba_sync.SimbaSync.get_deployed_artifact_id">get_deployed_artifact_id() (libsimba.simba_sync.SimbaSync method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="libsimba.html#libsimba.simba.Simba.get_designs">get_designs() (libsimba.simba.Simba method)</a>
 
       <ul>
@@ -624,8 +632,6 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="libsimba.auth.html#libsimba.auth.client_credentials.KcAuthProvider">KcAuthProvider (class in libsimba.auth.client_credentials)</a>
-</li>
-      <li><a href="libsimba.html#libsimba.utils.keccak">keccak() (in module libsimba.utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1035,35 +1041,19 @@
 </li>
       <li><a href="libsimba.html#libsimba.simba.Simba">Simba (class in libsimba.simba)</a>
 </li>
-      <li><a href="libsimba.html#libsimba.exceptions.ErrorType.SIMBA_INVALID_MNEMONIC_EXCEPTION">SIMBA_INVALID_MNEMONIC_EXCEPTION (libsimba.exceptions.ErrorType attribute)</a>
-</li>
-      <li><a href="libsimba.html#libsimba.exceptions.ErrorType.SIMBA_INVALID_PRIVATE_KEY_EXCEPTION">SIMBA_INVALID_PRIVATE_KEY_EXCEPTION (libsimba.exceptions.ErrorType attribute)</a>
-</li>
-      <li><a href="libsimba.html#libsimba.exceptions.ErrorType.SIMBA_INVALID_URL_EXCEPTION">SIMBA_INVALID_URL_EXCEPTION (libsimba.exceptions.ErrorType attribute)</a>
-</li>
-      <li><a href="libsimba.html#libsimba.exceptions.ErrorType.SIMBA_REQUEST_EXCEPTION">SIMBA_REQUEST_EXCEPTION (libsimba.exceptions.ErrorType attribute)</a>
-</li>
-      <li><a href="libsimba.html#libsimba.exceptions.ErrorType.SIMBA_WALLET_NOT_FOUND_EXCEPTION">SIMBA_WALLET_NOT_FOUND_EXCEPTION (libsimba.exceptions.ErrorType attribute)</a>
+      <li><a href="libsimba.html#libsimba.simba_contract.SimbaContract">SimbaContract (class in libsimba.simba_contract)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="libsimba.html#libsimba.simba_contract.SimbaContract">SimbaContract (class in libsimba.simba_contract)</a>
-</li>
       <li><a href="libsimba.html#libsimba.simba_contract_sync.SimbaContractSync">SimbaContractSync (class in libsimba.simba_contract_sync)</a>
 </li>
       <li><a href="libsimba.html#libsimba.exceptions.SimbaInvalidURLException">SimbaInvalidURLException</a>
-</li>
-      <li><a href="libsimba.html#libsimba.exceptions.SimbaMnemonicException">SimbaMnemonicException</a>
-</li>
-      <li><a href="libsimba.html#libsimba.exceptions.SimbaPrivateKeyException">SimbaPrivateKeyException</a>
 </li>
       <li><a href="libsimba.html#libsimba.simba_request.SimbaRequest">SimbaRequest (class in libsimba.simba_request)</a>
 </li>
       <li><a href="libsimba.html#libsimba.exceptions.SimbaRequestException">SimbaRequestException</a>
 </li>
       <li><a href="libsimba.html#libsimba.simba_sync.SimbaSync">SimbaSync (class in libsimba.simba_sync)</a>
-</li>
-      <li><a href="libsimba.html#libsimba.exceptions.SimbaWalletNotFoundException">SimbaWalletNotFoundException</a>
 </li>
       <li><a href="libsimba.html#libsimba.simba.Simba.smart_contract_client">smart_contract_client() (libsimba.simba.Simba method)</a>
 
@@ -1145,8 +1135,6 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="libsimba.html#libsimba.exceptions.ErrorType.UNKNOWN_EXCEPTION">UNKNOWN_EXCEPTION (libsimba.exceptions.ErrorType attribute)</a>
-</li>
       <li><a href="libsimba.html#libsimba.simba_request.SimbaRequest.url">url (libsimba.simba_request.SimbaRequest property)</a>
 </li>
       <li><a href="libsimba.html#libsimba.utils.Path.USER_ADDRESS_BALANCE">USER_ADDRESS_BALANCE (libsimba.utils.Path attribute)</a>

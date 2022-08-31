@@ -203,3 +203,98 @@ class SimbaContractSync(ParamChecking):
             login=login,
             config=config,
         )
+
+    def get_bundle(
+        self,
+        bundle_hash: str,
+        download_location: str,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> None:
+        """
+        Download a bundle tar.gz.
+
+        :param bundle_hash: The hash or UUID of the bundle
+        :type bundle_hash: str
+        :param download_location: local file location to write to
+        :type download_location: str
+
+        :param \**kwargs:
+            See below
+
+        :Keyword Arguments:
+            * *login* (``Login``) - Optional
+            * *config* (``ConnectionConfig``) - Optional
+        :return: An object containing any errors if the validation has failed.
+        :rtype: json
+        """
+        return self.simba.get_bundle(
+            app_id=self.app_name,
+            contract_name=self.contract_name,
+            bundle_hash=bundle_hash,
+            download_location=download_location,
+            login=login,
+            config=config,
+        )
+
+    def get_bundle_manifest(
+        self, bundle_hash: str, login: Login = None, config: ConnectionConfig = None
+    ) -> dict:
+        """
+        Get the JSON manifest for a bundle.
+
+        :param bundle_hash: The hash or UUID of the bundle
+        :type bundle_hash: str
+
+        :param \**kwargs:
+            See below
+
+        :Keyword Arguments:
+            * *login* (``Login``) - Optional
+            * *config* (``ConnectionConfig``) - Optional
+        :return: An object containing any errors if the validation has failed.
+        :rtype: json
+        """
+        return self.simba.get_manifest_for_bundle_from_bundle_hash(
+            app_id=self.app_name,
+            contract_name=self.contract_name,
+            bundle_hash=bundle_hash,
+            login=login,
+            config=config,
+        )
+
+    def get_bundle_file(
+        self,
+        bundle_hash: str,
+        file_name: str,
+        download_location: str,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> None:
+        """
+        Get a named file from a bundle.
+
+        :param bundle_hash: The hash or UUID of the bundle
+        :type bundle_hash: str
+        :param file_name: the name of the file in the bundle
+        :type file_name: str
+        :param download_location: local file location to write to
+        :type download_location: str
+        :param \**kwargs:
+            See below
+
+        :Keyword Arguments:
+            * *login* (``Login``) - Optional
+            * *config* (``ConnectionConfig``) - Optional
+        :return: An object containing any errors if the validation has failed.
+        :rtype: json
+        """
+        return self.simba.get_bundle_file(
+            app_id=self.app_name,
+            contract_name=self.contract_name,
+            bundle_hash=bundle_hash,
+            file_name=file_name,
+            download_location=download_location,
+            login=login,
+            config=config,
+        )
