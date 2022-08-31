@@ -9,7 +9,7 @@ docs/.doctrees
 
 **.env
 **.venv
-
+**/junit.xml
 # Vim
 *.*~
 *.*.swp
