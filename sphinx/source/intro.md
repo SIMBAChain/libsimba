@@ -34,18 +34,20 @@ poetry install
 
 Configuration is loaded consistent with other SIMBA client tools.
 The config file should be in dotenv format and should be called `.simbachain.env` or `simbachain.env`
-(i.e. a visible variant).
+(i.e. a visible variant) or `.env`.
 
 This can be placed in the project root, alongside the `libsimba` package, or can be placed anywhere if the
 environment variable `SIMBA_HOME` is set. This variable should point to the directory containing the
-`.simbachain.env` file. The `SIMBA_HOME` variable defaults to the user's home directory, e.g. `~/`
+dotenv file. The `SIMBA_HOME` variable defaults to the user's home directory, e.g. `~/`
 
 The search order for this file is:
 
-* At `project_root/.simbachain.env` 
-* At `project_root/simbachain.env`
-* At `SIMBA_HOME/.simbachain.env` 
-* At `SIMBA_HOME/simbachain.env`
+* `project_root/.simbachain.env` 
+* `project_root/simbachain.env`
+* `project_root/.env`
+* `SIMBA_HOME/.simbachain.env` 
+* `SIMBA_HOME/simbachain.env`
+* `SIMBA_HOME/.env`
 
 The config setup supports in memory env vars taking precedence over values in the file.
 All environment variables for libsimba are prefixed with `SIMBA_`.

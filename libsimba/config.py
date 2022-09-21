@@ -11,14 +11,15 @@ logger = logging.getLogger(__name__)
 
 ENV_HOME = "SIMBA_HOME"
 ENV_FILENAME = "simbachain.env"
+ENV_DEFAULT = ".env"
 
 
 def get_config_file(root: str) -> Optional[str]:
-    return (
-        os.path.join(root, f".{ENV_FILENAME}")
-        if os.path.exists(os.path.join(root, f".{ENV_FILENAME}"))
-        else os.path.join(root, ENV_FILENAME)
-    )
+    if os.path.exists(os.path.join(root, f".{ENV_FILENAME}")):
+        return os.path.join(root, f".{ENV_FILENAME}")
+    if os.path.exists(os.path.join(root, ENV_FILENAME)):
+        return os.path.join(root, ENV_FILENAME)
+    return os.path.join(root, ENV_DEFAULT)
 
 
 def locate_config() -> Optional[str]:
