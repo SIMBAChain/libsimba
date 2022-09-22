@@ -255,10 +255,7 @@ def get_address(deployment: dict) -> Optional[str]:
     :type deployment: dict
     :return: Optional[str]
     """
-    primary = deployment.get("primary")
-    if primary:
-        return primary.get("address")
-    return None
+    return deployment.get("primary", {}).get("address", None)
 
 def get_deployed_artifact_id(deployment: dict) -> Optional[str]:
     """
@@ -268,7 +265,4 @@ def get_deployed_artifact_id(deployment: dict) -> Optional[str]:
     :type deployment: dict
     :return: Optional[str]
     """
-    primary = deployment.get("primary")
-    if primary:
-        return primary.get("deployed_artifact_id")
-    return None
+    return deployment.get("primary", {}).get("deployed_artifact_id", None)
