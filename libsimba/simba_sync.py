@@ -25,7 +25,7 @@ class SimbaSync:
     def __init__(self, base_url: str = settings.API_BASE_URL):
         self.base_api_url = base_url
 
-    def smart_contract_client(self, app_name: str, contract_name: str):
+    def smart_contract_client(self, app_name: str, contract_name: str) -> SimbaContractSync:
         return SimbaContractSync(self, app_name, contract_name)
 
     def whoami(self, login: Login = None, config: ConnectionConfig = None) -> dict:
