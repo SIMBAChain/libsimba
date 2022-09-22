@@ -15,7 +15,7 @@ from libsimba.schemas import (
 )
 from libsimba.simba_contract_sync import SimbaContractSync
 from libsimba.simba_request import GetRequest, PostRequest, PutRequest, SimbaRequest
-from libsimba.utils import Path
+from libsimba.utils import Path, get_address, get_deployed_artifact_id
 
 
 logger = logging.getLogger(__name__)
@@ -1545,8 +1545,8 @@ class SimbaSync:
         deployment_id = res["deployment_id"]
         try:
             deployed = self.wait_for_deployment(org, deployment_id)
-            address = self.get_address(deployed)
-            contract_id = self.get_deployed_artifact_id(deployed)
+            address = get_address(deployed)
+            contract_id = get_deployed_artifact_id(deployed)
         except Exception as ex:
             logger.warning("[deploy] :: failed to wait for deployment: {}".format(ex))
             address = None
@@ -1604,39 +1604,13 @@ class SimbaSync:
         deployment_id = res["id"]
         try:
             deployed = self.wait_for_deployment(org, deployment_id)
-            address = self.get_address(deployed)
-            contract_id = self.get_deployed_artifact_id(deployed)
+            address = get_address(deployed)
+            contract_id = get_deployed_artifact_id(deployed)
         except Exception as ex:
             logger.warning("[deploy] :: failed to wait for deployment: {}".format(ex))
             address = None
             contract_id = None
         return address, contract_id
-
-    def get_address(self, deployment: dict) -> Optional[str]:
-        """
-        Extract the primary address from a deployment object.
-
-        :param deployment: The deployment object
-        :type deployment: dict
-        :return: Optional[str]
-        """
-        primary = deployment.get("primary")
-        if primary:
-            return primary.get("address")
-        return None
-
-    def get_deployed_artifact_id(self, deployment: dict) -> Optional[str]:
-        """
-        Extract the primary deployed artifact ID from a deployment object.
-
-        :param deployment: The deployment object
-        :type deployment: dict
-        :return: Optional[str]
-        """
-        primary = deployment.get("primary")
-        if primary:
-            return primary.get("deployed_artifact_id")
-        return None
 
     def get_designs(
         self,

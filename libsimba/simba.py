@@ -15,13 +15,13 @@ from libsimba.schemas import (
 from libsimba.simba_contract import SimbaContract
 from libsimba.simba_request import GetRequest, PostRequest, PutRequest, SimbaRequest
 from libsimba.simba_sync import SimbaSync
-from libsimba.utils import Path
+from libsimba.utils import Path, get_address, get_deployed_artifact_id
 
 
 logger = logging.getLogger(__name__)
 
 
-class Simba(SimbaSync):
+class Simba():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -678,8 +678,8 @@ class Simba(SimbaSync):
         deployment_id = res["deployment_id"]
         try:
             deployed = await self.wait_for_deployment(org, deployment_id)
-            address = self.get_address(deployed)
-            contract_id = self.get_deployed_artifact_id(deployed)
+            address = get_address(deployed)
+            contract_id = get_deployed_artifact_id(deployed)
         except Exception as ex:
             logger.warning("[deploy] :: failed to wait for deployment: {}".format(ex))
             address = None
@@ -711,8 +711,8 @@ class Simba(SimbaSync):
         deployment_id = res["id"]
         try:
             deployed = await self.wait_for_deployment(org, deployment_id)
-            address = self.get_address(deployed)
-            contract_id = self.get_deployed_artifact_id(deployed)
+            address = get_address(deployed)
+            contract_id = get_deployed_artifact_id(deployed)
         except Exception as ex:
             logger.warning("[deploy] :: failed to wait for deployment: {}".format(ex))
             address = None
