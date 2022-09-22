@@ -25,6 +25,9 @@ class Simba():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+    def smart_contract_client(self, app_name: str, contract_name: str) -> SimbaContract:
+        return SimbaContract(self, app_name, contract_name)
+
     async def whoami(
         self, login: Login = None, config: ConnectionConfig = None
     ) -> dict:
@@ -130,9 +133,6 @@ class Simba():
                 ).post(config=config, json_payload=inputs)
             else:
                 raise ex
-
-    def smart_contract_client(self, app_name: str, contract_name: str) -> SimbaContract:
-        return SimbaContract(self, app_name, contract_name)
 
     async def list_applications(
         self,

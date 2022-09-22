@@ -25,6 +25,9 @@ class SimbaSync:
     def __init__(self, base_url: str = settings.API_BASE_URL):
         self.base_api_url = base_url
 
+    def smart_contract_client(self, app_name: str, contract_name: str):
+        return SimbaContractSync(self, app_name, contract_name)
+
     def whoami(self, login: Login = None, config: ConnectionConfig = None) -> dict:
         """
         GET ``/user/whoami/``
@@ -307,9 +310,6 @@ class SimbaSync:
                 ).post_sync(config=config, json_payload=inputs)
             else:
                 raise ex
-
-    def smart_contract_client(self, app_name: str, contract_name: str):
-        return SimbaContractSync(self, app_name, contract_name)
 
     # -------------------------------------------------
     # All proceeding functions are general App getters
