@@ -719,6 +719,38 @@ class Simba():
             contract_id = None
         return address, contract_id
 
+    async def wait_for_org_transaction(
+        self,
+        org: str,
+        uid: str,
+        total_time: int = 0,
+        max_time: int = 40,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        res = await GetRequest(
+            endpoint=Path.ORG_TXN.format(org, uid),
+            login=login,
+        ).get(config=config)
+        state = res["state"]
+        if state == "FAILED":
+            raise ValueError("TXN FAILED: {}".format(res))
+        if state == "COMPLETED":
+            return res
+        else:
+            if total_time > max_time:
+                raise ValueError("waited way too long")
+            time.sleep(2)
+            total_time += 2
+            return await self.wait_for_org_transaction(
+                org=org,
+                uid=uid,
+                total_time=total_time,
+                max_time=max_time,
+                login=login,
+                config=config,
+            )
+
     async def get_designs(
         self,
         org: str,
@@ -854,35 +886,3 @@ class Simba():
             login=login,
         ).post(config=config, json_payload=inputs)
         return conf
-
-    async def wait_for_org_transaction(
-        self,
-        org: str,
-        uid: str,
-        total_time: int = 0,
-        max_time: int = 40,
-        login: Login = None,
-        config: ConnectionConfig = None,
-    ) -> dict:
-        res = await GetRequest(
-            endpoint=Path.ORG_TXN.format(org, uid),
-            login=login,
-        ).get(config=config)
-        state = res["state"]
-        if state == "FAILED":
-            raise ValueError("TXN FAILED: {}".format(res))
-        if state == "COMPLETED":
-            return res
-        else:
-            if total_time > max_time:
-                raise ValueError("waited way too long")
-            time.sleep(2)
-            total_time += 2
-            return await self.wait_for_org_transaction(
-                org=org,
-                uid=uid,
-                total_time=total_time,
-                max_time=max_time,
-                login=login,
-                config=config,
-            )
