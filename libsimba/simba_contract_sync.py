@@ -85,6 +85,39 @@ class SimbaContractSync(ParamChecking):
             files=files,
         )
 
+    def submit_method_sync(
+        self,
+        method_name: str,
+        inputs: Optional[dict],
+        files: Optional[FileDict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        Submit a transaction to a method
+
+        :param method_name: The method name
+        :type method_name: str
+        :param \**kwargs:
+            See below
+        :Keyword Arguments:
+            * **inputs** (`Optional[dict]`)
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: the created transaction
+        :rtype: dict
+        """
+        self.validate_params(method_name=method_name, inputs=inputs)
+        return self.simba.submit_contract_method_sync(
+            app_id=self.app_name,
+            contract_name=self.contract_name,
+            method_name=method_name,
+            inputs=inputs,
+            login=login,
+            config=config,
+            files=files,
+        )
+
     def list_method_transactions(
         self,
         method_name: str,
