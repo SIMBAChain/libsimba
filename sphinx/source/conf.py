@@ -13,7 +13,6 @@
 import os
 import sys
 project_path = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-print(project_path)
 sys.path.append(project_path)
 
 
@@ -24,7 +23,7 @@ copyright = '2022, SIMBA Chain Inc.'
 author = 'SIMBA Chain Inc.'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.4'
+release = '0.1.6'
 
 
 # -- General configuration ---------------------------------------------------
