@@ -15,15 +15,18 @@ from libsimba.schemas import (
 from libsimba.simba_contract import SimbaContract
 from libsimba.simba_request import GetRequest, PostRequest, PutRequest, SimbaRequest
 from libsimba.simba_sync import SimbaSync
-from libsimba.utils import Path
+from libsimba.utils import Path, get_address, get_deployed_artifact_id
 
 
 logger = logging.getLogger(__name__)
 
 
-class Simba(SimbaSync):
+class Simba():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    def smart_contract_client(self, app_name: str, contract_name: str) -> SimbaContract:
+        return SimbaContract(self, app_name, contract_name)
 
     async def whoami(
         self, login: Login = None, config: ConnectionConfig = None
@@ -130,9 +133,6 @@ class Simba(SimbaSync):
                 ).post(config=config, json_payload=inputs)
             else:
                 raise ex
-
-    def smart_contract_client(self, app_name: str, contract_name: str) -> SimbaContract:
-        return SimbaContract(self, app_name, contract_name)
 
     async def list_applications(
         self,
@@ -678,8 +678,8 @@ class Simba(SimbaSync):
         deployment_id = res["deployment_id"]
         try:
             deployed = await self.wait_for_deployment(org, deployment_id)
-            address = self.get_address(deployed)
-            contract_id = self.get_deployed_artifact_id(deployed)
+            address = get_address(deployed)
+            contract_id = get_deployed_artifact_id(deployed)
         except Exception as ex:
             logger.warning("[deploy] :: failed to wait for deployment: {}".format(ex))
             address = None
@@ -711,13 +711,45 @@ class Simba(SimbaSync):
         deployment_id = res["id"]
         try:
             deployed = await self.wait_for_deployment(org, deployment_id)
-            address = self.get_address(deployed)
-            contract_id = self.get_deployed_artifact_id(deployed)
+            address = get_address(deployed)
+            contract_id = get_deployed_artifact_id(deployed)
         except Exception as ex:
             logger.warning("[deploy] :: failed to wait for deployment: {}".format(ex))
             address = None
             contract_id = None
         return address, contract_id
+
+    async def wait_for_org_transaction(
+        self,
+        org: str,
+        uid: str,
+        total_time: int = 0,
+        max_time: int = 40,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        res = await GetRequest(
+            endpoint=Path.ORG_TXN.format(org, uid),
+            login=login,
+        ).get(config=config)
+        state = res["state"]
+        if state == "FAILED":
+            raise ValueError("TXN FAILED: {}".format(res))
+        if state == "COMPLETED":
+            return res
+        else:
+            if total_time > max_time:
+                raise ValueError("waited way too long")
+            time.sleep(2)
+            total_time += 2
+            return await self.wait_for_org_transaction(
+                org=org,
+                uid=uid,
+                total_time=total_time,
+                max_time=max_time,
+                login=login,
+                config=config,
+            )
 
     async def get_designs(
         self,
@@ -854,35 +886,3 @@ class Simba(SimbaSync):
             login=login,
         ).post(config=config, json_payload=inputs)
         return conf
-
-    async def wait_for_org_transaction(
-        self,
-        org: str,
-        uid: str,
-        total_time: int = 0,
-        max_time: int = 40,
-        login: Login = None,
-        config: ConnectionConfig = None,
-    ) -> dict:
-        res = await GetRequest(
-            endpoint=Path.ORG_TXN.format(org, uid),
-            login=login,
-        ).get(config=config)
-        state = res["state"]
-        if state == "FAILED":
-            raise ValueError("TXN FAILED: {}".format(res))
-        if state == "COMPLETED":
-            return res
-        else:
-            if total_time > max_time:
-                raise ValueError("waited way too long")
-            time.sleep(2)
-            total_time += 2
-            return await self.wait_for_org_transaction(
-                org=org,
-                uid=uid,
-                total_time=total_time,
-                max_time=max_time,
-                login=login,
-                config=config,
-            )

@@ -29,7 +29,6 @@ else:
 
 log = logging.getLogger(__name__)
 
-
 class Path(str, Enum):
     WHOAMI = "/user/whoami/"
     APPS = "/v2/apps/"
@@ -205,7 +204,6 @@ class RetryTransport(httpx.AsyncBaseTransport, httpx.BaseTransport):
             }
         return response
 
-
 def async_http_client(config: schemas.ConnectionConfig = None) -> httpx.AsyncClient:
     """
     Create an async HTTPX client
@@ -248,3 +246,23 @@ def build_url(base_api_url: str, path: str, query_dict: Optional[dict]):
     url_parts[2] = path
     url_parts[4] = urlencode(query_dict)
     return urlunparse(url_parts)
+
+def get_address(deployment: dict) -> Optional[str]:
+    """
+    Extract the primary address from a deployment object.
+
+    :param deployment: The deployment object
+    :type deployment: dict
+    :return: Optional[str]
+    """
+    return deployment.get("primary", {}).get("address", None)
+
+def get_deployed_artifact_id(deployment: dict) -> Optional[str]:
+    """
+    Extract the primary deployed artifact ID from a deployment object.
+
+    :param deployment: The deployment object
+    :type deployment: dict
+    :return: Optional[str]
+    """
+    return deployment.get("primary", {}).get("deployed_artifact_id", None)
