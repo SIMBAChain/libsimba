@@ -75,7 +75,7 @@ class AuthProvider(ABC):
 
     def cache_token(self, client_id: str, token: AuthToken) -> None:
         """
-        Saves the token data to a file.
+        Saves the token data to a file if configured, and also memory..
 
         Checks the TOKEN_DIR environment variable for alternative token storage locations,
         otherwise uses the current working path
@@ -102,18 +102,13 @@ class AuthProvider(ABC):
                 logger.debug(
                     "[libsimba] :: cache_token : Saved token : {}".format(token_file)
                 )
-        else:
-            self.access_tokens[client_id] = token
+        self.access_tokens[client_id] = token
 
     def get_cached_token(self, client_id: str) -> Optional[AuthToken]:
         logger.debug(f"[libsimba] :: get_cached_token : client id: {client_id}")
         """
-        Checks a local directory for a file containing an auth token
+        Checks memory and a local directory for a file containing an auth token
         If present, check the token hasn't expired, otherwise return it
-
-        Raises exceptions if the token directory is missing,
-        or if there is no token file,
-        or if the token has expired, see def token_expired(token_data)
 
         Checks the TOKEN_DIR environment variable for alternative token storage locations,
         otherwise uses the current working path
@@ -123,32 +118,31 @@ class AuthProvider(ABC):
         :param client_id: The ID for the client, token files are named <client_id>_token.json
         :return: an AuthToken, retrieved from the token file.
         """
-
-        if settings.WRITE_TOKEN_TO_FILE:
-            token_dir = settings.TOKEN_DIR
-            os.makedirs(token_dir, exist_ok=True)
-            if os.path.isdir(token_dir):
-                token_file = os.path.join(token_dir, "{}_token.json".format(client_id))
-                if os.path.isfile(token_file):
-                    with open(token_file, "r") as t1:
-                        token_data = json.load(t1)
-                        logger.debug(
-                            "[libsimba] :: get_cached_token : Found saved token : {}".format(
-                                token_file
-                            )
+        token = self.access_tokens.get(client_id)
+        if token:
+            if self.token_expired(token):
+                self.access_tokens.pop(client_id, None)
+            else:
+                return token
+        if not settings.WRITE_TOKEN_TO_FILE:
+            return None
+        token_dir = settings.TOKEN_DIR or "./"
+        os.makedirs(token_dir, exist_ok=True)
+        if os.path.isdir(token_dir):
+            token_file = os.path.join(token_dir, "{}_token.json".format(client_id))
+            if os.path.isfile(token_file):
+                with open(token_file, "r") as t1:
+                    token_data = json.load(t1)
+                    logger.debug(
+                        "[libsimba] :: get_cached_token : Found saved token : {}".format(
+                            token_file
                         )
-                    token = AuthToken(**token_data)
-                    if self.token_expired(token):
-                        os.remove(token_file)
-                        return None
-                    return token
-        else:
-            token = self.access_tokens.get(client_id)
-            if token:
+                    )
+                token = AuthToken(**token_data)
                 if self.token_expired(token):
-                    self.access_tokens.pop(client_id, None)
+                    os.remove(token_file)
                     return None
-            return token
+                return token
 
     def test_token_valid(self, token: AuthToken) -> bool:
         whoami_url = build_url(settings.API_BASE_URL, Path.WHOAMI, {})
