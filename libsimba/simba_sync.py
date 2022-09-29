@@ -385,6 +385,8 @@ class SimbaSync:
 
         Get application information
 
+        :param org: organisation id or name
+        :type org: str
         :param app_id: Application id or name
         :type app_id: str
         :param \**kwargs:
