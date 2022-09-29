@@ -406,7 +406,6 @@ class SimbaSync:
     def list_application_transactions(
         self,
         app_id: str,
-        query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> Generator[List[dict], None, None]:
@@ -420,14 +419,13 @@ class SimbaSync:
         :param \**kwargs:
             See below
         :Keyword Arguments:
-            * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: Generator of application information
         :rtype: Generator[List[dict], None, None]
         """
         return SimbaRequest(
-            endpoint=Path.APP_TXNS.format(app_id), query_params=query_args, login=login
+            endpoint=Path.APP_TXNS.format(app_id), login=login
         ).retrieve_iter_sync(config=config)
 
     def get_application_transactions(

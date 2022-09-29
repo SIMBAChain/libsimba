@@ -158,13 +158,12 @@ class Simba():
         self,
         org,
         app_id: str,
-        query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
         query_args = query_args or {}
         return await GetRequest(
-            endpoint=Path.APP.format(org, app_id), query_params=query_args, login=login
+            endpoint=Path.APP.format(org, app_id), login=login
         ).get(config=config)
 
     async def list_application_transactions(
