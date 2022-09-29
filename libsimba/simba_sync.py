@@ -191,7 +191,7 @@ class SimbaSync:
         :return: the wallet
         :rtype: dict
         """
-        return GetRequest(endpoint=Path.USER_WALLET_SET, login=login).get_sync(
+        return GetRequest(endpoint=Path.USER_WALLET, login=login).get_sync(
             config=config
         )
 
@@ -374,6 +374,7 @@ class SimbaSync:
 
     def get_application(
         self,
+        org: str,
         app_id: str,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
@@ -384,6 +385,8 @@ class SimbaSync:
 
         Get application information
 
+        :param org: organisation id or name
+        :type org: str
         :param app_id: Application id or name
         :type app_id: str
         :param \**kwargs:
@@ -397,13 +400,12 @@ class SimbaSync:
         """
         query_args = query_args or {}
         return GetRequest(
-            endpoint=Path.APP.format(app_id), query_params=query_args, login=login
+            endpoint=Path.APP.format(org, app_id), query_params=query_args, login=login
         ).get_sync(config=config)
 
     def list_application_transactions(
         self,
         app_id: str,
-        query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> Generator[List[dict], None, None]:
@@ -417,14 +419,13 @@ class SimbaSync:
         :param \**kwargs:
             See below
         :Keyword Arguments:
-            * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: Generator of application information
         :rtype: Generator[List[dict], None, None]
         """
         return SimbaRequest(
-            endpoint=Path.APP_TXNS.format(app_id), query_params=query_args, login=login
+            endpoint=Path.APP_TXNS.format(app_id), login=login
         ).retrieve_iter_sync(config=config)
 
     def get_application_transactions(

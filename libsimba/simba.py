@@ -90,7 +90,7 @@ class Simba():
     async def get_wallet(
         self, login: Login = None, config: ConnectionConfig = None
     ) -> dict:
-        return await GetRequest(endpoint=Path.USER_WALLET_SET, login=login).get(
+        return await GetRequest(endpoint=Path.USER_WALLET, login=login).get(
             config=config
         )
 
@@ -156,14 +156,14 @@ class Simba():
 
     async def get_application(
         self,
+        org,
         app_id: str,
-        query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
         query_args = query_args or {}
         return await GetRequest(
-            endpoint=Path.APP.format(app_id), query_params=query_args, login=login
+            endpoint=Path.APP.format(org, app_id), login=login
         ).get(config=config)
 
     async def list_application_transactions(
