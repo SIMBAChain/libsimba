@@ -90,7 +90,7 @@ class Simba():
     async def get_wallet(
         self, login: Login = None, config: ConnectionConfig = None
     ) -> dict:
-        return await GetRequest(endpoint=Path.USER_WALLET_SET, login=login).get(
+        return await GetRequest(endpoint=Path.USER_WALLET, login=login).get(
             config=config
         )
 

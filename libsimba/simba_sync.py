@@ -191,7 +191,7 @@ class SimbaSync:
         :return: the wallet
         :rtype: dict
         """
-        return GetRequest(endpoint=Path.USER_WALLET_SET, login=login).get_sync(
+        return GetRequest(endpoint=Path.USER_WALLET, login=login).get_sync(
             config=config
         )
 
