@@ -374,6 +374,7 @@ class SimbaSync:
 
     def get_application(
         self,
+        org: str,
         app_id: str,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
@@ -397,7 +398,7 @@ class SimbaSync:
         """
         query_args = query_args or {}
         return GetRequest(
-            endpoint=Path.APP.format(app_id), query_params=query_args, login=login
+            endpoint=Path.APP.format(org, app_id), query_params=query_args, login=login
         ).get_sync(config=config)
 
     def list_application_transactions(

@@ -32,7 +32,7 @@ log = logging.getLogger(__name__)
 class Path(str, Enum):
     WHOAMI = "/user/whoami/"
     APPS = "/v2/apps/"
-    APP = "/v2/apps/{}/"
+    APP = "/v2/organisations/{}/applications/{}/"
     APP_TXNS = "/v2/apps/{}/transactions/"
     APP_TXN = "/v2/apps/{}/transactions/{}/"
     APP_CONTRACT = "/v2/apps/{}/contract/{}/"
