@@ -161,7 +161,6 @@ class Simba():
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
-        query_args = query_args or {}
         return await GetRequest(
             endpoint=Path.APP.format(org, app_id), login=login
         ).get(config=config)
