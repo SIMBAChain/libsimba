@@ -55,3 +55,35 @@ class TestAuthRequired(unittest.TestCase):
         self.assertEqual(
             ({"bob": "test", "Authorization": "Bearer 1234567890"}, {}), resp
         )
+
+    @block_mock
+    def test_auth_from_headers(self):
+        mc = MockClass()
+        resp = mc.test_func(
+            headers={"Authorization": "Bearer 10000000000000"},
+            payload={},
+            login=Login(
+                auth_flow=AuthFlow.CLIENT_CREDENTIALS,
+                client_id="me",
+                client_secret="topsecret",
+            ),
+        )
+        self.assertEqual(
+            ({"Authorization": "Bearer 10000000000000"}, {}), resp
+        )
+
+    @block_mock
+    def test_auth_from_headers(self):
+        mc = MockClass()
+        resp = mc.test_func(
+            headers={"Authorization": "Bearer 10000000000000", "bob": "test"},
+            payload={},
+            login=Login(
+                auth_flow=AuthFlow.CLIENT_CREDENTIALS,
+                client_id="me",
+                client_secret="topsecret",
+            ),
+        )
+        self.assertEqual(
+            ({"bob": "test", "Authorization": "Bearer 10000000000000"}, {}), resp
+        )

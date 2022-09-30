@@ -139,22 +139,25 @@ class SimbaRequest(object):
         login: Login, headers: Optional[dict] = None, config: ConnectionConfig = None
     ) -> dict:
         """
-        Login.
+        Login. If an Authorization header is found in the headers,
+        this is used rather than performing a login.
 
         :param login: A Login object
         :type login: Login
         :param \**kwargs:
             See below
         :Keyword Arguments:
+            * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: HTTP Authorization header
         :rtype: dict
         """
         headers = headers or {}
-        auth_token = PROVIDERS[login.auth_flow].login_sync(
-            client_id=login.client_id, client_secret=login.client_secret, config=config
-        )
-        headers["Authorization"] = f"Bearer {auth_token.token}"
+        if headers.get("Authorization") is None:
+            auth_token = PROVIDERS[login.auth_flow].login_sync(
+                client_id=login.client_id, client_secret=login.client_secret, config=config
+            )
+            headers["Authorization"] = f"Bearer {auth_token.token}"
         return headers
 
     @staticmethod
@@ -162,22 +165,25 @@ class SimbaRequest(object):
         login: Login, headers: Optional[dict] = None, config: ConnectionConfig = None
     ) -> dict:
         """
-        Async login.
+        Async login. If an Authorization header is found in the headers,
+        this is used rather than performing a login
 
         :param login: A Login object
         :type login: Login
         :param \**kwargs:
             See below
         :Keyword Arguments:
+            * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: HTTP Authorization header
         :rtype: dict
         """
         headers = headers or {}
-        auth_token = await PROVIDERS[login.auth_flow].login(
-            client_id=login.client_id, client_secret=login.client_secret, config=config
-        )
-        headers["Authorization"] = f"Bearer {auth_token.token}"
+        if headers.get("Authorization") is None:
+            auth_token = await PROVIDERS[login.auth_flow].login(
+                client_id=login.client_id, client_secret=login.client_secret, config=config
+            )
+            headers["Authorization"] = f"Bearer {auth_token.token}"
         return headers
 
     async def download(
@@ -194,11 +200,11 @@ class SimbaRequest(object):
         :param \**kwargs:
             See below
         :Keyword Arguments:
-            * **login** (`Optional[Login]`)
+            * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: None
         """
-        headers = SimbaRequest.login(self.curr_login, headers)
+        headers = await SimbaRequest.async_login(self.curr_login, headers)
         logger.debug(self.log_me(headers=headers, current_method="download"))
         with open(location, "wb") as output:
             async with async_http_client(config=config) as async_client:
@@ -222,7 +228,7 @@ class SimbaRequest(object):
         :param \**kwargs:
             See below
         :Keyword Arguments:
-            * **login** (`Optional[Login]`)
+            * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: None
         """
@@ -249,7 +255,6 @@ class SimbaRequest(object):
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`)
             * **headers** (`Optional[dict]`)
-            * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: return value dictionary containing, return value, request ID and status
         :rtype: dict
@@ -278,7 +283,6 @@ class SimbaRequest(object):
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`)
             * **headers** (`Optional[dict]`)
-            * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: return value dictionary containing, return value, request ID and status
         :rtype: dict

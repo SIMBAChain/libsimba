@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LibSimba.py &mdash; libsimba 0.1.7 documentation</title>
+  <title>LibSimba.py &mdash; libsimba 0.1.10 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -163,6 +164,10 @@ below, i.e., the <code class="docutils literal notranslate"><span class="pre">SI
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">AUTH_FLOW</span></code> should currently not be changed as only <code class="docutils literal notranslate"><span class="pre">client_credentials</span></code> is supported.</p>
 <p>These values can also be directly set an environment variables if you don’t use a dot env file.</p>
+<p>When making requests, a Login object can be passed in containing a client ID and secret. If this is not
+passed into the methods, a default Login object is created using the environment variables <code class="docutils literal notranslate"><span class="pre">SIMBA_AUTH_CLIENT_SECRET</span></code>
+and <code class="docutils literal notranslate"><span class="pre">SIMBA_AUTH_CLIENT_ID</span></code> described above. Alternatively, if a <code class="docutils literal notranslate"><span class="pre">headers</span></code> dict is passed in and this contains
+an <code class="docutils literal notranslate"><span class="pre">Authoroization</span></code> key, this is assumed to be a valid bearer token and is used instead of loggin in.</p>
 <section id="logging">
 <h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h3>
 <p>To configure logging, set the <code class="docutils literal notranslate"><span class="pre">SIMBA_LOG_CONFIG</span></code> environment variable pointing to a logging file.

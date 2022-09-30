@@ -79,6 +79,11 @@ The `AUTH_FLOW` should currently not be changed as only `client_credentials` is 
 
 These values can also be directly set an environment variables if you don't use a dot env file.
 
+When making requests, a Login object can be passed in containing a client ID and secret. If this is not
+passed into the methods, a default Login object is created using the environment variables `SIMBA_AUTH_CLIENT_SECRET`
+and `SIMBA_AUTH_CLIENT_ID` described above. Alternatively, if a `headers` dict is passed in and this contains
+an `Authoroization` key, this is assumed to be a valid bearer token and is used instead of loggin in.
+
 ### Logging
 
 To configure logging, set the `SIMBA_LOG_CONFIG` environment variable pointing to a logging file.

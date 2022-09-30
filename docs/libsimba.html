@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>libsimba package &mdash; libsimba 0.1.7 documentation</title>
+  <title>libsimba package &mdash; libsimba 0.1.10 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,16 +48,420 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.exceptions">libsimba.exceptions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.config">libsimba.config module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.schemas">libsimba.schemas module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba">libsimba.simba module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba_sync">libsimba.simba_sync module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba_contract">libsimba.simba_contract module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba_contract_sync">libsimba.simba_contract_sync module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba_request">libsimba.simba_request module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#libsimba-param-checking-module">libsimba.param_checking module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.utils">libsimba.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.exceptions">libsimba.exceptions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.exceptions.LibSimbaException"><code class="docutils literal notranslate"><span class="pre">LibSimbaException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.exceptions.SimbaInvalidURLException"><code class="docutils literal notranslate"><span class="pre">SimbaInvalidURLException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.exceptions.SimbaRequestException"><code class="docutils literal notranslate"><span class="pre">SimbaRequestException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.config">libsimba.config module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.config.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.API_BASE_URL"><code class="docutils literal notranslate"><span class="pre">Settings.API_BASE_URL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.AUTH_BASE_URL"><code class="docutils literal notranslate"><span class="pre">Settings.AUTH_BASE_URL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.AUTH_CLIENT_ID"><code class="docutils literal notranslate"><span class="pre">Settings.AUTH_CLIENT_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.AUTH_CLIENT_SECRET"><code class="docutils literal notranslate"><span class="pre">Settings.AUTH_CLIENT_SECRET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.AUTH_FLOW"><code class="docutils literal notranslate"><span class="pre">Settings.AUTH_FLOW</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.AUTH_PROVIDER"><code class="docutils literal notranslate"><span class="pre">Settings.AUTH_PROVIDER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.AUTH_REALM"><code class="docutils literal notranslate"><span class="pre">Settings.AUTH_REALM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.AUTH_SCOPE"><code class="docutils literal notranslate"><span class="pre">Settings.AUTH_SCOPE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.Config"><code class="docutils literal notranslate"><span class="pre">Settings.Config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.TOKEN_DIR"><code class="docutils literal notranslate"><span class="pre">Settings.TOKEN_DIR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.WRITE_TOKEN_TO_FILE"><code class="docutils literal notranslate"><span class="pre">Settings.WRITE_TOKEN_TO_FILE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.set_api_url"><code class="docutils literal notranslate"><span class="pre">Settings.set_api_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.set_auth_flow"><code class="docutils literal notranslate"><span class="pre">Settings.set_auth_flow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.config.Settings.set_auth_url"><code class="docutils literal notranslate"><span class="pre">Settings.set_auth_url()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.config.get_config_file"><code class="docutils literal notranslate"><span class="pre">get_config_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.config.locate_config"><code class="docutils literal notranslate"><span class="pre">locate_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.schemas">libsimba.schemas module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.AuthFlow"><code class="docutils literal notranslate"><span class="pre">AuthFlow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.AuthFlow.CLIENT_CREDENTIALS"><code class="docutils literal notranslate"><span class="pre">AuthFlow.CLIENT_CREDENTIALS</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.AuthProviderName"><code class="docutils literal notranslate"><span class="pre">AuthProviderName</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.AuthProviderName.BLK"><code class="docutils literal notranslate"><span class="pre">AuthProviderName.BLK</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.AuthProviderName.KC"><code class="docutils literal notranslate"><span class="pre">AuthProviderName.KC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.AuthProviderName.NOOP"><code class="docutils literal notranslate"><span class="pre">AuthProviderName.NOOP</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.AuthToken"><code class="docutils literal notranslate"><span class="pre">AuthToken</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.AuthToken.do_datetime"><code class="docutils literal notranslate"><span class="pre">AuthToken.do_datetime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.AuthToken.expires"><code class="docutils literal notranslate"><span class="pre">AuthToken.expires</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.AuthToken.token"><code class="docutils literal notranslate"><span class="pre">AuthToken.token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.AuthToken.type"><code class="docutils literal notranslate"><span class="pre">AuthToken.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.ConnectionConfig"><code class="docutils literal notranslate"><span class="pre">ConnectionConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.ConnectionConfig.connection_retries"><code class="docutils literal notranslate"><span class="pre">ConnectionConfig.connection_retries</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.ConnectionConfig.http2"><code class="docutils literal notranslate"><span class="pre">ConnectionConfig.http2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.ConnectionConfig.max_attempts"><code class="docutils literal notranslate"><span class="pre">ConnectionConfig.max_attempts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.ConnectionConfig.timeout"><code class="docutils literal notranslate"><span class="pre">ConnectionConfig.timeout</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.FieldFilter"><code class="docutils literal notranslate"><span class="pre">FieldFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FieldFilter.field"><code class="docutils literal notranslate"><span class="pre">FieldFilter.field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FieldFilter.op"><code class="docutils literal notranslate"><span class="pre">FieldFilter.op</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FieldFilter.value"><code class="docutils literal notranslate"><span class="pre">FieldFilter.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.File"><code class="docutils literal notranslate"><span class="pre">File</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.close"><code class="docutils literal notranslate"><span class="pre">File.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.close_on_complete"><code class="docutils literal notranslate"><span class="pre">File.close_on_complete</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.fp"><code class="docutils literal notranslate"><span class="pre">File.fp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.mime"><code class="docutils literal notranslate"><span class="pre">File.mime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.name"><code class="docutils literal notranslate"><span class="pre">File.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.open"><code class="docutils literal notranslate"><span class="pre">File.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.path"><code class="docutils literal notranslate"><span class="pre">File.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.set_mime"><code class="docutils literal notranslate"><span class="pre">File.set_mime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.File.set_name"><code class="docutils literal notranslate"><span class="pre">File.set_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.FileDict"><code class="docutils literal notranslate"><span class="pre">FileDict</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FileDict.add"><code class="docutils literal notranslate"><span class="pre">FileDict.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FileDict.close"><code class="docutils literal notranslate"><span class="pre">FileDict.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FileDict.files"><code class="docutils literal notranslate"><span class="pre">FileDict.files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FileDict.open"><code class="docutils literal notranslate"><span class="pre">FileDict.open()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.FilterOp"><code class="docutils literal notranslate"><span class="pre">FilterOp</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.CONTAINS"><code class="docutils literal notranslate"><span class="pre">FilterOp.CONTAINS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.EQ"><code class="docutils literal notranslate"><span class="pre">FilterOp.EQ</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.EXACT"><code class="docutils literal notranslate"><span class="pre">FilterOp.EXACT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.GT"><code class="docutils literal notranslate"><span class="pre">FilterOp.GT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.GTE"><code class="docutils literal notranslate"><span class="pre">FilterOp.GTE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.ICONTAINS"><code class="docutils literal notranslate"><span class="pre">FilterOp.ICONTAINS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.IEXACT"><code class="docutils literal notranslate"><span class="pre">FilterOp.IEXACT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.IN"><code class="docutils literal notranslate"><span class="pre">FilterOp.IN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.IS"><code class="docutils literal notranslate"><span class="pre">FilterOp.IS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.ISTARTSWITH"><code class="docutils literal notranslate"><span class="pre">FilterOp.ISTARTSWITH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.LT"><code class="docutils literal notranslate"><span class="pre">FilterOp.LT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.LTE"><code class="docutils literal notranslate"><span class="pre">FilterOp.LTE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.FilterOp.STARTSWITH"><code class="docutils literal notranslate"><span class="pre">FilterOp.STARTSWITH</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.Login"><code class="docutils literal notranslate"><span class="pre">Login</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.Login.auth_flow"><code class="docutils literal notranslate"><span class="pre">Login.auth_flow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.Login.client_id"><code class="docutils literal notranslate"><span class="pre">Login.client_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.Login.client_secret"><code class="docutils literal notranslate"><span class="pre">Login.client_secret</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.Login.set_secret"><code class="docutils literal notranslate"><span class="pre">Login.set_secret()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.MethodCallArgs"><code class="docutils literal notranslate"><span class="pre">MethodCallArgs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.MethodCallArgs.args"><code class="docutils literal notranslate"><span class="pre">MethodCallArgs.args</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.SearchFilter"><code class="docutils literal notranslate"><span class="pre">SearchFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.SearchFilter.add_filter"><code class="docutils literal notranslate"><span class="pre">SearchFilter.add_filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.SearchFilter.fields"><code class="docutils literal notranslate"><span class="pre">SearchFilter.fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.SearchFilter.filter_query"><code class="docutils literal notranslate"><span class="pre">SearchFilter.filter_query</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.SearchFilter.filters"><code class="docutils literal notranslate"><span class="pre">SearchFilter.filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.SearchFilter.has_filter"><code class="docutils literal notranslate"><span class="pre">SearchFilter.has_filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.SearchFilter.limit"><code class="docutils literal notranslate"><span class="pre">SearchFilter.limit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.SearchFilter.offset"><code class="docutils literal notranslate"><span class="pre">SearchFilter.offset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName.DELEGATE"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName.DELEGATE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName.DYNAMIC_PRICING"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName.DYNAMIC_PRICING</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName.EXTERNAL"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName.EXTERNAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName.NONCE"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName.NONCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName.RUN_LOCAL"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName.RUN_LOCAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName.SENDER"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName.SENDER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName.SENDER_TOKEN"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName.SENDER_TOKEN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaderName.VALUE"><code class="docutils literal notranslate"><span class="pre">TxnHeaderName.VALUE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.schemas.TxnHeaders"><code class="docutils literal notranslate"><span class="pre">TxnHeaders</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.as_headers"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.as_headers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.delegate"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.delegate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.dynaminc_pricing"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.dynaminc_pricing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.external"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.external</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.nonce"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.nonce</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.run_local"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.run_local</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.sender"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.sender</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.sender_token"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.sender_token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.schemas.TxnHeaders.value"><code class="docutils literal notranslate"><span class="pre">TxnHeaders.value</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba">libsimba.simba module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba.Simba"><code class="docutils literal notranslate"><span class="pre">Simba</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.admin_set_wallet"><code class="docutils literal notranslate"><span class="pre">Simba.admin_set_wallet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.balance"><code class="docutils literal notranslate"><span class="pre">Simba.balance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.call_contract_method"><code class="docutils literal notranslate"><span class="pre">Simba.call_contract_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.create_app"><code class="docutils literal notranslate"><span class="pre">Simba.create_app()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.create_artifact"><code class="docutils literal notranslate"><span class="pre">Simba.create_artifact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.create_org"><code class="docutils literal notranslate"><span class="pre">Simba.create_org()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.deploy_artifact"><code class="docutils literal notranslate"><span class="pre">Simba.deploy_artifact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.deploy_design"><code class="docutils literal notranslate"><span class="pre">Simba.deploy_design()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.fund"><code class="docutils literal notranslate"><span class="pre">Simba.fund()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_application"><code class="docutils literal notranslate"><span class="pre">Simba.get_application()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_application_contract"><code class="docutils literal notranslate"><span class="pre">Simba.get_application_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_application_transactions"><code class="docutils literal notranslate"><span class="pre">Simba.get_application_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_applications"><code class="docutils literal notranslate"><span class="pre">Simba.get_applications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_artifact"><code class="docutils literal notranslate"><span class="pre">Simba.get_artifact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_artifacts"><code class="docutils literal notranslate"><span class="pre">Simba.get_artifacts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_blockchains"><code class="docutils literal notranslate"><span class="pre">Simba.get_blockchains()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_bundle"><code class="docutils literal notranslate"><span class="pre">Simba.get_bundle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_bundle_file"><code class="docutils literal notranslate"><span class="pre">Simba.get_bundle_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_contract_info"><code class="docutils literal notranslate"><span class="pre">Simba.get_contract_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_contract_transactions"><code class="docutils literal notranslate"><span class="pre">Simba.get_contract_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_contracts"><code class="docutils literal notranslate"><span class="pre">Simba.get_contracts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_designs"><code class="docutils literal notranslate"><span class="pre">Simba.get_designs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_events"><code class="docutils literal notranslate"><span class="pre">Simba.get_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_events_by_contract"><code class="docutils literal notranslate"><span class="pre">Simba.get_events_by_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_manifest_for_bundle_from_bundle_hash"><code class="docutils literal notranslate"><span class="pre">Simba.get_manifest_for_bundle_from_bundle_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_receipt"><code class="docutils literal notranslate"><span class="pre">Simba.get_receipt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_storage"><code class="docutils literal notranslate"><span class="pre">Simba.get_storage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_transaction"><code class="docutils literal notranslate"><span class="pre">Simba.get_transaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_transactions_by_contract"><code class="docutils literal notranslate"><span class="pre">Simba.get_transactions_by_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_transactions_by_method"><code class="docutils literal notranslate"><span class="pre">Simba.get_transactions_by_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.get_wallet"><code class="docutils literal notranslate"><span class="pre">Simba.get_wallet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.list_application_transactions"><code class="docutils literal notranslate"><span class="pre">Simba.list_application_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.list_applications"><code class="docutils literal notranslate"><span class="pre">Simba.list_applications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.list_contract_transactions"><code class="docutils literal notranslate"><span class="pre">Simba.list_contract_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.list_contracts"><code class="docutils literal notranslate"><span class="pre">Simba.list_contracts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.list_events"><code class="docutils literal notranslate"><span class="pre">Simba.list_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.list_events_by_contract"><code class="docutils literal notranslate"><span class="pre">Simba.list_events_by_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.list_transactions_by_contract"><code class="docutils literal notranslate"><span class="pre">Simba.list_transactions_by_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.list_transactions_by_method"><code class="docutils literal notranslate"><span class="pre">Simba.list_transactions_by_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.save_design"><code class="docutils literal notranslate"><span class="pre">Simba.save_design()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.set_notification_config"><code class="docutils literal notranslate"><span class="pre">Simba.set_notification_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.set_wallet"><code class="docutils literal notranslate"><span class="pre">Simba.set_wallet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.smart_contract_client"><code class="docutils literal notranslate"><span class="pre">Simba.smart_contract_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.submit_contract_method"><code class="docutils literal notranslate"><span class="pre">Simba.submit_contract_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.submit_contract_method_sync"><code class="docutils literal notranslate"><span class="pre">Simba.submit_contract_method_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.submit_signed_transaction"><code class="docutils literal notranslate"><span class="pre">Simba.submit_signed_transaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.subscribe"><code class="docutils literal notranslate"><span class="pre">Simba.subscribe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.validate_bundle"><code class="docutils literal notranslate"><span class="pre">Simba.validate_bundle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.wait_for_deploy_artifact"><code class="docutils literal notranslate"><span class="pre">Simba.wait_for_deploy_artifact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.wait_for_deploy_design"><code class="docutils literal notranslate"><span class="pre">Simba.wait_for_deploy_design()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.wait_for_deployment"><code class="docutils literal notranslate"><span class="pre">Simba.wait_for_deployment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.wait_for_org_transaction"><code class="docutils literal notranslate"><span class="pre">Simba.wait_for_org_transaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba.Simba.whoami"><code class="docutils literal notranslate"><span class="pre">Simba.whoami()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba_sync">libsimba.simba_sync module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync"><code class="docutils literal notranslate"><span class="pre">SimbaSync</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.admin_set_wallet"><code class="docutils literal notranslate"><span class="pre">SimbaSync.admin_set_wallet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.balance"><code class="docutils literal notranslate"><span class="pre">SimbaSync.balance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.call_contract_method"><code class="docutils literal notranslate"><span class="pre">SimbaSync.call_contract_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.create_app"><code class="docutils literal notranslate"><span class="pre">SimbaSync.create_app()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.create_artifact"><code class="docutils literal notranslate"><span class="pre">SimbaSync.create_artifact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.create_org"><code class="docutils literal notranslate"><span class="pre">SimbaSync.create_org()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.deploy_artifact"><code class="docutils literal notranslate"><span class="pre">SimbaSync.deploy_artifact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.deploy_design"><code class="docutils literal notranslate"><span class="pre">SimbaSync.deploy_design()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.fund"><code class="docutils literal notranslate"><span class="pre">SimbaSync.fund()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_application"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_application()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_application_contract"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_application_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_application_transactions"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_application_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_applications"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_applications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_artifact"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_artifact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_artifacts"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_artifacts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_blockchains"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_blockchains()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_bundle"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_bundle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_bundle_file"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_bundle_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_contract_info"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_contract_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_contract_transactions"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_contract_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_contracts"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_contracts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_designs"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_designs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_events"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_events_by_contract"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_events_by_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_manifest_for_bundle_from_bundle_hash"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_manifest_for_bundle_from_bundle_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_receipt"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_receipt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_storage"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_storage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_transaction"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_transaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_transactions_by_contract"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_transactions_by_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_transactions_by_method"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_transactions_by_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.get_wallet"><code class="docutils literal notranslate"><span class="pre">SimbaSync.get_wallet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.list_application_transactions"><code class="docutils literal notranslate"><span class="pre">SimbaSync.list_application_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.list_applications"><code class="docutils literal notranslate"><span class="pre">SimbaSync.list_applications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.list_contract_transactions"><code class="docutils literal notranslate"><span class="pre">SimbaSync.list_contract_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.list_contracts"><code class="docutils literal notranslate"><span class="pre">SimbaSync.list_contracts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.list_events"><code class="docutils literal notranslate"><span class="pre">SimbaSync.list_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.list_events_by_contract"><code class="docutils literal notranslate"><span class="pre">SimbaSync.list_events_by_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.list_transactions_by_contract"><code class="docutils literal notranslate"><span class="pre">SimbaSync.list_transactions_by_contract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.list_transactions_by_method"><code class="docutils literal notranslate"><span class="pre">SimbaSync.list_transactions_by_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.parse_wallet"><code class="docutils literal notranslate"><span class="pre">SimbaSync.parse_wallet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.save_design"><code class="docutils literal notranslate"><span class="pre">SimbaSync.save_design()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.set_notification_config"><code class="docutils literal notranslate"><span class="pre">SimbaSync.set_notification_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.set_wallet"><code class="docutils literal notranslate"><span class="pre">SimbaSync.set_wallet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.smart_contract_client"><code class="docutils literal notranslate"><span class="pre">SimbaSync.smart_contract_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.submit_contract_method"><code class="docutils literal notranslate"><span class="pre">SimbaSync.submit_contract_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.submit_contract_method_sync"><code class="docutils literal notranslate"><span class="pre">SimbaSync.submit_contract_method_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.submit_signed_transaction"><code class="docutils literal notranslate"><span class="pre">SimbaSync.submit_signed_transaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.subscribe"><code class="docutils literal notranslate"><span class="pre">SimbaSync.subscribe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.validate_bundle"><code class="docutils literal notranslate"><span class="pre">SimbaSync.validate_bundle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.wait_for_deploy_artifact"><code class="docutils literal notranslate"><span class="pre">SimbaSync.wait_for_deploy_artifact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.wait_for_deploy_design"><code class="docutils literal notranslate"><span class="pre">SimbaSync.wait_for_deploy_design()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.wait_for_deployment"><code class="docutils literal notranslate"><span class="pre">SimbaSync.wait_for_deployment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.wait_for_org_transaction"><code class="docutils literal notranslate"><span class="pre">SimbaSync.wait_for_org_transaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_sync.SimbaSync.whoami"><code class="docutils literal notranslate"><span class="pre">SimbaSync.whoami()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba_contract">libsimba.simba_contract module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract"><code class="docutils literal notranslate"><span class="pre">SimbaContract</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.call_method"><code class="docutils literal notranslate"><span class="pre">SimbaContract.call_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.get_bundle"><code class="docutils literal notranslate"><span class="pre">SimbaContract.get_bundle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.get_bundle_file"><code class="docutils literal notranslate"><span class="pre">SimbaContract.get_bundle_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.get_bundle_manifest"><code class="docutils literal notranslate"><span class="pre">SimbaContract.get_bundle_manifest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.get_method_transactions"><code class="docutils literal notranslate"><span class="pre">SimbaContract.get_method_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.list_events"><code class="docutils literal notranslate"><span class="pre">SimbaContract.list_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.list_method_transactions"><code class="docutils literal notranslate"><span class="pre">SimbaContract.list_method_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.submit_method"><code class="docutils literal notranslate"><span class="pre">SimbaContract.submit_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.submit_method_sync"><code class="docutils literal notranslate"><span class="pre">SimbaContract.submit_method_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract.SimbaContract.validate_bundle_hash"><code class="docutils literal notranslate"><span class="pre">SimbaContract.validate_bundle_hash()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba_contract_sync">libsimba.simba_contract_sync module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.call_method"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.call_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.get_bundle"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.get_bundle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.get_bundle_file"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.get_bundle_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.get_bundle_manifest"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.get_bundle_manifest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.get_method_transactions"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.get_method_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.list_events"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.list_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.list_method_transactions"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.list_method_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.submit_method"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.submit_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.submit_method_sync"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.submit_method_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_contract_sync.SimbaContractSync.validate_bundle_hash"><code class="docutils literal notranslate"><span class="pre">SimbaContractSync.validate_bundle_hash()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.simba_request">libsimba.simba_request module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba_request.DeleteRequest"><code class="docutils literal notranslate"><span class="pre">DeleteRequest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.DeleteRequest.delete"><code class="docutils literal notranslate"><span class="pre">DeleteRequest.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.DeleteRequest.delete_sync"><code class="docutils literal notranslate"><span class="pre">DeleteRequest.delete_sync()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba_request.GetRequest"><code class="docutils literal notranslate"><span class="pre">GetRequest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.GetRequest.get"><code class="docutils literal notranslate"><span class="pre">GetRequest.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.GetRequest.get_sync"><code class="docutils literal notranslate"><span class="pre">GetRequest.get_sync()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba_request.PostRequest"><code class="docutils literal notranslate"><span class="pre">PostRequest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.PostRequest.post"><code class="docutils literal notranslate"><span class="pre">PostRequest.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.PostRequest.post_sync"><code class="docutils literal notranslate"><span class="pre">PostRequest.post_sync()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba_request.PutRequest"><code class="docutils literal notranslate"><span class="pre">PutRequest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.PutRequest.put"><code class="docutils literal notranslate"><span class="pre">PutRequest.put()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.PutRequest.put_sync"><code class="docutils literal notranslate"><span class="pre">PutRequest.put_sync()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest"><code class="docutils literal notranslate"><span class="pre">SimbaRequest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.async_login"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.async_login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.call"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.call_sync"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.call_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.default_login"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.default_login</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.download"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.download()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.download_sync"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.download_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.json_response"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.json_response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.log_me"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.log_me()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.login"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.response"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.retrieve"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.retrieve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.retrieve_iter"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.retrieve_iter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.retrieve_iter_sync"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.retrieve_iter_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.retrieve_sync"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.retrieve_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.send"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.send()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.send_sync"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.send_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.status"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.simba_request.SimbaRequest.url"><code class="docutils literal notranslate"><span class="pre">SimbaRequest.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#libsimba-param-checking-module">libsimba.param_checking module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.param_checking.ParamChecking"><code class="docutils literal notranslate"><span class="pre">ParamChecking</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.expect_scalar"><code class="docutils literal notranslate"><span class="pre">ParamChecking.expect_scalar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.get_dimension_lengths"><code class="docutils literal notranslate"><span class="pre">ParamChecking.get_dimension_lengths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.get_metadata"><code class="docutils literal notranslate"><span class="pre">ParamChecking.get_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.get_type_info"><code class="docutils literal notranslate"><span class="pre">ParamChecking.get_type_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.is_array"><code class="docutils literal notranslate"><span class="pre">ParamChecking.is_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.is_struct"><code class="docutils literal notranslate"><span class="pre">ParamChecking.is_struct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.params_as_dict"><code class="docutils literal notranslate"><span class="pre">ParamChecking.params_as_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.validate"><code class="docutils literal notranslate"><span class="pre">ParamChecking.validate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.validate_param"><code class="docutils literal notranslate"><span class="pre">ParamChecking.validate_param()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.param_checking.ParamChecking.validate_params"><code class="docutils literal notranslate"><span class="pre">ParamChecking.validate_params()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-libsimba.utils">libsimba.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.utils.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.ADMIN_WALLET_SET"><code class="docutils literal notranslate"><span class="pre">Path.ADMIN_WALLET_SET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.APP"><code class="docutils literal notranslate"><span class="pre">Path.APP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.APPS"><code class="docutils literal notranslate"><span class="pre">Path.APPS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.APP_CONTRACT"><code class="docutils literal notranslate"><span class="pre">Path.APP_CONTRACT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.APP_CONTRACTS"><code class="docutils literal notranslate"><span class="pre">Path.APP_CONTRACTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.APP_TXN"><code class="docutils literal notranslate"><span class="pre">Path.APP_TXN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.APP_TXNS"><code class="docutils literal notranslate"><span class="pre">Path.APP_TXNS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.BLOCKCHAINS"><code class="docutils literal notranslate"><span class="pre">Path.BLOCKCHAINS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.BUNDLE"><code class="docutils literal notranslate"><span class="pre">Path.BUNDLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.BUNDLE_FILE"><code class="docutils literal notranslate"><span class="pre">Path.BUNDLE_FILE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.BUNDLE_MANIFEST"><code class="docutils literal notranslate"><span class="pre">Path.BUNDLE_MANIFEST</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACT_ARTIFACT"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_ARTIFACT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACT_ARTIFACTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_ARTIFACTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACT_EVENTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_EVENTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACT_INFO"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_INFO</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACT_METHOD"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_METHOD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACT_RECEIPT"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_RECEIPT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACT_TXN"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_TXN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.CONTRACT_TXNS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_TXNS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.DEPLOYED_CONTRACT"><code class="docutils literal notranslate"><span class="pre">Path.DEPLOYED_CONTRACT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.DEPLOYED_CONTRACTS"><code class="docutils literal notranslate"><span class="pre">Path.DEPLOYED_CONTRACTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.DEPLOYMENT"><code class="docutils literal notranslate"><span class="pre">Path.DEPLOYMENT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.DEPLOYMENTS"><code class="docutils literal notranslate"><span class="pre">Path.DEPLOYMENTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.DESIGN"><code class="docutils literal notranslate"><span class="pre">Path.DESIGN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.DESIGNS"><code class="docutils literal notranslate"><span class="pre">Path.DESIGNS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.DESIGN_DEPLOY"><code class="docutils literal notranslate"><span class="pre">Path.DESIGN_DEPLOY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.NOTIFICATION_CONFIGS"><code class="docutils literal notranslate"><span class="pre">Path.NOTIFICATION_CONFIGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.ORGANISATION"><code class="docutils literal notranslate"><span class="pre">Path.ORGANISATION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.ORGANISATIONS"><code class="docutils literal notranslate"><span class="pre">Path.ORGANISATIONS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.ORG_APP"><code class="docutils literal notranslate"><span class="pre">Path.ORG_APP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.ORG_APPS"><code class="docutils literal notranslate"><span class="pre">Path.ORG_APPS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.ORG_TXN"><code class="docutils literal notranslate"><span class="pre">Path.ORG_TXN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.ORG_TXNS"><code class="docutils literal notranslate"><span class="pre">Path.ORG_TXNS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.STORAGES"><code class="docutils literal notranslate"><span class="pre">Path.STORAGES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.SUBSCRIPTION"><code class="docutils literal notranslate"><span class="pre">Path.SUBSCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.SUBSCRIPTIONS"><code class="docutils literal notranslate"><span class="pre">Path.SUBSCRIPTIONS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.SYNC_CONTRACT_METHOD"><code class="docutils literal notranslate"><span class="pre">Path.SYNC_CONTRACT_METHOD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.USER_ADDRESS_BALANCE"><code class="docutils literal notranslate"><span class="pre">Path.USER_ADDRESS_BALANCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.USER_FUND_ADDRESS"><code class="docutils literal notranslate"><span class="pre">Path.USER_FUND_ADDRESS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.USER_WALLET"><code class="docutils literal notranslate"><span class="pre">Path.USER_WALLET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.USER_WALLET_SET"><code class="docutils literal notranslate"><span class="pre">Path.USER_WALLET_SET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.VALIDATE_BUNDLE"><code class="docutils literal notranslate"><span class="pre">Path.VALIDATE_BUNDLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.Path.WHOAMI"><code class="docutils literal notranslate"><span class="pre">Path.WHOAMI</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.utils.RetryTransport"><code class="docutils literal notranslate"><span class="pre">RetryTransport</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.RetryTransport.MAX_BACKOFF_WAIT"><code class="docutils literal notranslate"><span class="pre">RetryTransport.MAX_BACKOFF_WAIT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.RetryTransport.RETRYABLE_METHODS"><code class="docutils literal notranslate"><span class="pre">RetryTransport.RETRYABLE_METHODS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.RetryTransport.RETRYABLE_STATUS_CODES"><code class="docutils literal notranslate"><span class="pre">RetryTransport.RETRYABLE_STATUS_CODES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.RetryTransport.handle_async_request"><code class="docutils literal notranslate"><span class="pre">RetryTransport.handle_async_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libsimba.utils.RetryTransport.handle_request"><code class="docutils literal notranslate"><span class="pre">RetryTransport.handle_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.utils.async_http_client"><code class="docutils literal notranslate"><span class="pre">async_http_client()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.utils.build_url"><code class="docutils literal notranslate"><span class="pre">build_url()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.utils.get_address"><code class="docutils literal notranslate"><span class="pre">get_address()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.utils.get_deployed_artifact_id"><code class="docutils literal notranslate"><span class="pre">get_deployed_artifact_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libsimba.utils.http_client"><code class="docutils literal notranslate"><span class="pre">http_client()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-libsimba">Module contents</a></li>
 </ul>
 </li>
@@ -94,8 +499,46 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="libsimba.auth.html">libsimba.auth package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="libsimba.auth.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libsimba.auth.html#module-libsimba.auth.client_credentials">libsimba.auth.client_credentials module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libsimba.auth.html#module-libsimba.auth">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libsimba.auth.html#module-libsimba.auth.client_credentials">libsimba.auth.client_credentials module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.BlocksAuthProvider"><code class="docutils literal notranslate"><span class="pre">BlocksAuthProvider</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.BlocksAuthProvider.login"><code class="docutils literal notranslate"><span class="pre">BlocksAuthProvider.login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.BlocksAuthProvider.login_sync"><code class="docutils literal notranslate"><span class="pre">BlocksAuthProvider.login_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.BlocksAuthProvider.provider"><code class="docutils literal notranslate"><span class="pre">BlocksAuthProvider.provider()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.ClientCredentials"><code class="docutils literal notranslate"><span class="pre">ClientCredentials</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.ClientCredentials.do_login"><code class="docutils literal notranslate"><span class="pre">ClientCredentials.do_login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.ClientCredentials.login"><code class="docutils literal notranslate"><span class="pre">ClientCredentials.login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.ClientCredentials.login_sync"><code class="docutils literal notranslate"><span class="pre">ClientCredentials.login_sync()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.KcAuthProvider"><code class="docutils literal notranslate"><span class="pre">KcAuthProvider</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.KcAuthProvider.login"><code class="docutils literal notranslate"><span class="pre">KcAuthProvider.login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.KcAuthProvider.login_sync"><code class="docutils literal notranslate"><span class="pre">KcAuthProvider.login_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.client_credentials.KcAuthProvider.provider"><code class="docutils literal notranslate"><span class="pre">KcAuthProvider.provider()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libsimba.auth.html#module-libsimba.auth">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider"><code class="docutils literal notranslate"><span class="pre">AuthProvider</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.access_tokens"><code class="docutils literal notranslate"><span class="pre">AuthProvider.access_tokens</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.cache_token"><code class="docutils literal notranslate"><span class="pre">AuthProvider.cache_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.get_cached_token"><code class="docutils literal notranslate"><span class="pre">AuthProvider.get_cached_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.login"><code class="docutils literal notranslate"><span class="pre">AuthProvider.login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.login_sync"><code class="docutils literal notranslate"><span class="pre">AuthProvider.login_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.provider"><code class="docutils literal notranslate"><span class="pre">AuthProvider.provider()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.test_token_valid"><code class="docutils literal notranslate"><span class="pre">AuthProvider.test_token_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.test_token_valid_async"><code class="docutils literal notranslate"><span class="pre">AuthProvider.test_token_valid_async()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.AuthProvider.token_expired"><code class="docutils literal notranslate"><span class="pre">AuthProvider.token_expired()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.DateTimeEncoder"><code class="docutils literal notranslate"><span class="pre">DateTimeEncoder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="libsimba.auth.html#libsimba.auth.DateTimeEncoder.default"><code class="docutils literal notranslate"><span class="pre">DateTimeEncoder.default()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -3323,7 +3766,8 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.async_login">
 <em class="property"><span class="pre">async</span><span class="w"> </span><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">login</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libsimba.schemas.Login" title="libsimba.schemas.Login"><span class="pre">Login</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.async_login" title="Permalink to this definition"></a></dt>
-<dd><p>Async login.</p>
+<dd><p>Async login. If an Authorization header is found in the headers,
+this is used rather than performing a login</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3333,6 +3777,7 @@ The errors element will contain any validation errors encountered.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
+<li><p><strong>headers</strong> (<cite>Optional[dict]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
@@ -3358,7 +3803,6 @@ The errors element will contain any validation errors encountered.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>args</strong> (<cite>Optional[MethodCallArgs]</cite>)</p></li>
 <li><p><strong>headers</strong> (<cite>Optional[dict]</cite>)</p></li>
-<li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
@@ -3384,7 +3828,6 @@ The errors element will contain any validation errors encountered.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>args</strong> (<cite>Optional[MethodCallArgs]</cite>)</p></li>
 <li><p><strong>headers</strong> (<cite>Optional[dict]</cite>)</p></li>
-<li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
@@ -3424,7 +3867,7 @@ The errors element will contain any validation errors encountered.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
+<li><p><strong>headers</strong> (<cite>Optional[dict]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
@@ -3447,7 +3890,7 @@ The errors element will contain any validation errors encountered.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
+<li><p><strong>headers</strong> (<cite>Optional[dict]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
@@ -3479,7 +3922,8 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.login">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">login</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libsimba.schemas.Login" title="libsimba.schemas.Login"><span class="pre">Login</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.login" title="Permalink to this definition"></a></dt>
-<dd><p>Login.</p>
+<dd><p>Login. If an Authorization header is found in the headers,
+this is used rather than performing a login.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3489,6 +3933,7 @@ The errors element will contain any validation errors encountered.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
+<li><p><strong>headers</strong> (<cite>Optional[dict]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>

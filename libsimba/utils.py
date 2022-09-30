@@ -204,6 +204,7 @@ class RetryTransport(httpx.AsyncBaseTransport, httpx.BaseTransport):
             }
         return response
 
+
 def async_http_client(config: schemas.ConnectionConfig = None) -> httpx.AsyncClient:
     """
     Create an async HTTPX client
