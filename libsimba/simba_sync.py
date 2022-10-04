@@ -854,7 +854,7 @@ class SimbaSync:
         self,
         app_id: str,
         contract_name: str,
-        receipt_hash: str,
+        transaction_hash: str,
         login: Login = None,
         config: ConnectionConfig = None,
     ):
@@ -867,7 +867,7 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param receipt_hash: The hash of the receipt
+        :param transaction_hash: The hash of the transaction
         :type receipt_hash: str
         :param \**kwargs:
             See below
@@ -878,7 +878,7 @@ class SimbaSync:
         :rtype: dict
         """
         return GetRequest(
-            endpoint=Path.CONTRACT_RECEIPT.format(app_id, contract_name, receipt_hash),
+            endpoint=Path.CONTRACT_RECEIPT.format(app_id, contract_name, transaction_hash),
             login=login,
         ).get_sync(config=config)
 
