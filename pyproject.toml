@@ -12,7 +12,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = " >=3.9,<4.0"
-httpx = "^0.23.0"
+httpx = "0.23.0"
 pydantic = { extras = ["dotenv"], version = "1.10.2" }
 
 [tool.poetry.dev-dependencies]
