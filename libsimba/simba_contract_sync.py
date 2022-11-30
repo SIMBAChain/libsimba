@@ -33,8 +33,7 @@ class SimbaContractSync(ParamChecking):
 
         :param method_name: The method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`)
             * **login** (`Optional[Login]`)
@@ -65,8 +64,7 @@ class SimbaContractSync(ParamChecking):
 
         :param method_name: The method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **inputs** (`Optional[dict]`)
             * **login** (`Optional[Login]`)
@@ -98,8 +96,7 @@ class SimbaContractSync(ParamChecking):
 
         :param method_name: The method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **inputs** (`Optional[dict]`)
             * **login** (`Optional[Login]`)
@@ -130,8 +127,7 @@ class SimbaContractSync(ParamChecking):
 
         :param method_name: The method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -160,8 +156,7 @@ class SimbaContractSync(ParamChecking):
 
         :param method_name: The method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -190,8 +185,7 @@ class SimbaContractSync(ParamChecking):
 
         :param event_name: The method name
         :type event_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -219,9 +213,6 @@ class SimbaContractSync(ParamChecking):
 
         :param bundle_hash: The hash or UUID of the bundle
         :type bundle_hash: str
-
-        :param \**kwargs:
-            See below
 
         :Keyword Arguments:
             * *login* (``Login``) - Optional
@@ -252,9 +243,6 @@ class SimbaContractSync(ParamChecking):
         :param download_location: local file location to write to
         :type download_location: str
 
-        :param \**kwargs:
-            See below
-
         :Keyword Arguments:
             * *login* (``Login``) - Optional
             * *config* (``ConnectionConfig``) - Optional
@@ -278,9 +266,6 @@ class SimbaContractSync(ParamChecking):
 
         :param bundle_hash: The hash or UUID of the bundle
         :type bundle_hash: str
-
-        :param \**kwargs:
-            See below
 
         :Keyword Arguments:
             * *login* (``Login``) - Optional
@@ -313,8 +298,6 @@ class SimbaContractSync(ParamChecking):
         :type file_name: str
         :param download_location: local file location to write to
         :type download_location: str
-        :param \**kwargs:
-            See below
 
         :Keyword Arguments:
             * *login* (``Login``) - Optional

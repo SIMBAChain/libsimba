@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>libsimba package &mdash; libsimba 0.1.10 documentation</title>
+  <title>libsimba package &mdash; libsimba 0.1.11 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -480,8 +480,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>libsimba package</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">libsimba package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/libsimba.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -1406,7 +1406,6 @@ NOTE: This is an admin function.</p>
 <li><p><strong>blockchain</strong> (<em>str</em>) – The blockchain the wallet is intended for</p></li>
 <li><p><strong>pub</strong> (<em>str</em>) – The blockchain address</p></li>
 <li><p><strong>priv</strong> (<em>str</em>) – The private key</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1434,7 +1433,6 @@ NOTE: This is an admin function.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>blockchain</strong> (<em>str</em>) – The blockchain to target</p></li>
 <li><p><strong>address</strong> (<em>str</em>) – The address to get the balance of</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1463,7 +1461,6 @@ NOTE: This is an admin function.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>method_name</strong> (<em>str</em>) – Method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1497,7 +1494,6 @@ Otherwise it will attempt to create one.</p>
 <li><p><strong>name</strong> (<em>str</em>) – The app name</p></li>
 <li><p><strong>display</strong> (<em>str</em>) – The app display name</p></li>
 <li><p><strong>force</strong> (<em>bool</em>) – Whether to attempt to create before checking for existence or not. Default is true</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1525,7 +1521,6 @@ Otherwise it will attempt to create one.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>org</strong> (<em>str</em>) – The organisation.</p></li>
 <li><p><strong>design_id</strong> (<em>str</em>) – The contract design id from which to derive the artifact.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1555,7 +1550,6 @@ NOTE: Creating orgs is typically an admin function.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – The org name</p></li>
 <li><p><strong>display</strong> (<em>str</em>) – The org display name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1586,7 +1580,6 @@ NOTE: Creating orgs is typically an admin function.</p>
 <li><p><strong>api_name</strong> (<em>str</em>) – The api name of the contract.</p></li>
 <li><p><strong>artifact_id</strong> (<em>str</em>) – The id of the artifact to deploy</p></li>
 <li><p><strong>blockchain</strong> (<em>str</em>) – The name of the blockchain to deploy to.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1621,7 +1614,6 @@ and a deployment object being created and returned.</p>
 <li><p><strong>api_name</strong> (<em>str</em>) – The api name of the contract.</p></li>
 <li><p><strong>design_id</strong> (<em>str</em>) – The id of the design to deploy</p></li>
 <li><p><strong>blockchain</strong> (<em>str</em>) – The name of the blockchain to deploy to.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1653,7 +1645,6 @@ and a deployment object being created and returned.</p>
 <li><p><strong>blockchain</strong> (<em>str</em>) – The blockchain to target</p></li>
 <li><p><strong>address</strong> (<em>str</em>) – The address to fund</p></li>
 <li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>) – The amount of native currency (wei) to fund. Can de a decimal int or a hex string</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1681,7 +1672,6 @@ and a deployment object being created and returned.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>org</strong> (<em>str</em>) – organisation id or name</p></li>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1709,7 +1699,6 @@ and a deployment object being created and returned.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1735,10 +1724,7 @@ and a deployment object being created and returned.</p>
 <p>Get application transactions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -1763,10 +1749,7 @@ and a deployment object being created and returned.</p>
 <p>Get applications</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -1794,7 +1777,6 @@ and a deployment object being created and returned.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>org</strong> (<em>str</em>) – The organisation.</p></li>
 <li><p><strong>artifact_id</strong> (<em>str</em>) – The organisation to save to.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1819,10 +1801,7 @@ and a deployment object being created and returned.</p>
 <p>Get contract artifacts for an organisation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>org</strong> (<em>str</em>) – The organisation.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>org</strong> (<em>str</em>) – The organisation.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -1846,10 +1825,7 @@ and a deployment object being created and returned.</p>
 <p>Get blockchains for an organisation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>org</strong> (<em>str</em>) – The organisation.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>org</strong> (<em>str</em>) – The organisation.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -1879,7 +1855,6 @@ file location (including full file name and extension (tar.gz)) to write the bun
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>bundle_hash</strong> (<em>str</em>) – bundle hash</p></li>
 <li><p><strong>download_location</strong> (<em>str</em>) – bundle hash</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1911,7 +1886,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>bundle_hash</strong> (<em>str</em>) – bundle hash</p></li>
 <li><p><strong>file_name</strong> (<em>str</em>) – the file name of the file in the bundle</p></li>
 <li><p><strong>download_location</strong> (<em>str</em>) – bundle hash</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1939,7 +1913,6 @@ file location (including full file name and extension) to write the file to.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1967,7 +1940,6 @@ file location (including full file name and extension) to write the file to.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -1993,10 +1965,7 @@ file location (including full file name and extension) to write the file to.</p>
 <p>Get contracts</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -2021,10 +1990,7 @@ file location (including full file name and extension) to write the file to.</p>
 <p>Get contract designs for an organisation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>org</strong> (<em>str</em>) – The organisation.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>org</strong> (<em>str</em>) – The organisation.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -2052,7 +2018,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>event_name</strong> (<em>str</em>) – Name of the Event</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2082,7 +2047,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>event_name</strong> (<em>str</em>) – Event name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2112,7 +2076,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>bundle_hash</strong> (<em>str</em>) – bundle hash</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2141,7 +2104,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>receipt_hash</strong> (<em>str</em>) – The hash of the receipt</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2166,10 +2128,7 @@ file location (including full file name and extension) to write the file to.</p>
 <p>Get off chain storage repositories for an organisation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>org</strong> (<em>str</em>) – The organisation.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>org</strong> (<em>str</em>) – The organisation.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -2197,7 +2156,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>transaction_hash</strong> (<em>str</em>) – The hash of the receipt</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2225,7 +2183,6 @@ file location (including full file name and extension) to write the file to.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2255,7 +2212,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2280,20 +2236,17 @@ file location (including full file name and extension) to write the file to.</p>
 <dd><p>GET <code class="docutils literal notranslate"><span class="pre">/user/wallet/</span></code></p>
 <p>Get current user’s wallet</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**kwargs</strong> – See below</p>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the wallet</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the wallet</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2305,10 +2258,7 @@ file location (including full file name and extension) to write the file to.</p>
 <p>List application transactions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -2332,10 +2282,7 @@ file location (including full file name and extension) to write the file to.</p>
 <p>List applications</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -2363,7 +2310,6 @@ file location (including full file name and extension) to write the file to.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2389,10 +2335,7 @@ file location (including full file name and extension) to write the file to.</p>
 <p>List contracts</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -2421,7 +2364,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>event_name</strong> (<em>str</em>) – Name of the Event</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2451,7 +2393,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>event_name</strong> (<em>str</em>) – Event name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2480,7 +2421,6 @@ file location (including full file name and extension) to write the file to.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2510,7 +2450,6 @@ file location (including full file name and extension) to write the file to.</p>
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2562,7 +2501,6 @@ Otherwise a new design is created via a POST.</p>
 <li><p><strong>org</strong> (<em>str</em>) – The organisation to save to.</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – The name of the design.</p></li>
 <li><p><strong>code</strong> (<em>str</em>) – the code</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2598,7 +2536,6 @@ Otherwise a new design is created via a POST.</p>
 <li><p><strong>scheme</strong> (<em>str</em>) – THe scheme of the notification - currently HTTP(S), MAILTO and SMS are supported.</p></li>
 <li><p><strong>auth_type</strong> (<em>str</em>) – The authentication type defined in a notification config</p></li>
 <li><p><strong>auth_info</strong> (<em>dict</em>) – Scheme specific auth information such as login details.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2627,7 +2564,6 @@ Otherwise a new design is created via a POST.</p>
 <li><p><strong>blockchain</strong> (<em>str</em>) – The blockchain the wallet is intended for</p></li>
 <li><p><strong>pub</strong> (<em>str</em>) – The blockchain address</p></li>
 <li><p><strong>priv</strong> (<em>str</em>) – The private key</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2662,7 +2598,6 @@ the returned transaction will have a state of ACCEPTED and will not contain the 
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>method_name</strong> (<em>str</em>) – Method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2695,7 +2630,6 @@ the returned transaction will have a state of SUBMITTED and will contain the tra
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>method_name</strong> (<em>str</em>) – Method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2727,7 +2661,6 @@ the returned transaction will have a state of SUBMITTED and will contain the tra
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>txn_id</strong> (<em>str</em>) – The ID of the transaction in the database</p></li>
 <li><p><strong>txn</strong> (<em>dict</em>) – The signed transaction keyed to the <code class="docutils literal notranslate"><span class="pre">transaction</span></code> value.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2759,7 +2692,6 @@ the returned transaction will have a state of SUBMITTED and will contain the tra
 <li><p><strong>contract_name</strong> (<em>str</em>) – The name of the contract API</p></li>
 <li><p><strong>txn</strong> (<em>str</em>) – The transaction (Method or Event) in the contract.</p></li>
 <li><p><strong>subscription_type</strong> (<em>str</em>) – The type of subscription - METHOD or EVENT</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2788,7 +2720,6 @@ the returned transaction will have a state of SUBMITTED and will contain the tra
 <li><p><strong>app_id</strong> (<em>str</em>) – Application id or name</p></li>
 <li><p><strong>contract_name</strong> (<em>str</em>) – Contract API name</p></li>
 <li><p><strong>bundle_hash</strong> (<em>str</em>) – bundle hash</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2820,7 +2751,6 @@ of the deployed contract and contract DB ID</p>
 <li><p><strong>artifact_id</strong> (<em>str</em>) – The id of the artifact to deploy</p></li>
 <li><p><strong>api_name</strong> (<em>str</em>) – The api name of the contract.</p></li>
 <li><p><strong>blockchain</strong> (<em>str</em>) – The name of the blockchain to deploy to.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2855,7 +2785,6 @@ of the deployed contract and contract DB ID</p>
 <li><p><strong>design_id</strong> (<em>str</em>) – The id of the design to deploy</p></li>
 <li><p><strong>api_name</strong> (<em>str</em>) – The api name of the contract.</p></li>
 <li><p><strong>blockchain</strong> (<em>str</em>) – The name of the blockchain to deploy to.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2886,7 +2815,6 @@ of the deployed contract and contract DB ID</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>org</strong> (<em>str</em>) – The organisation to save to.</p></li>
 <li><p><strong>uid</strong> (<em>str</em>) – The ID of the deployment resource</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2920,7 +2848,6 @@ of the deployed contract and contract DB ID</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>org</strong> (<em>str</em>) – The organisation to save to.</p></li>
 <li><p><strong>uid</strong> (<em>str</em>) – The ID of the transaction</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -2950,20 +2877,17 @@ of the deployed contract and contract DB ID</p>
 <dd><p>GET <code class="docutils literal notranslate"><span class="pre">/user/whoami/</span></code></p>
 <p>Get the current user.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**kwargs</strong> – See below</p>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>user information</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>user information</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2983,10 +2907,7 @@ of the deployed contract and contract DB ID</p>
 <dd><p>Call a getter contract method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3013,7 +2934,6 @@ of the deployed contract and contract DB ID</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p></li>
 <li><p><strong>download_location</strong> (<em>str</em>) – local file location to write to</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -3041,7 +2961,6 @@ of the deployed contract and contract DB ID</p>
 <li><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p></li>
 <li><p><strong>file_name</strong> (<em>str</em>) – the name of the file in the bundle</p></li>
 <li><p><strong>download_location</strong> (<em>str</em>) – local file location to write to</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -3065,10 +2984,7 @@ of the deployed contract and contract DB ID</p>
 <dd><p>Get the JSON manifest for a bundle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3091,10 +3007,7 @@ of the deployed contract and contract DB ID</p>
 <dd><p>Query transactions by method and get a single page back as a list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3118,10 +3031,7 @@ of the deployed contract and contract DB ID</p>
 <dd><p>Query events and page through all results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>event_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>event_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3145,10 +3055,7 @@ of the deployed contract and contract DB ID</p>
 <dd><p>Query transactions by method and page through all results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3172,10 +3079,7 @@ of the deployed contract and contract DB ID</p>
 <dd><p>Submit a transaction to a method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3199,10 +3103,7 @@ of the deployed contract and contract DB ID</p>
 <dd><p>Submit a transaction to a method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3229,10 +3130,7 @@ ensuring that all the referenced data has not been tampered with.
 The errors element will contain any validation errors encountered.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3264,10 +3162,7 @@ The errors element will contain any validation errors encountered.</p>
 <dd><p>Call a getter contract method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3294,7 +3189,6 @@ The errors element will contain any validation errors encountered.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p></li>
 <li><p><strong>download_location</strong> (<em>str</em>) – local file location to write to</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -3322,7 +3216,6 @@ The errors element will contain any validation errors encountered.</p>
 <li><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p></li>
 <li><p><strong>file_name</strong> (<em>str</em>) – the name of the file in the bundle</p></li>
 <li><p><strong>download_location</strong> (<em>str</em>) – local file location to write to</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -3346,10 +3239,7 @@ The errors element will contain any validation errors encountered.</p>
 <dd><p>Get the JSON manifest for a bundle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3372,10 +3262,7 @@ The errors element will contain any validation errors encountered.</p>
 <dd><p>Query transactions by method and get a single page back as a list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3399,10 +3286,7 @@ The errors element will contain any validation errors encountered.</p>
 <dd><p>Query events and page through all results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>event_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>event_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3426,10 +3310,7 @@ The errors element will contain any validation errors encountered.</p>
 <dd><p>Query transactions by method and page through all results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3453,10 +3334,7 @@ The errors element will contain any validation errors encountered.</p>
 <dd><p>Submit a transaction to a method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3480,10 +3358,7 @@ The errors element will contain any validation errors encountered.</p>
 <dd><p>Submit a transaction to a method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<em>str</em>) – The method name</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>method_name</strong> (<em>str</em>) – The method name</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3510,10 +3385,7 @@ ensuring that all the referenced data has not been tampered with.
 The errors element will contain any validation errors encountered.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>bundle_hash</strong> (<em>str</em>) – The hash or UUID of the bundle</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3542,11 +3414,7 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.DeleteRequest.delete">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.DeleteRequest.delete" title="Permalink to this definition"></a></dt>
-<dd><p>Send a DELETE request.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a DELETE request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3566,11 +3434,7 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.DeleteRequest.delete_sync">
 <span class="sig-name descname"><span class="pre">delete_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.DeleteRequest.delete_sync" title="Permalink to this definition"></a></dt>
-<dd><p>Send a DELETE request.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a DELETE request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3596,11 +3460,7 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.GetRequest.get">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.GetRequest.get" title="Permalink to this definition"></a></dt>
-<dd><p>Send a GET request.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a GET request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3620,11 +3480,7 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.GetRequest.get_sync">
 <span class="sig-name descname"><span class="pre">get_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.GetRequest.get_sync" title="Permalink to this definition"></a></dt>
-<dd><p>Send a GET request.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a GET request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3650,11 +3506,7 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.PostRequest.post">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.FileDict" title="libsimba.schemas.FileDict"><span class="pre">FileDict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.PostRequest.post" title="Permalink to this definition"></a></dt>
-<dd><p>Send a POST request.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a POST request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3676,11 +3528,7 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.PostRequest.post_sync">
 <span class="sig-name descname"><span class="pre">post_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.FileDict" title="libsimba.schemas.FileDict"><span class="pre">FileDict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.PostRequest.post_sync" title="Permalink to this definition"></a></dt>
-<dd><p>Send a POST request.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a POST request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3708,11 +3556,7 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.PutRequest.put">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.FileDict" title="libsimba.schemas.FileDict"><span class="pre">FileDict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.PutRequest.put" title="Permalink to this definition"></a></dt>
-<dd><p>Send a PUT request.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a PUT request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3734,11 +3578,7 @@ The errors element will contain any validation errors encountered.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.PutRequest.put_sync">
 <span class="sig-name descname"><span class="pre">put_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.FileDict" title="libsimba.schemas.FileDict"><span class="pre">FileDict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.PutRequest.put_sync" title="Permalink to this definition"></a></dt>
-<dd><p>Send a PUT request.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a PUT request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3770,10 +3610,7 @@ The errors element will contain any validation errors encountered.</p>
 this is used rather than performing a login</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>login</strong> (<a class="reference internal" href="#libsimba.schemas.Login" title="libsimba.schemas.Login"><em>Login</em></a>) – A Login object</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>login</strong> (<a class="reference internal" href="#libsimba.schemas.Login" title="libsimba.schemas.Login"><em>Login</em></a>) – A Login object</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3793,11 +3630,7 @@ this is used rather than performing a login</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.call">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.MethodCallArgs" title="libsimba.schemas.MethodCallArgs"><span class="pre">MethodCallArgs</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.call" title="Permalink to this definition"></a></dt>
-<dd><p>Call a getter method in a contract async.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Call a getter method in a contract async.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3818,11 +3651,7 @@ this is used rather than performing a login</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.call_sync">
 <span class="sig-name descname"><span class="pre">call_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.MethodCallArgs" title="libsimba.schemas.MethodCallArgs"><span class="pre">MethodCallArgs</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.call_sync" title="Permalink to this definition"></a></dt>
-<dd><p>Call a getter method in a contract.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Call a getter method in a contract.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3860,10 +3689,7 @@ this is used rather than performing a login</p>
 <dd><p>Async download data and write it to <code class="docutils literal notranslate"><span class="pre">location</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>location</strong> (<em>str</em>) – A local file system location to write to.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>location</strong> (<em>str</em>) – A local file system location to write to.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3883,10 +3709,7 @@ this is used rather than performing a login</p>
 <dd><p>Download data and write it to <code class="docutils literal notranslate"><span class="pre">location</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>location</strong> (<em>str</em>) – A local file system location to write to.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>location</strong> (<em>str</em>) – A local file system location to write to.</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3926,10 +3749,7 @@ this is used rather than performing a login</p>
 this is used rather than performing a login.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>login</strong> (<a class="reference internal" href="#libsimba.schemas.Login" title="libsimba.schemas.Login"><em>Login</em></a>) – A Login object</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
+<dd class="field-odd"><p><strong>login</strong> (<a class="reference internal" href="#libsimba.schemas.Login" title="libsimba.schemas.Login"><em>Login</em></a>) – A Login object</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -3963,11 +3783,7 @@ this is used rather than performing a login.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.retrieve">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">retrieve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.retrieve" title="Permalink to this definition"></a></dt>
-<dd><p>Get multiple results as a List. This will NOT loop through paging if the result is pageed.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Get multiple results as a List. This will NOT loop through paging if the result is pageed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -3987,11 +3803,7 @@ this is used rather than performing a login.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.retrieve_iter">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">retrieve_iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.retrieve_iter" title="Permalink to this definition"></a></dt>
-<dd><p>Get multiple results as an async generator. This will loop through paging if the result is pageed.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Get multiple results as an async generator. This will loop through paging if the result is pageed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -4011,11 +3823,7 @@ this is used rather than performing a login.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.retrieve_iter_sync">
 <span class="sig-name descname"><span class="pre">retrieve_iter_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.retrieve_iter_sync" title="Permalink to this definition"></a></dt>
-<dd><p>Get multiple results as a generator. This will loop through paging if the result is pageed.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Get multiple results as a generator. This will loop through paging if the result is pageed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -4035,11 +3843,7 @@ this is used rather than performing a login.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.retrieve_sync">
 <span class="sig-name descname"><span class="pre">retrieve_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.retrieve_sync" title="Permalink to this definition"></a></dt>
-<dd><p>Get multiple results as a List. This will NOT loop through paging if the result is pageed.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Get multiple results as a List. This will NOT loop through paging if the result is pageed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -4059,11 +3863,7 @@ this is used rather than performing a login.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.send">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.FileDict" title="libsimba.schemas.FileDict"><span class="pre">FileDict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.send" title="Permalink to this definition"></a></dt>
-<dd><p>Send a request. Can be either GET, PUT or POST.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a request. Can be either GET, PUT or POST.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
@@ -4085,11 +3885,7 @@ this is used rather than performing a login.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.send_sync">
 <span class="sig-name descname"><span class="pre">send_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.FileDict" title="libsimba.schemas.FileDict"><span class="pre">FileDict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.send_sync" title="Permalink to this definition"></a></dt>
-<dd><p>Send a request. Can be either GET, PUT or POST.
-:param **kwargs:</p>
-<blockquote>
-<div><p>See below</p>
-</div></blockquote>
+<dd><p>Send a request. Can be either GET, PUT or POST.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">

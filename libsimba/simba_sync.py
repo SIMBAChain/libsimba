@@ -34,8 +34,6 @@ class SimbaSync:
 
         Get the current user.
 
-        :param \**kwargs:
-            See below
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -64,8 +62,7 @@ class SimbaSync:
         :type address: str
         :param amount: The amount of native currency (wei) to fund. Can de a decimal int or a hex string
         :type amount: Union[str, int]
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -94,8 +91,7 @@ class SimbaSync:
         :type blockchain: str
         :param address: The address to get the balance of
         :type address: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -130,8 +126,7 @@ class SimbaSync:
         :type pub: str
         :param priv: The private key
         :type priv: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -163,8 +158,7 @@ class SimbaSync:
         :type pub: str
         :param priv: The private key
         :type priv: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -182,9 +176,7 @@ class SimbaSync:
         GET ``/user/wallet/``
 
         Get current user's wallet
-
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -242,8 +234,7 @@ class SimbaSync:
         :type name: str
         :param display: The org display name
         :type display: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -286,8 +277,7 @@ class SimbaSync:
         :type display: str
         :param force: Whether to attempt to create before checking for existence or not. Default is true
         :type force: bool
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -333,8 +323,7 @@ class SimbaSync:
 
         :param app_id: Application id or name
         :type app_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -359,8 +348,7 @@ class SimbaSync:
 
         :param app_id: Application id or name
         :type app_id: str
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -388,8 +376,7 @@ class SimbaSync:
         :type org: str
         :param app_id: Application id or name
         :type app_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -413,8 +400,7 @@ class SimbaSync:
 
         :param app_id: Application id or name
         :type app_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -439,8 +425,7 @@ class SimbaSync:
 
         :param app_id: Application id or name
         :type app_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -469,8 +454,7 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -501,8 +485,7 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -533,8 +516,7 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -562,8 +544,7 @@ class SimbaSync:
 
         :param app_id: Application id or name
         :type app_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -591,8 +572,7 @@ class SimbaSync:
 
         :param app_id: Application id or name
         :type app_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -625,8 +605,7 @@ class SimbaSync:
         :type contract_name: str
         :param bundle_hash: bundle hash
         :type bundle_hash: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -661,8 +640,7 @@ class SimbaSync:
         :type bundle_hash: str
         :param download_location: bundle hash
         :type download_location: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -699,8 +677,7 @@ class SimbaSync:
         :type file_name: str
         :param download_location: bundle hash
         :type download_location: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -733,8 +710,7 @@ class SimbaSync:
         :type contract_name: str
         :param bundle_hash: bundle hash
         :type bundle_hash: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -768,8 +744,7 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -800,8 +775,7 @@ class SimbaSync:
         :type contract_name: str
         :param event_name: Name of the Event
         :type event_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -835,8 +809,7 @@ class SimbaSync:
         :type contract_name: str
         :param event_name: Name of the Event
         :type event_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -869,8 +842,7 @@ class SimbaSync:
         :type contract_name: str
         :param receipt_hash: The hash of the receipt
         :type receipt_hash: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -901,8 +873,7 @@ class SimbaSync:
         :type contract_name: str
         :param transaction_hash: The hash of the receipt
         :type transaction_hash: str
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -934,8 +905,7 @@ class SimbaSync:
         :type contract_name: str
         :param method_name: The method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -969,8 +939,7 @@ class SimbaSync:
         :type contract_name: str
         :param method_name: The method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -1001,8 +970,7 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -1033,8 +1001,7 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -1068,8 +1035,7 @@ class SimbaSync:
         :type contract_name: str
         :param event_name: Event name
         :type event_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -1103,8 +1069,7 @@ class SimbaSync:
         :type contract_name: str
         :param event_name: Event name
         :type event_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -1141,8 +1106,7 @@ class SimbaSync:
         :type contract_name: str
         :param method_name: Method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **inputs** (`Optional[dict]`) - method parameters as a dictionary
             * **files** (`Optional[FileDict]`) - optional off chain files to upload
@@ -1180,8 +1144,7 @@ class SimbaSync:
         :type contract_name: str
         :param method_name: Method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`) - optional method parameters as a dict
             * **txn_headers** (`Optional[TxnHeaders]`) - optional transaction related headers to include
@@ -1218,8 +1181,7 @@ class SimbaSync:
         :type contract_name: str
         :param method_name: Method name
         :type method_name: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **inputs** (`Optional[dict]`) - method parameters as a dictionary
             * **files** (`Optional[FileDict]`) - optional off chain files to upload
@@ -1259,8 +1221,7 @@ class SimbaSync:
         :type txn_id: str
         :param txn: The signed transaction keyed to the ``transaction`` value.
         :type txn: dict
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1297,8 +1258,7 @@ class SimbaSync:
         :type name: str
         :param code: the code
         :type code: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **design_id** (`str`) - A design ID. If provided, this will update the given design via a PUT. Otherwise a new design will be created.
             * **target_contract** (`str`) - The name of the target contract to create an API for
@@ -1353,8 +1313,7 @@ class SimbaSync:
         :type org: str
         :param uid: The ID of the deployment resource
         :type uid: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **total_time** (`int`) - total time waited so far. leave this at zero as it gets incremented through
                                         recursive calls.
@@ -1413,8 +1372,7 @@ class SimbaSync:
         :type design_id: str
         :param blockchain: The name of the blockchain to deploy to.
         :type blockchain: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **storage** (`str`) - The name of the off chain storage to use. Defaults to `no_storage`
             * **display_name** (`str`) - Display name for the contract.
@@ -1464,8 +1422,7 @@ class SimbaSync:
         :type artifact_id: str
         :param blockchain: The name of the blockchain to deploy to.
         :type blockchain: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **storage** (`str`) - The name of the off chain storage to use. Defaults to `no_storage`
             * **display_name** (`str`) - Display name for the contract.
@@ -1519,8 +1476,7 @@ class SimbaSync:
         :type api_name: str
         :param blockchain: The name of the blockchain to deploy to.
         :type blockchain: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **storage** (`str`) - The name of the off chain storage to use. Defaults to `no_storage`
             * **display_name** (`str`) - Display name for the contract.
@@ -1578,8 +1534,7 @@ class SimbaSync:
         :type api_name: str
         :param blockchain: The name of the blockchain to deploy to.
         :type blockchain: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **storage** (`str`) - The name of the off chain storage to use. Defaults to `no_storage`
             * **display_name** (`str`) - Display name for the contract.
@@ -1623,8 +1578,7 @@ class SimbaSync:
 
         :param org: The organisation.
         :type org: str
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1649,8 +1603,7 @@ class SimbaSync:
 
         :param org: The organisation.
         :type org: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1678,8 +1631,7 @@ class SimbaSync:
         :type org: str
         :param artifact_id: The organisation to save to.
         :type artifact_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1707,8 +1659,7 @@ class SimbaSync:
         :type org: str
         :param design_id: The contract design id from which to derive the artifact.
         :type design_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1734,8 +1685,7 @@ class SimbaSync:
 
         :param org: The organisation.
         :type org: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1760,8 +1710,7 @@ class SimbaSync:
 
         :param org: The organisation.
         :type org: str
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1801,8 +1750,7 @@ class SimbaSync:
         :type txn: str
         :param subscription_type: The type of subscription - METHOD or EVENT
         :type subscription_type: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1856,8 +1804,7 @@ class SimbaSync:
         :type auth_type: str
         :param auth_info: Scheme specific auth information such as login details.
         :type auth_info: dict
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1904,8 +1851,7 @@ class SimbaSync:
         :type org: str
         :param uid: The ID of the transaction
         :type uid: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **total_time** (`int`) - total time waited so far. leave this at zero as it gets incremented through
                                         recursive calls.
