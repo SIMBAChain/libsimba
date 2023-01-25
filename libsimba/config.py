@@ -23,7 +23,7 @@ def get_config_file(root: str) -> Optional[str]:
 
 
 def locate_config() -> Optional[str]:
-    conf = get_config_file(os.path.dirname(os.path.dirname(__file__)))
+    conf = get_config_file(os.getcwd())
     return (
         conf
         if os.path.exists(conf)
