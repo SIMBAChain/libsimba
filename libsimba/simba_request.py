@@ -41,8 +41,7 @@ class SimbaRequest(object):
 
         :param endpoint: Application id or name
         :type app_id: str
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * *method* (``str``) - Optional - default ``GET``
             * *query_params* (``Union of dict or SearchFilter``) - Optional
@@ -144,8 +143,7 @@ class SimbaRequest(object):
 
         :param login: A Login object
         :type login: Login
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -170,8 +168,8 @@ class SimbaRequest(object):
 
         :param login: A Login object
         :type login: Login
-        :param \**kwargs:
-            See below
+        
+            
         :Keyword Arguments:
             * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -197,8 +195,7 @@ class SimbaRequest(object):
 
         :param location: A local file system location to write to.
         :type location: str
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -225,8 +222,7 @@ class SimbaRequest(object):
 
         :param location: A local file system location to write to.
         :type location: str
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -250,8 +246,7 @@ class SimbaRequest(object):
     ) -> dict:
         """
         Call a getter method in a contract.
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`)
             * **headers** (`Optional[dict]`)
@@ -278,8 +273,7 @@ class SimbaRequest(object):
     ) -> dict:
         """
         Call a getter method in a contract async.
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`)
             * **headers** (`Optional[dict]`)
@@ -307,8 +301,7 @@ class SimbaRequest(object):
     ) -> dict:
         """
         Send a request. Can be either GET, PUT or POST.
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **json_payload** (`Optional[dict]`) - optional payload
@@ -358,8 +351,7 @@ class SimbaRequest(object):
     ) -> Generator[List[dict], None, None]:
         """
         Get multiple results as a generator. This will loop through paging if the result is pageed.
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -387,8 +379,7 @@ class SimbaRequest(object):
     ) -> List[dict]:
         """
         Get multiple results as a List. This will NOT loop through paging if the result is pageed.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -410,8 +401,7 @@ class SimbaRequest(object):
     ) -> AsyncGenerator[List[dict], None]:
         """
         Get multiple results as an async generator. This will loop through paging if the result is pageed.
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -443,8 +433,7 @@ class SimbaRequest(object):
     ) -> List[dict]:
         """
         Get multiple results as a List. This will NOT loop through paging if the result is pageed.
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -470,8 +459,7 @@ class SimbaRequest(object):
     ) -> dict:
         """
         Send a request. Can be either GET, PUT or POST.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **json_payload** (`Optional[dict]`) - optional payload
@@ -562,8 +550,7 @@ class GetRequest(SimbaRequest):
     ) -> dict:
         """
         Send a GET request.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -579,8 +566,7 @@ class GetRequest(SimbaRequest):
     ) -> dict:
         """
         Send a GET request.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -607,8 +593,7 @@ class PostRequest(SimbaRequest):
     ) -> dict:
         """
         Send a POST request.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **json_payload** (`Optional[dict]`) - optional payload
@@ -630,8 +615,7 @@ class PostRequest(SimbaRequest):
     ) -> dict:
         """
         Send a POST request.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **json_payload** (`Optional[dict]`) - optional payload
@@ -662,8 +646,7 @@ class PutRequest(SimbaRequest):
     ) -> dict:
         """
         Send a PUT request.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **json_payload** (`Optional[dict]`) - optional payload
@@ -685,8 +668,7 @@ class PutRequest(SimbaRequest):
     ) -> dict:
         """
         Send a PUT request.
-        :param \**kwargs:
-            See below
+            
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **json_payload** (`Optional[dict]`) - optional payload
@@ -715,8 +697,7 @@ class DeleteRequest(SimbaRequest):
     ) -> Optional[dict]:
         """
         Send a DELETE request.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -732,8 +713,7 @@ class DeleteRequest(SimbaRequest):
     ) -> Optional[dict]:
         """
         Send a DELETE request.
-        :param \**kwargs:
-            See below
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config

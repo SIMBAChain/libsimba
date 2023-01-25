@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "libsimba"
-version = "0.1.10"
+version = "0.1.12"
 description = "libsimba is a library simplifying the use of SIMBAChain Blocks APIs."
 authors = [
     "SIMBA Chain Inc."
@@ -12,7 +12,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = " >=3.9,<4.0"
-httpx = "^0.23.0"
+httpx = "0.23.0"
 pydantic = { extras = ["dotenv"], version = "1.10.2" }
 
 [tool.poetry.dev-dependencies]
