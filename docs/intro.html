@@ -130,14 +130,14 @@
 <p>Configuration is loaded consistent with other SIMBA client tools.
 The config file should be in dotenv format and should be called <code class="docutils literal notranslate"><span class="pre">.simbachain.env</span></code> or <code class="docutils literal notranslate"><span class="pre">simbachain.env</span></code>
 (i.e. a visible variant) or <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p>
-<p>This can be placed in the project root, alongside the <code class="docutils literal notranslate"><span class="pre">libsimba</span></code> package, or can be placed anywhere if the
+<p>This can be placed in the current working directory, or can be placed anywhere if the
 environment variable <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME</span></code> is set. This variable should point to the directory containing the
 dotenv file. The <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME</span></code> variable defaults to the user’s home directory, e.g. <code class="docutils literal notranslate"><span class="pre">~/</span></code></p>
 <p>The search order for this file is:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">project_root/.simbachain.env</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">project_root/simbachain.env</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">project_root/.env</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">working</span> <span class="pre">directory/.simbachain.env</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">working</span> <span class="pre">directory/simbachain.env</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">working</span> <span class="pre">directory/.env</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SIMBA_HOME/.simbachain.env</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SIMBA_HOME/simbachain.env</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SIMBA_HOME/.env</span></code></p></li>
@@ -201,16 +201,10 @@ Otherwise ini file format is assumed.</p>
 
 <span class="c1"># Using Simba and async/await</span>
 <span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">apps</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">get_applications</span><span class="p">()</span>
-        <span class="c1"># .. do something with apps</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">me</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">whoami</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">me</span><span class="p">)</span>
 
-<span class="c1"># Using simba and asyncio</span>
-<span class="c1"># if you want to run directly from a file and see printed output, use soemthing like the following:</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">apps</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">get_applications</span><span class="p">()</span>
-
-<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libsimba</span> <span class="kn">import</span> <span class="n">SimbaSync</span>
@@ -220,14 +214,9 @@ Otherwise ini file format is assumed.</p>
 <span class="c1"># Using SimbaSync with synchronous behavior</span>
 <span class="k">class</span> <span class="nc">SyncExample</span><span class="p">:</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">apps</span> <span class="o">=</span> <span class="n">simba_sync</span><span class="o">.</span><span class="n">get_applications</span><span class="p">()</span>
-        <span class="c1"># .. do something with apps</span>
+        <span class="n">me</span> <span class="o">=</span> <span class="n">simba_sync</span><span class="o">.</span><span class="n">whoami</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">me</span><span class="p">)</span>
 
-<span class="c1"># Making a call and viewing printed result:</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">apps</span> <span class="o">=</span> <span class="n">simba_sync</span><span class="o">.</span><span class="n">get_applications</span><span class="p">()</span>
-
-<span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>returned objects are currently not typed, i.e., the SDK returns <code class="docutils literal notranslate"><span class="pre">dict</span></code> instances.</p>

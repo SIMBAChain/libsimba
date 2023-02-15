@@ -36,15 +36,15 @@ Configuration is loaded consistent with other SIMBA client tools.
 The config file should be in dotenv format and should be called `.simbachain.env` or `simbachain.env`
 (i.e. a visible variant) or `.env`.
 
-This can be placed in the project root, alongside the `libsimba` package, or can be placed anywhere if the
+This can be placed in the current working directory, or can be placed anywhere if the
 environment variable `SIMBA_HOME` is set. This variable should point to the directory containing the
 dotenv file. The `SIMBA_HOME` variable defaults to the user's home directory, e.g. `~/`
 
 The search order for this file is:
 
-* `project_root/.simbachain.env` 
-* `project_root/simbachain.env`
-* `project_root/.env`
+* `current working directory/.simbachain.env` 
+* `current working directory/simbachain.env`
+* `current working directory/.env`
 * `SIMBA_HOME/.simbachain.env` 
 * `SIMBA_HOME/simbachain.env`
 * `SIMBA_HOME/.env`
@@ -120,16 +120,10 @@ import asyncio
 
 # Using Simba and async/await
 class Example:
-    async def do_something(self):
-        apps = await simba.get_applications()
-        # .. do something with apps
+    async def get_me(self):
+        me = await simba.whoami()
+        print(me)
 
-# Using simba and asyncio
-# if you want to run directly from a file and see printed output, use soemthing like the following:
-async def main():
-    apps = await simba.get_applications()
-
-asyncio.run(main())
 ```
 
 ```python
@@ -140,14 +134,9 @@ simba_sync = SimbaSync()
 # Using SimbaSync with synchronous behavior
 class SyncExample:
     async def do_something(self):
-        apps = simba_sync.get_applications()
-        # .. do something with apps
+        me = simba_sync.whoami()
+        print(me)
 
-# Making a call and viewing printed result:
-def main():
-    apps = simba_sync.get_applications()
-
-main()
 ```
 
 returned objects are currently not typed, i.e., the SDK returns `dict` instances.
