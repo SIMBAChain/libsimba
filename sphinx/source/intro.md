@@ -114,7 +114,6 @@ All method signatures for both sync and async clients are the same except the as
 from libsimba import Simba
 
 simba = Simba()
-import asyncio
 
 # Using Simba's default async behavior
 
