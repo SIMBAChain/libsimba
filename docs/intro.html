@@ -188,7 +188,7 @@ Otherwise ini file format is assumed.</p>
 <p>The Simba client object runs asynchronously by default, so if you would like to run synchronous code instead, you should use the SimbaSync client:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libsimba.simba</span> <span class="kn">import</span> <span class="n">SimbaSync</span>
 
-<span class="n">simba_async</span> <span class="o">=</span> <span class="n">SimbaSync</span><span class="p">()</span>
+<span class="n">simba_sync</span> <span class="o">=</span> <span class="n">SimbaSync</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>All method signatures for both sync and async clients are the same except the async client functions are largely async and should be awaited.</p>
