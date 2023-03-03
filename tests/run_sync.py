@@ -18,7 +18,7 @@ import tarfile
 class Runner(object):
     def __init__(
         self,
-        org: str = "libsimba-1660833413",
+        org: str = "libsimba",
         blockchain_name: str = "Quorum",
         storage_name: str = "azure",
         num_calls: int = 10,

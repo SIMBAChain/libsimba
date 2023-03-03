@@ -69,8 +69,14 @@ class FilterOp(str, Enum):
 
 class FieldFilter(BaseModel):
     op: FilterOp
-    field: str
+    field: Union[str, FilterOp]
     value: Any
+
+    @validator("field")
+    def check_op(cls, v: Union[FilterOp, str]):
+        if isinstance(v, FilterOp):
+            return v.value
+        return v
 
 
 class MethodCallArgs(BaseModel):
@@ -100,7 +106,7 @@ class SearchFilter(BaseModel):
             if isinstance(filter.value, (list, tuple)):
                 v = [str(val) for val in filter.value]
                 v = ",".join(v)
-            if filter.op in [FilterOp.EXACT, FilterOp.EQ]:
+            if filter.op in [FilterOp.EXACT.value, FilterOp.EQ.value]:
                 q["filter[{}]".format(filter.field)] = v
             else:
                 q["filter[{}.{}]".format(filter.field, filter.op)] = v
@@ -137,21 +143,21 @@ class TxnHeaders(BaseModel):
     def as_headers(self) -> dict:
         headers = {}
         if self.dynaminc_pricing:
-            headers[TxnHeaderName.DYNAMIC_PRICING] = self.dynaminc_pricing
+            headers[TxnHeaderName.DYNAMIC_PRICING.value] = self.dynaminc_pricing
         if self.external:
-            headers[TxnHeaderName.EXTERNAL] = self.external
+            headers[TxnHeaderName.EXTERNAL.value] = self.external
         if self.run_local:
-            headers[TxnHeaderName.RUN_LOCAL] = self.run_local
+            headers[TxnHeaderName.RUN_LOCAL.value] = self.run_local
         if self.delegate:
-            headers[TxnHeaderName.DELEGATE] = self.delegate
+            headers[TxnHeaderName.DELEGATE.value] = self.delegate
         if self.nonce:
-            headers[TxnHeaderName.NONCE] = self.nonce
+            headers[TxnHeaderName.NONCE.value] = self.nonce
         if self.sender_token:
-            headers[TxnHeaderName.SENDER_TOKEN] = self.sender_token
+            headers[TxnHeaderName.SENDER_TOKEN.value] = self.sender_token
         if self.sender:
-            headers[TxnHeaderName.SENDER] = self.sender
+            headers[TxnHeaderName.SENDER.value] = self.sender
         if self.value:
-            headers[TxnHeaderName.VALUE] = self.value
+            headers[TxnHeaderName.VALUE.value] = self.value
         return headers
 
 

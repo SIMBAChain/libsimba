@@ -21,7 +21,7 @@ from libsimba.utils import Path, get_address, get_deployed_artifact_id
 logger = logging.getLogger(__name__)
 
 
-class Simba():
+class Simba(SimbaSync):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
