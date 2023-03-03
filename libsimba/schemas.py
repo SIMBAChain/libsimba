@@ -69,14 +69,8 @@ class FilterOp(str, Enum):
 
 class FieldFilter(BaseModel):
     op: FilterOp
-    field: Union[str, FilterOp]
+    field: str
     value: Any
-
-    @validator("field")
-    def check_op(cls, v: Union[FilterOp, str]):
-        if isinstance(v, FilterOp):
-            return v.value
-        return v
 
 
 class MethodCallArgs(BaseModel):
@@ -106,10 +100,10 @@ class SearchFilter(BaseModel):
             if isinstance(filter.value, (list, tuple)):
                 v = [str(val) for val in filter.value]
                 v = ",".join(v)
-            if filter.op in [FilterOp.EXACT.value, FilterOp.EQ.value]:
+            if filter.op in [FilterOp.EXACT, FilterOp.EQ]:
                 q["filter[{}]".format(filter.field)] = v
             else:
-                q["filter[{}.{}]".format(filter.field, filter.op)] = v
+                q["filter[{}.{}]".format(filter.field, filter.op.value)] = v
         if self.fields:
             q["fields"] = ",".join(self.fields)
         if self.limit:
