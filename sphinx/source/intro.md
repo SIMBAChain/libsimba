@@ -94,21 +94,22 @@ an `Authoroization` key, this is assumed to be a valid bearer token and is used 
 
 Further configuration options available in the simba env file:
 
-* WRITE_TOKEN_TO_FILE: boolean. If set to true, this will cache tokens to file. Otherwise they are
+* SIMBA_WRITE_TOKEN_TO_FILE: boolean. If set to true, this will cache tokens to file. Otherwise they are
     cached in memory. Default is true.
-* TOKEN_DIR: string. If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored.
+* SIMBA_TOKEN_DIR: string. If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored.
     Default is "./"
-* CONNECTION_TIMEOUT: float. Connection timeout in seconds for requests. Default is 5 which is the httpx default.
-* LOG_LEVEL: set the logging level. Can be one of 'CRITICAL', 'FATAL', 'ERROR', 'WARNING, 'INFO', 'DEBUG', 'NOTSET'
+* SIMBA_CONNECTION_TIMEOUT: float. Connection timeout in seconds for requests. Default is 5 which is the httpx default.
+* SIMBA_LOG_LEVEL: set the logging level. Can be one of 'CRITICAL', 'FATAL', 'ERROR', 'WARNING, 'INFO', 'DEBUG', 'NOTSET'
 
 ### Logging
 
 To configure logging, there are two options:
-* For simply changing the log level, set the `LOG_LEVEL` in the env file (see above).
+* For simply changing the log level, set the `SIMBA_LOG_LEVEL` in the env file (see above). This sets the level
+  of the loggers in the `libsimba` namespace only. 
 * To fully configure logging, set the `SIMBA_LOG_CONFIG` environment variable pointing to a logging file.
   If you don't set that the default `libsimba/logging.conf` configuration will be used. If you provide a logging
   config file that is json and has a `.json` file extension, then it will be loaded as a dictionary config.
-  Otherwise `ini` file format is assumed.
+  Otherwise `ini` file format is assumed. Ensure there is a `libsimba` logger defined.
 
 ## *Usage*
 ### *Instantiate the SIMBA client*

@@ -184,23 +184,24 @@ an <code class="docutils literal notranslate"><span class="pre">Authoroization</
 <h3>Additional Configuration Options<a class="headerlink" href="#additional-configuration-options" title="Permalink to this heading"></a></h3>
 <p>Further configuration options available in the simba env file:</p>
 <ul class="simple">
-<li><p>WRITE_TOKEN_TO_FILE: boolean. If set to true, this will cache tokens to file. Otherwise they are
+<li><p>SIMBA_WRITE_TOKEN_TO_FILE: boolean. If set to true, this will cache tokens to file. Otherwise they are
 cached in memory. Default is true.</p></li>
-<li><p>TOKEN_DIR: string. If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored.
+<li><p>SIMBA_TOKEN_DIR: string. If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored.
 Default is “./”</p></li>
-<li><p>CONNECTION_TIMEOUT: float. Connection timeout in seconds for requests. Default is 5 which is the httpx default.</p></li>
-<li><p>LOG_LEVEL: set the logging level. Can be one of ‘CRITICAL’, ‘FATAL’, ‘ERROR’, ‘WARNING, ‘INFO’, ‘DEBUG’, ‘NOTSET’</p></li>
+<li><p>SIMBA_CONNECTION_TIMEOUT: float. Connection timeout in seconds for requests. Default is 5 which is the httpx default.</p></li>
+<li><p>SIMBA_LOG_LEVEL: set the logging level. Can be one of ‘CRITICAL’, ‘FATAL’, ‘ERROR’, ‘WARNING, ‘INFO’, ‘DEBUG’, ‘NOTSET’</p></li>
 </ul>
 </section>
 <section id="logging">
 <h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h3>
 <p>To configure logging, there are two options:</p>
 <ul class="simple">
-<li><p>For simply changing the log level, set the <code class="docutils literal notranslate"><span class="pre">LOG_LEVEL</span></code> in the env file (see above).</p></li>
+<li><p>For simply changing the log level, set the <code class="docutils literal notranslate"><span class="pre">SIMBA_LOG_LEVEL</span></code> in the env file (see above). This sets the level
+of the loggers in the <code class="docutils literal notranslate"><span class="pre">libsimba</span></code> namespace only.</p></li>
 <li><p>To fully configure logging, set the <code class="docutils literal notranslate"><span class="pre">SIMBA_LOG_CONFIG</span></code> environment variable pointing to a logging file.
 If you don’t set that the default <code class="docutils literal notranslate"><span class="pre">libsimba/logging.conf</span></code> configuration will be used. If you provide a logging
 config file that is json and has a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file extension, then it will be loaded as a dictionary config.
-Otherwise <code class="docutils literal notranslate"><span class="pre">ini</span></code> file format is assumed.</p></li>
+Otherwise <code class="docutils literal notranslate"><span class="pre">ini</span></code> file format is assumed. Ensure there is a <code class="docutils literal notranslate"><span class="pre">libsimba</span></code> logger defined.</p></li>
 </ul>
 </section>
 </section>
