@@ -168,7 +168,10 @@ The Simba class provides some functions focussed on users and accounts:
 * Get the balance of an address (`def balance`)
 * Fund an address (`def fund`)
 * Set the current user custodial wallet for a blockchain (`def set_wallet`)
-* Get the current user custodial wallet (`def get_wallet`)
+* Get the current user custodial wallet (`def get_wallet`). *NOTE: This currently returns a JSON blob.*
+  *You can use the parse_wallet function to extract the address for a given blockchain type and blockchain.*
+  *`blockchain_type` is typically `ethereum` for EVM chains, and `blockchain` is the name of the network, e.g.,*
+  *`Quorum` or `mumbai` for example. The full list of blockchains is returned from the `get_blockchain` method (see below).* 
 
 ### Platform Functions
 

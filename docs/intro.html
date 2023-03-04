@@ -257,7 +257,10 @@ Otherwise <code class="docutils literal notranslate"><span class="pre">ini</span
 <li><p>Get the balance of an address (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">balance</span></code>)</p></li>
 <li><p>Fund an address (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">fund</span></code>)</p></li>
 <li><p>Set the current user custodial wallet for a blockchain (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">set_wallet</span></code>)</p></li>
-<li><p>Get the current user custodial wallet (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">get_wallet</span></code>)</p></li>
+<li><p>Get the current user custodial wallet (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">get_wallet</span></code>). <em>NOTE: This currently returns a JSON blob.</em>
+<em>You can use the parse_wallet function to extract the address for a given blockchain type and blockchain.</em>
+<em><code class="docutils literal notranslate"><span class="pre">blockchain_type</span></code> is typically <code class="docutils literal notranslate"><span class="pre">ethereum</span></code> for EVM chains, and <code class="docutils literal notranslate"><span class="pre">blockchain</span></code> is the name of the network, e.g.,</em>
+<em><code class="docutils literal notranslate"><span class="pre">Quorum</span></code> or <code class="docutils literal notranslate"><span class="pre">mumbai</span></code> for example. The full list of blockchains is returned from the <code class="docutils literal notranslate"><span class="pre">get_blockchain</span></code> method (see below).</em></p></li>
 </ul>
 </section>
 <section id="platform-functions">
