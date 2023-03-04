@@ -52,6 +52,14 @@ class Settings(BaseSettings):
     """ If set to true, tokens will be cached on the file system. Otherwise they are cached in memory """
     TOKEN_DIR: str = "./"
     """ If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored."""
+    CONNECTION_TIMEOUT: Optional[float] = 5.0
+    """ connection timeout in seconds for requests. Default is 5 which is the httpx default"""
+    LOG_LEVEL: Optional[str] = None
+    """
+    Set the log level of the 'libsimba' logger.
+    Can be one of 'CRITICAL', 'FATAL', 'ERROR', 'WARNING, 'INFO', 'DEBUG', 'NOTSET'
+    If not defined or empty, it is not used.
+    """
 
     @validator("AUTH_FLOW")
     def set_auth_flow(cls, v: str) -> str:

@@ -7,6 +7,7 @@ from tests import run_sync
 from tests.validate import Templates
 from httpx import Response
 from libsimba import SimbaSync
+import pytest
 
 tpl = Templates()
 runner = run_sync.SyncRunner()
@@ -150,6 +151,7 @@ get_method_route = block_mock.route(method="GET", url=query_method_pattern).mock
 
 
 class SyncApp(unittest.TestCase):
+    @pytest.mark.unit
     @block_mock
     def test_mocked(self):
         simba = SimbaSync()

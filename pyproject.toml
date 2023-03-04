@@ -11,7 +11,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = " >=3.9,<4.0"
+python = ">=3.9,<4.0"
 httpx = "0.23.0"
 pydantic = { extras = ["dotenv"], version = "1.10.2" }
 
@@ -39,10 +39,17 @@ skip_glob="*/setup.py"
 filter_files=true
 known_first_party="poetry"
 
+[tool.pytest.ini_options]
+markers = [
+    "unit: do not require an external service",
+]
+
 [tool.taskipy.tasks]
 isort = { cmd = "isort libsimba", help = "Sort imports" }
 format = { cmd = "black libsimba", help = "Run black code formatting" }
-tests = { cmd = "pytest --pyargs tests --junitxml=junit.xml --verbose", help = "Run tests" }
+tests = { cmd = "pytest --pyargs tests -m unit --junitxml=junit.xml --verbose", help = "Run tests" }
+live_async = { cmd = "pytest --pyargs tests/test_live_async.py --junitxml=junit.xml --verbose", help = "Run live async tests" }
+live_sync = { cmd = "pytest --pyargs tests/test_live_sync.py --junitxml=junit.xml --verbose", help = "Run live async tests" }
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -3,7 +3,7 @@ import respx
 import re
 from httpx import Response
 from libsimba import Login, AuthFlow, SimbaRequest
-
+import pytest
 
 login_pattern = re.compile(r".*/o/token.*")
 
@@ -28,6 +28,7 @@ class MockClass:
 
 
 class TestAuthRequired(unittest.TestCase):
+    @pytest.mark.unit
     @block_mock
     def test_auth_required_no_params(self):
         mc = MockClass()
@@ -40,6 +41,7 @@ class TestAuthRequired(unittest.TestCase):
         )
         self.assertEqual(({"Authorization": "Bearer 1234567890"}, None), resp)
 
+    @pytest.mark.unit
     @block_mock
     def test_auth_required_headers(self):
         mc = MockClass()
@@ -56,6 +58,7 @@ class TestAuthRequired(unittest.TestCase):
             ({"bob": "test", "Authorization": "Bearer 1234567890"}, {}), resp
         )
 
+    @pytest.mark.unit
     @block_mock
     def test_auth_from_headers(self):
         mc = MockClass()
@@ -72,6 +75,7 @@ class TestAuthRequired(unittest.TestCase):
             ({"Authorization": "Bearer 10000000000000"}, {}), resp
         )
 
+    @pytest.mark.unit
     @block_mock
     def test_auth_from_headers(self):
         mc = MockClass()

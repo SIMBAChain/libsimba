@@ -8,51 +8,73 @@ class AsyncRunner(Runner):
     async def run(self):
         simba = Simba()
         print("================ checking me ================")
-        await self.me(simba)
+        try:
+            await self.me(simba)
+        except Exception:
+            self.capture_error()
         print("================ checking blockchains ================")
-        chains = await self.blockchains(simba)
+        try:
+            chains = await self.blockchains(simba)
+            assert self.blockchain_name in chains
+        except Exception:
+            self.capture_error()
         print("================ checking storage ================")
-        offchains = await self.storage(simba)
-        assert self.blockchain_name in chains
-        assert self.storage_name in offchains
-        await self.org_app(simba)
-        print("================ checking designs ================")
-        design_name, design_id = await self.designs(simba)
-        print(f"Saved design: {design_name} with id: {design_id}")
+        try:
+            offchains = await self.storage(simba)
+            assert self.storage_name in offchains
+        except Exception:
+            self.capture_error()
+        try:
+            await self.org_app(simba)
+            print("================ checking designs ================")
+            design_name, design_id = await self.designs(simba)
+            print(f"Saved design: {design_name} with id: {design_id}")
+        except Exception:
+            self.capture_error()
+            raise ValueError(self.get_errors())
+
         print("================ checking deploy ================")
-        app, api_name, address, contract_id = await self.artifacts(
-            simba=simba,
-            design_id=design_id,
-            app=self.name,
-            api_name=self.name,
-            blockchain=self.blockchain_name,
-            storage=self.storage_name,
-        )
-        print(f"Deployed contract: {address} with id: {contract_id}")
-        print("================ checking transactions ================")
-        txn_data = await self.contract(
-            simba=simba, app=app, org=self.org, api_name=api_name
-        )
-        bundle_hash = txn_data.get("inputs", {}).get("_bundleHash")
-        print("================ checking bundles ================")
-        manifest = await self.files(
-            simba=simba, app=app, api_name=api_name, bundle_hash=bundle_hash
-        )
-        print(manifest)
-        print("================ checking query ================")
-        await self.query(simba=simba, app=app, api_name=api_name)
-        print("================ checking getter ================")
-        event_list = await self.event_and_getter(
-            simba=simba, app=app, api_name=api_name
-        )
-        print("================ checking contract client ================")
-        await self.contract_client(
-            simba=simba,
-            app=app,
-            api_name=api_name,
-            bundle_hash=bundle_hash,
-            getter_args=event_list[0],
-        )
+        try:
+            app, api_name, address, contract_id = await self.artifacts(
+                simba=simba,
+                design_id=design_id,
+                app=self.name,
+                api_name=self.name,
+                blockchain=self.blockchain_name,
+                storage=self.storage_name,
+            )
+            print(f"Deployed contract: {address} with id: {contract_id}")
+
+            print("================ checking transactions ================")
+            txn_data = await self.contract(
+                simba=simba, app=app, org=self.org, api_name=api_name
+            )
+            bundle_hash = txn_data.get("inputs", {}).get("_bundleHash")
+            print("================ checking bundles ================")
+            manifest = await self.files(
+                simba=simba, app=app, api_name=api_name, bundle_hash=bundle_hash
+            )
+            print(manifest)
+            print("================ checking query ================")
+            await self.query(simba=simba, app=app, api_name=api_name)
+            print("================ checking getter ================")
+            event_list = await self.event_and_getter(
+                simba=simba, app=app, api_name=api_name
+            )
+            print("================ checking contract client ================")
+            await self.contract_client(
+                simba=simba,
+                app=app,
+                api_name=api_name,
+                bundle_hash=bundle_hash,
+                getter_args=event_list[0],
+            )
+        except Exception:
+            self.capture_error()
+            raise ValueError(self.get_errors())
+        if self.get_errors():
+            print("================ errors found ================")
+            raise ValueError(self.get_errors())
 
     async def me(self, simba: Simba):
         me = await simba.whoami()
@@ -72,7 +94,7 @@ class AsyncRunner(Runner):
         return self.get_fields(storage)
 
     async def org_app(self, simba: Simba):
-        org_data = await simba.create_org(name=self.org, display="Simbachain")
+        org_data = await simba.create_org(name=self.org, display="Libsimba")
         print(org_data)
         self.templates.assert_structure("organisation", org_data)
         app_data = await simba.create_app(

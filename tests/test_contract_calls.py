@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 import logging
-
+import pytest
 from libsimba import SimbaSync, TxnHeaders
 
 
@@ -15,6 +15,7 @@ class TestSimba(unittest.TestCase):
         self.addCleanup(patcher_send.stop)
         self.mock_send = patcher_send.start()
 
+    @pytest.mark.unit
     def test_submit_contract_method(self):
         resp = self.simba.submit_contract_method(
             app_id="app_id",
@@ -26,6 +27,7 @@ class TestSimba(unittest.TestCase):
             headers={}, json_payload={"key": "value"}, files=None, config=None
         )
 
+    @pytest.mark.unit
     def test_submit_contract_method_with_params(self):
         resp = self.simba.submit_contract_method(
             app_id="app_id",
@@ -41,6 +43,7 @@ class TestSimba(unittest.TestCase):
             config=None,
         )
 
+    @pytest.mark.unit
     def test_submit_contract_method_async(self):
         resp = self.simba.submit_contract_method_sync(
             app_id="app_id",
@@ -52,6 +55,7 @@ class TestSimba(unittest.TestCase):
             headers={}, json_payload={"key": "value"}, files=None, config=None
         )
 
+    @pytest.mark.unit
     def test_submit_contract_method_async_with_params(self):
         resp = self.simba.submit_contract_method_sync(
             app_id="app_id",
@@ -67,6 +71,7 @@ class TestSimba(unittest.TestCase):
             config=None,
         )
 
+    @pytest.mark.unit
     def test_submit_signed_transaction(self):
         resp = self.simba.submit_signed_transaction(
             app_id="app_id",
@@ -80,6 +85,7 @@ class TestSimba(unittest.TestCase):
             config=None,
         )
 
+    @pytest.mark.unit
     def test_submit_signed_transaction_with_params(self):
         logger.debug("HELLOOOOO")
         resp = self.simba.submit_signed_transaction(

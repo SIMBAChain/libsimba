@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>libsimba.auth package &mdash; libsimba 0.1.11 documentation</title>
@@ -28,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> libsimba
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            libsimba
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -40,7 +44,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">LibSimba.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">libsimba</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libsimba.html">libsimba package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="libsimba.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">libsimba.auth package</a><ul>
@@ -80,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="libsimba.html">libsimba package</a></li>
       <li class="breadcrumb-item active">libsimba.auth package</li>
       <li class="wy-breadcrumbs-aside">
@@ -191,13 +195,13 @@ otherwise uses the current working path</p>
 This is used later to discover if the token has expired</p>
 <p>Token files are named &lt;client_id&gt;_token.json</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client_id</strong> – The ID for the client, token files are named &lt;client_id&gt;_token.json</p></li>
 <li><p><strong>token</strong> – The token object to save</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p></p>
 </dd>
 </dl>
@@ -241,13 +245,13 @@ This is used later to discover if the token has expired</p>
 <dd><p>Checks to see if a token has expired, by checking the ‘expires’ key
 Adds an offset to allow for delays when performing auth processes</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>token</strong> – the token to check for expiry. Should contain an ‘expires’ key</p></li>
 <li><p><strong>offset</strong> – To allow for delays in auth processes, this number of seconds is added to the expiry time</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p></p>
 </dd>
 </dl>

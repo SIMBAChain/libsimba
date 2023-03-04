@@ -3,9 +3,11 @@ import unittest
 from libsimba import SearchFilter, FilterOp, FieldFilter, FileDict, File
 from libsimba.utils import build_url
 from urllib.parse import unquote
+import pytest
 
 
 class SchemaTestCase(unittest.TestCase):
+    @pytest.mark.unit
     def test_filters(self):
         filter = SearchFilter(
             filters=[
@@ -20,6 +22,9 @@ class SchemaTestCase(unittest.TestCase):
             limit=2,
             offset=2,
         )
+        has_filter = filter.has_filter(field="foo.choo.boo")
+        self.assertTrue(has_filter)
+
         url = unquote(
             build_url("http://localhost", "path/to/stuff", filter.filter_query)
         )
@@ -28,6 +33,7 @@ class SchemaTestCase(unittest.TestCase):
             url,
         )
 
+    @pytest.mark.unit
     def test_files(self):
         data_dir = os.path.join(os.path.dirname(__file__), "data")
         f1 = File(path=os.path.join(data_dir, "file1.txt"), mime="text/plain")

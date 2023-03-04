@@ -5,6 +5,7 @@ from libsimba.param_checking import ParamChecking
 import respx
 import re
 from httpx import Response
+import pytest
 
 data = os.path.join(os.path.dirname(__file__), "data", "test-contract.json")
 with open(data) as md_file:
@@ -32,6 +33,7 @@ metadata_route = md_mock.route(method="GET", url=metadata_pattern).mock(
 
 
 class ParamTestCase(unittest.TestCase):
+    @pytest.mark.unit
     @md_mock
     def test_struct(self):
         pcc = ParamChecking("my_app", "my_api")
@@ -70,6 +72,7 @@ class ParamTestCase(unittest.TestCase):
             assert "Expected non negative int but got -10" in f"{ve}"
         assert err is not None
 
+    @pytest.mark.unit
     @md_mock
     def test_arrs(self):
         pcc = ParamChecking("my_app", "my_api")
@@ -104,6 +107,7 @@ class ParamTestCase(unittest.TestCase):
             assert "Expected 3 but got 2" in f"{ve}"
         assert err is not None
 
+    @pytest.mark.unit
     @md_mock
     def test_struct_arrs(self):
         pcc = ParamChecking("my_app", "my_api")

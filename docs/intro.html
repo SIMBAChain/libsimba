@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LibSimba.py &mdash; libsimba 0.1.11 documentation</title>
+  <title>libsimba &mdash; libsimba 0.1.11 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> libsimba
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            libsimba
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -41,7 +45,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">LibSimba.py</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">libsimba</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites"><em>Prerequisites</em></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation"><em>Installation</em></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#install-from-package"><em>Install from package:</em></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-for-development"><em>Install for development</em></a></li>
@@ -49,6 +54,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration"><em>Configuration</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#additional-configuration-options">Additional Configuration Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a></li>
 </ul>
 </li>
@@ -80,8 +86,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">LibSimba.py</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">libsimba</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/intro.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -91,18 +97,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="libsimba-py">
-<h1>LibSimba.py<a class="headerlink" href="#libsimba-py" title="Permalink to this heading"></a></h1>
+  <section id="libsimba">
+<h1>libsimba<a class="headerlink" href="#libsimba" title="Permalink to this heading"></a></h1>
+<section id="prerequisites">
+<h2><em>Prerequisites</em><a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Python &gt;= 3.9</p></li>
+<li><p>Poetry (https://python-poetry.org/docs/)</p></li>
+</ul>
+</section>
 <section id="installation">
 <h2><em>Installation</em><a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<p>Requires Python &gt;= 3.8</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">libsimba</span>
 </pre></div>
 </div>
 <section id="install-from-package">
 <h3><em>Install from package:</em><a class="headerlink" href="#install-from-package" title="Permalink to this heading"></a></h3>
 <p>View our <a class="reference external" href="https://github.com/SIMBAChain/libsimba/releases/">releases</a> and download the tarball for the chosen release.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">libsimba</span><span class="o">-</span><span class="mf">0.1.0</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">libsimba</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
 </pre></div>
 </div>
 </section>
@@ -168,12 +180,28 @@ below, i.e., the <code class="docutils literal notranslate"><span class="pre">SI
 passed into the methods, a default Login object is created using the environment variables <code class="docutils literal notranslate"><span class="pre">SIMBA_AUTH_CLIENT_SECRET</span></code>
 and <code class="docutils literal notranslate"><span class="pre">SIMBA_AUTH_CLIENT_ID</span></code> described above. Alternatively, if a <code class="docutils literal notranslate"><span class="pre">headers</span></code> dict is passed in and this contains
 an <code class="docutils literal notranslate"><span class="pre">Authoroization</span></code> key, this is assumed to be a valid bearer token and is used instead of loggin in.</p>
+<section id="additional-configuration-options">
+<h3>Additional Configuration Options<a class="headerlink" href="#additional-configuration-options" title="Permalink to this heading"></a></h3>
+<p>Further configuration options available in the simba env file:</p>
+<ul class="simple">
+<li><p>WRITE_TOKEN_TO_FILE: boolean. If set to true, this will cache tokens to file. Otherwise they are
+cached in memory. Default is true.</p></li>
+<li><p>TOKEN_DIR: string. If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored.
+Default is “./”</p></li>
+<li><p>CONNECTION_TIMEOUT: float. Connection timeout in seconds for requests. Default is 5 which is the httpx default.</p></li>
+<li><p>LOG_LEVEL: set the logging level. Can be one of ‘CRITICAL’, ‘FATAL’, ‘ERROR’, ‘WARNING, ‘INFO’, ‘DEBUG’, ‘NOTSET’</p></li>
+</ul>
+</section>
 <section id="logging">
 <h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h3>
-<p>To configure logging, set the <code class="docutils literal notranslate"><span class="pre">SIMBA_LOG_CONFIG</span></code> environment variable pointing to a logging file.
+<p>To configure logging, there are two options:</p>
+<ul class="simple">
+<li><p>For simply changing the log level, set the <code class="docutils literal notranslate"><span class="pre">LOG_LEVEL</span></code> in the env file (see above).</p></li>
+<li><p>To fully configure logging, set the <code class="docutils literal notranslate"><span class="pre">SIMBA_LOG_CONFIG</span></code> environment variable pointing to a logging file.
 If you don’t set that the default <code class="docutils literal notranslate"><span class="pre">libsimba/logging.conf</span></code> configuration will be used. If you provide a logging
 config file that is json and has a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file extension, then it will be loaded as a dictionary config.
-Otherwise ini file format is assumed.</p>
+Otherwise <code class="docutils literal notranslate"><span class="pre">ini</span></code> file format is assumed.</p></li>
+</ul>
 </section>
 </section>
 <section id="usage">

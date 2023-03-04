@@ -2,9 +2,11 @@ from unittest import IsolatedAsyncioTestCase
 from tests.test_mocked_sync import block_mock
 from tests.run_async import AsyncRunner
 from libsimba import Simba
+import pytest
 
 
 class AsyncApp(IsolatedAsyncioTestCase):
+    @pytest.mark.unit
     @block_mock
     async def test_mocked(self):
         simba = Simba()

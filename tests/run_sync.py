@@ -10,9 +10,10 @@ from libsimba import (
 )
 import time
 from tests.validate import Templates
-from typing import Tuple, List, Union
+from typing import Tuple, List, Union, Optional
 import shutil
 import tarfile
+import traceback
 
 
 class Runner(object):
@@ -22,8 +23,8 @@ class Runner(object):
         blockchain_name: str = "Quorum",
         storage_name: str = "azure",
         num_calls: int = 10,
+        now: Optional[int] = int(time.time())
     ):
-        now = int(time.time())
         self.org = org
         self.blockchain_name = blockchain_name
         self.storage_name = storage_name
@@ -31,6 +32,16 @@ class Runner(object):
         self.name = f"libsimba-{now}"
         self.display = f"LibSimba-{now}"
         self.templates = Templates()
+        self.errors = []
+
+    def capture_error(self):
+        self.errors.append(traceback.format_exc())
+
+    def get_errors(self):
+        return "==============\n\n".join(self.errors)
+
+    def has_errors(self):
+        return len(self.errors) > 0
 
     def file_paths(self) -> Tuple[str, str, str]:
         data_dir = os.path.join(os.path.dirname(__file__), "output")
@@ -146,48 +157,74 @@ class SyncRunner(Runner):
     def run(self):
         simba = SimbaSync()
         print("================ checking me ================")
-        self.me(simba)
+        try:
+            self.me(simba)
+        except Exception:
+            self.capture_error()
         print("================ checking blockchains ================")
-        chains = self.blockchains(simba)
+        try:
+            chains = self.blockchains(simba)
+            assert self.blockchain_name in chains
+        except Exception:
+            self.capture_error()
         print("================ checking storage ================")
-        offchains = self.storage(simba)
-        assert self.blockchain_name in chains
-        assert self.storage_name in offchains
-        print("================ checking org and app ================")
-        self.org_app(simba)
-        print("================ checking designs ================")
-        design_name, design_id = self.designs(simba)
-        print(f"Saved design: {design_name} with id: {design_id}")
+        try:
+            offchains = self.storage(simba)
+            assert self.storage_name in offchains
+        except Exception:
+            self.capture_error()
+        try:
+            self.org_app(simba)
+            print("================ checking designs ================")
+            design_name, design_id = self.designs(simba)
+            print(f"Saved design: {design_name} with id: {design_id}")
+        except Exception:
+            self.capture_error()
+            raise ValueError(self.get_errors())
+
         print("================ checking deploy ================")
-        app, api_name, address, contract_id = self.artifacts(
-            simba=simba,
-            design_id=design_id,
-            app=self.name,
-            api_name=self.name,
-            blockchain=self.blockchain_name,
-            storage=self.storage_name,
-        )
-        print(f"Deployed contract: {address} with id: {contract_id}")
-        print("================ checking transactions ================")
-        txn_data = self.contract(simba=simba, app=app, org=self.org, api_name=api_name)
-        bundle_hash = txn_data.get("inputs", {}).get("_bundleHash")
-        print("================ checking bundles ================")
-        manifest = self.files(
-            simba=simba, app=app, api_name=api_name, bundle_hash=bundle_hash
-        )
-        print(manifest)
-        print("================ checking query ================")
-        self.query(simba=simba, app=app, api_name=api_name)
-        print("================ checking getter ================")
-        event_list = self.event_and_getter(simba=simba, app=app, api_name=api_name)
-        print("================ checking contract client ================")
-        self.contract_client(
-            simba=simba,
-            app=app,
-            api_name=api_name,
-            bundle_hash=bundle_hash,
-            getter_args=event_list[0],
-        )
+        try:
+            app, api_name, address, contract_id = self.artifacts(
+                simba=simba,
+                design_id=design_id,
+                app=self.name,
+                api_name=self.name,
+                blockchain=self.blockchain_name,
+                storage=self.storage_name,
+            )
+            print(f"Deployed contract: {address} with id: {contract_id}")
+
+            print("================ checking transactions ================")
+            txn_data = self.contract(
+                simba=simba, app=app, org=self.org, api_name=api_name
+            )
+            bundle_hash = txn_data.get("inputs", {}).get("_bundleHash")
+            print("================ checking bundles ================")
+            manifest = self.files(
+                simba=simba, app=app, api_name=api_name, bundle_hash=bundle_hash
+            )
+            print(manifest)
+            print("================ checking query ================")
+            self.query(simba=simba, app=app, api_name=api_name)
+            print("================ checking getter ================")
+            event_list = self.event_and_getter(
+                simba=simba, app=app, api_name=api_name
+            )
+            print("================ checking contract client ================")
+            self.contract_client(
+                simba=simba,
+                app=app,
+                api_name=api_name,
+                bundle_hash=bundle_hash,
+                getter_args=event_list[0],
+            )
+        except Exception:
+            self.capture_error()
+            raise ValueError(self.get_errors())
+        if self.get_errors():
+            print("================ errors found ================")
+            raise ValueError(self.get_errors())
+
 
     def me(self, simba: SimbaSync):
         me = simba.whoami()

@@ -192,6 +192,7 @@ class SimbaSync:
     ) -> Optional[str]:
         """
         Extract address from a wallet structure for a given blockchain.
+        The wallet structure is the JSON returned from a call to get_wallet.
 
         :param wallet: The wallet structure
         :type wallet: dict
@@ -206,7 +207,7 @@ class SimbaSync:
             wallet.get("wallet", {})
             .get("identities", {})
             .get(blockchain_type, {})
-            .get(blockchain)
+            .get(blockchain, {})
         )
         for key, val in bc.items():
             if len(val) > 0:

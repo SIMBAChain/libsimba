@@ -11,6 +11,7 @@ from logging.config import dictConfig, fileConfig
 from time import sleep
 from typing import Dict, Iterable, Mapping, Optional, Union
 from urllib.parse import urlencode, urlparse, urlunparse
+from libsimba.config import settings
 
 import httpx
 
@@ -28,6 +29,15 @@ else:
     fileConfig(log_file)
 
 log = logging.getLogger(__name__)
+
+logger = logging.getLogger("libsimba")
+if settings.LOG_LEVEL:
+    logger.setLevel(settings.LOG_LEVEL)
+    for handler in logger.handlers:
+        handler.setLevel(settings.LOG_LEVEL)
+
+log.debug(f"[UTILS] :: set log level to {settings.LOG_LEVEL}")
+
 
 class Path(str, Enum):
     WHOAMI = "/user/whoami/"
@@ -214,7 +224,7 @@ def async_http_client(config: schemas.ConnectionConfig = None) -> httpx.AsyncCli
     :rtype: httpx.AsyncClient
     """
     if not config:
-        config = schemas.ConnectionConfig()
+        config = schemas.ConnectionConfig(timeout=settings.CONNECTION_TIMEOUT)
     transport = RetryTransport(
         AsyncHTTPTransport(retries=config.connection_retries),
         max_attempts=config.max_attempts,
@@ -233,7 +243,7 @@ def http_client(config: schemas.ConnectionConfig = None) -> httpx.Client:
     :rtype: httpx.Client
     """
     if not config:
-        config = schemas.ConnectionConfig()
+        config = schemas.ConnectionConfig(timeout=settings.CONNECTION_TIMEOUT)
     transport = RetryTransport(
         HTTPTransport(retries=config.connection_retries),
         max_attempts=config.max_attempts,
@@ -248,6 +258,7 @@ def build_url(base_api_url: str, path: str, query_dict: Optional[dict]):
     url_parts[4] = urlencode(query_dict)
     return urlunparse(url_parts)
 
+
 def get_address(deployment: dict) -> Optional[str]:
     """
     Extract the primary address from a deployment object.
@@ -257,6 +268,7 @@ def get_address(deployment: dict) -> Optional[str]:
     :return: Optional[str]
     """
     return deployment.get("primary", {}).get("address", None)
+
 
 def get_deployed_artifact_id(deployment: dict) -> Optional[str]:
     """
