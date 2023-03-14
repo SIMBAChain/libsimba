@@ -250,7 +250,7 @@ class SyncRunner(Runner):
         app_data = simba.create_app(org=self.org, name=self.name, display=self.display)
         print(app_data)
         self.templates.assert_structure("application", app_data)
-        self.templates.assert_value(data=app_data, value=self.name, path="name")
+        self.templates.assert_value(type_name="application", data=app_data, value=self.name, path="name")
 
     def designs(self, simba: SimbaSync) -> Tuple[str, str]:
         designs = simba.get_designs(org=self.org)

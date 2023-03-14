@@ -5,8 +5,7 @@
     "name": "string",
     "is_user_group": true,
     "created_on": "2022-08-17T09:19:11.516Z",
-    "metadata": {},
-    "solution_blocks": {}
+    "metadata": {}
   },
   "user": {
     "username": "string",

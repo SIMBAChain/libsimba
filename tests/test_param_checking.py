@@ -33,6 +33,44 @@ metadata_route = md_mock.route(method="GET", url=metadata_pattern).mock(
 
 
 class ParamTestCase(unittest.TestCase):
+
+    @pytest.mark.unit
+    @md_mock
+    def test_getter(self):
+        pcc = ParamChecking("my_app", "my_api")
+        pcc.validate_params(
+            method_name="getTestData",
+            inputs={
+                "tokenId": 1234
+            },
+        )
+        err = None
+        try:
+            pcc.validate_params(
+                method_name="getTestData",
+                inputs={
+                    "foo": True
+                },
+            )
+        except ValueError as ve:
+            err = ve
+            print(err)
+            assert "Unexpected keys." in f"{ve}"
+        assert err is not None
+        err = None
+        try:
+            pcc.validate_params(
+                method_name="getTestData",
+                inputs={
+                    "tokenId": "foo"
+                },
+            )
+        except ValueError as ve:
+            err = ve
+            print(err)
+            assert "invalid literal for int() with base 10" in f"{ve}"
+        assert err is not None
+
     @pytest.mark.unit
     @md_mock
     def test_struct(self):

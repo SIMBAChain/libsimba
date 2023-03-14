@@ -102,7 +102,7 @@ class AsyncRunner(Runner):
         )
         print(app_data)
         self.templates.assert_structure("application", app_data)
-        self.templates.assert_value(data=app_data, value=self.name, path="name")
+        self.templates.assert_value(type_name="application", data=app_data, value=self.name, path="name")
 
     async def designs(self, simba: Simba) -> Tuple[str, str]:
         designs = await simba.get_designs(org=self.org)
