@@ -63,7 +63,7 @@ class Templates(object):
 
     def assert_value(self, type_name: str, data: Any, value: Any, path: str = None):
         try:
-            logger.info(f"[Templates] :: Error with type {type_name}: assert_value data: {data}, value: {value}, path: {path}")
+            logger.info(f"[Templates] :: Type {type_name}: assert_value data: {data}, value: {value}, path: {path}")
             if path:
                 components = path.split(".")
                 tail = components[-1]
@@ -78,5 +78,5 @@ class Templates(object):
             logger.info(f"[Templates] :: assert_value {data} == {value}")
             assert data == value
         except Exception as ex:
-            logger.exception("[Templates] :: Error with type {type_name}: error")
+            logger.exception(f"[Templates] :: Error with type {type_name}: error")
             raise ex
