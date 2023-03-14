@@ -269,7 +269,7 @@ class SyncRunner(Runner):
             binary_targets=["TestContract"],
         )
         self.templates.assert_structure("contract_design", saved_data)
-        print(saved_data)
+        #print(saved_data)
         return saved_data.get("name"), saved_data.get("id")
 
     def artifacts(

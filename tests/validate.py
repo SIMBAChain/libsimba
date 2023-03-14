@@ -39,12 +39,17 @@ class Templates(object):
     def check_structure(self, type_name: str, template, struct):
         if not template:
             return True
-        logger.info(f"[Templates] :: template: {template}, struct: {struct}")
         if isinstance(struct, dict) and isinstance(template, dict):
-            if not template.keys() <= set(struct.keys()):
+            if template.keys() > struct.keys():
                 unknown_keys = set(template.keys()) - set(struct.keys())
                 raise ValueError(
-                    f"[Templates] :: Error with type {type_name}: Expected keys: {unknown_keys} not found in response: {struct.keys()}"
+                    f"[Templates] :: Error with type {type_name}: Expected keys: {unknown_keys} not found in response: {list(struct.keys())}"
+                )
+            elif template.keys() < struct.keys():
+                unknown_keys = set(struct.keys()) - set(template.keys())
+                logger.warning(
+                    f"[Templates] :: Template issue with type {type_name}: Expected keys: {unknown_keys} "
+                    f"not found in template: {list(struct.keys())}. Please update the template entry for {type_name} in types.json."
                 )
             for k in template.keys():
                 self.check_structure(type_name=type_name, template=template.get(k), struct=struct.get(k))
