@@ -615,7 +615,6 @@ class Simba(SimbaSync):
         full["app_name"] = app
         if args:
             full["args"] = args
-        full["singleton"] = True
         return await PostRequest(
             endpoint=Path.DESIGN_DEPLOY.format(org, design_id),
             login=login,
@@ -646,7 +645,6 @@ class Simba(SimbaSync):
         full["app_name"] = app
         if args:
             full["args"] = args
-        full["singleton"] = True
         return await PostRequest(
             endpoint=Path.DEPLOYMENTS.format(org),
             login=login,

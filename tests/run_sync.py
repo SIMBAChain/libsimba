@@ -254,7 +254,7 @@ class SyncRunner(Runner):
 
     def designs(self, simba: SimbaSync) -> Tuple[str, str]:
         designs = simba.get_designs(org=self.org)
-        self.templates.assert_structure("contract_design", designs, many=True)
+        self.templates.assert_structure("contract_design", designs, many=True, action="list")
 
         contract = os.path.join(os.path.dirname(__file__), "data", "TestContract.sol")
 
@@ -269,7 +269,6 @@ class SyncRunner(Runner):
             binary_targets=["TestContract"],
         )
         self.templates.assert_structure("contract_design", saved_data)
-        #print(saved_data)
         return saved_data.get("name"), saved_data.get("id")
 
     def artifacts(

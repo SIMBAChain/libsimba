@@ -106,7 +106,7 @@ class AsyncRunner(Runner):
 
     async def designs(self, simba: Simba) -> Tuple[str, str]:
         designs = await simba.get_designs(org=self.org)
-        self.templates.assert_structure("contract_design", designs, many=True)
+        self.templates.assert_structure("contract_design", designs, many=True, action="list")
 
         contract = os.path.join(os.path.dirname(__file__), "data", "TestContract.sol")
 

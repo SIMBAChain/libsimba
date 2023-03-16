@@ -13,10 +13,14 @@ class Templates(object):
             self.types = json.load(types_file)
 
     def assert_structure(
-        self, type_name: str, struct: Union[list, dict], many: bool = False
+        self, type_name: str, struct: Union[list, dict], many: bool = False, action: str = None
     ):
+        # action ca be one of list, get, post, put to cover where return data may be structured differently
         try:
-            template = self.types.get(type_name)
+            if action:
+                template = self.types.get(f"{action}:{type_name}")
+            else:
+                template = self.types.get(type_name)
             if not template:
                 raise ValueError(f"[Templates] :: Unknown type {type_name}")
             if many and isinstance(struct, dict):
