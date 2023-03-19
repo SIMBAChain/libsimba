@@ -18,26 +18,51 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-from .schemas import (
-    AuthFlow,
-    AuthProviderName,
-    AuthToken,
-    ConnectionConfig,
-    FieldFilter,
-    File,
-    FileDict,
-    FilterOp,
-    Login,
-    MethodCallArgs,
-    SearchFilter,
-    TxnHeaders,
-)
-from .simba import Simba
-from .simba_request import (
-    DeleteRequest,
-    GetRequest,
-    PostRequest,
-    PutRequest,
-    SimbaRequest,
-)
-from .simba_sync import SimbaSync
+from abc import ABC, abstractmethod
+
+
+class Wallet(ABC):
+
+    @abstractmethod
+    def forget_wallet(self):
+        """
+        Remove the current wallet
+        """
+
+    @abstractmethod
+    def wallet_available(self) -> bool:
+        """
+        Does a wallet currently exists?
+
+        Returns:
+            Returns a boolean indicating if a wallet exist.
+        """
+
+    @abstractmethod
+    def get_address(self) -> str:
+        """
+        The address associated with this wallet
+
+        Returns:
+            Returns the address associated with this wallet
+        """
+
+    @abstractmethod
+    def get_private_key(self) -> str:
+        """
+        The private key associated with this wallet
+
+        Returns:
+            Returns the private key associated with this wallet
+        """
+
+    @abstractmethod
+    def sign(self, payload: dict) -> dict:
+        """
+        Sign a transaction payload with the wallet
+
+        Args:
+            payload: a transaction object
+        Returns:
+            Returns the signed transaction
+        """

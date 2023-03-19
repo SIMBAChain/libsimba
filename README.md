@@ -15,7 +15,7 @@ Feel free to check [issues page](https://github.com/SIMBAChain/libsimba/issues).
 
 ## License
 
-Copyright © 2022 [SIMBAChain Inc](https://simbachain.com/).
+Copyright © 2023 [SIMBAChain Inc](https://simbachain.com/).
 
 This project is [MIT](https://github.com/SIMBAChain/libsimba/blob/main/LICENSE) licensed.
 
