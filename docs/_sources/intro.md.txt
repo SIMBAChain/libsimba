@@ -180,7 +180,78 @@ The Simba class provides functions to list platform capabilities:
 * List available blockchains (`def get_blockchains`)
 * List available off chain storage (`def get_storage`)
 
+### Deploying Smart Contracts
+
+Smart contracts have a lifecycle. They atart out as contract designs. These are basically code. You can update
+the code and the design, along with its metadata will change. Before deployment, a contract artifact is created.
+This is a snapshot of the design at a given point in time. Given the frozen artifact, a deployed contract can be
+created. This deploys the code to a specific chain.
+
+The example below compiles a contract. The parameters are as follows:
+
+* `org` - the org name
+* `name` - a name for the contract
+* `code` - the contract code
+* `target_contract` - typically the name of the contract.
+   This ensures this contract will be the one that API metadata will be generated.
+* `binary_targets` - this is a list of contracts to return binary code for. This allows
+  then to be deployed. In the case of a simple deployment of a single contract this can be
+  set to the contract name, same as 'target_contract'.
+* `libraries` - a dictionary with keys defining library names and values being their deployed addresses. Used for
+  linking external libraries.
+* `encode` - whether to base64 encode the code string. Default is true. Leave this if the input code has not
+  been Base64 encoded.
+* `model` - this should be set to `aat`
+
+```python
+# Read a contract from file
+with open("./TestContract.sol", "r") as sol:
+    code = sol.read()
+saved_data = await simba.save_design(
+    org="my-org",
+    name="my-contract",
+    code=code,
+    target_contract="TestContract",
+    model="aat",
+    binary_targets=["TestContract"],
+)
+```
+
+Next we can create an artifact from the design and deploy it.
+* `org` - the org name
+* `api_name` - field defines the url path component that will be used for the deployed contract. This can be used
+  when invoking the contract as the `contract_name` field to identify the target contract.
+* `app` - the application to deploy to.
+* `storage` - used to define a storage backend for saving off chain data.
+* `blockchain` - the name of the blockchain to deploy to. 
+
+
+```python
+artifact_data = await simba.create_artifact(org="my-org", design_id=saved_data.get("id"))
+address, contract_id = await simba.wait_for_deploy_artifact(
+    org="my-org",
+    app="my-app",
+    api_name="my-contract-api",
+    artifact_id=artifact_data["id"],
+    storage="azure",
+    blockchain="Quorum",
+)
+```
+This returns the address of the newly deployed contract along with the uuid of the deployed contract in the database.
+
+
 ### Invoking Smart Contract Methods
+
+Smart contract methods come in two flavours:
+
+* Methods that send data to the contract and change the state of the contract and/or result in a transaction being 
+  added to the chain. These are sometimes called `setters`. These are invoked using the HTTP `POST` method.
+  The API allows you to query for transactions
+  created by these methods using HTTP `GET` along with query filters.
+* Methods that are accessors, also known as `getters`.
+  These call the contract but do not change its state and do not result in a transaction
+  being added to the chain. These are invoked using the HTTP `GET` method. You cannot query for transactions from these
+  methods because they do not create transactions.
 
 The Simba class provides several methods for calling methods in smart contracts. These take the SIMBA `app` name,
 the contract API name and the method name. The `inputs` parameter contains a dict of method parameter values
@@ -232,7 +303,6 @@ Methods that allow file uploads have a special `_bundleHash` parameter. This sho
 transaction along with files. Blocks takes the files and sends them to the configured off chain storage, hashing
 them along the way and producing a JSON manifest file of all files uploaded. This manifest file is then hashed, and
 that hash is put in the `_bundleHash` field before writing to chain. This provides verifiability of file content.
-
 
 
 As we well as methods that create transactions, some contract methods are getter functions that return values

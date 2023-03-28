@@ -62,6 +62,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#instantiate-the-simba-client"><em>Instantiate the SIMBA client</em></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#user-and-account-functions">User and Account Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#platform-functions">Platform Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deploying-smart-contracts">Deploying Smart Contracts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#invoking-smart-contract-methods">Invoking Smart Contract Methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#querying-smart-contract-methods">Querying Smart contract Methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#getting-file-bundle-information">Getting File Bundle Information</a></li>
@@ -271,8 +272,76 @@ Otherwise <code class="docutils literal notranslate"><span class="pre">ini</span
 <li><p>List available off chain storage (<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">get_storage</span></code>)</p></li>
 </ul>
 </section>
+<section id="deploying-smart-contracts">
+<h3>Deploying Smart Contracts<a class="headerlink" href="#deploying-smart-contracts" title="Permalink to this heading"></a></h3>
+<p>Smart contracts have a lifecycle. They atart out as contract designs. These are basically code. You can update
+the code and the design, along with its metadata will change. Before deployment, a contract artifact is created.
+This is a snapshot of the design at a given point in time. Given the frozen artifact, a deployed contract can be
+created. This deploys the code to a specific chain.</p>
+<p>The example below compiles a contract. The parameters are as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">org</span></code> - the org name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> - a name for the contract</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code> - the contract code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_contract</span></code> - typically the name of the contract.
+This ensures this contract will be the one that API metadata will be generated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">binary_targets</span></code> - this is a list of contracts to return binary code for. This allows
+then to be deployed. In the case of a simple deployment of a single contract this can be
+set to the contract name, same as ‘target_contract’.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libraries</span></code> - a dictionary with keys defining library names and values being their deployed addresses. Used for
+linking external libraries.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encode</span></code> - whether to base64 encode the code string. Default is true. Leave this if the input code has not
+been Base64 encoded.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> - this should be set to <code class="docutils literal notranslate"><span class="pre">aat</span></code></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read a contract from file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./TestContract.sol&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sol</span><span class="p">:</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">saved_data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">save_design</span><span class="p">(</span>
+    <span class="n">org</span><span class="o">=</span><span class="s2">&quot;my-org&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-contract&quot;</span><span class="p">,</span>
+    <span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="p">,</span>
+    <span class="n">target_contract</span><span class="o">=</span><span class="s2">&quot;TestContract&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;aat&quot;</span><span class="p">,</span>
+    <span class="n">binary_targets</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;TestContract&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Next we can create an artifact from the design and deploy it.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">org</span></code> - the org name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">api_name</span></code> - field defines the url path component that will be used for the deployed contract. This can be used
+when invoking the contract as the <code class="docutils literal notranslate"><span class="pre">contract_name</span></code> field to identify the target contract.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">app</span></code> - the application to deploy to.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">storage</span></code> - used to define a storage backend for saving off chain data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blockchain</span></code> - the name of the blockchain to deploy to.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">artifact_data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">create_artifact</span><span class="p">(</span><span class="n">org</span><span class="o">=</span><span class="s2">&quot;my-org&quot;</span><span class="p">,</span> <span class="n">design_id</span><span class="o">=</span><span class="n">saved_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+<span class="n">address</span><span class="p">,</span> <span class="n">contract_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">simba</span><span class="o">.</span><span class="n">wait_for_deploy_artifact</span><span class="p">(</span>
+    <span class="n">org</span><span class="o">=</span><span class="s2">&quot;my-org&quot;</span><span class="p">,</span>
+    <span class="n">app</span><span class="o">=</span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span>
+    <span class="n">api_name</span><span class="o">=</span><span class="s2">&quot;my-contract-api&quot;</span><span class="p">,</span>
+    <span class="n">artifact_id</span><span class="o">=</span><span class="n">artifact_data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+    <span class="n">storage</span><span class="o">=</span><span class="s2">&quot;azure&quot;</span><span class="p">,</span>
+    <span class="n">blockchain</span><span class="o">=</span><span class="s2">&quot;Quorum&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This returns the address of the newly deployed contract along with the uuid of the deployed contract in the database.</p>
+</section>
 <section id="invoking-smart-contract-methods">
 <h3>Invoking Smart Contract Methods<a class="headerlink" href="#invoking-smart-contract-methods" title="Permalink to this heading"></a></h3>
+<p>Smart contract methods come in two flavours:</p>
+<ul class="simple">
+<li><p>Methods that send data to the contract and change the state of the contract and/or result in a transaction being
+added to the chain. These are sometimes called <code class="docutils literal notranslate"><span class="pre">setters</span></code>. These are invoked using the HTTP <code class="docutils literal notranslate"><span class="pre">POST</span></code> method.
+The API allows you to query for transactions
+created by these methods using HTTP <code class="docutils literal notranslate"><span class="pre">GET</span></code> along with query filters.</p></li>
+<li><p>Methods that are accessors, also known as <code class="docutils literal notranslate"><span class="pre">getters</span></code>.
+These call the contract but do not change its state and do not result in a transaction
+being added to the chain. These are invoked using the HTTP <code class="docutils literal notranslate"><span class="pre">GET</span></code> method. You cannot query for transactions from these
+methods because they do not create transactions.</p></li>
+</ul>
 <p>The Simba class provides several methods for calling methods in smart contracts. These take the SIMBA <code class="docutils literal notranslate"><span class="pre">app</span></code> name,
 the contract API name and the method name. The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> parameter contains a dict of method parameter values
 keyed to their parameter names.</p>
