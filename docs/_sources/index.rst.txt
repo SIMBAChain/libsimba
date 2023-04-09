@@ -12,6 +12,7 @@ Welcome to libsimba for SIMBA Blocks!
 
    intro.md
    libsimba
+   api
 
 Indices and tables
 ==================

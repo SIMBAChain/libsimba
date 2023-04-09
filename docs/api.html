@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>API Notes &#8212; libsimba 0.1.16 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="libsimba.auth package" href="libsimba.auth.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.svg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="intro.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="libsimba.html">
+                        libsimba package
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        API Notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="intro.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="libsimba.html">
+                        libsimba package
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        API Notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">API Notes</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="api-notes">
+<h1>API Notes<a class="headerlink" href="#api-notes" title="Permalink to this heading">#</a></h1>
+<p>This page describes aspects of the API that may need explanation.</p>
+<section id="contract-deployment">
+<h2><em>Contract Deployment</em><a class="headerlink" href="#contract-deployment" title="Permalink to this heading">#</a></h2>
+<p><em>NOTE: Angle brackets (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>) are used to designate variables.</em></p>
+<p>SIMBA has the concept of contract designs, contract artifacts and deployed contracts. In addition, it has the
+concept of supporting artifacts such as libraries.</p>
+<ul class="simple">
+<li><p>Contract Design - a design represents code that is compiled to binary and potentially lined with libraries.
+Contract designs are mutable, that is you can change the code and update the contract.</p></li>
+<li><p>Contract Artifact - an artifact is a snapshot of a design at a point in time. Artifacts are what are deployed.</p></li>
+<li><p>Deployed Contract - these are artifacts that are bound to a blockchain, i.e., they have an address and can be invoked.
+Contracts are deployed to an Application. An application is simply an umbrella component to group deployed
+contracts. To create an application send an HTTP <code class="docutils literal notranslate"><span class="pre">POST</span></code> request to <code class="docutils literal notranslate"><span class="pre">v2/organisations/&lt;MY_ORG&gt;/applications/</span></code>.
+The JSON payload is:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A globally unique name for the application.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">display_name</span></code>: An optional display name for the application.</p></li>
+</ul>
+</li>
+</ul>
+<section id="compiling-contracts">
+<h3>Compiling Contracts<a class="headerlink" href="#compiling-contracts" title="Permalink to this heading">#</a></h3>
+<p>The following will assume a solidity contract.</p>
+<p>To compile a contract, send an HTTP <code class="docutils literal notranslate"><span class="pre">POST</span></code> to <code class="docutils literal notranslate"><span class="pre">v2/organisations/&lt;MY_ORG&gt;/contract_designs/</span></code>
+where <code class="docutils literal notranslate"><span class="pre">&lt;MY_ORG&gt;</span></code> is an organisation you have write access to.</p>
+<p>The JSON payload is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code>: base64 encoded contract solidity source code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">language</span></code>: ‘solidity’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A non-unique name for the design. This does not have to match the name of the contract in the solidity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_contract</span></code>: <code class="docutils literal notranslate"><span class="pre">&lt;CONTRACT_NAME&gt;</span></code>. This field identifies the contract you want an HTTP API for. In the case
+of a simple contract deployment, this is not required as there is only a single contract. However, if there
+are related contracts in the compilation, this ensures the correct contract is the primary contract to be exposed
+via the Blocks API.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">binary_targets</span></code>: A list containing the &lt;CONTRACT_NAME&gt;. Again, this is optional, but worth including if you want to
+restrict the artifacts that should be deployed at deployment time. It defines
+the contracts for which binary info should be returned. Without this info, the artifact cannot be deployed. Consider
+a contract that depends on external libraries, for which you already know the addresses. In this case you want to
+not have those deployed when deploying the contract as they are already deployed. In this case, the binary targets
+list can be used to restrict deployment to only the main contract.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libraries</span></code>: Optional dictionary of external libraries that are already deployed and should be linked to the contract.
+The key values of the dictionary are <code class="docutils literal notranslate"><span class="pre">&lt;LIBRARY_NAME&gt;</span></code> key and value of <code class="docutils literal notranslate"><span class="pre">&lt;ADDRESS&gt;</span></code>. If libraries are included, they
+are linked into the binary content of the compiled contract.</p></li>
+</ul>
+<p>A return status of 200/201 signifies successful compilation.</p>
+<p>The return value is a contract design object. This includes generated metadata that is used to create the API as well
+as compilation information such as the binary contract. The <code class="docutils literal notranslate"><span class="pre">id</span></code> field is important as it is used to create an
+artifact from the design.</p>
+</section>
+<section id="creating-a-contract-artifact">
+<h3>Creating a Contract Artifact<a class="headerlink" href="#creating-a-contract-artifact" title="Permalink to this heading">#</a></h3>
+<p>Using the contract design ID in the <code class="docutils literal notranslate"><span class="pre">id</span></code> field of the returned design, send an HTTP <code class="docutils literal notranslate"><span class="pre">POST</span></code> to
+<code class="docutils literal notranslate"><span class="pre">v2/organisations/%s/contract_artifacts/</span></code>. The JSON payload is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">design_id</span></code>: <code class="docutils literal notranslate"><span class="pre">&lt;CONTRACT_DESIGN_ID&gt;</span></code></p></li>
+</ul>
+<p>A return value of 200/201 signifies success.</p>
+<p>The return value is a contract artifact object. This is virtually identical to a design.
+The <code class="docutils literal notranslate"><span class="pre">id</span></code> field is important as it is used to deploy the contract.</p>
+</section>
+<section id="deploying-a-contract-artifact">
+<h3>Deploying a Contract Artifact<a class="headerlink" href="#deploying-a-contract-artifact" title="Permalink to this heading">#</a></h3>
+<p>Using the contract artifact ID in the <code class="docutils literal notranslate"><span class="pre">id</span></code> field of the returned artifact, send an HTTP <code class="docutils literal notranslate"><span class="pre">POST</span></code> to
+<code class="docutils literal notranslate"><span class="pre">v2/organisations/&lt;MY_ORG&gt;/deployments/</span></code>. The JSON payload is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">blockchain</span></code>: the blockchain name as known to Blocks, e.g. <code class="docutils literal notranslate"><span class="pre">mumbai</span></code>, or <code class="docutils literal notranslate"><span class="pre">Quorum</span></code>. The available blockchains
+can be retrieved from the <code class="docutils literal notranslate"><span class="pre">v2/organisations/&lt;MY_ORG&gt;/blockchain/</span></code> endpoint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">storage</span></code>: the name of the off chain storage. Defaults to <code class="docutils literal notranslate"><span class="pre">no_storage</span></code>. The available stores
+can be retrieved from the <code class="docutils literal notranslate"><span class="pre">v2/organisations/&lt;MY_ORG&gt;/storage/</span></code> endpoint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">api_name</span></code>: deployed contract API name. This is used in the URL once it is deployed and therefore is restricted
+to alphanumeric characters, dashes and underscores. It needs to be unique within an application.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">artifact_id</span></code>: the artifact ID</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">display_name</span></code>: an optional display name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">app_name</span></code>: the containing Application to deploy to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">args</span></code>: optional arguments for deploying. This is only needed for contracts that take arguments in the constructor.
+The args are a dictionary where the keys are the constructor parameter names and the values are parameter values.</p></li>
+</ul>
+<p>A return status of 200/201 response means all went well.</p>
+<p>The return value is a deployment object.</p>
+<p>Important fields are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: the id of the deployment object. This can also be used to wait for deployment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: the current state of the deployment. For a simple deployment the state is likely to be <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>.
+For more complex deployments, it may still be in the <code class="docutils literal notranslate"><span class="pre">EXECUTING</span></code> state. If it has failed for some reason,
+it will be in a <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> state. In this case, the <code class="docutils literal notranslate"><span class="pre">error</span></code> field should be populated with the reason.</p></li>
+</ul>
+<p>If the deployment is not in a <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code> state, you can wait for the deployment to complete.
+Poll the <code class="docutils literal notranslate"><span class="pre">/v2/organisations/&lt;MY_ORG&gt;/deployments/&lt;DEPLOYMENT_ID/</span></code> endpoint with HTTP <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+and wait for the <code class="docutils literal notranslate"><span class="pre">state</span></code> field to be <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code> or <code class="docutils literal notranslate"><span class="pre">FAILED</span></code>.</p>
+<p>If in a <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code> state, the deployment’s field <code class="docutils literal notranslate"><span class="pre">primary</span></code> can be queried.
+This is a JSON object that contains an <code class="docutils literal notranslate"><span class="pre">address</span></code> field. This should be populated once the deployment has finished.
+The primary field <code class="docutils literal notranslate"><span class="pre">deployed_artifact_id</span></code> contains the ID of the deployed contract. Using this ID, you call
+inspect the deployed contract object by sending an HTTP <code class="docutils literal notranslate"><span class="pre">GET</span></code> to
+<code class="docutils literal notranslate"><span class="pre">/v2/organisations/&lt;MY_ORG&gt;/deployed_contracts/&lt;DEPLOYED_CONTRACT_ID&gt;/</span></code>.</p>
+<p>The contract will be available under the name of the Application it was deployed to, and the api
+name when deploying. E.g., to send transactions to methods use:
+<code class="docutils literal notranslate"><span class="pre">/v2/apps/&lt;APP_NAME&gt;/contract/&lt;CONTRACT_API_NAME&gt;/&lt;METHOD_NAME&gt;/</span></code></p>
+</section>
+</section>
+<section id="calling-and-querying-contract-methods">
+<h2>Calling and Querying Contract Methods<a class="headerlink" href="#calling-and-querying-contract-methods" title="Permalink to this heading">#</a></h2>
+<p>Smart contract methods come in two flavours:</p>
+<ul class="simple">
+<li><p>Methods that send data to the contract and change the state of the contract and/or result in a transaction being
+added to the chain. These are sometimes called <code class="docutils literal notranslate"><span class="pre">setters</span></code>. These are invoked using the HTTP <code class="docutils literal notranslate"><span class="pre">POST</span></code> method.
+The API allows you to query for transactions
+created by these methods using HTTP <code class="docutils literal notranslate"><span class="pre">GET</span></code> along with query filters.</p></li>
+<li><p>Methods that are accessors, also known as <code class="docutils literal notranslate"><span class="pre">getters</span></code>.
+These call the contract but do not change its state and do not result in a transaction
+being added to the chain. In Solidity terms these are modified with either <code class="docutils literal notranslate"><span class="pre">view</span></code> or <code class="docutils literal notranslate"><span class="pre">pure</span></code>.
+These are invoked using the HTTP <code class="docutils literal notranslate"><span class="pre">GET</span></code> method. You cannot query for transactions from these
+methods because they do not create transactions.</p></li>
+</ul>
+<p>As a result, HTTP <code class="docutils literal notranslate"><span class="pre">GET</span></code> is used for two purposes, depending on the nature of the method and <code class="docutils literal notranslate"><span class="pre">POST</span></code> can only be used
+against methods that are not getters.</p>
+<section id="calling-methods">
+<h3>Calling Methods<a class="headerlink" href="#calling-methods" title="Permalink to this heading">#</a></h3>
+<p>When submitting a transaction to a contract method via <code class="docutils literal notranslate"><span class="pre">POST</span></code>, the payload is dependent on the method parameters.
+The payload is a JSON object where the keys are the method parameter names and the values are the method parameters.
+The endpoint is <code class="docutils literal notranslate"><span class="pre">/v2/apps/&lt;APP_NAME&gt;/contract/&lt;CONTRACT_API_NAME&gt;/&lt;METHOD_NAME&gt;/</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;METHOD_NAME&gt;</span></code> is the name
+of the contract method being called.</p>
+<p>For example, given a function defined as below:</p>
+<div class="highlight-solidity notranslate"><div class="highlight"><pre><span></span><span class="kt">function</span><span class="w"> </span><span class="nv">myFunction</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">address</span><span class="w"> </span><span class="nv">myAddress</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint16</span><span class="w"> </span><span class="nv">myInt</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nv">memory</span><span class="w"> </span>_bundleHash
+<span class="w">    </span><span class="p">)</span>
+<span class="kt">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The JSON payload would be as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;myAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xa508dd875f10c33c52a8abb20e16fc68e981f186&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;myInt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
+<span class="w">  </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that Solidity address types as well as byte arrays are encoded as hex strings.</p>
+<p>When calling a getter, the request goes to the chain to get the current state frm the contract and return the requested
+value. The endpoint is the same as for <code class="docutils literal notranslate"><span class="pre">POST</span></code>ing: <code class="docutils literal notranslate"><span class="pre">/v2/apps/&lt;APP_NAME&gt;/contract/&lt;CONTRACT_API_NAME&gt;/&lt;METHOD_NAME&gt;/</span></code>.
+Any parameters are turned into HTTP query parameters. Note this restricts the nature of the values a little, although
+URL encoded JSON is valid for complex types.</p>
+</section>
+<section id="off-chain-data">
+<h3>Off Chain Data<a class="headerlink" href="#off-chain-data" title="Permalink to this heading">#</a></h3>
+<p>The special _<code class="docutils literal notranslate"><span class="pre">bundleHash</span></code> parameter name is used to determine whether a method has been defined to accept file uploads.
+This field should not be populated by the client side. Instead, if files are present in the current
+request and the field is defined on the method, then the files are written to off-chain storage
+with the JSON manifest being constructed and written out alongside the files.
+The manifest contains the content hashes of the files along with metadata and timestamp.
+The content hash of the JSON manifest is then set to be the value of the _<code class="docutils literal notranslate"><span class="pre">bundleHash</span></code> field.
+This hash value is then what ends up on the chain in the transaction.</p>
+<p>For example, given a function defined as below:</p>
+<p>Note that these transactions must be submitted using <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> rather than <code class="docutils literal notranslate"><span class="pre">application/json</span></code> in order
+to upload files.</p>
+<p>When the transaction completes, the <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> field will be populated with a hash value. This value can then
+be used to query for the JSON manifest, the gzipped bundle, or files within the bundle.</p>
+<div class="highlight-solidity notranslate"><div class="highlight"><pre><span></span><span class="kt">function</span><span class="w"> </span><span class="nv">myFunction</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">address</span><span class="w"> </span><span class="nv">myAddress</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint16</span><span class="w"> </span><span class="nv">myInt</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nv">memory</span><span class="w"> </span>_bundleHash
+<span class="w">    </span><span class="p">)</span>
+<span class="kt">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The payload would be a multipart message containing <code class="docutils literal notranslate"><span class="pre">myAddress</span></code> as a string, <code class="docutils literal notranslate"><span class="pre">myInt</span></code> as a string, as multipart
+interprets everything as strings, and then file uploads. The <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> field is left blank.</p>
+<p>When looking at the <code class="docutils literal notranslate"><span class="pre">inputs</span></code> of the completed transaction, the <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> field will be populated with the
+content hash of the JSON manifest, e.g.:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;myAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xa508dd875f10c33c52a8abb20e16fc68e981f186&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;myInt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
+<span class="w">  </span><span class="nt">&quot;_bundleHash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7a0e488c12c6fdcc67cbf4fc47b61607034157929cd0842eb23adc1e8f199fdf&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> value can then be used to in queries to the bundle endpoint for the contract.</p>
+<p>The structure of the manifest is as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+  &quot;alg&quot;: &quot;sha256&quot;,
+  &quot;digest&quot;: &quot;hex&quot;,
+  &quot;files&quot;: [
+    {
+      &quot;alg&quot;: &quot;sha256&quot;,
+      &quot;digest&quot;: &quot;hex&quot;,
+      &quot;uid&quot;: &quot;76a5de1f-2a90-41f3-9a55-40278d3e1f8d.gz&quot;,
+      &quot;mime&quot;: &quot;text/plain&quot;,
+      &quot;name&quot;: &quot;file1.txt&quot;,
+      &quot;hash&quot;: &quot;7a0e488c12c6fdcc67cbf4fc47b61607034157929cd0842eb23adc1e8f199fdf&quot;,
+      &quot;size&quot;: 14
+    },
+    ...
+  ],
+  &quot;time&quot;: 1607169707
+}
+</pre></div>
+</div>
+<p>To query for the manifest send a <code class="docutils literal notranslate"><span class="pre">GET</span></code> to</p>
+<p><code class="docutils literal notranslate"><span class="pre">/v2/apps/&lt;APP_NAME&gt;/contract/&lt;CONTRACT_API_NAME&gt;/bundle/&lt;BUNDLE_HASH&gt;/manifest/</span></code></p>
+<p>To query for a file inside a bundle send a <code class="docutils literal notranslate"><span class="pre">GET</span></code> to</p>
+<p><code class="docutils literal notranslate"><span class="pre">/v2/apps/&lt;APP_NAME&gt;/contract/&lt;CONTRACT_API_NAME&gt;/bundle/&lt;BUNDLE_HASH&gt;/filename/&lt;FILE_NAME&gt;/</span></code></p>
+<p>The response with be a binary stream of the file which can be written to memory or file.</p>
+<p>To query for a bundle send a <code class="docutils literal notranslate"><span class="pre">GET</span></code> to</p>
+<p><code class="docutils literal notranslate"><span class="pre">/v2/apps/&lt;APP_NAME&gt;/contract/&lt;CONTRACT_API_NAME&gt;/bundle/&lt;BUNDLE_HASH&gt;/</span></code></p>
+<p>The response with be a binary stream of the tar.gz which can be written to memory or file.</p>
+</section>
+</section>
+<section id="querying-transaction-methods">
+<h2>Querying Transaction Methods<a class="headerlink" href="#querying-transaction-methods" title="Permalink to this heading">#</a></h2>
+<section id="selecting-fields">
+<h3>Selecting Fields<a class="headerlink" href="#selecting-fields" title="Permalink to this heading">#</a></h3>
+<p>Specify fields you would like to be returned in the model using the field query parameter.</p>
+<p>Example:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>fields=method,inputs,transaction_hash,finalized_on
+</pre></div>
+</div>
+</section>
+<section id="filtering">
+<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this heading">#</a></h3>
+<p><strong>Basics</strong></p>
+<p>The basic format for filtering is of the form <code class="docutils literal notranslate"><span class="pre">?filter[FIELD]=VALUE</span></code>, where <code class="docutils literal notranslate"><span class="pre">FIELD</span></code> is the field you’d like to match on,
+and <code class="docutils literal notranslate"><span class="pre">VALUE</span></code> is the value you’d like to match,
+e.g. - GET <code class="docutils literal notranslate"><span class="pre">/v2/apps/myapp/contract/mycontract/comments?filter[inputs.post]=1</span></code>.</p>
+<p>In this case, inputs. specifies that the value to match on is within the inputs list for this transaction/method call.</p>
+<p><strong>Modifiers</strong></p>
+<p>Filters can have modifiers applied. These use dot notation. These allow you to perform more complex filtering.
+GET <code class="docutils literal notranslate"><span class="pre">/v2/apps/myapp/contract/mycontract/comments?filter[inputs.post.gte]=1</span></code>
+for example, will return comments where post is greater than or equal to (gte) 1.</p>
+<p><strong>Operators</strong></p>
+<p>Different data types have different operators that are applicable to them. The default operator is <code class="docutils literal notranslate"><span class="pre">exact</span></code>.</p>
+<p><strong>Numbers</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lte</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gte</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">equals</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in</span></code> (for arrays of numbers)</p></li>
+</ul>
+<p><strong>Strings</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">exact</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contains</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">icontains</span></code> (case-insensitive contains)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startswith</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">endswith</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in</span></code> (for arrays of strings)</p></li>
+</ul>
+<p><strong>Boolean</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is</span></code></p></li>
+</ul>
+<p><strong>Structs, Arrays, and Complex Objects</strong></p>
+<p>Consider the snippet below. <code class="docutils literal notranslate"><span class="pre">foo()</span></code> accepts an <code class="docutils literal notranslate"><span class="pre">AddressPerson</span></code> object, which is a struct, containing an array of structs.</p>
+<div class="highlight-solidity notranslate"><div class="highlight"><pre><span></span><span class="kt">struct</span><span class="w"> </span><span class="nv">Addr</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nv">street</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nv">town</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">struct</span><span class="w"> </span><span class="nv">AddressPerson</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nv">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint</span><span class="w"> </span><span class="nv">age</span><span class="p">;</span>
+<span class="w">    </span>Addr<span class="p">[]</span><span class="w"> </span>addrs<span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">function</span><span class="w"> </span><span class="nv">foo</span><span class="p">(</span>AddressPerson<span class="w"> </span><span class="kt">memory</span><span class="w"> </span>person<span class="p">)</span><span class="w"> </span><span class="kt">public</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+<p>The data sent to this method may look like the following:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;person&quot;</span><span class="p">:</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w">  </span><span class="mi">88</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a_name_001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;addrs&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;town&quot;</span><span class="p">:</span><span class="w">   </span><span class="s2">&quot;Nowheresville&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;street&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whatever Road&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In order to query on, for example, the street address, you’d construct a query such
+as <code class="docutils literal notranslate"><span class="pre">?filter[inputs.person.addrs.0.street.icontains]=whatever</span></code>.</p>
+<p>This would return all transactions, where the street for the address at index 0 contains
+the string whatever, using a case insensitive match.</p>
+<p><strong>Property Access</strong></p>
+<p>As seen in the above query, accessing properties is through dot-notation.
+So accessing a persons age is just inputs.person.age.</p>
+<p><strong>Array Item Access</strong></p>
+<p>As also seen in the above query, accessing array indices is through dot notation.
+Accessing index 1 of the addrs array is <code class="docutils literal notranslate"><span class="pre">inputs.person.addrs.1</span></code>.</p>
+<p><strong>Putting it all together</strong></p>
+<p>You want to query for a person with the name “Bob” living on a street with “Whatever” in the name.</p>
+<p><code class="docutils literal notranslate"><span class="pre">?filter[inputs.person.bob.exact]=Bob&amp;filter[inputs.person.addrs.0.street.icontains]=whatever</span></code></p>
+<p>In addition to filtering on the transaction inputs field, the following fields support string comparison operators:</p>
+<ul class="simple">
+<li><p>transaction_type</p></li>
+<li><p>request_id</p></li>
+<li><p>state</p></li>
+<li><p>error</p></li>
+<li><p>transaction_hash</p></li>
+<li><p>from_address</p></li>
+<li><p>to_address</p></li>
+<li><p>origin</p></li>
+<li><p>transaction_type</p></li>
+</ul>
+<p>The following fields support numeric/datetime comparison operators:</p>
+<ul class="simple">
+<li><p>created_on</p></li>
+<li><p>finalized_on</p></li>
+<li><p>confirmations</p></li>
+<li><p>value</p></li>
+<li><p>nonce</p></li>
+</ul>
+<p>The following fields support the exact comparison operator on their UUID identifiers:</p>
+<ul class="simple">
+<li><p>blockchain</p></li>
+<li><p>app</p></li>
+<li><p>contract</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="libsimba.auth.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">libsimba.auth package</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contract-deployment"><em>Contract Deployment</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-contracts">Compiling Contracts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-contract-artifact">Creating a Contract Artifact</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploying-a-contract-artifact">Deploying a Contract Artifact</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-and-querying-contract-methods">Calling and Querying Contract Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-methods">Calling Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#off-chain-data">Off Chain Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-transaction-methods">Querying Transaction Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-fields">Selecting Fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">Filtering</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/api.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, SIMBA Chain Inc..
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

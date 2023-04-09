@@ -265,7 +265,6 @@ class SyncRunner(Runner):
             name=self.name,
             code=code,
             target_contract="TestContract",
-            model="aat",
             binary_targets=["TestContract"],
         )
         self.templates.assert_structure("contract_design", saved_data)
