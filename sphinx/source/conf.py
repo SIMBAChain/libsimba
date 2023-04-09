@@ -50,6 +50,7 @@ exclude_patterns = ['**.env*']
 #
 html_theme = "pydata_sphinx_theme"
 html_logo = "./logo.svg"
+html_favicon = "./favicon.ico"
 
 # html_sidebars = {
 #   "**": []
