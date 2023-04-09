@@ -1,4 +1,4 @@
-# libsimba
+# Documentation
 
 ## *Prerequisites*
 
@@ -13,26 +13,11 @@
 pip install libsimba
 ```
 
-### *Install from package:*
-View our [releases](https://github.com/SIMBAChain/libsimba/releases/) and download the tarball for the chosen release.
-```
-pip install libsimba-<version>.tar.gz
-```
-
 ### *Install for development*
 
 ```
 git clone https://github.com/SIMBAChain/libsimba.git
 cd libsimba
-poetry install
-```
-### *Alternatively, using virtualenv*
-
-```
-git clone https://github.com/SIMBAChain/libsimba.git
-cd libsimba
-virtualenv -p python3 .venv
-source .venv/bin/activate
 poetry install
 ```
 
@@ -94,12 +79,12 @@ an `Authoroization` key, this is assumed to be a valid bearer token and is used 
 
 Further configuration options available in the simba env file:
 
-* SIMBA_WRITE_TOKEN_TO_FILE: boolean. If set to true, this will cache tokens to file. Otherwise they are
+* `SIMBA_WRITE_TOKEN_TO_FILE`: boolean. If set to true, this will cache tokens to file. Otherwise they are
     cached in memory. Default is true.
-* SIMBA_TOKEN_DIR: string. If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored.
+* `SIMBA_TOKEN_DIR`: string. If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored.
     Default is "./"
-* SIMBA_CONNECTION_TIMEOUT: float. Connection timeout in seconds for requests. Default is 5 which is the httpx default.
-* SIMBA_LOG_LEVEL: set the logging level. Can be one of 'CRITICAL', 'FATAL', 'ERROR', 'WARNING, 'INFO', 'DEBUG', 'NOTSET'
+* `SIMBA_CONNECTION_TIMEOUT`: float. Connection timeout in seconds for requests. Default is 5 which is the httpx default.
+* `SIMBA_LOG_LEVEL`: set the logging level. Can be one of `CRITICAL`, `FATAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`, `NOTSET`
 
 ### Logging
 
@@ -111,8 +96,7 @@ To configure logging, there are two options:
   config file that is json and has a `.json` file extension, then it will be loaded as a dictionary config.
   Otherwise `ini` file format is assumed. Ensure there is a `libsimba` logger defined.
 
-## *Usage*
-### *Instantiate the SIMBA client*
+## *Instantiate the SIMBA client*
 
 ```python
 from libsimba.simba import Simba
@@ -152,7 +136,7 @@ simba_sync = SimbaSync()
 
 # Using SimbaSync with synchronous behavior
 class SyncExample:
-    async def do_something(self):
+    def get_me(self):
         me = simba_sync.whoami()
         print(me)
 
@@ -160,7 +144,7 @@ class SyncExample:
 
 returned objects are currently not typed, i.e., the SDK returns `dict` instances.
 
-### User and Account Functions
+## *User and Account Functions*
 
 The Simba class provides some functions focussed on users and accounts:
 
@@ -173,14 +157,14 @@ The Simba class provides some functions focussed on users and accounts:
   *`blockchain_type` is typically `ethereum` for EVM chains, and `blockchain` is the name of the network, e.g.,*
   *`Quorum` or `mumbai` for example. The full list of blockchains is returned from the `get_blockchain` method (see below).* 
 
-### Platform Functions
+## *Platform Functions*
 
 The Simba class provides functions to list platform capabilities:
 
 * List available blockchains (`def get_blockchains`)
 * List available off chain storage (`def get_storage`)
 
-### Deploying Smart Contracts
+## *Deploying Smart Contracts*
 
 Smart contracts have a lifecycle. They atart out as contract designs. These are basically code. You can update
 the code and the design, along with its metadata will change. Before deployment, a contract artifact is created.
@@ -240,7 +224,7 @@ address, contract_id = await simba.wait_for_deploy_artifact(
 This returns the address of the newly deployed contract along with the uuid of the deployed contract in the database.
 
 
-### Invoking Smart Contract Methods
+## *Invoking Smart Contract Methods*
 
 Smart contract methods come in two flavours:
 
@@ -259,16 +243,16 @@ keyed to their parameter names.
 
 ```python
 inputs = {
-            "person": {
-                "name": "The Laughing Gnome",
-                "age": 32,
-                "addr": {
-                    "street": "Happy Street",
-                    "number": 10,
-                    "town": "Funsville",
-                },
-            }
-        }
+    "person": {
+        "name": "The Laughing Gnome",
+        "age": 32,
+        "addr": {
+            "street": "Happy Street",
+            "number": 10,
+            "town": "Funsville",
+        },
+    }
+}
 txn = await simba.submit_contract_method(
     app_id="my-app",
     contract_name="my-contract",
@@ -318,7 +302,7 @@ getter_result = simba.call_contract_method(
 ```
 The MethodCallArgs class is a simple wrapper around a dict of args that is appended to the query string of the request.
 
-### Querying Smart contract Methods
+## *Querying Smart contract Methods*
 
 For methods that are not getters, you can query for past transactions created by submitting transactions to the method.
 Query calls optionally take a SearchFilter object that has various fields that can filter responses.
@@ -360,7 +344,7 @@ until no more results are available.
 Methods that retrieve multiple objects and start with the prefix `get_` return a list from a single page, and hence
 the number of results is limited to a single page size.
 
-### Getting File Bundle Information 
+## *Getting File Bundle Information* 
 
 The API allows you get a JSON manifest for a bundle, to download the bundle as a `tar.gz` file, or to download
 a particular file inside a bundle.
@@ -391,7 +375,7 @@ await simba.get_bundle_file(
 )
 ```
 
-### Contract Client Classes
+## *Contract Client Classes*
 
 The library provides utilities that represent a single contract API via the `SimbaContractSync` and `SimbaContract`
 classes. These can be created via the respective sync and async Simba classes passing in the Simba instance

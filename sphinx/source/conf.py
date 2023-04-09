@@ -19,11 +19,11 @@ sys.path.append(project_path)
 # -- Project information -----------------------------------------------------
 
 project = 'libsimba'
-copyright = '2022, SIMBA Chain Inc.'
+copyright = '2023, SIMBA Chain Inc.'
 author = 'SIMBA Chain Inc.'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.11'
+release = '0.1.16'
 
 
 # -- General configuration ---------------------------------------------------
@@ -48,7 +48,12 @@ exclude_patterns = ['**.env*']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = "pydata_sphinx_theme"
+html_logo = "./logo.svg"
+
+# html_sidebars = {
+#   "**": []
+# }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
