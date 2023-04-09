@@ -135,8 +135,7 @@ For example, given a function defined as below:
 ```solidity
 function myFunction (
     address myAddress,
-    uint16 myInt,
-    string memory _bundleHash
+    uint16 myInt
     )
 public {
     ...
