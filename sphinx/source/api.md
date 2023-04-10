@@ -148,25 +148,25 @@ The JSON payload would be as follows:
 {
   "myAddress": "0xa508dd875f10c33c52a8abb20e16fc68e981f186",
   "myInt": 12
-  
 }
 ```
 
 Note that Solidity address types as well as byte arrays are encoded as hex strings.
 
-When calling a getter, the request goes to the chain to get the current state frm the contract and return the requested
-value. The endpoint is the same as for `POST`ing: `/v2/apps/<APP_NAME>/contract/<CONTRACT_API_NAME>/<METHOD_NAME>/`.
+When calling a getter, the request goes to the chain to get the current state form the contract and return the requested
+value. The endpoint is the same as for `POST`ing:
+`/v2/apps/<APP_NAME>/contract/<CONTRACT_API_NAME>/<METHOD_NAME>/`.
 Any parameters are turned into HTTP query parameters. Note this restricts the nature of the values a little, although
 URL encoded JSON is valid for complex types.
 
 ### Off Chain Data
 
-The special _`bundleHash` parameter name is used to determine whether a method has been defined to accept file uploads.
+The special `_bundleHash` parameter name is used to determine whether a method has been defined to accept file uploads.
 This field should not be populated by the client side. Instead, if files are present in the current
 request and the field is defined on the method, then the files are written to off-chain storage
 with the JSON manifest being constructed and written out alongside the files.
 The manifest contains the content hashes of the files along with metadata and timestamp.
-The content hash of the JSON manifest is then set to be the value of the _`bundleHash` field.
+The content hash of the JSON manifest is then set to be the value of the `_bundleHash` field.
 This hash value is then what ends up on the chain in the transaction.
 
 For example, given a function defined as below:
@@ -353,7 +353,7 @@ Accessing index 1 of the addrs array is `inputs.person.addrs.1`.
 
 You want to query for a person with the name "Bob" living on a street with "Whatever" in the name.
 
-`?filter[inputs.person.bob.exact]=Bob&filter[inputs.person.addrs.0.street.icontains]=whatever`
+`?filter[inputs.person.name.exact]=Bob&filter[inputs.person.addrs.0.street.icontains]=whatever`
 
 In addition to filtering on the transaction inputs field, the following fields support string comparison operators:
 

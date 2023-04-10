@@ -457,24 +457,24 @@ of the contract method being called.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;myAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xa508dd875f10c33c52a8abb20e16fc68e981f186&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;myInt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
-<span class="w">  </span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Note that Solidity address types as well as byte arrays are encoded as hex strings.</p>
-<p>When calling a getter, the request goes to the chain to get the current state frm the contract and return the requested
-value. The endpoint is the same as for <code class="docutils literal notranslate"><span class="pre">POST</span></code>ing: <code class="docutils literal notranslate"><span class="pre">/v2/apps/&lt;APP_NAME&gt;/contract/&lt;CONTRACT_API_NAME&gt;/&lt;METHOD_NAME&gt;/</span></code>.
+<p>When calling a getter, the request goes to the chain to get the current state form the contract and return the requested
+value. The endpoint is the same as for <code class="docutils literal notranslate"><span class="pre">POST</span></code>ing:
+<code class="docutils literal notranslate"><span class="pre">/v2/apps/&lt;APP_NAME&gt;/contract/&lt;CONTRACT_API_NAME&gt;/&lt;METHOD_NAME&gt;/</span></code>.
 Any parameters are turned into HTTP query parameters. Note this restricts the nature of the values a little, although
 URL encoded JSON is valid for complex types.</p>
 </section>
 <section id="off-chain-data">
 <h3>Off Chain Data<a class="headerlink" href="#off-chain-data" title="Permalink to this heading">#</a></h3>
-<p>The special _<code class="docutils literal notranslate"><span class="pre">bundleHash</span></code> parameter name is used to determine whether a method has been defined to accept file uploads.
+<p>The special <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> parameter name is used to determine whether a method has been defined to accept file uploads.
 This field should not be populated by the client side. Instead, if files are present in the current
 request and the field is defined on the method, then the files are written to off-chain storage
 with the JSON manifest being constructed and written out alongside the files.
 The manifest contains the content hashes of the files along with metadata and timestamp.
-The content hash of the JSON manifest is then set to be the value of the _<code class="docutils literal notranslate"><span class="pre">bundleHash</span></code> field.
+The content hash of the JSON manifest is then set to be the value of the <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> field.
 This hash value is then what ends up on the chain in the transaction.</p>
 <p>For example, given a function defined as below:</p>
 <p>Note that these transactions must be submitted using <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> rather than <code class="docutils literal notranslate"><span class="pre">application/json</span></code> in order
@@ -623,7 +623,7 @@ So accessing a persons age is just inputs.person.age.</p>
 Accessing index 1 of the addrs array is <code class="docutils literal notranslate"><span class="pre">inputs.person.addrs.1</span></code>.</p>
 <p><strong>Putting it all together</strong></p>
 <p>You want to query for a person with the name “Bob” living on a street with “Whatever” in the name.</p>
-<p><code class="docutils literal notranslate"><span class="pre">?filter[inputs.person.bob.exact]=Bob&amp;filter[inputs.person.addrs.0.street.icontains]=whatever</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">?filter[inputs.person.name.exact]=Bob&amp;filter[inputs.person.addrs.0.street.icontains]=whatever</span></code></p>
 <p>In addition to filtering on the transaction inputs field, the following fields support string comparison operators:</p>
 <ul class="simple">
 <li><p>transaction_type</p></li>
