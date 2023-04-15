@@ -1,0 +1,864 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>libsimba utils &#8212; libsimba 0.1.16 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libsimba/utils';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="libsimba.auth" href="../auth/index.html" />
+    <link rel="prev" title="libsimba exceptions" href="exceptions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">libsimba</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../usage/index.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api.html">
+                        API Notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../usage/index.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api.html">
+                        API Notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">libsimba</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">libsimba config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schemas.html">libsimba schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simba.html">libsimba simba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simba_sync.html">libsimba simba_sync</a></li>
+<li class="toctree-l2"><a class="reference internal" href="param_checking.html">libsimba param_checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simba_request.html">libsimba simba_request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simba_contract.html">libsimba simba_contract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simba_contract_sync.html">libsimba simba_contract_sync</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">libsimba exceptions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">libsimba utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../auth/index.html">libsimba.auth</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../auth/client_credentials.html">libsimba.client_credentials</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">libsimba</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">libsimba utils</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-libsimba.utils">
+<span id="libsimba-utils"></span><h1>libsimba utils<a class="headerlink" href="#module-libsimba.utils" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="libsimba.utils.Path">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libsimba.utils.</span></span><span class="sig-name descname"><span class="pre">Path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libsimba.utils.Path" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ADMIN_WALLET_SET">
+<span class="sig-name descname"><span class="pre">ADMIN_WALLET_SET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/admin/users/{}/wallet/set/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ADMIN_WALLET_SET" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.APP">
+<span class="sig-name descname"><span class="pre">APP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/applications/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.APP" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.APPS">
+<span class="sig-name descname"><span class="pre">APPS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/'</span></em><a class="headerlink" href="#libsimba.utils.Path.APPS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.APP_CONTRACT">
+<span class="sig-name descname"><span class="pre">APP_CONTRACT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.APP_CONTRACT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.APP_CONTRACTS">
+<span class="sig-name descname"><span class="pre">APP_CONTRACTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contracts/'</span></em><a class="headerlink" href="#libsimba.utils.Path.APP_CONTRACTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.APP_TXN">
+<span class="sig-name descname"><span class="pre">APP_TXN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/transactions/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.APP_TXN" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.APP_TXNS">
+<span class="sig-name descname"><span class="pre">APP_TXNS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/transactions/'</span></em><a class="headerlink" href="#libsimba.utils.Path.APP_TXNS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.BLOCKCHAINS">
+<span class="sig-name descname"><span class="pre">BLOCKCHAINS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/blockchains/'</span></em><a class="headerlink" href="#libsimba.utils.Path.BLOCKCHAINS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.BUNDLE">
+<span class="sig-name descname"><span class="pre">BUNDLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/bundle/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.BUNDLE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.BUNDLE_FILE">
+<span class="sig-name descname"><span class="pre">BUNDLE_FILE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/bundle/{}/filename/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.BUNDLE_FILE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.BUNDLE_MANIFEST">
+<span class="sig-name descname"><span class="pre">BUNDLE_MANIFEST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/bundle/{}/manifest/'</span></em><a class="headerlink" href="#libsimba.utils.Path.BUNDLE_MANIFEST" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACTS">
+<span class="sig-name descname"><span class="pre">CONTRACTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contracts/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_ARTIFACT">
+<span class="sig-name descname"><span class="pre">CONTRACT_ARTIFACT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/contract_artifacts/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_ARTIFACT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_ARTIFACTS">
+<span class="sig-name descname"><span class="pre">CONTRACT_ARTIFACTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/contract_artifacts/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_ARTIFACTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_EVENTS">
+<span class="sig-name descname"><span class="pre">CONTRACT_EVENTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/events/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_EVENTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_INFO">
+<span class="sig-name descname"><span class="pre">CONTRACT_INFO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/info'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_INFO" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_METHOD">
+<span class="sig-name descname"><span class="pre">CONTRACT_METHOD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_METHOD" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_RECEIPT">
+<span class="sig-name descname"><span class="pre">CONTRACT_RECEIPT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/receipt/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_RECEIPT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_TXN">
+<span class="sig-name descname"><span class="pre">CONTRACT_TXN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/transaction/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_TXN" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_TXNS">
+<span class="sig-name descname"><span class="pre">CONTRACT_TXNS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/transactions/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_TXNS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.DEPLOYED_CONTRACT">
+<span class="sig-name descname"><span class="pre">DEPLOYED_CONTRACT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/deployed_contracts/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.DEPLOYED_CONTRACT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.DEPLOYED_CONTRACTS">
+<span class="sig-name descname"><span class="pre">DEPLOYED_CONTRACTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/deployed_contracts/'</span></em><a class="headerlink" href="#libsimba.utils.Path.DEPLOYED_CONTRACTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.DEPLOYMENT">
+<span class="sig-name descname"><span class="pre">DEPLOYMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/deployments/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.DEPLOYMENT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.DEPLOYMENTS">
+<span class="sig-name descname"><span class="pre">DEPLOYMENTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/deployments/'</span></em><a class="headerlink" href="#libsimba.utils.Path.DEPLOYMENTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.DESIGN">
+<span class="sig-name descname"><span class="pre">DESIGN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/contract_designs/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.DESIGN" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.DESIGNS">
+<span class="sig-name descname"><span class="pre">DESIGNS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/contract_designs/'</span></em><a class="headerlink" href="#libsimba.utils.Path.DESIGNS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.DESIGN_DEPLOY">
+<span class="sig-name descname"><span class="pre">DESIGN_DEPLOY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/contract_designs/{}/deploy/'</span></em><a class="headerlink" href="#libsimba.utils.Path.DESIGN_DEPLOY" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.NOTIFICATION_CONFIGS">
+<span class="sig-name descname"><span class="pre">NOTIFICATION_CONFIGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/notification_config/'</span></em><a class="headerlink" href="#libsimba.utils.Path.NOTIFICATION_CONFIGS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORGANISATION">
+<span class="sig-name descname"><span class="pre">ORGANISATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORGANISATION" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORGANISATIONS">
+<span class="sig-name descname"><span class="pre">ORGANISATIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORGANISATIONS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_APP">
+<span class="sig-name descname"><span class="pre">ORG_APP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/applications/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_APP" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_APPS">
+<span class="sig-name descname"><span class="pre">ORG_APPS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/applications/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_APPS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_TXN">
+<span class="sig-name descname"><span class="pre">ORG_TXN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/transactions/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_TXN" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_TXNS">
+<span class="sig-name descname"><span class="pre">ORG_TXNS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/transactions/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_TXNS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.STORAGES">
+<span class="sig-name descname"><span class="pre">STORAGES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/storage/'</span></em><a class="headerlink" href="#libsimba.utils.Path.STORAGES" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.SUBSCRIPTION">
+<span class="sig-name descname"><span class="pre">SUBSCRIPTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/subscriptions/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.SUBSCRIPTION" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.SUBSCRIPTIONS">
+<span class="sig-name descname"><span class="pre">SUBSCRIPTIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/subscriptions/'</span></em><a class="headerlink" href="#libsimba.utils.Path.SUBSCRIPTIONS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.SYNC_CONTRACT_METHOD">
+<span class="sig-name descname"><span class="pre">SYNC_CONTRACT_METHOD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/sync/contract/{}/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.SYNC_CONTRACT_METHOD" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_ADDRESS_BALANCE">
+<span class="sig-name descname"><span class="pre">USER_ADDRESS_BALANCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/account/{}/balance/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_ADDRESS_BALANCE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_FUND_ADDRESS">
+<span class="sig-name descname"><span class="pre">USER_FUND_ADDRESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/account/{}/fund/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_FUND_ADDRESS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_WALLET">
+<span class="sig-name descname"><span class="pre">USER_WALLET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/wallet/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_WALLET" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_WALLET_SET">
+<span class="sig-name descname"><span class="pre">USER_WALLET_SET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/wallet/set/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_WALLET_SET" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.VALIDATE_BUNDLE">
+<span class="sig-name descname"><span class="pre">VALIDATE_BUNDLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/validate/{}/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.VALIDATE_BUNDLE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.WHOAMI">
+<span class="sig-name descname"><span class="pre">WHOAMI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/whoami/'</span></em><a class="headerlink" href="#libsimba.utils.Path.WHOAMI" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libsimba.utils.RetryTransport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libsimba.utils.</span></span><span class="sig-name descname"><span class="pre">RetryTransport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wrapped_transport</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseTransport</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AsyncBaseTransport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_backoff_wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backoff_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitter_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_retry_after_header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retryable_methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_status_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libsimba.utils.RetryTransport" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncBaseTransport</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransport</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.RetryTransport.MAX_BACKOFF_WAIT">
+<span class="sig-name descname"><span class="pre">MAX_BACKOFF_WAIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#libsimba.utils.RetryTransport.MAX_BACKOFF_WAIT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.RetryTransport.RETRYABLE_METHODS">
+<span class="sig-name descname"><span class="pre">RETRYABLE_METHODS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">frozenset({'DELETE',</span> <span class="pre">'GET',</span> <span class="pre">'HEAD',</span> <span class="pre">'OPTIONS',</span> <span class="pre">'PUT',</span> <span class="pre">'TRACE'})</span></em><a class="headerlink" href="#libsimba.utils.RetryTransport.RETRYABLE_METHODS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.RetryTransport.RETRYABLE_STATUS_CODES">
+<span class="sig-name descname"><span class="pre">RETRYABLE_STATUS_CODES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">frozenset({413,</span> <span class="pre">429,</span> <span class="pre">500,</span> <span class="pre">502,</span> <span class="pre">503,</span> <span class="pre">504})</span></em><a class="headerlink" href="#libsimba.utils.RetryTransport.RETRYABLE_STATUS_CODES" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libsimba.utils.RetryTransport.handle_async_request">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle_async_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="headerlink" href="#libsimba.utils.RetryTransport.handle_async_request" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libsimba.utils.RetryTransport.handle_request">
+<span class="sig-name descname"><span class="pre">handle_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="headerlink" href="#libsimba.utils.RetryTransport.handle_request" title="Permalink to this definition">#</a></dt>
+<dd><p>Send a single HTTP request and return a response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>httpx.Request</em>) – a <cite>Request</cite> instance</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a response</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>httpx.Response</p>
+</dd>
+</dl>
+<p>Developers shouldn’t typically ever need to call into this API directly,
+since the Client class provides all the higher level user-facing API
+niceties.</p>
+<p>In order to properly release any network resources, the response
+stream should <em>either</em> be consumed immediately, with a call to
+<cite>response.stream.read()</cite>, or else the <cite>handle_request</cite> call should
+be followed with a try/finally block to ensuring the stream is
+always closed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libsimba.utils.async_http_client">
+<span class="sig-prename descclassname"><span class="pre">libsimba.utils.</span></span><span class="sig-name descname"><span class="pre">async_http_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="schemas.html#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncClient</span></span></span><a class="headerlink" href="#libsimba.utils.async_http_client" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an async HTTPX client
+:param config: a connection config
+:type config: schemas.ConnectionConfig
+:return: a client
+:rtype: httpx.AsyncClient</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libsimba.utils.build_url">
+<span class="sig-prename descclassname"><span class="pre">libsimba.utils.</span></span><span class="sig-name descname"><span class="pre">build_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_api_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libsimba.utils.build_url" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libsimba.utils.get_address">
+<span class="sig-prename descclassname"><span class="pre">libsimba.utils.</span></span><span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deployment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#libsimba.utils.get_address" title="Permalink to this definition">#</a></dt>
+<dd><p>Extract the primary address from a deployment object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>deployment</strong> (<em>dict</em>) – The deployment object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libsimba.utils.get_deployed_artifact_id">
+<span class="sig-prename descclassname"><span class="pre">libsimba.utils.</span></span><span class="sig-name descname"><span class="pre">get_deployed_artifact_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deployment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#libsimba.utils.get_deployed_artifact_id" title="Permalink to this definition">#</a></dt>
+<dd><p>Extract the primary deployed artifact ID from a deployment object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>deployment</strong> (<em>dict</em>) – The deployment object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libsimba.utils.http_client">
+<span class="sig-prename descclassname"><span class="pre">libsimba.utils.</span></span><span class="sig-name descname"><span class="pre">http_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="schemas.html#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Client</span></span></span><a class="headerlink" href="#libsimba.utils.http_client" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an HTTPX client
+:param config: a connection config
+:type config: schemas.ConnectionConfig
+:return: a client
+:rtype: httpx.Client</p>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exceptions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">libsimba exceptions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../auth/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">libsimba.auth</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ADMIN_WALLET_SET"><code class="docutils literal notranslate"><span class="pre">Path.ADMIN_WALLET_SET</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.APP"><code class="docutils literal notranslate"><span class="pre">Path.APP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.APPS"><code class="docutils literal notranslate"><span class="pre">Path.APPS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.APP_CONTRACT"><code class="docutils literal notranslate"><span class="pre">Path.APP_CONTRACT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.APP_CONTRACTS"><code class="docutils literal notranslate"><span class="pre">Path.APP_CONTRACTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.APP_TXN"><code class="docutils literal notranslate"><span class="pre">Path.APP_TXN</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.APP_TXNS"><code class="docutils literal notranslate"><span class="pre">Path.APP_TXNS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.BLOCKCHAINS"><code class="docutils literal notranslate"><span class="pre">Path.BLOCKCHAINS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.BUNDLE"><code class="docutils literal notranslate"><span class="pre">Path.BUNDLE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.BUNDLE_FILE"><code class="docutils literal notranslate"><span class="pre">Path.BUNDLE_FILE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.BUNDLE_MANIFEST"><code class="docutils literal notranslate"><span class="pre">Path.BUNDLE_MANIFEST</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_ARTIFACT"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_ARTIFACT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_ARTIFACTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_ARTIFACTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_EVENTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_EVENTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_INFO"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_INFO</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_METHOD"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_METHOD</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_RECEIPT"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_RECEIPT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_TXN"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_TXN</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_TXNS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_TXNS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.DEPLOYED_CONTRACT"><code class="docutils literal notranslate"><span class="pre">Path.DEPLOYED_CONTRACT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.DEPLOYED_CONTRACTS"><code class="docutils literal notranslate"><span class="pre">Path.DEPLOYED_CONTRACTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.DEPLOYMENT"><code class="docutils literal notranslate"><span class="pre">Path.DEPLOYMENT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.DEPLOYMENTS"><code class="docutils literal notranslate"><span class="pre">Path.DEPLOYMENTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.DESIGN"><code class="docutils literal notranslate"><span class="pre">Path.DESIGN</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.DESIGNS"><code class="docutils literal notranslate"><span class="pre">Path.DESIGNS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.DESIGN_DEPLOY"><code class="docutils literal notranslate"><span class="pre">Path.DESIGN_DEPLOY</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.NOTIFICATION_CONFIGS"><code class="docutils literal notranslate"><span class="pre">Path.NOTIFICATION_CONFIGS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORGANISATION"><code class="docutils literal notranslate"><span class="pre">Path.ORGANISATION</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORGANISATIONS"><code class="docutils literal notranslate"><span class="pre">Path.ORGANISATIONS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_APP"><code class="docutils literal notranslate"><span class="pre">Path.ORG_APP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_APPS"><code class="docutils literal notranslate"><span class="pre">Path.ORG_APPS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_TXN"><code class="docutils literal notranslate"><span class="pre">Path.ORG_TXN</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_TXNS"><code class="docutils literal notranslate"><span class="pre">Path.ORG_TXNS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.STORAGES"><code class="docutils literal notranslate"><span class="pre">Path.STORAGES</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.SUBSCRIPTION"><code class="docutils literal notranslate"><span class="pre">Path.SUBSCRIPTION</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.SUBSCRIPTIONS"><code class="docutils literal notranslate"><span class="pre">Path.SUBSCRIPTIONS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.SYNC_CONTRACT_METHOD"><code class="docutils literal notranslate"><span class="pre">Path.SYNC_CONTRACT_METHOD</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ADDRESS_BALANCE"><code class="docutils literal notranslate"><span class="pre">Path.USER_ADDRESS_BALANCE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_FUND_ADDRESS"><code class="docutils literal notranslate"><span class="pre">Path.USER_FUND_ADDRESS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_WALLET"><code class="docutils literal notranslate"><span class="pre">Path.USER_WALLET</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_WALLET_SET"><code class="docutils literal notranslate"><span class="pre">Path.USER_WALLET_SET</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.VALIDATE_BUNDLE"><code class="docutils literal notranslate"><span class="pre">Path.VALIDATE_BUNDLE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.WHOAMI"><code class="docutils literal notranslate"><span class="pre">Path.WHOAMI</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.RetryTransport"><code class="docutils literal notranslate"><span class="pre">RetryTransport</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.RetryTransport.MAX_BACKOFF_WAIT"><code class="docutils literal notranslate"><span class="pre">RetryTransport.MAX_BACKOFF_WAIT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.RetryTransport.RETRYABLE_METHODS"><code class="docutils literal notranslate"><span class="pre">RetryTransport.RETRYABLE_METHODS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.RetryTransport.RETRYABLE_STATUS_CODES"><code class="docutils literal notranslate"><span class="pre">RetryTransport.RETRYABLE_STATUS_CODES</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.RetryTransport.handle_async_request"><code class="docutils literal notranslate"><span class="pre">RetryTransport.handle_async_request()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.RetryTransport.handle_request"><code class="docutils literal notranslate"><span class="pre">RetryTransport.handle_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.async_http_client"><code class="docutils literal notranslate"><span class="pre">async_http_client()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.build_url"><code class="docutils literal notranslate"><span class="pre">build_url()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.get_address"><code class="docutils literal notranslate"><span class="pre">get_address()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.get_deployed_artifact_id"><code class="docutils literal notranslate"><span class="pre">get_deployed_artifact_id()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.http_client"><code class="docutils literal notranslate"><span class="pre">http_client()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/reference/libsimba/utils.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, SIMBA Chain Inc..
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

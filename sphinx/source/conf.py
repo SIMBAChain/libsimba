@@ -52,6 +52,7 @@ html_theme = "pydata_sphinx_theme"
 html_favicon = "./favicon.ico"
 
 html_theme_options = {
+   "use_page_nav": False,
    "logo": {
       "text": "libsimba",
       "image_light": "./logo.svg",
