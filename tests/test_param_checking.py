@@ -145,76 +145,76 @@ class ParamTestCase(unittest.TestCase):
             assert "Expected 3 but got 2" in f"{ve}"
         assert err is not None
 
-    # @pytest.mark.unit
-    # @md_mock
-    # def test_struct_arrs(self):
-    #     pcc = ParamChecking("my_app", "my_api")
+    @pytest.mark.unit
+    @md_mock
+    def test_struct_arrs(self):
+        pcc = ParamChecking("my_app", "my_api")
 
-    #     pcc.validate_params(
-    #         method_name="structTest_4",
-    #         inputs={
-    #             "persons": [
-    #                 {
-    #                     "name": "The Laughing Gnome",
-    #                     "age": 32,
-    #                     "addrs": [
-    #                         {
-    #                             "street": "Happy Street",
-    #                             "number": 10,
-    #                             "town": "Funsville",
-    #                         }
-    #                     ],
-    #                 },
-    #                 {
-    #                     "name": "The Laughing Gnome",
-    #                     "age": 32,
-    #                     "addrs": [
-    #                         {
-    #                             "street": "Happy Street",
-    #                             "number": 10,
-    #                             "town": "Funsville",
-    #                         },
-    #                         {
-    #                             "street": "Happy Street",
-    #                             "number": 10,
-    #                             "town": "Funsville",
-    #                         },
-    #                     ],
-    #                 },
-    #             ]
-    #         },
-    #     )
-    #     err = None
-    #     try:
-    #         pcc.validate_params(
-    #             method_name="structTest_4",
-    #             inputs={
-    #                 "persons": [
-    #                     {
-    #                         "name": "The Laughing Gnome",
-    #                         "age": 32,
-    #                         "addrs": [
-    #                             {
-    #                                 "street": "Happy Street",
-    #                                 "number": 10,
-    #                                 "town": "Funsville",
-    #                             }
-    #                         ],
-    #                     },
-    #                     {
-    #                         "name": "The Laughing Gnome",
-    #                         "age": 32,
-    #                         "addrs": {
-    #                             "street": "Happy Street",
-    #                             "number": 10,
-    #                             "town": "Funsville",
-    #                         }
-    #                     },
-    #                 ]
-    #             },
-    #         )
-    #     except ValueError as ve:
-    #         err = ve
-    #         print(ve)
-    #         assert "Expected a list for key: addrs" in f"{ve}"
-    #     assert err is not None
+        pcc.validate_params(
+            method_name="structTest_4",
+            inputs={
+                "persons": [
+                    {
+                        "name": "The Laughing Gnome",
+                        "age": 32,
+                        "addrs": [
+                            {
+                                "street": "Happy Street",
+                                "number": 10,
+                                "town": "Funsville",
+                            }
+                        ],
+                    },
+                    {
+                        "name": "The Laughing Gnome",
+                        "age": 32,
+                        "addrs": [
+                            {
+                                "street": "Happy Street",
+                                "number": 10,
+                                "town": "Funsville",
+                            },
+                            {
+                                "street": "Happy Street",
+                                "number": 10,
+                                "town": "Funsville",
+                            },
+                        ],
+                    },
+                ]
+            },
+        )
+        err = None
+        try:
+            pcc.validate_params(
+                method_name="structTest_4",
+                inputs={
+                    "persons": [
+                        {
+                            "name": "The Laughing Gnome",
+                            "age": 32,
+                            "addrs": [
+                                {
+                                    "street": "Happy Street",
+                                    "number": 10,
+                                    "town": "Funsville",
+                                }
+                            ],
+                        },
+                        {
+                            "name": "The Laughing Gnome",
+                            "age": 32,
+                            "addrs": {
+                                "street": "Happy Street",
+                                "number": 10,
+                                "town": "Funsville",
+                            }
+                        },
+                    ]
+                },
+            )
+        except ValueError as ve:
+            err = ve
+            print(ve)
+            assert "Expected a list for key: addrs" in f"{ve}"
+        assert err is not None
