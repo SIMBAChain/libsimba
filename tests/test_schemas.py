@@ -37,7 +37,6 @@ class SchemaTestCase(unittest.TestCase):
     def test_files(self):
         data_dir = os.path.join(os.path.dirname(__file__), "data")
         f1 = File(path=os.path.join(data_dir, "file1.txt"), mime="text/plain")
-        print("\n\n\nf1111: ", f1)
         self.assertEqual("file1.txt", f1.name)
         pointer = f1.open()
         # opened in binary mode so matches on bytes
