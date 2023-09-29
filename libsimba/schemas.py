@@ -25,7 +25,7 @@ from enum import Enum
 from pathlib import Path
 from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Union
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 
 
 class AuthFlow(str, Enum):
@@ -43,7 +43,7 @@ class AuthToken(BaseModel):
     type: str
     expires: datetime
 
-    @validator("expires")
+    @field_validator("expires")
     def do_datetime(cls, v: Union[datetime, str]):
         if isinstance(v, str):
             return datetime.fromisoformat(v)
@@ -62,7 +62,7 @@ class Login(BaseModel):
     client_id: str
     client_secret: Optional[str]
 
-    @validator("client_secret")
+    @field_validator("client_secret")
     def set_secret(cls, v: Optional[str], values: Dict[str, Any]) -> str:
         if not v and values.get("auth_flow") == AuthFlow.CLIENT_CREDENTIALS:
             raise ValueError(
@@ -176,13 +176,13 @@ class TxnHeaders(BaseModel):
 
 
 class File(BaseModel):
-    path: Optional[str]
-    name: Optional[str]
-    mime: Optional[str]
-    fp: Optional[Any]
+    path: Optional[str] = None
+    name: Optional[str] = None
+    mime: Optional[str] = None
+    fp: Optional[Any] = None
     close_on_complete: Optional[bool] = True
 
-    @validator("name", always=True)
+    @field_validator("name", mode="before")
     def set_name(cls, v: Optional[str], values: Dict[str, Any]) -> str:
         if not v:
             if not values.get("path"):
@@ -190,7 +190,7 @@ class File(BaseModel):
             return Path(values.get("path", "")).name
         return v
 
-    @validator("mime", always=True)
+    @field_validator("mime", mode="before")
     def set_mime(cls, v: Optional[str], values: Dict[str, Any]) -> str:
         if not v:
             mime_type, encoding = mimetypes.guess_type(values.get("name"))

@@ -24,7 +24,8 @@ import os
 from typing import Optional
 
 from libsimba.schemas import AuthFlow, AuthProviderName
-from pydantic import BaseSettings, validator
+from pydantic import field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 logger = logging.getLogger(__name__)
@@ -64,9 +65,9 @@ class Settings(BaseSettings):
     """ Auth client secret """
     AUTH_CLIENT_ID: str = ""
     """ Auth client ID """
-    AUTH_SCOPE: Optional[str]
+    AUTH_SCOPE: Optional[str] = None
     """ Optional scope. This is set by auth providers if not given """
-    AUTH_REALM: Optional[str]
+    AUTH_REALM: Optional[str] = None
     """ Optional realm ID. Used for KeyCloak """
     WRITE_TOKEN_TO_FILE: bool = True
     """ If set to true, tokens will be cached on the file system. Otherwise they are cached in memory """
@@ -81,25 +82,26 @@ class Settings(BaseSettings):
     If not defined or empty, it is not used.
     """
 
-    @validator("AUTH_FLOW")
+    @field_validator("AUTH_FLOW")
     def set_auth_flow(cls, v: str) -> str:
         return v.lower()
 
-    @validator("API_BASE_URL")
+    @field_validator("API_BASE_URL")
     def set_api_url(cls, v: str) -> str:
         if v.endswith("/"):
             v = v[:-1]
         return v
 
-    @validator("AUTH_BASE_URL")
+    @field_validator("AUTH_BASE_URL")
     def set_auth_url(cls, v: str) -> str:
         if v.endswith("/"):
             v = v[:-1]
         return v
 
-    class Config:
-        env_prefix = "SIMBA_"
-        env_file = locate_config()
+    model_config = SettingsConfigDict(env_file = locate_config(), env_prefix="SIMBA_")
+    # class Config:
+    #     env_prefix = "SIMBA_"
+    #     env_file = locate_config()
 
 
 settings = Settings()

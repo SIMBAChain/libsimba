@@ -117,7 +117,7 @@ class AuthProvider(ABC):
             os.makedirs(token_dir, exist_ok=True)
             token_file = os.path.join(token_dir, "{}_token.json".format(client_id))
             with open(token_file, "w") as t1:
-                json_data = token.json(encoder=DateTimeEncoder())
+                json_data = token.model_dump_json()
                 t1.write(json_data)
                 logger.debug(
                     "[libsimba] :: cache_token : Saved token : {}".format(token_file)
