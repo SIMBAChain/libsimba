@@ -25,7 +25,7 @@ from enum import Enum
 from pathlib import Path
 from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Union
 
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_validator, model_validator
 
 
 class AuthFlow(str, Enum):
@@ -145,14 +145,14 @@ class TxnHeaderName(str, Enum):
 
 
 class TxnHeaders(BaseModel):
-    dynaminc_pricing: Optional[str]
-    external: Optional[str]
-    run_local: Optional[str]
-    delegate: Optional[str]
-    nonce: Optional[str]
-    sender_token: Optional[str]
-    sender: Optional[str]
-    value: Optional[str]
+    dynaminc_pricing: Optional[str] = None
+    external: Optional[str] = None
+    run_local: Optional[str] = None
+    delegate: Optional[str] = None
+    nonce: Optional[str] = None
+    sender_token: Optional[str] = None
+    sender: Optional[str] = None
+    value: Optional[str] = None
 
     def as_headers(self) -> dict:
         headers = {}
@@ -182,23 +182,22 @@ class File(BaseModel):
     fp: Optional[Any] = None
     close_on_complete: Optional[bool] = True
 
-    @field_validator("name", mode="before")
-    def set_name(cls, v: Optional[str], values: Dict[str, Any]) -> str:
-        if not v:
-            if not values.get("path"):
+    @model_validator(mode="before")
+    def set_name_and_mime(cls, data: dict) -> dict:
+        name = data.get("name")
+        path = data.get("path")
+        mime = data.get("mime")
+        if name is None:
+            if path is None:
                 raise ValueError("Name must be provided if path is not set")
-            return Path(values.get("path", "")).name
-        return v
-
-    @field_validator("mime", mode="before")
-    def set_mime(cls, v: Optional[str], values: Dict[str, Any]) -> str:
-        if not v:
-            mime_type, encoding = mimetypes.guess_type(values.get("name"))
+            data["name"] = Path(data.get("path", "")).name
+        if mime is None:
+            mime_type, encoding = mimetypes.guess_type(data.get("name"))
             if mime_type:
-                v = mime_type
+                data["mime"] = mime_type
             else:
-                v = "application/octet-stream"
-        return v
+                data["mime"] = "application/octet-stream"
+        return data
 
     def open(self) -> IO[AnyStr]:
         if not self.fp:
