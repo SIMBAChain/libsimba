@@ -99,9 +99,6 @@ class Settings(BaseSettings):
         return v
 
     model_config = SettingsConfigDict(env_file = locate_config(), env_prefix="SIMBA_")
-    # class Config:
-    #     env_prefix = "SIMBA_"
-    #     env_file = locate_config()
 
 
 settings = Settings()

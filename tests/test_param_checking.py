@@ -36,79 +36,79 @@ class ParamTestCase(unittest.TestCase):
 
     @pytest.mark.unit
     @md_mock
-    # def test_getter(self):
-    #     pcc = ParamChecking("my_app", "my_api")
-    #     pcc.validate_params(
-    #         method_name="getTestData",
-    #         inputs={
-    #             "tokenId": 1234
-    #         },
-    #     )
-    #     err = None
-    #     try:
-    #         pcc.validate_params(
-    #             method_name="getTestData",
-    #             inputs={
-    #                 "foo": True
-    #             },
-    #         )
-    #     except ValueError as ve:
-    #         err = ve
-    #         print(err)
-    #         assert "Unexpected keys." in f"{ve}"
-    #     assert err is not None
-    #     err = None
-    #     try:
-    #         pcc.validate_params(
-    #             method_name="getTestData",
-    #             inputs={
-    #                 "tokenId": "foo"
-    #             },
-    #         )
-    #     except ValueError as ve:
-    #         err = ve
-    #         print(err)
-    #         assert "invalid literal for int() with base 10" in f"{ve}"
-    #     assert err is not None
+    def test_getter(self):
+        pcc = ParamChecking("my_app", "my_api")
+        pcc.validate_params(
+            method_name="getTestData",
+            inputs={
+                "tokenId": 1234
+            },
+        )
+        err = None
+        try:
+            pcc.validate_params(
+                method_name="getTestData",
+                inputs={
+                    "foo": True
+                },
+            )
+        except ValueError as ve:
+            err = ve
+            print(err)
+            assert "Unexpected keys." in f"{ve}"
+        assert err is not None
+        err = None
+        try:
+            pcc.validate_params(
+                method_name="getTestData",
+                inputs={
+                    "tokenId": "foo"
+                },
+            )
+        except ValueError as ve:
+            err = ve
+            print(err)
+            assert "invalid literal for int() with base 10" in f"{ve}"
+        assert err is not None
 
-    # @pytest.mark.unit
-    # @md_mock
-    # def test_struct(self):
-    #     pcc = ParamChecking("my_app", "my_api")
-    #     pcc.validate_params(
-    #         method_name="structTest_5",
-    #         inputs={
-    #             "person": {
-    #                 "name": "The Laughing Gnome",
-    #                 "age": 32,
-    #                 "addr": {
-    #                     "street": "Happy Street",
-    #                     "number": 10,
-    #                     "town": "Funsville",
-    #                 },
-    #             }
-    #         },
-    #     )
-    #     err = None
-    #     try:
-    #         pcc.validate_params(
-    #             method_name="structTest_5",
-    #             inputs={
-    #                 "person": {
-    #                     "name": "The Laughing Gnome",
-    #                     "age": 32,
-    #                     "addr": {
-    #                         "street": "Happy Street",
-    #                         "number": -10,
-    #                         "town": "Funsville",
-    #                     },
-    #                 }
-    #             },
-    #         )
-    #     except ValueError as ve:
-    #         err = ve
-    #         assert "Expected non negative int but got -10" in f"{ve}"
-    #     assert err is not None
+    @pytest.mark.unit
+    @md_mock
+    def test_struct(self):
+        pcc = ParamChecking("my_app", "my_api")
+        pcc.validate_params(
+            method_name="structTest_5",
+            inputs={
+                "person": {
+                    "name": "The Laughing Gnome",
+                    "age": 32,
+                    "addr": {
+                        "street": "Happy Street",
+                        "number": 10,
+                        "town": "Funsville",
+                    },
+                }
+            },
+        )
+        err = None
+        try:
+            pcc.validate_params(
+                method_name="structTest_5",
+                inputs={
+                    "person": {
+                        "name": "The Laughing Gnome",
+                        "age": 32,
+                        "addr": {
+                            "street": "Happy Street",
+                            "number": -10,
+                            "town": "Funsville",
+                        },
+                    }
+                },
+            )
+        except ValueError as ve:
+            err = ve
+            assert "Expected non negative int but got -10" in f"{ve}"
+        assert err is not None
 
     @pytest.mark.unit
     @md_mock

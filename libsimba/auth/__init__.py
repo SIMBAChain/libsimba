@@ -34,19 +34,6 @@ from libsimba.utils import Path, async_http_client, build_url, http_client
 logger = logging.getLogger(__name__)
 
 
-class DateTimeEncoder(json.JSONEncoder):
-    def default(self, obj: Any) -> Any:
-        if isinstance(obj, (datetime, date, time)):
-            return obj.isoformat()
-        elif isinstance(obj, timedelta):
-            return (datetime.min + obj).time().isoformat()
-
-        return super(DateTimeEncoder, self).default(obj)
-
-    def __call__(self, obj: Any) -> Any:
-        return self.default(obj)
-
-
 class AuthProvider(ABC):
     access_tokens: Dict[str, AuthToken] = {}
 
