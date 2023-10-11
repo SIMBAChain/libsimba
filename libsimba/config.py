@@ -24,7 +24,7 @@ import os
 from typing import Optional
 
 from libsimba.schemas import AuthFlow, AuthProviderName
-from pydantic import field_validator
+from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -53,9 +53,9 @@ def locate_config() -> Optional[str]:
 
 
 class Settings(BaseSettings):
-    API_BASE_URL: str
+    API_BASE_URL: Optional[str] = None
     """ Base URL of Blocks environment """
-    AUTH_BASE_URL: str
+    AUTH_BASE_URL: Optional[str] = None
     """ Base URL of Auth provider """
     AUTH_FLOW: AuthFlow = AuthFlow.CLIENT_CREDENTIALS
     """ Authentication Flow. Currently fixed to client_credentials """
@@ -86,17 +86,25 @@ class Settings(BaseSettings):
     def set_auth_flow(cls, v: str) -> str:
         return v.lower()
 
-    @field_validator("API_BASE_URL")
-    def set_api_url(cls, v: str) -> str:
-        if v.endswith("/"):
-            v = v[:-1]
-        return v
-
-    @field_validator("AUTH_BASE_URL")
-    def set_auth_url(cls, v: str) -> str:
-        if v.endswith("/"):
-            v = v[:-1]
-        return v
+    @model_validator(mode='after')
+    def check_urls(self) -> "Settings":
+        api_base = self.API_BASE_URL
+        if not api_base:
+            api_base = os.environ.get("SIMBA_API_BASE_URL")
+        if not api_base:
+            raise ValueError("API_BASE_URL is required")
+        if api_base.endswith("/"):
+            api_base = api_base[:-1]
+        self.API_BASE_URL = api_base
+        auth_base = self.AUTH_BASE_URL
+        if not auth_base:
+            auth_base = os.environ.get("SIMBA_AUTH_BASE_URL")
+        if not auth_base:
+            raise ValueError("AUTH_BASE_URL is required")
+        if auth_base and auth_base.endswith("/"):
+            auth_base = auth_base[:-1]
+        self.AUTH_BASE_URL = auth_base
+        return self
 
     model_config = SettingsConfigDict(env_file = locate_config(), env_prefix="SIMBA_")
 

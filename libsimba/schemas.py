@@ -25,8 +25,7 @@ from enum import Enum
 from pathlib import Path
 from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Union
 
-from pydantic import BaseModel, field_validator, model_validator
-
+from pydantic import BaseModel, field_validator, model_validator, FieldValidationInfo
 
 class AuthFlow(str, Enum):
     CLIENT_CREDENTIALS = "client_credentials"
@@ -63,7 +62,8 @@ class Login(BaseModel):
     client_secret: Optional[str]
 
     @field_validator("client_secret")
-    def set_secret(cls, v: Optional[str], values: Dict[str, Any]) -> str:
+    def set_secret(cls, v: Optional[str], info: FieldValidationInfo) -> str:
+        values = info.data
         if not v and values.get("auth_flow") == AuthFlow.CLIENT_CREDENTIALS:
             raise ValueError(
                 "Client Secret is required if auth flow is client-credentials"
