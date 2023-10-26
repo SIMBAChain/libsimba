@@ -39,18 +39,18 @@ class KcAuthProvider(AuthProvider):
 
     async def login_sync(
         self,
-        client_id: str = settings.AUTH_CLIENT_ID,
-        client_secret: str = settings.AUTH_CLIENT_SECRET,
+        client_id: str,
+        client_secret: str,
         config: ConnectionConfig = None,
     ) -> AuthToken:
         data = {
             "client_id": client_id,
             "client_secret": client_secret,
             "grant_type": "client_credentials",
-            "scope": settings.AUTH_SCOPE or "email profile roles web-origins",
+            "scope": settings().AUTH_SCOPE or "email profile roles web-origins",
         }
         sso_host = "{}/auth/realms/{}/protocol/openid-connect/token".format(
-            settings.BASE_AUTH_URL, settings.AUTH_REALM
+            settings().BASE_AUTH_URL, settings().AUTH_REALM
         )
         with http_client(config=config) as client:
             r = client.post(
@@ -75,19 +75,19 @@ class KcAuthProvider(AuthProvider):
 
     async def login(
         self,
-        client_id: str = settings.AUTH_CLIENT_ID,
-        client_secret: str = settings.AUTH_CLIENT_SECRET,
+        client_id: str,
+        client_secret: str,
         config: ConnectionConfig = None,
     ) -> AuthToken:
         data = {
             "client_id": client_id,
             "client_secret": client_secret,
             "grant_type": "client_credentials",
-            "scope": settings.SCOPE or "email profile roles web-origins",
+            "scope": settings().SCOPE or "email profile roles web-origins",
         }
         try:
             sso_host = "{}/auth/realms/{}/protocol/openid-connect/token".format(
-                settings.AUTH_BASE_URL, settings.AUTH_REALM_ID
+                settings().AUTH_BASE_URL, settings().AUTH_REALM_ID
             )
             async with async_http_client(config=config) as client:
                 r = client.post(
@@ -116,8 +116,8 @@ class BlocksAuthProvider(AuthProvider):
 
     async def login(
         self,
-        client_id: str = settings.AUTH_CLIENT_ID,
-        client_secret: str = settings.AUTH_CLIENT_SECRET,
+        client_id: str,
+        client_secret: str,
         config: ConnectionConfig = None,
     ) -> AuthToken:
         try:
@@ -125,7 +125,7 @@ class BlocksAuthProvider(AuthProvider):
             data = {"grant_type": "client_credentials"}
             async with async_http_client(config=config) as client:
                 token_response = await client.post(
-                    "{}/o/token/".format(settings.AUTH_BASE_URL),
+                    "{}/o/token/".format(settings().AUTH_BASE_URL),
                     data=data,
                     auth=auth,
                 )
@@ -145,8 +145,8 @@ class BlocksAuthProvider(AuthProvider):
 
     def login_sync(
         self,
-        client_id: str = settings.AUTH_CLIENT_ID,
-        client_secret: str = settings.AUTH_CLIENT_SECRET,
+        client_id: str,
+        client_secret: str,
         config: ConnectionConfig = None,
     ) -> AuthToken:
         try:
@@ -154,7 +154,7 @@ class BlocksAuthProvider(AuthProvider):
             data = {"grant_type": "client_credentials"}
             with http_client(config=config) as client:
                 token_response = client.post(
-                    "{}/o/token/".format(settings.AUTH_BASE_URL),
+                    "{}/o/token/".format(settings().AUTH_BASE_URL),
                     data=data,
                     auth=auth,
                 )
@@ -182,18 +182,18 @@ class ClientCredentials(AuthProvider):
         self.registry[kc.provider()] = kc
 
     def do_login(self, client_id: str) -> Tuple[Optional[AuthToken], AuthProvider]:
-        provider = self.registry.get(settings.AUTH_PROVIDER)
+        provider = self.registry.get(settings().AUTH_PROVIDER)
         if not provider:
             raise ValueError(
-                f"No provider found for provider type: {settings.AUTH_PROVIDER}"
+                f"No provider found for provider type: {settings().AUTH_PROVIDER}"
             )
         token = self.get_cached_token(client_id=client_id)
         return token, provider
 
     def login_sync(
         self,
-        client_id: str = settings.AUTH_CLIENT_ID,
-        client_secret: str = settings.AUTH_CLIENT_SECRET,
+        client_id: str,
+        client_secret: str,
         config: ConnectionConfig = None,
     ) -> AuthToken:
         token, provider = self.do_login(client_id=client_id)
@@ -208,8 +208,8 @@ class ClientCredentials(AuthProvider):
 
     async def login(
         self,
-        client_id: str = settings.AUTH_CLIENT_ID,
-        client_secret: str = settings.AUTH_CLIENT_SECRET,
+        client_id: str,
+        client_secret: str,
         config: ConnectionConfig = None,
     ) -> AuthToken:
         token, provider = self.do_login(client_id=client_id)

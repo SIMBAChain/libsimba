@@ -42,8 +42,13 @@ logger = logging.getLogger(__name__)
 
 
 class SimbaSync:
-    def __init__(self, base_url: str = settings.API_BASE_URL):
-        self.base_api_url = base_url
+    def __init__(self, **kwargs):
+        """
+        See libsimba Settings for args that can be passed
+        :param kwargs: args that can configure Settings if settings
+        have not been initialized
+        """
+        settings(**kwargs)
 
     def smart_contract_client(self, app_name: str, contract_name: str) -> SimbaContractSync:
         return SimbaContractSync(self, app_name, contract_name)

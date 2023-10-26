@@ -19,15 +19,11 @@
 #  THE SOFTWARE.
 
 import asyncio
-import json
-import logging
-import os
 import random
 
 from datetime import datetime
 from email.utils import parsedate_to_datetime
 from enum import Enum
-from logging.config import dictConfig, fileConfig
 from time import sleep
 from typing import Dict, Iterable, Mapping, Optional, Union
 from urllib.parse import urlencode, urlparse, urlunparse
@@ -37,26 +33,6 @@ import httpx
 
 from httpx import AsyncHTTPTransport, HTTPTransport
 from libsimba import schemas
-
-
-log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf")
-
-log_file = os.environ.get("SIMBA_LOG_CONFIG", log_file_path)
-if log_file.endswith(".json"):
-    with open(log_file) as json_conf:
-        dictConfig(json.load(json_conf))
-else:
-    fileConfig(log_file)
-
-log = logging.getLogger(__name__)
-
-logger = logging.getLogger("libsimba")
-if settings.LOG_LEVEL:
-    logger.setLevel(settings.LOG_LEVEL)
-    for handler in logger.handlers:
-        handler.setLevel(settings.LOG_LEVEL)
-
-log.debug(f"[UTILS] :: set log level to {settings.LOG_LEVEL}")
 
 
 class Path(str, Enum):
@@ -244,7 +220,7 @@ def async_http_client(config: schemas.ConnectionConfig = None) -> httpx.AsyncCli
     :rtype: httpx.AsyncClient
     """
     if not config:
-        config = schemas.ConnectionConfig(timeout=settings.CONNECTION_TIMEOUT)
+        config = schemas.ConnectionConfig(timeout=settings().CONNECTION_TIMEOUT)
     transport = RetryTransport(
         AsyncHTTPTransport(retries=config.connection_retries),
         max_attempts=config.max_attempts,
@@ -263,7 +239,7 @@ def http_client(config: schemas.ConnectionConfig = None) -> httpx.Client:
     :rtype: httpx.Client
     """
     if not config:
-        config = schemas.ConnectionConfig(timeout=settings.CONNECTION_TIMEOUT)
+        config = schemas.ConnectionConfig(timeout=settings().CONNECTION_TIMEOUT)
     transport = RetryTransport(
         HTTPTransport(retries=config.connection_retries),
         max_attempts=config.max_attempts,

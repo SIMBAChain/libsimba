@@ -104,13 +104,13 @@ class SimbaRequest(object):
         """
         Get a default login based on the settings
 
-        :return: a default login
+        :return: a default log in
         :rtype: Login
         """
         return Login(
-            auth_flow=settings.AUTH_FLOW,
-            client_id=settings.AUTH_CLIENT_ID,
-            client_secret=settings.AUTH_CLIENT_SECRET,
+            auth_flow=settings().AUTH_FLOW,
+            client_id=settings().AUTH_CLIENT_ID,
+            client_secret=settings().AUTH_CLIENT_SECRET,
         )
 
     @property
@@ -121,7 +121,7 @@ class SimbaRequest(object):
         :return: the URL
         :rtype: str
         """
-        return build_url(settings.API_BASE_URL, self.endpoint, self.query_params)
+        return build_url(settings().API_BASE_URL, self.endpoint, self.query_params)
 
     @property
     def response(self) -> httpx.Response:
