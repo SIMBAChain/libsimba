@@ -1,5 +1,5 @@
 libsimba simba_contract
-================
+=======================
 
 .. automodule:: libsimba.simba_contract
    :members:

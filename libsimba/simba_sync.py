@@ -44,9 +44,11 @@ logger = logging.getLogger(__name__)
 class SimbaSync:
     def __init__(self, **kwargs):
         """
-        See libsimba Settings for args that can be passed
-        :param kwargs: args that can configure Settings if settings
-        have not been initialized
+        See libsimba Settings for args that can be passed.
+
+        :Keyword Arguments:
+            * args that can configure Settings if settings
+            have not been initialized
         """
         settings(**kwargs)
 

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>API Notes &#8212; libsimba 0.1.16 documentation</title>
+    <title>API Notes &#8212; libsimba 1.1.0 documentation</title>
   
   
   
@@ -456,9 +456,9 @@ of the contract method being called.</p>
 </pre></div>
 </div>
 <p>The JSON payload would be as follows:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;myAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xa508dd875f10c33c52a8abb20e16fc68e981f186&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;myInt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;myAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;0xa508dd875f10c33c52a8abb20e16fc68e981f186&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;myInt&quot;</span><span class="p">:</span> <span class="mi">12</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -497,32 +497,32 @@ be used to query for the JSON manifest, the gzipped bundle, or files within the 
 interprets everything as strings, and then file uploads. The <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> field is left blank.</p>
 <p>When looking at the <code class="docutils literal notranslate"><span class="pre">inputs</span></code> of the completed transaction, the <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> field will be populated with the
 content hash of the JSON manifest, e.g.:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;myAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xa508dd875f10c33c52a8abb20e16fc68e981f186&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;myInt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
-<span class="w">  </span><span class="nt">&quot;_bundleHash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7a0e488c12c6fdcc67cbf4fc47b61607034157929cd0842eb23adc1e8f199fdf&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;myAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;0xa508dd875f10c33c52a8abb20e16fc68e981f186&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;myInt&quot;</span><span class="p">:</span> <span class="mi">12</span>
+  <span class="s2">&quot;_bundleHash&quot;</span><span class="p">:</span> <span class="s2">&quot;7a0e488c12c6fdcc67cbf4fc47b61607034157929cd0842eb23adc1e8f199fdf&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>This <code class="docutils literal notranslate"><span class="pre">_bundleHash</span></code> value can then be used to in queries to the bundle endpoint for the contract.</p>
 <p>The structure of the manifest is as follows:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
-  &quot;alg&quot;: &quot;sha256&quot;,
-  &quot;digest&quot;: &quot;hex&quot;,
-  &quot;files&quot;: [
-    {
-      &quot;alg&quot;: &quot;sha256&quot;,
-      &quot;digest&quot;: &quot;hex&quot;,
-      &quot;uid&quot;: &quot;76a5de1f-2a90-41f3-9a55-40278d3e1f8d.gz&quot;,
-      &quot;mime&quot;: &quot;text/plain&quot;,
-      &quot;name&quot;: &quot;file1.txt&quot;,
-      &quot;hash&quot;: &quot;7a0e488c12c6fdcc67cbf4fc47b61607034157929cd0842eb23adc1e8f199fdf&quot;,
-      &quot;size&quot;: 14
-    },
-    ...
-  ],
-  &quot;time&quot;: 1607169707
-}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;alg&quot;</span><span class="p">:</span> <span class="s2">&quot;sha256&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;digest&quot;</span><span class="p">:</span> <span class="s2">&quot;hex&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;alg&quot;</span><span class="p">:</span> <span class="s2">&quot;sha256&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;digest&quot;</span><span class="p">:</span> <span class="s2">&quot;hex&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="s2">&quot;76a5de1f-2a90-41f3-9a55-40278d3e1f8d.gz&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;mime&quot;</span><span class="p">:</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;file1.txt&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;7a0e488c12c6fdcc67cbf4fc47b61607034157929cd0842eb23adc1e8f199fdf&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">14</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mi">1607169707</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>To query for the manifest send a <code class="docutils literal notranslate"><span class="pre">GET</span></code> to</p>
@@ -541,7 +541,7 @@ content hash of the JSON manifest, e.g.:</p>
 <h3>Selecting Fields<a class="headerlink" href="#selecting-fields" title="Permalink to this heading">#</a></h3>
 <p>Specify fields you would like to be returned in the model using the field query parameter.</p>
 <p>Example:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>fields=method,inputs,transaction_hash,finalized_on
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fields</span><span class="o">=</span><span class="n">method</span><span class="p">,</span><span class="n">inputs</span><span class="p">,</span><span class="n">transaction_hash</span><span class="p">,</span><span class="n">finalized_on</span>
 </pre></div>
 </div>
 </section>
@@ -597,19 +597,19 @@ for example, will return comments where post is greater than or equal to (gte) 1
 </pre></div>
 </div>
 <p>The data sent to this method may look like the following:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;person&quot;</span><span class="p">:</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w">  </span><span class="mi">88</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a_name_001&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;addrs&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="p">[</span>
-<span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;town&quot;</span><span class="p">:</span><span class="w">   </span><span class="s2">&quot;Nowheresville&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;street&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whatever Road&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">]</span>
-<span class="w">  </span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;person&quot;</span><span class="p">:</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;age&quot;</span><span class="p">:</span>  <span class="mi">88</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;a_name_001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;addrs&quot;</span><span class="p">:</span>
+    <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;town&quot;</span><span class="p">:</span>   <span class="s2">&quot;Nowheresville&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;street&quot;</span><span class="p">:</span> <span class="s2">&quot;Whatever Road&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>

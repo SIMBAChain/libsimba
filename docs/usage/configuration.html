@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Configuration &#8212; libsimba 0.1.16 documentation</title>
+    <title>Configuration &#8212; libsimba 1.1.0 documentation</title>
   
   
   
@@ -341,8 +341,29 @@ document.write(`
                   
   <section id="configuration">
 <h1><em>Configuration</em><a class="headerlink" href="#configuration" title="Permalink to this heading">#</a></h1>
-<p>Configuration is loaded consistent with other SIMBA client tools.
-The config file should be in dotenv format and should be called <code class="docutils literal notranslate"><span class="pre">.simbachain.env</span></code> or <code class="docutils literal notranslate"><span class="pre">simbachain.env</span></code>
+<p>Configuration can be loaded consistent with other SIMBA client tools via an env file. It can
+also be passed to <code class="docutils literal notranslate"><span class="pre">Simba</span></code> and <code class="docutils literal notranslate"><span class="pre">SimbaSync</span></code> instances, or by invoking <code class="docutils literal notranslate"><span class="pre">libsimba.config.settings(**kwargs)</span></code>.
+The constructors call the <code class="docutils literal notranslate"><span class="pre">settings()</span></code> with any kwargs passed to it. Valid values are documented below.</p>
+<p>Values passed to constructors or the settings function override values found in the env file. Note that
+values passed to constructors or <code class="docutils literal notranslate"><span class="pre">settings()</span></code> do not take the <code class="docutils literal notranslate"><span class="pre">SIMBA_</span></code> prefix. This prefix is only used for
+values in the env file.</p>
+<p>The env file is not required if key configuration is passed to constructors. These are typically</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AUTH_CLIENT_SECRET</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AUTH_CLIENT_ID</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AUTH_BASE_URL</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">API_BASE_URL</span></code></p></li>
+</ul>
+<p>The example below will read from an env file if available and override the two values
+passed to the instance of <code class="docutils literal notranslate"><span class="pre">Simba</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>libsimba.simba<span class="w"> </span>import<span class="w"> </span>Simba
+
+Simba<span class="o">(</span><span class="nv">API_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://foo&quot;</span>,<span class="w"> </span><span class="nv">LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span><span class="o">)</span>
+
+print<span class="o">(</span>settings<span class="o">()</span>.model_dump_json<span class="o">(</span><span class="nv">indent</span><span class="o">=</span><span class="m">2</span><span class="o">))</span>
+</pre></div>
+</div>
+<p>When using the env The config file, it should be in dotenv format and should be called <code class="docutils literal notranslate"><span class="pre">.simbachain.env</span></code> or <code class="docutils literal notranslate"><span class="pre">simbachain.env</span></code>
 (i.e. a visible variant) or <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p>
 <p>This can be placed in the current working directory, or can be placed anywhere if the
 environment variable <code class="docutils literal notranslate"><span class="pre">SIMBA_HOME</span></code> is set. This variable should point to the directory containing the

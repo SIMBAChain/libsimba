@@ -144,7 +144,7 @@ public {
 
 The JSON payload would be as follows:
 
-```json
+```
 {
   "myAddress": "0xa508dd875f10c33c52a8abb20e16fc68e981f186",
   "myInt": 12
@@ -194,7 +194,7 @@ interprets everything as strings, and then file uploads. The `_bundleHash` field
 When looking at the `inputs` of the completed transaction, the `_bundleHash` field will be populated with the
 content hash of the JSON manifest, e.g.:
 
-```json
+```
 {
   "myAddress": "0xa508dd875f10c33c52a8abb20e16fc68e981f186",
   "myInt": 12
@@ -205,7 +205,7 @@ This `_bundleHash` value can then be used to in queries to the bundle endpoint f
 
 The structure of the manifest is as follows:
 
-```json
+```
 {
   "alg": "sha256",
   "digest": "hex",
@@ -248,7 +248,7 @@ The response with be a binary stream of the tar.gz which can be written to memor
 Specify fields you would like to be returned in the model using the field query parameter.
 
 Example:
-```http request
+```
 fields=method,inputs,transaction_hash,finalized_on
 ```
 
@@ -316,7 +316,7 @@ function foo(AddressPerson memory person) public {}
 ```
 
 The data sent to this method may look like the following:
-```json
+```
 {
   "person":
   {
