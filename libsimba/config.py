@@ -18,7 +18,9 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
+import json
 import logging
+from logging.config import dictConfig, fileConfig
 import os
 
 from typing import Optional
@@ -26,9 +28,6 @@ from typing import Optional
 from libsimba.schemas import AuthFlow, AuthProviderName
 from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-
-logger = logging.getLogger(__name__)
 
 ENV_HOME = "SIMBA_HOME"
 ENV_FILENAME = "simbachain.env"
@@ -91,16 +90,12 @@ class Settings(BaseSettings):
         api_base = self.API_BASE_URL
         if not api_base:
             api_base = os.environ.get("SIMBA_API_BASE_URL")
-        if not api_base:
-            raise ValueError("API_BASE_URL is required")
-        if api_base.endswith("/"):
+        if api_base and api_base.endswith("/"):
             api_base = api_base[:-1]
         self.API_BASE_URL = api_base
         auth_base = self.AUTH_BASE_URL
         if not auth_base:
             auth_base = os.environ.get("SIMBA_AUTH_BASE_URL")
-        if not auth_base:
-            raise ValueError("AUTH_BASE_URL is required")
         if auth_base and auth_base.endswith("/"):
             auth_base = auth_base[:-1]
         self.AUTH_BASE_URL = auth_base
@@ -109,7 +104,28 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file = locate_config(), env_prefix="SIMBA_")
 
 
-settings = Settings()
+class SettingsObject:
+    instance: Optional[Settings] = None
 
-if __name__ == "__main__":
-    print(locate_config())
+libsimba_settings = SettingsObject()
+
+def settings(**kwargs) -> Settings:
+    if libsimba_settings.instance is None:
+        log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf")
+        log_file = os.environ.get("SIMBA_LOG_CONFIG", log_file_path)
+        if log_file.endswith(".json"):
+            with open(log_file) as json_conf:
+                dictConfig(json.load(json_conf))
+        else:
+            fileConfig(log_file)
+        # create settings
+        libsimba_settings.instance = Settings(**kwargs)
+        logger = logging.getLogger("libsimba")
+        if libsimba_settings.instance.LOG_LEVEL:
+            logger.setLevel(libsimba_settings.instance.LOG_LEVEL)
+            for handler in logger.handlers:
+                handler.setLevel(libsimba_settings.instance.LOG_LEVEL)
+
+        logger.debug(f"[Settings] :: set log level to {libsimba_settings.instance.LOG_LEVEL}")
+    return libsimba_settings.instance
+
