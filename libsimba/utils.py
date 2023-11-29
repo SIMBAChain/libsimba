@@ -37,6 +37,7 @@ from libsimba import schemas
 
 class Path(str, Enum):
     WHOAMI = "/user/whoami/"
+    ADMIN_EVENTS = "/admin/events/"
     APPS = "/v2/apps/"
     APP = "/v2/organisations/{}/applications/{}/"
     APP_TXNS = "/v2/apps/{}/transactions/"

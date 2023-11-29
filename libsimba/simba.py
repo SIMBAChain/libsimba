@@ -381,12 +381,12 @@ class Simba(SimbaSync):
         self,
         app_id: str,
         contract_name: str,
-        receipt_hash: str,
+        transaction_hash: str,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
         return await GetRequest(
-            endpoint=Path.CONTRACT_RECEIPT.format(app_id, contract_name, receipt_hash),
+            endpoint=Path.CONTRACT_RECEIPT.format(app_id, contract_name, transaction_hash),
             login=login,
         ).get(config=config)
 
@@ -461,17 +461,14 @@ class Simba(SimbaSync):
             login=login,
         ).retrieve_iter(config=config)
 
-    async def get_events_by_contract(
+    async def admin_get_events(
         self,
-        app_id: str,
-        contract_name: str,
-        event_name: str,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> List[dict]:
         return await SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.ADMIN_EVENTS,
             query_params=query_args,
             login=login,
         ).retrieve(config=config)
