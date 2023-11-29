@@ -1,7 +1,32 @@
 # *Configuration*
 
-Configuration is loaded consistent with other SIMBA client tools.
-The config file should be in dotenv format and should be called `.simbachain.env` or `simbachain.env`
+Configuration can be loaded consistent with other SIMBA client tools via an env file. It can
+also be passed to `Simba` and `SimbaSync` instances, or by invoking `libsimba.config.settings(**kwargs)`.
+The constructors call the `settings()` with any kwargs passed to it. Valid values are documented below.
+
+Values passed to constructors or the settings function override values found in the env file. Note that
+values passed to constructors or `settings()` do not take the `SIMBA_` prefix. This prefix is only used for
+values in the env file.
+
+The env file is not required if key configuration is passed to constructors. These are typically
+
+ * `AUTH_CLIENT_SECRET`
+ * `AUTH_CLIENT_ID`
+ * `AUTH_BASE_URL`
+ * `API_BASE_URL`
+
+The example below will read from an env file if available and override the two values
+passed to the instance of `Simba`.
+
+```shell
+from libsimba.simba import Simba
+
+Simba(API_BASE_URL="https://foo", LOG_LEVEL="INFO")
+
+print(settings().model_dump_json(indent=2))
+```
+
+When using the env The config file, it should be in dotenv format and should be called `.simbachain.env` or `simbachain.env`
 (i.e. a visible variant) or `.env`.
 
 This can be placed in the current working directory, or can be placed anywhere if the

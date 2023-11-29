@@ -4,19 +4,15 @@
     "display_name": "string",
     "name": "string",
     "is_user_group": true,
-    "created_on": "2022-08-17T09:19:11.516Z",
-    "metadata": {}
+    "created_on": "2022-08-17T09:19:11.516Z"
   },
   "user": {
     "username": "string",
     "first_name": "string",
     "last_name": "string",
-    "admin": true,
     "email": "string",
     "onboarding_complete": "2022-07-12T17:21:51.987000Z",
-    "organisations": [],
-    "default_organisation": null,
-    "permissions": {}
+    "default_organisation": null
   },
   "blockchain": {
     "id": "34574039-9009-4995-83f1-ef51dfab711e",
@@ -49,13 +45,16 @@
     "id": "f82d86ad-9a8f-4730-9765-770d2f72f6df",
     "name": "string",
     "display_name": "string",
-    "storage_type": "string"
+    "storage_type": "string",
+    "updated_on": "2023-02-14T18:42:37.133Z",
+    "organisation": "string",
+    "created_on":  "2023-02-14T18:42:37.133Z",
+    "disabled": false
   },
   "application": {
     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "display_name": "string",
     "name": "string",
-    "components": [],
     "organisation": {}
   },
   "list:contract_design": {
@@ -66,7 +65,8 @@
       "model": "string",
       "name": "string",
       "updated_on": "2023-02-14T18:42:37.133Z",
-      "version": "string"
+      "version": "string",
+      "description": "string"
   },
   "contract_design": {
     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -83,7 +83,8 @@
     "service_args": "string",
     "asset_type": "string",
     "organisation": "string",
-    "designset": "string"
+    "designset": "string",
+    "description": "string"
   },
   "contract_artifact": {
     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",

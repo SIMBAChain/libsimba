@@ -18,16 +18,16 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
+import json
 import logging
+from logging.config import dictConfig, fileConfig
 import os
 
 from typing import Optional
 
 from libsimba.schemas import AuthFlow, AuthProviderName
-from pydantic import BaseSettings, validator
-
-
-logger = logging.getLogger(__name__)
+from pydantic import field_validator, model_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ENV_HOME = "SIMBA_HOME"
 ENV_FILENAME = "simbachain.env"
@@ -52,9 +52,9 @@ def locate_config() -> Optional[str]:
 
 
 class Settings(BaseSettings):
-    API_BASE_URL: str
+    API_BASE_URL: Optional[str] = None
     """ Base URL of Blocks environment """
-    AUTH_BASE_URL: str
+    AUTH_BASE_URL: Optional[str] = None
     """ Base URL of Auth provider """
     AUTH_FLOW: AuthFlow = AuthFlow.CLIENT_CREDENTIALS
     """ Authentication Flow. Currently fixed to client_credentials """
@@ -64,9 +64,9 @@ class Settings(BaseSettings):
     """ Auth client secret """
     AUTH_CLIENT_ID: str = ""
     """ Auth client ID """
-    AUTH_SCOPE: Optional[str]
+    AUTH_SCOPE: Optional[str] = None
     """ Optional scope. This is set by auth providers if not given """
-    AUTH_REALM: Optional[str]
+    AUTH_REALM: Optional[str] = None
     """ Optional realm ID. Used for KeyCloak """
     WRITE_TOKEN_TO_FILE: bool = True
     """ If set to true, tokens will be cached on the file system. Otherwise they are cached in memory """
@@ -81,28 +81,51 @@ class Settings(BaseSettings):
     If not defined or empty, it is not used.
     """
 
-    @validator("AUTH_FLOW")
+    @field_validator("AUTH_FLOW")
     def set_auth_flow(cls, v: str) -> str:
         return v.lower()
 
-    @validator("API_BASE_URL")
-    def set_api_url(cls, v: str) -> str:
-        if v.endswith("/"):
-            v = v[:-1]
-        return v
+    @model_validator(mode='after')
+    def check_urls(self) -> "Settings":
+        api_base = self.API_BASE_URL
+        if not api_base:
+            api_base = os.environ.get("SIMBA_API_BASE_URL")
+        if api_base and api_base.endswith("/"):
+            api_base = api_base[:-1]
+        self.API_BASE_URL = api_base
+        auth_base = self.AUTH_BASE_URL
+        if not auth_base:
+            auth_base = os.environ.get("SIMBA_AUTH_BASE_URL")
+        if auth_base and auth_base.endswith("/"):
+            auth_base = auth_base[:-1]
+        self.AUTH_BASE_URL = auth_base
+        return self
 
-    @validator("AUTH_BASE_URL")
-    def set_auth_url(cls, v: str) -> str:
-        if v.endswith("/"):
-            v = v[:-1]
-        return v
-
-    class Config:
-        env_prefix = "SIMBA_"
-        env_file = locate_config()
+    model_config = SettingsConfigDict(env_file = locate_config(), env_prefix="SIMBA_")
 
 
-settings = Settings()
+class SettingsObject:
+    instance: Optional[Settings] = None
 
-if __name__ == "__main__":
-    print(locate_config())
+libsimba_settings = SettingsObject()
+
+def settings(**kwargs) -> Settings:
+    if libsimba_settings.instance is None:
+        log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf")
+        log_file = os.environ.get("SIMBA_LOG_CONFIG", log_file_path)
+        if log_file.endswith(".json"):
+            with open(log_file) as json_conf:
+                dictConfig(json.load(json_conf))
+        else:
+            fileConfig(log_file)
+        # create settings
+        libsimba_settings.instance = Settings(**kwargs)
+        logger = logging.getLogger("libsimba")
+        if libsimba_settings.instance.LOG_LEVEL:
+            logger.setLevel(libsimba_settings.instance.LOG_LEVEL)
+            for handler in logger.handlers:
+                handler.setLevel(libsimba_settings.instance.LOG_LEVEL)
+
+        logger.debug(f"[Settings] :: set log level to {libsimba_settings.instance.LOG_LEVEL}")
+    return libsimba_settings.instance
+

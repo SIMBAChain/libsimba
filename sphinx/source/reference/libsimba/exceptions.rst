@@ -1,5 +1,5 @@
 libsimba exceptions
-================
+===================
 
 .. automodule:: libsimba.exceptions
    :members:

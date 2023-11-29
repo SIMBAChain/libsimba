@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>SIMBA Client &#8212; libsimba 0.1.16 documentation</title>
+    <title>SIMBA Client &#8212; libsimba 1.1.0 documentation</title>
   
   
   
@@ -352,6 +352,18 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libsimba.simba</span> <span class="kn">import</span> <span class="n">SimbaSync</span>
 
 <span class="n">simba_async</span> <span class="o">=</span> <span class="n">SimbaSync</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can also pass configuration to these classes which override settings that may be supplied by an env file
+if present:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libsimba.simba</span> <span class="kn">import</span> <span class="n">Simba</span>
+
+<span class="n">simba</span> <span class="o">=</span> <span class="n">Simba</span><span class="p">(</span>
+  <span class="n">API_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://foo/&quot;</span><span class="p">,</span>
+  <span class="n">AUTH_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://foo/&quot;</span><span class="p">,</span>
+  <span class="n">AUTH_CLIENT_SECRET</span><span class="o">=</span><span class="s2">&quot;secr3t&quot;</span><span class="p">,</span>
+  <span class="n">AUTH_CLIENT_ID</span><span class="o">=</span><span class="s2">&quot;1234&quot;</span>
+<span class="p">)</span> 
 </pre></div>
 </div>
 <p>All method signatures for both sync and async clients are the same except the async client functions are largely async and should be awaited.</p>

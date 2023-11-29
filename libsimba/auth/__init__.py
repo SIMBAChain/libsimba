@@ -34,19 +34,6 @@ from libsimba.utils import Path, async_http_client, build_url, http_client
 logger = logging.getLogger(__name__)
 
 
-class DateTimeEncoder(json.JSONEncoder):
-    def default(self, obj: Any) -> Any:
-        if isinstance(obj, (datetime, date, time)):
-            return obj.isoformat()
-        elif isinstance(obj, timedelta):
-            return (datetime.min + obj).time().isoformat()
-
-        return super(DateTimeEncoder, self).default(obj)
-
-    def __call__(self, obj: Any) -> Any:
-        return self.default(obj)
-
-
 class AuthProvider(ABC):
     access_tokens: Dict[str, AuthToken] = {}
 
@@ -56,8 +43,8 @@ class AuthProvider(ABC):
     @abstractmethod
     async def login(
         self,
-        client_id: str = settings.AUTH_CLIENT_ID,
-        client_secret: str = settings.AUTH_CLIENT_SECRET,
+        client_id: str,
+        client_secret: str,
         config: ConnectionConfig = None,
     ) -> AuthToken:
         """login and return a token"""
@@ -65,8 +52,8 @@ class AuthProvider(ABC):
     @abstractmethod
     def login_sync(
         self,
-        client_id: str = settings.AUTH_CLIENT_ID,
-        client_secret: str = settings.AUTH_CLIENT_SECRET,
+        client_id: str,
+        client_secret: str,
         config: ConnectionConfig = None,
     ) -> AuthToken:
         """login and return a token"""
@@ -112,12 +99,12 @@ class AuthProvider(ABC):
         :return:
         """
         logger.debug(f"[libsimba] :: cache_token : client id: {client_id}")
-        if settings.WRITE_TOKEN_TO_FILE:
-            token_dir = settings.TOKEN_DIR
+        if settings().WRITE_TOKEN_TO_FILE:
+            token_dir = settings().TOKEN_DIR
             os.makedirs(token_dir, exist_ok=True)
             token_file = os.path.join(token_dir, "{}_token.json".format(client_id))
             with open(token_file, "w") as t1:
-                json_data = token.json(encoder=DateTimeEncoder())
+                json_data = token.model_dump_json()
                 t1.write(json_data)
                 logger.debug(
                     "[libsimba] :: cache_token : Saved token : {}".format(token_file)
@@ -144,9 +131,9 @@ class AuthProvider(ABC):
                 self.access_tokens.pop(client_id, None)
             else:
                 return token
-        if not settings.WRITE_TOKEN_TO_FILE:
+        if not settings().WRITE_TOKEN_TO_FILE:
             return None
-        token_dir = settings.TOKEN_DIR or "./"
+        token_dir = settings().TOKEN_DIR or "./"
         os.makedirs(token_dir, exist_ok=True)
         if os.path.isdir(token_dir):
             token_file = os.path.join(token_dir, "{}_token.json".format(client_id))
@@ -165,7 +152,7 @@ class AuthProvider(ABC):
                 return token
 
     def test_token_valid(self, token: AuthToken) -> bool:
-        whoami_url = build_url(settings.API_BASE_URL, Path.WHOAMI, {})
+        whoami_url = build_url(settings().API_BASE_URL, Path.WHOAMI, {})
         try:
             with http_client() as client:
                 r = client.get(
@@ -179,7 +166,7 @@ class AuthProvider(ABC):
             return False
 
     async def test_token_valid_async(self, token: AuthToken) -> bool:
-        whoami_url = build_url(settings.API_BASE_URL, "user/whoami/", {})
+        whoami_url = build_url(settings().API_BASE_URL, "user/whoami/", {})
         try:
             async with async_http_client() as client:
                 r = await client.get(

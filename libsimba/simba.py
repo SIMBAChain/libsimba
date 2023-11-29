@@ -43,6 +43,11 @@ logger = logging.getLogger(__name__)
 
 class Simba(SimbaSync):
     def __init__(self, *args, **kwargs):
+        """
+        See libsimba Settings for args that can be passed
+        :param kwargs: args that can configure Settings if settings
+        have not been initialized
+        """
         super().__init__(*args, **kwargs)
 
     def smart_contract_client(self, app_name: str, contract_name: str) -> SimbaContract:
