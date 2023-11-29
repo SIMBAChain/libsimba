@@ -23,7 +23,7 @@ copyright = '2023, SIMBA Chain Inc.'
 author = 'SIMBA Chain Inc.'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.16'
+release = '1.1.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -52,7 +52,6 @@ html_theme = "pydata_sphinx_theme"
 html_favicon = "./favicon.ico"
 
 html_theme_options = {
-   "use_page_nav": False,
    "logo": {
       "text": "libsimba",
       "image_light": "./logo.svg",

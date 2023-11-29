@@ -16,6 +16,20 @@ from libsimba.simba import SimbaSync
 simba_async = SimbaSync()
 ```
 
+You can also pass configuration to these classes which override settings that may be supplied by an env file
+if present:
+
+```python
+from libsimba.simba import Simba
+
+simba = Simba(
+  API_BASE_URL="https://foo/",
+  AUTH_BASE_URL="https://foo/",
+  AUTH_CLIENT_SECRET="secr3t",
+  AUTH_CLIENT_ID="1234"
+) 
+```
+
 All method signatures for both sync and async clients are the same except the async client functions are largely async and should be awaited.
 
 ```python

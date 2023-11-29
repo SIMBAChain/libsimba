@@ -25,8 +25,7 @@ from enum import Enum
 from pathlib import Path
 from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Union
 
-from pydantic import BaseModel, validator
-
+from pydantic import BaseModel, field_validator, model_validator, FieldValidationInfo
 
 class AuthFlow(str, Enum):
     CLIENT_CREDENTIALS = "client_credentials"
@@ -43,7 +42,7 @@ class AuthToken(BaseModel):
     type: str
     expires: datetime
 
-    @validator("expires")
+    @field_validator("expires")
     def do_datetime(cls, v: Union[datetime, str]):
         if isinstance(v, str):
             return datetime.fromisoformat(v)
@@ -62,8 +61,9 @@ class Login(BaseModel):
     client_id: str
     client_secret: Optional[str]
 
-    @validator("client_secret")
-    def set_secret(cls, v: Optional[str], values: Dict[str, Any]) -> str:
+    @field_validator("client_secret")
+    def set_secret(cls, v: Optional[str], info: FieldValidationInfo) -> str:
+        values = info.data
         if not v and values.get("auth_flow") == AuthFlow.CLIENT_CREDENTIALS:
             raise ValueError(
                 "Client Secret is required if auth flow is client-credentials"
@@ -145,14 +145,14 @@ class TxnHeaderName(str, Enum):
 
 
 class TxnHeaders(BaseModel):
-    dynaminc_pricing: Optional[str]
-    external: Optional[str]
-    run_local: Optional[str]
-    delegate: Optional[str]
-    nonce: Optional[str]
-    sender_token: Optional[str]
-    sender: Optional[str]
-    value: Optional[str]
+    dynaminc_pricing: Optional[str] = None
+    external: Optional[str] = None
+    run_local: Optional[str] = None
+    delegate: Optional[str] = None
+    nonce: Optional[str] = None
+    sender_token: Optional[str] = None
+    sender: Optional[str] = None
+    value: Optional[str] = None
 
     def as_headers(self) -> dict:
         headers = {}
@@ -176,29 +176,28 @@ class TxnHeaders(BaseModel):
 
 
 class File(BaseModel):
-    path: Optional[str]
-    name: Optional[str]
-    mime: Optional[str]
-    fp: Optional[Any]
+    path: Optional[str] = None
+    name: Optional[str] = None
+    mime: Optional[str] = None
+    fp: Optional[Any] = None
     close_on_complete: Optional[bool] = True
 
-    @validator("name", always=True)
-    def set_name(cls, v: Optional[str], values: Dict[str, Any]) -> str:
-        if not v:
-            if not values.get("path"):
+    @model_validator(mode="before")
+    def set_name_and_mime(cls, data: dict) -> dict:
+        name = data.get("name")
+        path = data.get("path")
+        mime = data.get("mime")
+        if name is None:
+            if path is None:
                 raise ValueError("Name must be provided if path is not set")
-            return Path(values.get("path", "")).name
-        return v
-
-    @validator("mime", always=True)
-    def set_mime(cls, v: Optional[str], values: Dict[str, Any]) -> str:
-        if not v:
-            mime_type, encoding = mimetypes.guess_type(values.get("name"))
+            data["name"] = Path(data.get("path", "")).name
+        if mime is None:
+            mime_type, encoding = mimetypes.guess_type(data.get("name"))
             if mime_type:
-                v = mime_type
+                data["mime"] = mime_type
             else:
-                v = "application/octet-stream"
-        return v
+                data["mime"] = "application/octet-stream"
+        return data
 
     def open(self) -> IO[AnyStr]:
         if not self.fp:

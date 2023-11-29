@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; libsimba 0.1.16 documentation</title>
+    <title>Index &#8212; libsimba 1.1.0 documentation</title>
   
   
   
@@ -429,6 +429,8 @@ document.write(`
       </ul></li>
       <li><a href="reference/libsimba/simba_request.html#libsimba.simba_request.SimbaRequest.call_sync">call_sync() (libsimba.simba_request.SimbaRequest method)</a>
 </li>
+      <li><a href="reference/libsimba/config.html#libsimba.config.Settings.check_urls">check_urls() (libsimba.config.Settings method)</a>
+</li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.AuthFlow.CLIENT_CREDENTIALS">CLIENT_CREDENTIALS (libsimba.schemas.AuthFlow attribute)</a>
 </li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.Login.client_id">client_id (libsimba.schemas.Login attribute)</a>
@@ -449,10 +451,10 @@ document.write(`
 </li>
       <li><a href="reference/libsimba/config.html#libsimba.config.Settings.CONNECTION_TIMEOUT">CONNECTION_TIMEOUT (libsimba.config.Settings attribute)</a>
 </li>
-      <li><a href="reference/libsimba/schemas.html#libsimba.schemas.ConnectionConfig">ConnectionConfig (class in libsimba.schemas)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/libsimba/schemas.html#libsimba.schemas.ConnectionConfig">ConnectionConfig (class in libsimba.schemas)</a>
+</li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.FilterOp.CONTAINS">CONTAINS (libsimba.schemas.FilterOp attribute)</a>
 </li>
       <li><a href="reference/libsimba/utils.html#libsimba.utils.Path.CONTRACT_ARTIFACT">CONTRACT_ARTIFACT (libsimba.utils.Path attribute)</a>
@@ -555,18 +557,14 @@ document.write(`
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/libsimba/config.html#libsimba.config.Settings.Config.env_file">env_file (libsimba.config.Settings.Config attribute)</a>
-</li>
-      <li><a href="reference/libsimba/config.html#libsimba.config.Settings.Config.env_prefix">env_prefix (libsimba.config.Settings.Config attribute)</a>
-</li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.FilterOp.EQ">EQ (libsimba.schemas.FilterOp attribute)</a>
 </li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.FilterOp.EXACT">EXACT (libsimba.schemas.FilterOp attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/libsimba/param_checking.html#libsimba.param_checking.ParamChecking.expect_scalar">expect_scalar() (libsimba.param_checking.ParamChecking method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.AuthToken.expires">expires (libsimba.schemas.AuthToken attribute)</a>
 </li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.TxnHeaderName.EXTERNAL">EXTERNAL (libsimba.schemas.TxnHeaderName attribute)</a>
@@ -819,6 +817,8 @@ document.write(`
 </li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.FilterOp.IN">IN (libsimba.schemas.FilterOp attribute)</a>
 </li>
+      <li><a href="reference/libsimba/config.html#libsimba.config.SettingsObject.instance">instance (libsimba.config.SettingsObject attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.FilterOp.IS">IS (libsimba.schemas.FilterOp attribute)</a>
@@ -1040,6 +1040,48 @@ document.write(`
 </li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.File.mime">mime (libsimba.schemas.File attribute)</a>
 </li>
+      <li><a href="reference/libsimba/config.html#libsimba.config.Settings.model_config">model_config (libsimba.config.Settings attribute)</a>
+
+      <ul>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.AuthToken.model_config">(libsimba.schemas.AuthToken attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.ConnectionConfig.model_config">(libsimba.schemas.ConnectionConfig attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.FieldFilter.model_config">(libsimba.schemas.FieldFilter attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.File.model_config">(libsimba.schemas.File attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.Login.model_config">(libsimba.schemas.Login attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.MethodCallArgs.model_config">(libsimba.schemas.MethodCallArgs attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.SearchFilter.model_config">(libsimba.schemas.SearchFilter attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.TxnHeaders.model_config">(libsimba.schemas.TxnHeaders attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/libsimba/config.html#libsimba.config.Settings.model_fields">model_fields (libsimba.config.Settings attribute)</a>
+
+      <ul>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.AuthToken.model_fields">(libsimba.schemas.AuthToken attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.ConnectionConfig.model_fields">(libsimba.schemas.ConnectionConfig attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.FieldFilter.model_fields">(libsimba.schemas.FieldFilter attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.File.model_fields">(libsimba.schemas.File attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.Login.model_fields">(libsimba.schemas.Login attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.MethodCallArgs.model_fields">(libsimba.schemas.MethodCallArgs attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.SearchFilter.model_fields">(libsimba.schemas.SearchFilter attribute)</a>
+</li>
+        <li><a href="reference/libsimba/schemas.html#libsimba.schemas.TxnHeaders.model_fields">(libsimba.schemas.TxnHeaders attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     module
 
@@ -1205,15 +1247,9 @@ document.write(`
 </li>
       <li><a href="reference/libsimba/schemas.html#libsimba.schemas.TxnHeaders.sender_token">sender_token (libsimba.schemas.TxnHeaders attribute)</a>
 </li>
-      <li><a href="reference/libsimba/config.html#libsimba.config.Settings.set_api_url">set_api_url() (libsimba.config.Settings class method)</a>
-</li>
       <li><a href="reference/libsimba/config.html#libsimba.config.Settings.set_auth_flow">set_auth_flow() (libsimba.config.Settings class method)</a>
 </li>
-      <li><a href="reference/libsimba/config.html#libsimba.config.Settings.set_auth_url">set_auth_url() (libsimba.config.Settings class method)</a>
-</li>
-      <li><a href="reference/libsimba/schemas.html#libsimba.schemas.File.set_mime">set_mime() (libsimba.schemas.File class method)</a>
-</li>
-      <li><a href="reference/libsimba/schemas.html#libsimba.schemas.File.set_name">set_name() (libsimba.schemas.File class method)</a>
+      <li><a href="reference/libsimba/schemas.html#libsimba.schemas.File.set_name_and_mime">set_name_and_mime() (libsimba.schemas.File class method)</a>
 </li>
       <li><a href="reference/libsimba/simba.html#libsimba.simba.Simba.set_notification_config">set_notification_config() (libsimba.simba.Simba method)</a>
 
@@ -1231,7 +1267,9 @@ document.write(`
       </ul></li>
       <li><a href="reference/libsimba/config.html#libsimba.config.Settings">Settings (class in libsimba.config)</a>
 </li>
-      <li><a href="reference/libsimba/config.html#libsimba.config.Settings.Config">Settings.Config (class in libsimba.config)</a>
+      <li><a href="reference/libsimba/config.html#libsimba.config.settings">settings() (in module libsimba.config)</a>
+</li>
+      <li><a href="reference/libsimba/config.html#libsimba.config.SettingsObject">SettingsObject (class in libsimba.config)</a>
 </li>
       <li><a href="reference/libsimba/simba.html#libsimba.simba.Simba">Simba (class in libsimba.simba)</a>
 </li>
@@ -1241,10 +1279,10 @@ document.write(`
 </li>
       <li><a href="reference/libsimba/exceptions.html#libsimba.exceptions.SimbaInvalidURLException">SimbaInvalidURLException</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/libsimba/simba_request.html#libsimba.simba_request.SimbaRequest">SimbaRequest (class in libsimba.simba_request)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/libsimba/exceptions.html#libsimba.exceptions.SimbaRequestException">SimbaRequestException</a>
 </li>
       <li><a href="reference/libsimba/exceptions.html#libsimba.exceptions.SimbaSigningException">SimbaSigningException</a>
