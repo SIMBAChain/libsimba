@@ -1,4 +1,4 @@
-#  Copyright (c) 2023 SIMBA Chain Inc. https://simbachain.com
+#  Copyright (c) 2024 SIMBA Chain Inc. https://simbachain.com
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ class Path(str, Enum):
     BUNDLE_FILE = "/v2/apps/{}/contract/{}/bundle/{}/filename/{}/"
     BUNDLE_MANIFEST = "/v2/apps/{}/contract/{}/bundle/{}/manifest/"
     CONTRACT_INFO = "/v2/apps/{}/contract/{}/info"
-    CONTRACT_EVENTS = "/v2/apps/{}/contract/{}/events/{}/"
+    CONTRACT_EVENTS = "/v2/apps/{}/contract/{}/events?event_name={}"
     CONTRACT_RECEIPT = "/v2/apps/{}/contract/{}/receipt/{}/"
     CONTRACT_METHOD = "/v2/apps/{}/contract/{}/{}/"
     SYNC_CONTRACT_METHOD = "/v2/apps/{}/sync/contract/{}/{}/"

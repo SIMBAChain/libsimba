@@ -351,7 +351,8 @@ The JSON payload is:</p>
 where <code class="docutils literal notranslate"><span class="pre">&lt;MY_ORG&gt;</span></code> is an organisation you have write access to.</p>
 <p>The JSON payload is:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code>: base64 encoded contract solidity source code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code>: base64 encoded contract solidity source code or a dictionary of base64 encoded source code mapped to
+contract names.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">language</span></code>: ‘solidity’</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A non-unique name for the design. This does not have to match the name of the contract in the solidity.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">target_contract</span></code>: <code class="docutils literal notranslate"><span class="pre">&lt;CONTRACT_NAME&gt;</span></code>. This field identifies the contract you want an HTTP API for. In the case

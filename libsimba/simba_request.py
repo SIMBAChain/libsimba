@@ -1,4 +1,4 @@
-#  Copyright (c) 2023 SIMBA Chain Inc. https://simbachain.com
+#  Copyright (c) 2024 SIMBA Chain Inc. https://simbachain.com
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -173,7 +173,9 @@ class SimbaRequest(object):
         headers = headers or {}
         if headers.get("Authorization") is None:
             auth_token = PROVIDERS[login.auth_flow].login_sync(
-                client_id=login.client_id, client_secret=login.client_secret, config=config
+                client_id=login.client_id,
+                client_secret=login.client_secret,
+                config=config,
             )
             headers["Authorization"] = f"Bearer {auth_token.token}"
         return headers
@@ -188,8 +190,8 @@ class SimbaRequest(object):
 
         :param login: A Login object
         :type login: Login
-        
-            
+
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -199,7 +201,9 @@ class SimbaRequest(object):
         headers = headers or {}
         if headers.get("Authorization") is None:
             auth_token = await PROVIDERS[login.auth_flow].login(
-                client_id=login.client_id, client_secret=login.client_secret, config=config
+                client_id=login.client_id,
+                client_secret=login.client_secret,
+                config=config,
             )
             headers["Authorization"] = f"Bearer {auth_token.token}"
         return headers
@@ -215,7 +219,7 @@ class SimbaRequest(object):
 
         :param location: A local file system location to write to.
         :type location: str
-            
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -242,7 +246,7 @@ class SimbaRequest(object):
 
         :param location: A local file system location to write to.
         :type location: str
-            
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -266,7 +270,7 @@ class SimbaRequest(object):
     ) -> dict:
         """
         Call a getter method in a contract.
-            
+
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`)
             * **headers** (`Optional[dict]`)
@@ -293,7 +297,7 @@ class SimbaRequest(object):
     ) -> dict:
         """
         Call a getter method in a contract async.
-            
+
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`)
             * **headers** (`Optional[dict]`)
@@ -321,7 +325,7 @@ class SimbaRequest(object):
     ) -> dict:
         """
         Send a request. Can be either GET, PUT or POST.
-            
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **json_payload** (`Optional[dict]`) - optional payload
@@ -371,7 +375,7 @@ class SimbaRequest(object):
     ) -> Generator[List[dict], None, None]:
         """
         Get multiple results as a generator. This will loop through paging if the result is pageed.
-            
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -421,7 +425,7 @@ class SimbaRequest(object):
     ) -> AsyncGenerator[List[dict], None]:
         """
         Get multiple results as an async generator. This will loop through paging if the result is pageed.
-            
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -453,7 +457,7 @@ class SimbaRequest(object):
     ) -> List[dict]:
         """
         Get multiple results as a List. This will NOT loop through paging if the result is pageed.
-            
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **config** (`Optional[ConnectionConfig]`) - optional connection config
@@ -536,19 +540,20 @@ class SimbaRequest(object):
             self._response = response
             if self._response.status_code:
                 self._status = self._response.status_code
-            response.raise_for_status()
+
             json_response = response.json()
-            logger.debug(
+            logger.info(
                 self.log_me(
                     headers=response.headers, current_method="json_response_or_raise"
                 )
             )
+            response.raise_for_status()
         except (InvalidURL, ConnectError, ProtocolError, ValueError) as e:
             raise SimbaInvalidURLException(str(e))
         except (RequestError) as e:
-            raise SimbaRequestException(str(e))
+            raise SimbaRequestException(f"{e} :: {self._response.text}")
         except Exception as e:
-            raise LibSimbaException(message=str(e))
+            raise LibSimbaException(message=f"{e} :: {self._response.text}")
         return json_response
 
 
@@ -688,7 +693,7 @@ class PutRequest(SimbaRequest):
     ) -> dict:
         """
         Send a PUT request.
-            
+
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
             * **json_payload** (`Optional[dict]`) - optional payload

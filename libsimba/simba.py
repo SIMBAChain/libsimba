@@ -1,4 +1,4 @@
-#  Copyright (c) 2023 SIMBA Chain Inc. https://simbachain.com
+#  Copyright (c) 2024 SIMBA Chain Inc. https://simbachain.com
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -186,9 +186,9 @@ class Simba(SimbaSync):
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
-        return await GetRequest(
-            endpoint=Path.APP.format(org, app_id), login=login
-        ).get(config=config)
+        return await GetRequest(endpoint=Path.APP.format(org, app_id), login=login).get(
+            config=config
+        )
 
     async def list_application_transactions(
         self,
@@ -562,7 +562,7 @@ class Simba(SimbaSync):
         self,
         org: str,
         name: str,
-        code: str,
+        code: Union[str, dict],
         design_id: Optional[str] = None,
         target_contract: str = None,
         libraries: dict = None,
@@ -573,7 +573,13 @@ class Simba(SimbaSync):
         config: ConnectionConfig = None,
     ) -> dict:
         if encode:
-            code = base64.b64encode(code.encode()).decode("utf-8")
+            if isinstance(code, dict):
+                tmp = {}
+                for k, v in code.items():
+                    tmp[k] = base64.b64encode(v.encode()).decode("utf-8")
+                code = tmp
+            else:
+                code = base64.b64encode(code.encode()).decode("utf-8")
         full = {"name": name, "code": code, "language": "solidity"}
         if target_contract:
             full["target_contract"] = target_contract

@@ -19,8 +19,8 @@ import traceback
 class Runner(object):
     def __init__(
         self,
-        org: str = "libsimba",
-        blockchain_name: str = "Quorum",
+        org: str = "andrew_harrison_simbachain_com",
+        blockchain_name: str = "Quorum Dev New",
         storage_name: str = "azure",
         num_calls: int = 10,
         now: Optional[int] = int(time.time())
@@ -67,10 +67,6 @@ class Runner(object):
             os.path.join(orig_dir, "file2.txt"), "r"
         ) as f2_orig:
             assert f2.read() == f2_orig.read()
-        with open(os.path.join(file_path), "r") as f1, open(
-            os.path.join(orig_dir, "file1.txt"), "r"
-        ) as f1_orig:
-            assert f1.read() == f1_orig.read()
         shutil.rmtree(data_dir)
 
     def bundle_function(self) -> str:
@@ -257,13 +253,16 @@ class SyncRunner(Runner):
         self.templates.assert_structure("contract_design", designs, many=True, action="list")
 
         contract = os.path.join(os.path.dirname(__file__), "data", "TestContract.sol")
+        intfce = os.path.join(os.path.dirname(__file__), "data", "Dev.sol")
 
         with open(contract, "r") as sol:
-            code = sol.read()
+            cont = sol.read()
+        with open(intfce, "r") as sol:
+            interface = sol.read()
         saved_data = simba.save_design(
             org=self.org,
             name=self.name,
-            code=code,
+            code={"TestContract": cont, "Dev": interface},
             target_contract="TestContract",
             binary_targets=["TestContract"],
         )

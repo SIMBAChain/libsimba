@@ -1,4 +1,4 @@
-#  Copyright (c) 2023 SIMBA Chain Inc. https://simbachain.com
+#  Copyright (c) 2024 SIMBA Chain Inc. https://simbachain.com
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ from pathlib import Path
 from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Union
 
 from pydantic import BaseModel, field_validator, model_validator, FieldValidationInfo
+
 
 class AuthFlow(str, Enum):
     CLIENT_CREDENTIALS = "client_credentials"

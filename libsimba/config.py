@@ -1,4 +1,4 @@
-#  Copyright (c) 2023 SIMBA Chain Inc. https://simbachain.com
+#  Copyright (c) 2024 SIMBA Chain Inc. https://simbachain.com
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -85,7 +85,7 @@ class Settings(BaseSettings):
     def set_auth_flow(cls, v: str) -> str:
         return v.lower()
 
-    @model_validator(mode='after')
+    @model_validator(mode="after")
     def check_urls(self) -> "Settings":
         api_base = self.API_BASE_URL
         if not api_base:
@@ -101,17 +101,21 @@ class Settings(BaseSettings):
         self.AUTH_BASE_URL = auth_base
         return self
 
-    model_config = SettingsConfigDict(env_file = locate_config(), env_prefix="SIMBA_")
+    model_config = SettingsConfigDict(env_file=locate_config(), env_prefix="SIMBA_")
 
 
 class SettingsObject:
     instance: Optional[Settings] = None
 
+
 libsimba_settings = SettingsObject()
+
 
 def settings(**kwargs) -> Settings:
     if libsimba_settings.instance is None:
-        log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf")
+        log_file_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "logging.conf"
+        )
         log_file = os.environ.get("SIMBA_LOG_CONFIG", log_file_path)
         if log_file.endswith(".json"):
             with open(log_file) as json_conf:
@@ -126,6 +130,7 @@ def settings(**kwargs) -> Settings:
             for handler in logger.handlers:
                 handler.setLevel(libsimba_settings.instance.LOG_LEVEL)
 
-        logger.debug(f"[Settings] :: set log level to {libsimba_settings.instance.LOG_LEVEL}")
+        logger.debug(
+            f"[Settings] :: set log level to {libsimba_settings.instance.LOG_LEVEL}"
+        )
     return libsimba_settings.instance
-

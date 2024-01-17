@@ -109,19 +109,20 @@ class AsyncRunner(Runner):
         self.templates.assert_structure("contract_design", designs, many=True, action="list")
 
         contract = os.path.join(os.path.dirname(__file__), "data", "TestContract.sol")
+        intfce = os.path.join(os.path.dirname(__file__), "data", "Dev.sol")
 
         with open(contract, "r") as sol:
-            code = sol.read()
+            cont = sol.read()
+        with open(intfce, "r") as sol:
+            interface = sol.read()
         saved_data = await simba.save_design(
             org=self.org,
             name=self.name,
-            code=code,
+            code={"TestContract": cont, "Dev": interface},
             target_contract="TestContract",
-            model="aat",
             binary_targets=["TestContract"],
         )
         self.templates.assert_structure("contract_design", saved_data)
-        #print(saved_data)
         return saved_data.get("name"), saved_data.get("id")
 
     async def artifacts(

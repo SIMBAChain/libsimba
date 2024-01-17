@@ -1,4 +1,4 @@
-#  Copyright (c) 2023 SIMBA Chain Inc. https://simbachain.com
+#  Copyright (c) 2024 SIMBA Chain Inc. https://simbachain.com
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,9 @@ class SimbaSync:
         """
         settings(**kwargs)
 
-    def smart_contract_client(self, app_name: str, contract_name: str) -> SimbaContractSync:
+    def smart_contract_client(
+        self, app_name: str, contract_name: str
+    ) -> SimbaContractSync:
         return SimbaContractSync(self, app_name, contract_name)
 
     def whoami(self, login: Login = None, config: ConnectionConfig = None) -> dict:
@@ -203,7 +205,7 @@ class SimbaSync:
         GET ``/user/wallet/``
 
         Get current user's wallet
-            
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -376,7 +378,7 @@ class SimbaSync:
 
         :param app_id: Application id or name
         :type app_id: str
-            
+
         :Keyword Arguments:
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
@@ -411,9 +413,9 @@ class SimbaSync:
         :return: Application information
         :rtype: dict
         """
-        return GetRequest(
-            endpoint=Path.APP.format(org, app_id), login=login
-        ).get_sync(config=config)
+        return GetRequest(endpoint=Path.APP.format(org, app_id), login=login).get_sync(
+            config=config
+        )
 
     def list_application_transactions(
         self,
@@ -901,7 +903,7 @@ class SimbaSync:
         :type contract_name: str
         :param transaction_hash: The hash of the receipt
         :type transaction_hash: str
-            
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1249,7 +1251,7 @@ class SimbaSync:
         :type txn_id: str
         :param txn: The signed transaction keyed to the ``transaction`` value.
         :type txn: dict
-            
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1264,7 +1266,7 @@ class SimbaSync:
         self,
         org: str,
         name: str,
-        code: str,
+        code: Union[str, dict],
         design_id: Optional[str] = None,
         target_contract: str = None,
         libraries: dict = None,
@@ -1285,7 +1287,7 @@ class SimbaSync:
         :param name: The name of the design.
         :type name: str
         :param code: the code
-        :type code: str
+        :type code: Union[str, dict]
 
         :Keyword Arguments:
             * **design_id** (`str`) - A design ID. If provided, this will update the given design via a PUT. Otherwise a new design will be created.
@@ -1300,7 +1302,13 @@ class SimbaSync:
         :rtype: dict
         """
         if encode:
-            code = base64.b64encode(code.encode()).decode("utf-8")
+            if isinstance(code, dict):
+                tmp = {}
+                for k, v in code.items():
+                    tmp[k] = base64.b64encode(v.encode()).decode("utf-8")
+                code = tmp
+            else:
+                code = base64.b64encode(code.encode()).decode("utf-8")
         full = {"name": name, "code": code, "language": "solidity"}
         if target_contract:
             full["target_contract"] = target_contract
@@ -1604,7 +1612,7 @@ class SimbaSync:
 
         :param org: The organisation.
         :type org: str
-            
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
@@ -1736,7 +1744,7 @@ class SimbaSync:
 
         :param org: The organisation.
         :type org: str
-            
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)

@@ -28,7 +28,8 @@ where `<MY_ORG>` is an organisation you have write access to.
 
 The JSON payload is:
 
-* `code`: base64 encoded contract solidity source code
+* `code`: base64 encoded contract solidity source code or a dictionary of base64 encoded source code mapped to
+   contract names.
 * `language`: 'solidity'
 * `name`: A non-unique name for the design. This does not have to match the name of the contract in the solidity.
 * `target_contract`: `<CONTRACT_NAME>`. This field identifies the contract you want an HTTP API for. In the case

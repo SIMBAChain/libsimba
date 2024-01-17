@@ -3,8 +3,9 @@ pragma solidity ^0.8.11;
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
+import './Dev.sol';
 
-contract TestContract is ERC721("DevToken", "DVT"), Ownable {
+contract TestContract is Dev, ERC721("DevToken", "DVT"), Ownable {
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenId;
@@ -42,7 +43,7 @@ contract TestContract is ERC721("DevToken", "DVT"), Ownable {
         moreData = _test.moreData;
     }
 
-    function mint(string memory data, string memory moreData) public payable onlyOwner {
+    function mint(string memory data, string memory moreData) external payable onlyOwner {
         uint256 tokenId = _tokenId.current();
         TestData memory _test = TestData({data : data, moreData : moreData});
         _mint(msg.sender, tokenId);
