@@ -56,6 +56,11 @@ transaction_pattern = re.compile(r"/v2/organisations/[\w-]+/transactions/[\w-]+/
 method_pattern = re.compile(r"/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/$")
 query_method_pattern = re.compile(r"/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/\?.*$")
 
+abi_pattern = re.compile(r"/service/contracts/abi/[\w-]+/\?.*$")
+accounts_pattern = re.compile(r"/user/accounts/$")
+accounts_sign_pattern = re.compile(r"/user/accounts/.+/sign/$")
+
+
 block_mock = respx.mock(assert_all_mocked=True, assert_all_called=False)
 
 login_route = block_mock.route(method="POST", url=login_pattern).mock(
@@ -149,6 +154,18 @@ get_method_route = block_mock.route(method="GET", url=query_method_pattern).mock
     return_value=Response(200, json=make_results("transaction", length=2))
 )
 
+get_abi_route = block_mock.route(method="GET", url=abi_pattern).mock(
+    return_value=Response(200, json=make_type("abi"))
+)
+
+get_accounts_route = block_mock.route(method="GET", url=accounts_pattern).mock(
+    return_value=Response(200, json=make_results("account"))
+)
+
+accounts_sign_route = block_mock.route(method="POST", url=accounts_sign_pattern).mock(
+    return_value=Response(200, json=make_type("signature"))
+)
+
 
 class SyncApp(unittest.TestCase):
     @pytest.mark.unit
@@ -158,6 +175,7 @@ class SyncApp(unittest.TestCase):
         runner.me(simba=simba)
         runner.blockchains(simba=simba)
         runner.storage(simba=simba)
+        runner.accounts(simba=simba)
         runner.org_app(simba=simba)
         name, design_id = runner.designs(simba=simba)
         app, api_name, address, contract_id = runner.artifacts(

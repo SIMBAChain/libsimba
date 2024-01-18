@@ -2,6 +2,7 @@ import os
 import json
 import unittest
 from libsimba.param_checking import ParamChecking
+from libsimba.utils import Path
 import respx
 import re
 from httpx import Response
@@ -218,3 +219,21 @@ class ParamTestCase(unittest.TestCase):
             print(ve)
             assert "Expected a list for key: addrs" in f"{ve}"
         assert err is not None
+
+    def test_paths(self):
+        p = Path.CONTRACT_TXN
+        ex = None
+        try:
+            _ = p.create("org", "0x1234")
+        except Exception as e:
+            ex = e
+        self.assertIsNotNone(ex)
+        ex = None
+        try:
+            _ = p.create("app", "org", "0x1234", "extra")
+        except Exception as e:
+            ex = e
+        self.assertIsNotNone(ex)
+        formatted = p.create("app", "org", "0x1234")
+        self.assertEqual("/v2/apps/app/contract/org/transaction/0x1234/", formatted)
+

@@ -348,6 +348,13 @@ class SimbaRequest(object):
                     json=json_payload,
                     follow_redirects=True,
                 )
+            elif self.method == "PATCH":
+                response = client.patch(
+                    self.url,
+                    headers=headers,
+                    json=json_payload,
+                    follow_redirects=True,
+                )
             elif self.method == "POST":
                 if files is not None:
                     data = {key: json.dumps(json_payload[key]) for key in json_payload}
@@ -505,6 +512,13 @@ class SimbaRequest(object):
             json_payload = json_payload or {}
             if self.method == "PUT":
                 response = await async_client.post(
+                    self.url,
+                    headers=headers,
+                    json=json_payload,
+                    follow_redirects=True,
+                )
+            elif self.method == "PATCH":
+                response = await async_client.patch(
                     self.url,
                     headers=headers,
                     json=json_payload,
@@ -693,6 +707,59 @@ class PutRequest(SimbaRequest):
     ) -> dict:
         """
         Send a PUT request.
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - optional headers
+            * **json_payload** (`Optional[dict]`) - optional payload
+            * **files** (`Optional[FileDict]`) - optional files to upload
+            * **config** (`Optional[ConnectionConfig]`) - optional connection config
+        :return: A dictionary response object
+        :rtype: dict
+        """
+        return await self.send(
+            headers=headers, json_payload=json_payload, files=files, config=config
+        )
+
+
+class PatchRequest(SimbaRequest):
+    def __init__(
+        self,
+        endpoint: str,
+        login: Login = None,
+    ):
+        super().__init__(endpoint=endpoint, method="PATCH", login=login)
+
+    def patch_sync(
+        self,
+        headers: Optional[dict] = None,
+        json_payload: Optional[dict] = None,
+        files: FileDict = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        Send a PATCH request.
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - optional headers
+            * **json_payload** (`Optional[dict]`) - optional payload
+            * **files** (`Optional[FileDict]`) - optional files to upload
+            * **config** (`Optional[ConnectionConfig]`) - optional connection config
+        :return: A dictionary response object
+        :rtype: dict
+        """
+        return self.send_sync(
+            headers=headers, json_payload=json_payload, files=files, config=config
+        )
+
+    async def patch(
+        self,
+        headers: Optional[dict] = None,
+        json_payload: Optional[dict] = None,
+        files: FileDict = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        Send a PATCH request.
 
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers

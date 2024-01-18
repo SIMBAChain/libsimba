@@ -51,15 +51,20 @@ class Path(str, Enum):
     BUNDLE_FILE = "/v2/apps/{}/contract/{}/bundle/{}/filename/{}/"
     BUNDLE_MANIFEST = "/v2/apps/{}/contract/{}/bundle/{}/manifest/"
     CONTRACT_INFO = "/v2/apps/{}/contract/{}/info"
-    CONTRACT_EVENTS = "/v2/apps/{}/contract/{}/events?event_name={}"
+    CONTRACT_EVENTS = "/v2/apps/{}/contract/{}/events/"
     CONTRACT_RECEIPT = "/v2/apps/{}/contract/{}/receipt/{}/"
     CONTRACT_METHOD = "/v2/apps/{}/contract/{}/{}/"
+    CONTRACT_ABI = "/services/contracts/abi/{}/"
     SYNC_CONTRACT_METHOD = "/v2/apps/{}/sync/contract/{}/{}/"
     USER_FUND_ADDRESS = "/user/account/{}/fund/"
     USER_ADDRESS_BALANCE = "/user/account/{}/balance/{}/"
     ADMIN_WALLET_SET = "/admin/users/{}/wallet/set/"
     USER_WALLET_SET = "/user/wallet/set/"
     USER_WALLET = "/user/wallet/"
+    USER_ACCOUNTS = "/user/accounts/"
+    USER_ACCOUNT = "/user/accounts/{}/"
+    USER_ACCOUNT_SIGN = "/user/accounts/{}/sign/"
+    USER_ACCOUNT_SET = "/user/accounts/set/"
     ORGANISATION = "/v2/organisations/{}/"
     ORGANISATIONS = "/v2/organisations/"
     ORG_APP = "/v2/organisations/{}/applications/{}/"
@@ -80,6 +85,12 @@ class Path(str, Enum):
     SUBSCRIPTIONS = "/v2/organisations/{}/subscriptions/"
     SUBSCRIPTION = "/v2/organisations/{}/subscriptions/{}/"
     NOTIFICATION_CONFIGS = "/v2/organisations/{}/notification_config/"
+
+    def create(self, *args) -> str:
+        slots = self.value.count("{}")
+        if slots != len(args):
+            raise ValueError(f"Incorrect number of args ({len(args)}) supplied to {self.value}")
+        return self.value.format(*args)
 
 
 class RetryTransport(httpx.AsyncBaseTransport, httpx.BaseTransport):

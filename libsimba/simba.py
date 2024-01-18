@@ -22,18 +22,20 @@ import base64
 import logging
 import time
 
-from typing import AsyncGenerator, List, Optional, Tuple, Union
+from typing import Any, AsyncGenerator, List, Optional, Tuple, Union
 
 from libsimba.schemas import (
     ConnectionConfig,
+    FieldFilter,
     FileDict,
+    FilterOp,
     Login,
     MethodCallArgs,
     SearchFilter,
     TxnHeaders,
 )
 from libsimba.simba_contract import SimbaContract
-from libsimba.simba_request import GetRequest, PostRequest, PutRequest, SimbaRequest
+from libsimba.simba_request import GetRequest, PatchRequest, PostRequest, PutRequest, SimbaRequest
 from libsimba.simba_sync import SimbaSync
 from libsimba.utils import Path, get_address, get_deployed_artifact_id
 
@@ -351,13 +353,14 @@ class Simba(SimbaSync):
         self,
         app_id: str,
         contract_name: str,
-        event_name: str,
+        event_name: Optional[str] = None,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> AsyncGenerator[List[dict], None]:
+        query_args = self.add_event_name(event_name=event_name, query_args=query_args)
         return SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name),
             query_params=query_args,
             login=login,
         ).retrieve_iter(config=config)
@@ -366,13 +369,14 @@ class Simba(SimbaSync):
         self,
         app_id: str,
         contract_name: str,
-        event_name: str,
+        event_name: Optional[str] = None,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> List[dict]:
+        query_args = self.add_event_name(event_name=event_name, query_args=query_args)
         return await SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name),
             query_params=query_args,
             login=login,
         ).retrieve(config=config)
@@ -465,13 +469,14 @@ class Simba(SimbaSync):
         self,
         app_id: str,
         contract_name: str,
-        event_name: str,
+        event_name: Optional[str] = None,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> List[dict]:
+        query_args = self.add_event_name(event_name=event_name, query_args=query_args)
         return await SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name),
             query_params=query_args,
             login=login,
         ).retrieve(config=config)
@@ -480,13 +485,14 @@ class Simba(SimbaSync):
         self,
         app_id: str,
         contract_name: str,
-        event_name: str,
+        event_name: Optional[str] = None,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> AsyncGenerator[List[dict], None]:
+        query_args = self.add_event_name(event_name=event_name, query_args=query_args)
         return SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name),
             query_params=query_args,
             login=login,
         ).retrieve_iter(config=config)
@@ -554,9 +560,9 @@ class Simba(SimbaSync):
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
-        return await PostRequest(
+        return await PatchRequest(
             endpoint=Path.APP_TXN.format(app_id, txn_id), login=login
-        ).post(json_payload={"transaction": txn}, config=config)
+        ).patch(json_payload={"transaction": txn}, config=config)
 
     async def save_design(
         self,
@@ -811,6 +817,117 @@ class Simba(SimbaSync):
             endpoint=Path.STORAGES.format(org),
             login=login,
         ).retrieve(config=config)
+
+    async def get_abi(
+        self,
+        contract_address: str,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        return await SimbaRequest(
+            endpoint=Path.CONTRACT_ABI.format(contract_address),
+            login=login,
+        ).send(config=config)
+
+    async def get_accounts(
+        self,
+        nickname: Optional[str] = None,
+        alias: Optional[str] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> List[dict]:
+        params = None
+        if nickname or alias:
+            params = SearchFilter()
+            if nickname:
+                params.add_filter(FieldFilter(field="nickname", op=FilterOp.EQ, value=nickname))
+            if alias:
+                params.add_filter(FieldFilter(field="alias", op=FilterOp.EQ, value=alias))
+
+        return await SimbaRequest(
+            endpoint=Path.USER_ACCOUNTS,
+            query_params=params,
+            login=login,
+        ).retrieve(config=config)
+
+    async def get_account(
+            self,
+            uid: str,
+            login: Login = None,
+            config: ConnectionConfig = None,
+    ) -> dict:
+        return await SimbaRequest(
+            endpoint=Path.USER_ACCOUNT.format(uid),
+            login=login,
+        ).send(config=config)
+
+    async def create_account(
+        self,
+        network_subtype: str,
+        network: str,
+        nickname: str,
+        alias: str,
+        network_type: Optional[str] = "ethereum",
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        payload = {
+          "network_type": network_type,
+          "network_subtype": network_subtype,
+          "network": network,
+          "nickname": nickname,
+          "alias": alias
+        }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_ACCOUNTS,
+            login=login,
+        ).send(config=config, json_payload=payload)
+
+    async def set_account(
+        self,
+        network_subtype: str,
+        network: str,
+        nickname: str,
+        alias: str,
+        address: str,
+        private_key: str,
+        network_type: Optional[str] = "ethereum",
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        payload = {
+          "network_type": network_type,
+          "network_subtype": network_subtype,
+          "network": network,
+          "nickname": nickname,
+          "alias": alias,
+          "public_key": address,
+          "private_key": private_key
+        }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_ACCOUNT_SET,
+            login=login,
+        ).send(config=config, json_payload=payload)
+
+    async def account_sign(
+        self,
+        uid: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        payload = {
+            "input_pairs": [list(t) for t in input_pairs],
+            "hash_message": hash_message
+        }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_ACCOUNT_SIGN.format(uid),
+            login=login,
+        ).send(config=config, json_payload=payload)
 
     async def get_artifacts(
         self,

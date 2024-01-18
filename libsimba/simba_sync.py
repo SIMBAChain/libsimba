@@ -22,11 +22,13 @@ import base64
 import logging
 import time
 
-from typing import Generator, List, Optional, Tuple, Union
+from typing import Any, Generator, List, Optional, Tuple, Union
 
 from libsimba.config import settings
 from libsimba.schemas import (
     ConnectionConfig,
+    FieldFilter,
+    FilterOp,
     FileDict,
     Login,
     MethodCallArgs,
@@ -34,7 +36,7 @@ from libsimba.schemas import (
     TxnHeaders,
 )
 from libsimba.simba_contract_sync import SimbaContractSync
-from libsimba.simba_request import GetRequest, PostRequest, PutRequest, SimbaRequest
+from libsimba.simba_request import GetRequest, PatchRequest, PostRequest, PutRequest, SimbaRequest
 from libsimba.utils import Path, get_address, get_deployed_artifact_id
 
 
@@ -789,7 +791,7 @@ class SimbaSync:
         self,
         app_id: str,
         contract_name: str,
-        event_name: str,
+        event_name: Optional[str] = None,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
@@ -803,18 +805,18 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param event_name: Name of the Event
-        :type event_name: str
 
         :Keyword Arguments:
+            * **event_name** (`Optional[str]`)
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: A generator of events
         :rtype: Generator[List[dict], None, None]
         """
+        query_args = self.add_event_name(event_name=event_name, query_args=query_args)
         return SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name),
             query_params=query_args,
             login=login,
         ).retrieve_iter_sync(config=config)
@@ -823,7 +825,7 @@ class SimbaSync:
         self,
         app_id: str,
         contract_name: str,
-        event_name: str,
+        event_name: Optional[str] = None,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
@@ -837,18 +839,18 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param event_name: Name of the Event
-        :type event_name: str
 
         :Keyword Arguments:
+            * **event_name** (`Optional[str]`)
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: A list of events
         :rtype: List[dict]
         """
+        query_args = self.add_event_name(event_name=event_name, query_args=query_args)
         return SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name),
             query_params=query_args,
             login=login,
         ).retrieve_sync(config=config)
@@ -1049,7 +1051,7 @@ class SimbaSync:
         self,
         app_id: str,
         contract_name: str,
-        event_name: str,
+        event_name: Optional[str] = None,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
@@ -1063,18 +1065,18 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param event_name: Event name
-        :type event_name: str
 
         :Keyword Arguments:
+            * **event_name** (`Optional[str]`)
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: A list of transactions
         :rtype: List[dict]
         """
+        query_args = self.add_event_name(event_name=event_name, query_args=query_args)
         return SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name),
             query_params=query_args,
             login=login,
         ).retrieve_sync(config=config)
@@ -1083,7 +1085,7 @@ class SimbaSync:
         self,
         app_id: str,
         contract_name: str,
-        event_name: str,
+        event_name: Optional[str] = None,
         query_args: Optional[SearchFilter] = None,
         login: Login = None,
         config: ConnectionConfig = None,
@@ -1097,18 +1099,18 @@ class SimbaSync:
         :type app_id: str
         :param contract_name: Contract API name
         :type contract_name: str
-        :param event_name: Event name
-        :type event_name: str
 
         :Keyword Arguments:
+            * **event_name** (`Optional[str]`)
             * **query_args** (`Optional[SearchFilter]`)
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: A generator of transactions
         :rtype: Generator[List[dict], None, None]
         """
+        query_args = self.add_event_name(event_name=event_name, query_args=query_args)
         return SimbaRequest(
-            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name, event_name),
+            endpoint=Path.CONTRACT_EVENTS.format(app_id, contract_name),
             query_params=query_args,
             login=login,
         ).retrieve_iter_sync(config=config)
@@ -1241,7 +1243,7 @@ class SimbaSync:
         config: ConnectionConfig = None,
     ):
         """
-        POST ``/v2/apps/{application}/transactions/{identifier}/``
+        PATCH ``/v2/apps/{application}/transactions/{identifier}/``
 
         Submit a signed transaction to a contract method.
 
@@ -1258,9 +1260,9 @@ class SimbaSync:
         :return: The transaction
         :rtype: dict
         """
-        return PostRequest(
+        return PatchRequest(
             endpoint=Path.APP_TXN.format(app_id, txn_id), login=login
-        ).post_sync(json_payload={"transaction": txn}, config=config)
+        ).patch_sync(json_payload={"transaction": txn}, config=config)
 
     def save_design(
         self,
@@ -1756,6 +1758,189 @@ class SimbaSync:
             login=login,
         ).retrieve_sync(config=config)
 
+    def get_abi(
+        self,
+        contract_address: str,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        GET ``/services/contracts/abi/{contract_address}/``
+
+        Get the ABI and metadata for a contract address.
+
+        :param contract_address: The address of the deployed contract.
+        :type contract_address: str
+
+        :Keyword Arguments:
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with keys `abi` and `metadata`.
+        :rtype: dict
+        """
+        return SimbaRequest(
+            endpoint=Path.CONTRACT_ABI.format(contract_address),
+            login=login,
+        ).send_sync(config=config)
+
+    def get_accounts(
+        self,
+        nickname: Optional[str] = None,
+        alias: Optional[str] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> List[dict]:
+        """
+        GET ``/user/accounts/``
+
+        Get the accounts for the current user. Optionally filter on
+        nickname or alias.
+
+        :Keyword Arguments:
+            * **nickname** (`Optional[str]`)
+            * **alias** (`Optional[str]`)
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with keys `abi` and `metadata`.
+        :rtype: dict
+        """
+        params = None
+        if nickname or alias:
+            params = SearchFilter()
+            if nickname:
+                params.add_filter(FieldFilter(field="nickname", op=FilterOp.EQ, value=nickname))
+            if alias:
+                params.add_filter(FieldFilter(field="alias", op=FilterOp.EQ, value=alias))
+
+        return SimbaRequest(
+            endpoint=Path.USER_ACCOUNTS,
+            query_params=params,
+            login=login,
+        ).retrieve_sync(config=config)
+
+    def get_account(
+        self,
+        uid: str,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        GET ``/user/accounts/{id}``
+
+        Get the account for the current user with the given id.
+
+        :Keyword Arguments:
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with keys `abi` and `metadata`.
+        :rtype: dict
+        """
+        return SimbaRequest(
+            endpoint=Path.USER_ACCOUNT.format(uid),
+            login=login,
+        ).send_sync(config=config)
+
+    def create_account(
+        self,
+        network_subtype: str,
+        network: str,
+        nickname: str,
+        alias: str,
+        network_type: Optional[str] = "ethereum",
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/accounts/``
+
+        Create a new account for the current user.
+
+        :Keyword Arguments:
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with keys `abi` and `metadata`.
+        :rtype: dict
+        """
+        payload = {
+          "network_type": network_type,
+          "network_subtype": network_subtype,
+          "network": network,
+          "nickname": nickname,
+          "alias": alias
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_ACCOUNTS,
+            login=login,
+        ).send_sync(config=config, json_payload=payload)
+
+    def set_account(
+        self,
+        network_subtype: str,
+        network: str,
+        nickname: str,
+        alias: str,
+        address: str,
+        private_key: str,
+        network_type: Optional[str] = "ethereum",
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/accounts/set/``
+
+        Create a new account for the current user.
+
+        :Keyword Arguments:
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with keys `abi` and `metadata`.
+        :rtype: dict
+        """
+        payload = {
+          "network_type": network_type,
+          "network_subtype": network_subtype,
+          "network": network,
+          "nickname": nickname,
+          "alias": alias,
+          "public_key": address,
+          "private_key": private_key
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_ACCOUNT_SET,
+            login=login,
+        ).send_sync(config=config, json_payload=payload)
+
+    def account_sign(
+        self,
+        uid: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/accounts/{id}``
+
+        Get the account for the current user to sign inputs.
+
+        :Keyword Arguments:
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with keys `abi` and `metadata`.
+        :rtype: dict
+        """
+        payload = {
+            "input_pairs": [list(t) for t in input_pairs],
+            "hash_message": hash_message
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_ACCOUNT_SIGN.format(uid),
+            login=login,
+        ).send_sync(config=config, json_payload=payload)
+
     def subscribe(
         self,
         org: str,
@@ -1917,3 +2102,15 @@ class SimbaSync:
                 login=login,
                 config=config,
             )
+
+    def add_event_name(
+        self,
+        event_name: Optional[str] = None,
+        query_args: Optional[SearchFilter] = None
+    ) -> Optional[SearchFilter]:
+        if event_name:
+            if not query_args:
+                query_args = SearchFilter()
+            if not query_args.has_filter_value(field="event_name", op=FilterOp.EQ, value=event_name):
+                query_args.add_filter(FieldFilter(op=FilterOp.EQ, field="event_name", value=event_name))
+        return query_args

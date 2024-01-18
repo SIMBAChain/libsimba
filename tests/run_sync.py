@@ -19,9 +19,9 @@ import traceback
 class Runner(object):
     def __init__(
         self,
-        org: str = "andrew_harrison_simbachain_com",
+        org: str = "libsimba",
         blockchain_name: str = "Quorum Dev New",
-        storage_name: str = "azure",
+        storage_name: str = "azure2",
         num_calls: int = 10,
         now: Optional[int] = int(time.time())
     ):
@@ -169,6 +169,11 @@ class SyncRunner(Runner):
             assert self.storage_name in offchains
         except Exception:
             self.capture_error()
+        print("================ checking accounts ================")
+        try:
+            accounts = self.accounts(simba)
+        except Exception:
+            self.capture_error()
         try:
             self.org_app(simba)
             print("================ checking designs ================")
@@ -238,6 +243,17 @@ class SyncRunner(Runner):
         print(storage)
         self.templates.assert_structure("storage", storage, many=True)
         return self.get_fields(storage)
+
+    def accounts(self, simba: SimbaSync) -> List[str]:
+        accounts = simba.get_accounts()
+        print(accounts)
+        self.templates.assert_structure("account", accounts, many=True)
+        if len(accounts) > 0:
+            uid = accounts[0].get("id")
+            inputs = [("string", "hello"), ("uint256", 10)]
+            sig = simba.account_sign(uid=uid, input_pairs=inputs, hash_message=True)
+            self.templates.assert_structure("signature", sig)
+        return self.get_fields(accounts)
 
     def org_app(self, simba: SimbaSync):
         org_data = simba.create_org(name=self.org, display=self.org)

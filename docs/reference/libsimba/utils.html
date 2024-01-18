@@ -424,6 +424,11 @@ document.write(`
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_ABI">
+<span class="sig-name descname"><span class="pre">CONTRACT_ABI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/services/contracts/abi/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_ABI" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_ARTIFACT">
 <span class="sig-name descname"><span class="pre">CONTRACT_ARTIFACT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/contract_artifacts/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_ARTIFACT" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
@@ -435,7 +440,7 @@ document.write(`
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="libsimba.utils.Path.CONTRACT_EVENTS">
-<span class="sig-name descname"><span class="pre">CONTRACT_EVENTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/events?event_name={}'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_EVENTS" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">CONTRACT_EVENTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/apps/{}/contract/{}/events/'</span></em><a class="headerlink" href="#libsimba.utils.Path.CONTRACT_EVENTS" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -554,6 +559,26 @@ document.write(`
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_ACCOUNT">
+<span class="sig-name descname"><span class="pre">USER_ACCOUNT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/accounts/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_ACCOUNT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_ACCOUNTS">
+<span class="sig-name descname"><span class="pre">USER_ACCOUNTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/accounts/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_ACCOUNTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_ACCOUNT_SET">
+<span class="sig-name descname"><span class="pre">USER_ACCOUNT_SET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/accounts/set/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_ACCOUNT_SET" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_ACCOUNT_SIGN">
+<span class="sig-name descname"><span class="pre">USER_ACCOUNT_SIGN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/accounts/{}/sign/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_ACCOUNT_SIGN" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="libsimba.utils.Path.USER_ADDRESS_BALANCE">
 <span class="sig-name descname"><span class="pre">USER_ADDRESS_BALANCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/account/{}/balance/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_ADDRESS_BALANCE" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
@@ -581,6 +606,11 @@ document.write(`
 <dl class="py attribute">
 <dt class="sig sig-object py" id="libsimba.utils.Path.WHOAMI">
 <span class="sig-name descname"><span class="pre">WHOAMI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/whoami/'</span></em><a class="headerlink" href="#libsimba.utils.Path.WHOAMI" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libsimba.utils.Path.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#libsimba.utils.Path.create" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -751,6 +781,7 @@ always closed.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.BUNDLE_FILE"><code class="docutils literal notranslate"><span class="pre">Path.BUNDLE_FILE</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.BUNDLE_MANIFEST"><code class="docutils literal notranslate"><span class="pre">Path.BUNDLE_MANIFEST</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_ABI"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_ABI</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_ARTIFACT"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_ARTIFACT</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_ARTIFACTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_ARTIFACTS</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.CONTRACT_EVENTS"><code class="docutils literal notranslate"><span class="pre">Path.CONTRACT_EVENTS</span></code></a></li>
@@ -777,12 +808,17 @@ always closed.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.SUBSCRIPTION"><code class="docutils literal notranslate"><span class="pre">Path.SUBSCRIPTION</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.SUBSCRIPTIONS"><code class="docutils literal notranslate"><span class="pre">Path.SUBSCRIPTIONS</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.SYNC_CONTRACT_METHOD"><code class="docutils literal notranslate"><span class="pre">Path.SYNC_CONTRACT_METHOD</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNT"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNTS"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNT_SET"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNT_SET</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNT_SIGN"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNT_SIGN</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ADDRESS_BALANCE"><code class="docutils literal notranslate"><span class="pre">Path.USER_ADDRESS_BALANCE</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_FUND_ADDRESS"><code class="docutils literal notranslate"><span class="pre">Path.USER_FUND_ADDRESS</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_WALLET"><code class="docutils literal notranslate"><span class="pre">Path.USER_WALLET</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_WALLET_SET"><code class="docutils literal notranslate"><span class="pre">Path.USER_WALLET_SET</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.VALIDATE_BUNDLE"><code class="docutils literal notranslate"><span class="pre">Path.VALIDATE_BUNDLE</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.WHOAMI"><code class="docutils literal notranslate"><span class="pre">Path.WHOAMI</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.create"><code class="docutils literal notranslate"><span class="pre">Path.create()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.RetryTransport"><code class="docutils literal notranslate"><span class="pre">RetryTransport</span></code></a><ul class="nav section-nav flex-column">

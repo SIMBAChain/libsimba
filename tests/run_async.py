@@ -24,6 +24,11 @@ class AsyncRunner(Runner):
             assert self.storage_name in offchains
         except Exception:
             self.capture_error()
+        print("================ checking accounts ================")
+        try:
+            accounts = await self.accounts(simba)
+        except Exception:
+            self.capture_error()
         try:
             await self.org_app(simba)
             print("================ checking designs ================")
@@ -92,6 +97,17 @@ class AsyncRunner(Runner):
         print(storage)
         self.templates.assert_structure("storage", storage, many=True)
         return self.get_fields(storage)
+
+    async def accounts(self, simba: Simba) -> List[str]:
+        accounts = await simba.get_accounts()
+        print(accounts)
+        self.templates.assert_structure("account", accounts, many=True)
+        if len(accounts) > 0:
+            uid = accounts[0].get("id")
+            inputs = [("string", "hello"), ("uint256", 10)]
+            sig = await simba.account_sign(uid=uid, input_pairs=inputs, hash_message=True)
+            self.templates.assert_structure("signature", sig)
+        return self.get_fields(accounts)
 
     async def org_app(self, simba: Simba):
         org_data = await simba.create_org(name=self.org, display="Libsimba")

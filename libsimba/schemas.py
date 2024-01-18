@@ -100,13 +100,19 @@ class MethodCallArgs(BaseModel):
 
 class SearchFilter(BaseModel):
     filters: List[FieldFilter] = []
-    fields: Optional[List[str]]
-    limit: Optional[int]
-    offset: Optional[int]
+    fields: Optional[List[str]] = None
+    limit: Optional[int] = None
+    offset: Optional[int] = None
 
     def has_filter(self, field: str):
         for filter in self.filters:
             if filter.field == field:
+                return True
+        return False
+
+    def has_filter_value(self, field: str, op: FilterOp, value: Any):
+        for filter in self.filters:
+            if filter.field == field and filter.op == op and filter.value == value:
                 return True
         return False
 

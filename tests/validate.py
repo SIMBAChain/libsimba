@@ -15,7 +15,7 @@ class Templates(object):
     def assert_structure(
         self, type_name: str, struct: Union[list, dict], many: bool = False, action: str = None
     ):
-        # action ca be one of list, get, post, put to cover where return data may be structured differently
+        # action can be one of list, get, post, put to cover where return data may be structured differently
         try:
             if action:
                 template = self.types.get(f"{action}:{type_name}")
