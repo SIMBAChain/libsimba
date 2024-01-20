@@ -14,6 +14,7 @@ class AsyncApp(IsolatedAsyncioTestCase):
         await arunner.me(simba=simba)
         await arunner.blockchains(simba=simba)
         await arunner.storage(simba=simba)
+        await arunner.accounts(simba=simba)
         await arunner.org_app(simba=simba)
         name, design_id = await arunner.designs(simba=simba)
         app, api_name, address, contract_id = await arunner.artifacts(

@@ -17,10 +17,10 @@
 #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
-
+import asyncio
 import base64
 import logging
-import time
+
 
 from typing import Any, AsyncGenerator, List, Optional, Tuple, Union
 
@@ -37,7 +37,7 @@ from libsimba.schemas import (
 from libsimba.simba_contract import SimbaContract
 from libsimba.simba_request import GetRequest, PatchRequest, PostRequest, PutRequest, SimbaRequest
 from libsimba.simba_sync import SimbaSync
-from libsimba.utils import Path, get_address, get_deployed_artifact_id
+from libsimba.utils import Path, get_address, get_deployed_artifact_id, get_address_by_name
 
 
 logger = logging.getLogger(__name__)
@@ -626,7 +626,7 @@ class Simba(SimbaSync):
         else:
             if total_time > max_time:
                 raise ValueError("[wait_for_deployment] :: waited way too long")
-            time.sleep(2)
+            await asyncio.sleep(2)
             total_time += 2
             return await self.wait_for_deployment(
                 org, uid, total_time=total_time, login=login, config=config
@@ -686,6 +686,68 @@ class Simba(SimbaSync):
             endpoint=Path.DEPLOYMENTS.format(org),
             login=login,
         ).post(json_payload=full, config=config)
+
+    async def deploy_library(
+        self,
+        org: str,
+        lib_name: str,
+        blockchain: str,
+        code: str,
+        encode: bool = True,
+        app_name=None,
+        args=None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        if encode:
+            code = base64.b64encode(code.encode()).decode("utf-8")
+        full = {
+            "blockchain": blockchain,
+            "language": "solidity",
+            "code": code,
+            "lib_name": lib_name,
+        }
+        if app_name:
+            full["app_name"] = app_name
+        if args:
+            full["args"] = args
+        return await PostRequest(
+            endpoint=Path.LIBRARIES.create(org),
+            login=login,
+        ).post(json_payload=full, config=config)
+
+    async def wait_for_deploy_library(
+        self,
+        org: str,
+        lib_name: str,
+        blockchain: str,
+        code: str,
+        app_name=None,
+        args=None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> Tuple[str, str]:
+
+        res = await self.deploy_library(
+            org=org,
+            lib_name=lib_name,
+            blockchain=blockchain,
+            code=code,
+            args=args,
+            app_name=app_name,
+            login=login,
+            config=config
+        )
+        deployment_id = res["deployment_id"]
+        try:
+            deployed = await self.wait_for_deployment(org, deployment_id)
+            address = get_address_by_name(deployed, lib_name)
+            library_id = get_deployed_artifact_id(deployed)
+        except Exception as ex:
+            logger.warning("[wait_for_deploy_library] :: failed to wait for deployment: {}".format(ex))
+            address = None
+            library_id = None
+        return address, library_id
 
     async def wait_for_deploy_design(
         self,
@@ -774,7 +836,7 @@ class Simba(SimbaSync):
         else:
             if total_time > max_time:
                 raise ValueError("waited way too long")
-            time.sleep(2)
+            await asyncio.sleep(2)
             total_time += 2
             return await self.wait_for_org_transaction(
                 org=org,

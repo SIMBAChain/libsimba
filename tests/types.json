@@ -18,6 +18,14 @@
     "abi": {},
     "metadata": {}
   },
+  "library": {
+    "lib_name": "string",
+    "code": "string",
+    "language": "solidity",
+    "args": {},
+    "blockchain": "string",
+    "app_name": "string"
+  },
   "account": {
     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "network_type": "string",
@@ -134,16 +142,32 @@
     "storage": "string",
     "created_on": "2022-08-17T11:44:04.430Z",
     "updated_on": "2022-08-17T11:44:04.430Z",
-    "deployment": {},
+    "deployment": [
+      {
+        "name": "PoseidonT4",
+        "address": "0x1234",
+        "deployed_artifact_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    ],
     "app_name": "string",
     "api_name": "string",
     "artifact_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "design_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "state": "string",
     "error": "string",
-    "primary": {},
+    "primary": {
+      "address": "0x1234",
+      "deployed_artifact_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
     "organisation": "string",
     "generate_request_id": true
+  },
+  "deployment_response": {
+    "transaction_hash": "string",
+    "transaction_id": "string",
+    "deployment_id": "string",
+    "instance_id": "string",
+    "state": "string"
   },
   "deployed_contract": {
     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",

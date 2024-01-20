@@ -4,6 +4,7 @@ import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
 import './Dev.sol';
+import "./PoseidonT4.sol";
 
 contract TestContract is Dev, ERC721("DevToken", "DVT"), Ownable {
 
@@ -49,6 +50,10 @@ contract TestContract is Dev, ERC721("DevToken", "DVT"), Ownable {
         _mint(msg.sender, tokenId);
         _tests[tokenId] = _test;
         _tokenId.increment();
+    }
+
+    function hash(uint256[3] memory inputs) public pure returns (uint256) {
+        return PoseidonT4.hash(inputs);
     }
 
     function an_arr(uint[] memory first)

@@ -250,6 +250,8 @@ class SyncRunner(Runner):
         self.templates.assert_structure("account", accounts, many=True)
         if len(accounts) > 0:
             uid = accounts[0].get("id")
+            account = simba.get_account(uid=uid)
+            self.templates.assert_structure("account", account)
             inputs = [("string", "hello"), ("uint256", 10)]
             sig = simba.account_sign(uid=uid, input_pairs=inputs, hash_message=True)
             self.templates.assert_structure("signature", sig)
@@ -271,6 +273,16 @@ class SyncRunner(Runner):
         contract = os.path.join(os.path.dirname(__file__), "data", "TestContract.sol")
         intfce = os.path.join(os.path.dirname(__file__), "data", "Dev.sol")
 
+        lib = os.path.join(os.path.dirname(__file__), "data", "PoseidonT4.sol")
+        with open(lib, "r") as sol:
+            lib_code = sol.read()
+        lib_address, lib_id = simba.wait_for_deploy_library(
+            org=self.org,
+            lib_name="PoseidonT4",
+            blockchain=self.blockchain_name,
+            code=lib_code,
+
+        )
         with open(contract, "r") as sol:
             cont = sol.read()
         with open(intfce, "r") as sol:
@@ -278,9 +290,10 @@ class SyncRunner(Runner):
         saved_data = simba.save_design(
             org=self.org,
             name=self.name,
-            code={"TestContract": cont, "Dev": interface},
+            code={"TestContract": cont, "Dev": interface, "PoseidonT4": lib_code},
             target_contract="TestContract",
             binary_targets=["TestContract"],
+            libraries={"PoseidonT4": lib_address}
         )
         self.templates.assert_structure("contract_design", saved_data)
         return saved_data.get("name"), saved_data.get("id")

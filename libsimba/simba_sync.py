@@ -37,7 +37,7 @@ from libsimba.schemas import (
 )
 from libsimba.simba_contract_sync import SimbaContractSync
 from libsimba.simba_request import GetRequest, PatchRequest, PostRequest, PutRequest, SimbaRequest
-from libsimba.utils import Path, get_address, get_deployed_artifact_id
+from libsimba.utils import Path, get_address, get_deployed_artifact_id, get_address_by_name
 
 
 logger = logging.getLogger(__name__)
@@ -1452,7 +1452,7 @@ class SimbaSync:
         :param org: The organisation to deploy to.
         :type org: str
         :param app: The app to deploy to.
-        :type org: str
+        :type app: str
         :param api_name: The api name of the contract.
         :type api_name: str
         :param artifact_id: The id of the artifact to deploy
@@ -1484,6 +1484,92 @@ class SimbaSync:
             endpoint=Path.DEPLOYMENTS.format(org),
             login=login,
         ).post_sync(json_payload=full, config=config)
+
+    def deploy_library(
+        self,
+        org: str,
+        lib_name: str,
+        blockchain: str,
+        code: str,
+        encode: bool = True,
+        app_name=None,
+        args=None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/v2/organisations/{organisation}/deployments/library/``
+
+        Deploy a library. This results in a deployment object being created and returned.
+
+        :param org: The organisation to deploy to.
+        :type org: str
+        :param code: The library code.
+        :type code: str
+        :param lib_name: The name of the library.
+        :type lib_name: str
+        :param blockchain: The name of the blockchain to deploy to.
+        :type blockchain: str
+        :param encode: whether to base64 encode the code or not.
+        :type encode: bool
+
+        :Keyword Arguments:
+            * **app_name** (`str`) - App name for the library.
+            * **args** (`dict`) - Constructor args for the deployment.
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: A deployment object
+        :rtype: Deployment
+        """
+        if encode:
+            code = base64.b64encode(code.encode()).decode("utf-8")
+        full = {
+            "blockchain": blockchain,
+            "language": "solidity",
+            "code": code,
+            "lib_name": lib_name,
+        }
+        if app_name:
+            full["app_name"] = app_name
+        if args:
+            full["args"] = args
+        return PostRequest(
+            endpoint=Path.LIBRARIES.create(org),
+            login=login,
+        ).post_sync(json_payload=full, config=config)
+
+    def wait_for_deploy_library(
+        self,
+        org: str,
+        lib_name: str,
+        blockchain: str,
+        code: str,
+        app_name=None,
+        args=None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> Tuple[str, str]:
+
+        res = self.deploy_library(
+            org=org,
+            lib_name=lib_name,
+            blockchain=blockchain,
+            code=code,
+            args=args,
+            app_name=app_name,
+            login=login,
+            config=config
+        )
+        deployment_id = res["deployment_id"]
+        try:
+            deployed = self.wait_for_deployment(org, deployment_id)
+            address = get_address_by_name(deployed, lib_name)
+            library_id = get_deployed_artifact_id(deployed)
+        except Exception as ex:
+            logger.warning("[wait_for_deploy_library] :: failed to wait for deployment: {}".format(ex))
+            address = None
+            library_id = None
+        return address, library_id
 
     def wait_for_deploy_design(
         self,

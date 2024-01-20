@@ -80,6 +80,7 @@ class Path(str, Enum):
     DESIGN_DEPLOY = "/v2/organisations/{}/contract_designs/{}/deploy/"
     DEPLOYMENT = "/v2/organisations/{}/deployments/{}/"
     DEPLOYMENTS = "/v2/organisations/{}/deployments/"
+    LIBRARIES = "/v2/organisations/{}/deployments/library/"
     STORAGES = "/v2/organisations/{}/storage/"
     BLOCKCHAINS = "/v2/organisations/{}/blockchains/"
     SUBSCRIPTIONS = "/v2/organisations/{}/subscriptions/"
@@ -275,6 +276,17 @@ def get_address(deployment: dict) -> Optional[str]:
     :return: Optional[str]
     """
     return deployment.get("primary", {}).get("address", None)
+
+
+def get_address_by_name(deployment, name):
+    deps = deployment.get("deployment", [])
+    primary = deployment.get("primary")
+    if primary and primary.get("name") == name:
+        return primary.get("address")
+    for dep in deps:
+        if dep.get("name") == name:
+            return dep.get("address")
+    return None
 
 
 def get_deployed_artifact_id(deployment: dict) -> Optional[str]:

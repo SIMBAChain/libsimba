@@ -52,12 +52,14 @@ designs_pattern = re.compile(r".*/v2/organisations/[\w-]+/contract_designs/$")
 artifacts_pattern = re.compile(r".*/v2/organisations/[\w-]+/contract_artifacts/$")
 deployment_pattern = re.compile(r".*/v2/organisations/[\w-]+/deployments/[\w-]+/$")
 deployments_pattern = re.compile(r".*/v2/organisations/[\w-]+/deployments/$")
+libraries_pattern = re.compile(r".*/v2/organisations/[\w-]+/deployments/library/$")
 transaction_pattern = re.compile(r"/v2/organisations/[\w-]+/transactions/[\w-]+/$")
 method_pattern = re.compile(r"/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/$")
 query_method_pattern = re.compile(r"/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/\?.*$")
 
 abi_pattern = re.compile(r"/service/contracts/abi/[\w-]+/\?.*$")
 accounts_pattern = re.compile(r"/user/accounts/$")
+account_pattern = re.compile(r"/user/accounts/[\w-]+/$")
 accounts_sign_pattern = re.compile(r"/user/accounts/.+/sign/$")
 
 
@@ -162,8 +164,16 @@ get_accounts_route = block_mock.route(method="GET", url=accounts_pattern).mock(
     return_value=Response(200, json=make_results("account"))
 )
 
+get_account_route = block_mock.route(method="GET", url=account_pattern).mock(
+    return_value=Response(200, json=make_type("account"))
+)
+
 accounts_sign_route = block_mock.route(method="POST", url=accounts_sign_pattern).mock(
     return_value=Response(200, json=make_type("signature"))
+)
+
+libraries_route = block_mock.route(method="POST", url=libraries_pattern).mock(
+    return_value=Response(200, json=make_type("deployment_response"))
 )
 
 
