@@ -173,6 +173,9 @@ class AsyncRunner(Runner):
             storage=storage,
             blockchain=blockchain,
         )
+        abi = await simba.get_abi(blockchain=blockchain, contract_address=address)
+        print(abi.get("abi"))
+        print(abi.get("metadata"))
         return app, api_name, address, contract_id
 
     async def contract(self, simba: Simba, org: str, app: str, api_name: str) -> dict:

@@ -90,7 +90,7 @@ class KcAuthProvider(AuthProvider):
                 settings().AUTH_BASE_URL, settings().AUTH_REALM_ID
             )
             async with async_http_client(config=config) as client:
-                r = client.post(
+                r = await client.post(
                     sso_host,
                     data=data,
                     headers={"Content-Type": "application/x-www-form-urlencoded"},

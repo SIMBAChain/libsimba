@@ -1338,7 +1338,7 @@ class SimbaSync:
         org: str,
         uid: str,
         total_time: int = 0,
-        max_time: int = 480,
+        max_time: int = 960,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
@@ -1846,6 +1846,7 @@ class SimbaSync:
 
     def get_abi(
         self,
+        blockchain: str,
         contract_address: str,
         login: Login = None,
         config: ConnectionConfig = None,
@@ -1857,6 +1858,8 @@ class SimbaSync:
 
         :param contract_address: The address of the deployed contract.
         :type contract_address: str
+        :param blockchain: The name of the blockchain the contract is deployed on.
+        :type blockchain: str
 
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
@@ -1865,7 +1868,7 @@ class SimbaSync:
         :rtype: dict
         """
         return SimbaRequest(
-            endpoint=Path.CONTRACT_ABI.format(contract_address),
+            endpoint=Path.CONTRACT_ABI.create(blockchain, contract_address),
             login=login,
         ).send_sync(config=config)
 

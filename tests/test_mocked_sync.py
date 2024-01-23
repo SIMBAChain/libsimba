@@ -57,7 +57,7 @@ transaction_pattern = re.compile(r"/v2/organisations/[\w-]+/transactions/[\w-]+/
 method_pattern = re.compile(r"/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/$")
 query_method_pattern = re.compile(r"/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/\?.*$")
 
-abi_pattern = re.compile(r"/service/contracts/abi/[\w-]+/\?.*$")
+abi_pattern = re.compile(r"/services/blockchains/.+/contracts/.+/abi/$")
 accounts_pattern = re.compile(r"/user/accounts/$")
 account_pattern = re.compile(r"/user/accounts/[\w-]+/$")
 accounts_sign_pattern = re.compile(r"/user/accounts/.+/sign/$")

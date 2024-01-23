@@ -54,7 +54,7 @@ class Path(str, Enum):
     CONTRACT_EVENTS = "/v2/apps/{}/contract/{}/events/"
     CONTRACT_RECEIPT = "/v2/apps/{}/contract/{}/receipt/{}/"
     CONTRACT_METHOD = "/v2/apps/{}/contract/{}/{}/"
-    CONTRACT_ABI = "/services/contracts/abi/{}/"
+    CONTRACT_ABI = "/services/blockchains/{}/contracts/{}/abi/"
     SYNC_CONTRACT_METHOD = "/v2/apps/{}/sync/contract/{}/{}/"
     USER_FUND_ADDRESS = "/user/account/{}/fund/"
     USER_ADDRESS_BALANCE = "/user/account/{}/balance/{}/"

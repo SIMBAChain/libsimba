@@ -318,6 +318,9 @@ class SyncRunner(Runner):
             storage=storage,
             blockchain=blockchain,
         )
+        abi = simba.get_abi(blockchain=blockchain, contract_address=address)
+        print(abi.get("abi"))
+        print(abi.get("metadata"))
         return app, api_name, address, contract_id
 
     def contract(self, simba: SimbaSync, org: str, app: str, api_name: str) -> dict:

@@ -882,12 +882,13 @@ class Simba(SimbaSync):
 
     async def get_abi(
         self,
+        blockchain: str,
         contract_address: str,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
         return await SimbaRequest(
-            endpoint=Path.CONTRACT_ABI.format(contract_address),
+            endpoint=Path.CONTRACT_ABI.create(blockchain, contract_address),
             login=login,
         ).send(config=config)
 
