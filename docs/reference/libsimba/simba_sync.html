@@ -365,20 +365,26 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_sync.SimbaSync.account_sign">
 <span class="sig-name descname"><span class="pre">account_sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_pairs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hash_message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">login</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="schemas.html#libsimba.schemas.Login" title="libsimba.schemas.Login"><span class="pre">Login</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="schemas.html#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_sync.SimbaSync.account_sign" title="Permalink to this definition">#</a></dt>
-<dd><p>POST <code class="docutils literal notranslate"><span class="pre">/user/accounts/{id}</span></code></p>
-<p>Get the account for the current user to sign inputs.</p>
+<dd><p>POST <code class="docutils literal notranslate"><span class="pre">/user/accounts/{account_id}/sign/</span></code></p>
+<p>Sign a message using the specified account.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>uid</strong> (<em>str</em>) – The account id.</p></li>
+<li><p><strong>input_pairs</strong> (<em>List</em><em>[</em><em>Tuple</em><em>(</em><em>str</em><em>, </em><em>Any</em><em>)</em><em>]</em>) – A list of tuples defining the data type and data to sign.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a Dict with keys <cite>abi</cite> and <cite>metadata</cite>.</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a Dict with the signed content.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -481,17 +487,25 @@ NOTE: This is an admin function.</p>
 <dd><p>POST <code class="docutils literal notranslate"><span class="pre">/user/accounts/</span></code></p>
 <p>Create a new account for the current user.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>network_subtype</strong> (<em>str</em>) – The blockchain subtype.</p></li>
+<li><p><strong>network</strong> (<em>str</em>) – The blockchain name.</p></li>
+<li><p><strong>nickname</strong> (<em>str</em>) – The account nickname.</p></li>
+<li><p><strong>alias</strong> (<em>str</em>) – The account alias.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a Dict with keys <cite>abi</cite> and <cite>metadata</cite>.</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>an account object.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -713,7 +727,7 @@ and a deployment object being created and returned.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_sync.SimbaSync.get_abi">
 <span class="sig-name descname"><span class="pre">get_abi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockchain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">login</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="schemas.html#libsimba.schemas.Login" title="libsimba.schemas.Login"><span class="pre">Login</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="schemas.html#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#libsimba.simba_sync.SimbaSync.get_abi" title="Permalink to this definition">#</a></dt>
-<dd><p>GET <code class="docutils literal notranslate"><span class="pre">/services/contracts/abi/{contract_address}/</span></code></p>
+<dd><p>GET <code class="docutils literal notranslate"><span class="pre">/services/blockchains/{blockchain}/contracts/{contract_address}/abi/</span></code></p>
 <p>Get the ABI and metadata for a contract address.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -750,7 +764,7 @@ and a deployment object being created and returned.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a Dict with keys <cite>abi</cite> and <cite>metadata</cite>.</p>
+<dd class="field-even"><p>an account object.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
@@ -774,10 +788,10 @@ nickname or alias.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a Dict with keys <cite>abi</cite> and <cite>metadata</cite>.</p>
+<dd class="field-even"><p>a list of account objects</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1651,17 +1665,28 @@ Otherwise a new design is created via a POST.</p>
 <dd><p>POST <code class="docutils literal notranslate"><span class="pre">/user/accounts/set/</span></code></p>
 <p>Create a new account for the current user.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>network_subtype</strong> (<em>str</em>) – The blockchain subtype.</p></li>
+<li><p><strong>network</strong> (<em>str</em>) – The blockchain name.</p></li>
+<li><p><strong>nickname</strong> (<em>str</em>) – The account nickname.</p></li>
+<li><p><strong>alias</strong> (<em>str</em>) – The account alias.</p></li>
+<li><p><strong>address</strong> (<em>str</em>) – The account address.</p></li>
+<li><p><strong>private_key</strong> (<em>str</em>) – The account private key.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>network_type</strong> (<cite>Optional[str]</cite>)</p></li>
 <li><p><strong>login</strong> (<cite>Optional[Login]</cite>)</p></li>
 <li><p><strong>config</strong> (<cite>Optional[ConnectionConfig]</cite>)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a Dict with keys <cite>abi</cite> and <cite>metadata</cite>.</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>an account object.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>

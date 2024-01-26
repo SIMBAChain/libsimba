@@ -1852,7 +1852,7 @@ class SimbaSync:
         config: ConnectionConfig = None,
     ) -> dict:
         """
-        GET ``/services/contracts/abi/{contract_address}/``
+        GET ``/services/blockchains/{blockchain}/contracts/{contract_address}/abi/``
 
         Get the ABI and metadata for a contract address.
 
@@ -1890,8 +1890,8 @@ class SimbaSync:
             * **alias** (`Optional[str]`)
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
-        :return: a Dict with keys `abi` and `metadata`.
-        :rtype: dict
+        :return: a list of account objects
+        :rtype: list
         """
         params = None
         if nickname or alias:
@@ -1921,7 +1921,7 @@ class SimbaSync:
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
-        :return: a Dict with keys `abi` and `metadata`.
+        :return: an account object.
         :rtype: dict
         """
         return SimbaRequest(
@@ -1944,10 +1944,19 @@ class SimbaSync:
 
         Create a new account for the current user.
 
+        :param network_subtype: The blockchain subtype.
+        :type network_subtype: str
+        :param network: The blockchain name.
+        :type network: str
+        :param nickname: The account nickname.
+        :type nickname: str
+        :param alias: The account alias.
+        :type alias: str
+
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
-        :return: a Dict with keys `abi` and `metadata`.
+        :return: an account object.
         :rtype: dict
         """
         payload = {
@@ -1980,10 +1989,24 @@ class SimbaSync:
 
         Create a new account for the current user.
 
+        :param network_subtype: The blockchain subtype.
+        :type network_subtype: str
+        :param network: The blockchain name.
+        :type network: str
+        :param nickname: The account nickname.
+        :type nickname: str
+        :param alias: The account alias.
+        :type alias: str
+        :param address: The account address.
+        :type address: str
+        :param private_key: The account private key.
+        :type private_key: str
+
         :Keyword Arguments:
+            * **network_type** (`Optional[str]`)
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
-        :return: a Dict with keys `abi` and `metadata`.
+        :return: an account object.
         :rtype: dict
         """
         payload = {
@@ -2010,14 +2033,19 @@ class SimbaSync:
         config: ConnectionConfig = None,
     ) -> dict:
         """
-        POST ``/user/accounts/{id}``
+        POST ``/user/accounts/{account_id}/sign/``
 
-        Get the account for the current user to sign inputs.
+        Sign a message using the specified account.
+
+        :param uid: The account id.
+        :type uid: str
+        :param input_pairs: A list of tuples defining the data type and data to sign.
+        :type input_pairs: List[Tuple(str, Any)]
 
         :Keyword Arguments:
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
-        :return: a Dict with keys `abi` and `metadata`.
+        :return: a Dict with the signed content.
         :rtype: dict
         """
         payload = {
