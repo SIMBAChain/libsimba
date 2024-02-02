@@ -104,7 +104,7 @@ class AsyncRunner(Runner):
         self.templates.assert_structure("account", accounts, many=True)
         if len(accounts) > 0:
             uid = accounts[0].get("id")
-            account = simba.get_account(uid=uid)
+            account = await simba.get_account(uid=uid)
             self.templates.assert_structure("account", account)
             inputs = [("string", "hello"), ("uint256", 10)]
             sig = await simba.account_sign(uid=uid, input_pairs=inputs, hash_message=True)

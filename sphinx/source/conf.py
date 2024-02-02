@@ -23,7 +23,7 @@ copyright = '2023, SIMBA Chain Inc.'
 author = 'SIMBA Chain Inc.'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.0'
+release = '1.3.3'
 
 
 # -- General configuration ---------------------------------------------------

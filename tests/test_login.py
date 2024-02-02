@@ -2,7 +2,9 @@ import unittest
 import respx
 import re
 from httpx import Response
-from libsimba import Login, AuthFlow, SimbaRequest
+from libsimba import Login, AuthFlow, SimbaRequest, ConnectionConfig
+from libsimba.auth import AuthProvider, AuthToken
+from libsimba.config import settings
 import pytest
 
 login_pattern = re.compile(r".*/o/token.*")
@@ -91,3 +93,24 @@ class TestAuthRequired(unittest.TestCase):
         self.assertEqual(
             ({"bob": "test", "Authorization": "Bearer 10000000000000"}, {}), resp
         )
+
+    def test_token_expired(self) -> None:
+
+
+        token = AuthToken(**{
+            "token": "64YU6BPTqM6SJcrYbbkgVtOjRy3zgx",
+            "type": "Bearer",
+            "expires": "2024-01-24T08:21:11.190578"}
+        )
+
+        class TestProvider(AuthProvider):
+            async def login(self, client_id: str, client_secret: str, config: ConnectionConfig = None) -> AuthToken:
+                return token
+
+            def login_sync(self, client_id: str, client_secret: str, config: ConnectionConfig = None) -> AuthToken:
+                return token
+
+        prov = TestProvider()
+        client_id = "me"
+
+        print(prov.get_cached_token(client_id=client_id))

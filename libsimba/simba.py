@@ -724,6 +724,7 @@ class Simba(SimbaSync):
         code: str,
         app_name=None,
         args=None,
+        encode: bool = True,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> Tuple[str, str]:
@@ -735,6 +736,7 @@ class Simba(SimbaSync):
             code=code,
             args=args,
             app_name=app_name,
+            encode=encode,
             login=login,
             config=config
         )
@@ -759,6 +761,8 @@ class Simba(SimbaSync):
         storage: Optional[str] = "no_storage",
         display_name: str = None,
         args: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
     ) -> Tuple[str, str]:
 
         res = await self.deploy_design(
@@ -770,6 +774,8 @@ class Simba(SimbaSync):
             storage=storage,
             args=args,
             display_name=display_name,
+            login=login,
+            config=config
         )
         deployment_id = res["deployment_id"]
         try:
@@ -792,6 +798,8 @@ class Simba(SimbaSync):
         storage: Optional[str] = "no_storage",
         display_name: str = None,
         args: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
     ) -> Tuple[str, str]:
 
         res = await self.deploy_artifact(
@@ -803,6 +811,8 @@ class Simba(SimbaSync):
             storage=storage,
             args=args,
             display_name=display_name,
+            login=login,
+            config=config
         )
         deployment_id = res["id"]
         try:

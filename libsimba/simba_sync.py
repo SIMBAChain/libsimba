@@ -1546,10 +1546,35 @@ class SimbaSync:
         code: str,
         app_name=None,
         args=None,
+        encode: bool = True,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> Tuple[str, str]:
+        """
+        POST ``/v2/organisations/{organisation}/deployments/library/``
 
+        Deploy a library and wait for completion.
+        This results in a deployment object being created and returned.
+
+        :param org: The organisation to deploy to.
+        :type org: str
+        :param code: The library code.
+        :type code: str
+        :param lib_name: The name of the library.
+        :type lib_name: str
+        :param blockchain: The name of the blockchain to deploy to.
+        :type blockchain: str
+        :param encode: whether to base64 encode the code or not.
+        :type encode: bool
+
+        :Keyword Arguments:
+            * **app_name** (`str`) - App name for the library.
+            * **args** (`dict`) - Constructor args for the deployment.
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: A tuple of address and contract ID
+        :rtype: Tuple[str, str]
+        """
         res = self.deploy_library(
             org=org,
             lib_name=lib_name,
@@ -1557,6 +1582,7 @@ class SimbaSync:
             code=code,
             args=args,
             app_name=app_name,
+            encode=encode,
             login=login,
             config=config
         )
@@ -1581,6 +1607,8 @@ class SimbaSync:
         storage: Optional[str] = "no_storage",
         display_name: str = None,
         args: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
     ) -> Tuple[str, str]:
         """
         POST ``/v2/organisations/{organisation}/contract_designs/deploy/``
@@ -1617,6 +1645,8 @@ class SimbaSync:
             storage=storage,
             args=args,
             display_name=display_name,
+            login=login,
+            config=config
         )
         deployment_id = res["deployment_id"]
         try:
@@ -1639,6 +1669,8 @@ class SimbaSync:
         storage: Optional[str] = "no_storage",
         display_name: str = None,
         args: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
     ) -> Tuple[str, str]:
         """
         POST ``/v2/organisations/{organisation}/contract_artifacts/``
@@ -1675,6 +1707,8 @@ class SimbaSync:
             storage=storage,
             args=args,
             display_name=display_name,
+            login=login,
+            config=config
         )
         deployment_id = res["id"]
         try:
