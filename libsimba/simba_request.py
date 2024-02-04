@@ -511,7 +511,7 @@ class SimbaRequest(object):
                 return self._process_response(response)
             json_payload = json_payload or {}
             if self.method == "PUT":
-                response = await async_client.post(
+                response = await async_client.put(
                     self.url,
                     headers=headers,
                     json=json_payload,
