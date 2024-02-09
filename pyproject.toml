@@ -13,7 +13,7 @@ packages = [
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
 httpx = "0.24.1"
-pydantic = "2.1.1"
+pydantic = ">=2.1.1,<=2.6.1"
 pydantic-settings = "^2.0.3"
 
 [tool.poetry.dev-dependencies]
