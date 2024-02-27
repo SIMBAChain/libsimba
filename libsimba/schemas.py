@@ -183,7 +183,7 @@ class TxnHeaders(BaseModel):
             headers[TxnHeaderName.VALUE.value] = self.value
         if self.account:
             if self.account[0] is not None:
-                headers[TxnHeaderName.ACCOUNT.value] = f"{self.account[0]}: {self.account[1]}"
+                headers[TxnHeaderName.ACCOUNT.value] = f"{self.account[0]}:{self.account[1]}"
             else:
                 headers[TxnHeaderName.ACCOUNT.value] = self.account[1]
         return headers
