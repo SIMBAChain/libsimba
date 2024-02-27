@@ -149,6 +149,7 @@ class TxnHeaderName(str, Enum):
     SENDER_TOKEN = "txn-sender-token"
     SENDER = "txn-sender"
     VALUE = "txn-value"
+    ACCOUNT = "txn-account"
 
 
 class TxnHeaders(BaseModel):
@@ -160,6 +161,7 @@ class TxnHeaders(BaseModel):
     sender_token: Optional[str] = None
     sender: Optional[str] = None
     value: Optional[str] = None
+    account: Optional[Tuple[Optional[str], str]] = None
 
     def as_headers(self) -> dict:
         headers = {}
@@ -179,6 +181,11 @@ class TxnHeaders(BaseModel):
             headers[TxnHeaderName.SENDER.value] = self.sender
         if self.value:
             headers[TxnHeaderName.VALUE.value] = self.value
+        if self.account:
+            if self.account[0] is not None:
+                headers[TxnHeaderName.ACCOUNT.value] = f"{self.account[0]}: {self.account[1]}"
+            else:
+                headers[TxnHeaderName.ACCOUNT.value] = self.account[1]
         return headers
 
 

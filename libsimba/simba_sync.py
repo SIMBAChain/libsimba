@@ -1910,6 +1910,7 @@ class SimbaSync:
         self,
         nickname: Optional[str] = None,
         alias: Optional[str] = None,
+        network: Optional[str] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> List[dict]:
@@ -1934,7 +1935,8 @@ class SimbaSync:
                 params.add_filter(FieldFilter(field="nickname", op=FilterOp.EQ, value=nickname))
             if alias:
                 params.add_filter(FieldFilter(field="alias", op=FilterOp.EQ, value=alias))
-
+            if network:
+                params.add_filter(FieldFilter(field="networks", op=FilterOp.EQ, value=network))
         return SimbaRequest(
             endpoint=Path.USER_ACCOUNTS,
             query_params=params,
