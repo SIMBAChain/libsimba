@@ -101,7 +101,7 @@ class Settings(BaseSettings):
         self.AUTH_BASE_URL = auth_base
         return self
 
-    model_config = SettingsConfigDict(env_file=locate_config(), env_prefix="SIMBA_")
+    model_config = SettingsConfigDict(env_file=locate_config(), env_prefix="SIMBA_", extra="ignore")
 
 
 class SettingsObject:
