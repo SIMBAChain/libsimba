@@ -232,13 +232,13 @@ def async_http_client(config: schemas.ConnectionConfig = None) -> httpx.AsyncCli
     :rtype: httpx.AsyncClient
     """
     if not config:
-        config = schemas.ConnectionConfig(timeout=settings().CONNECTION_TIMEOUT)
+        config = schemas.ConnectionConfig(timeout=settings().CONNECTION_TIMEOUT, verify=settings().SSL_VERIFY)
     transport = RetryTransport(
-        AsyncHTTPTransport(retries=config.connection_retries),
+        AsyncHTTPTransport(retries=config.connection_retries, verify=config.verify, http2=config.http2),
         max_attempts=config.max_attempts,
     )
     return httpx.AsyncClient(
-        timeout=config.timeout, transport=transport, http2=config.http2
+        timeout=config.timeout, transport=transport
     )
 
 
@@ -251,12 +251,12 @@ def http_client(config: schemas.ConnectionConfig = None) -> httpx.Client:
     :rtype: httpx.Client
     """
     if not config:
-        config = schemas.ConnectionConfig(timeout=settings().CONNECTION_TIMEOUT)
+        config = schemas.ConnectionConfig(timeout=settings().CONNECTION_TIMEOUT, verify=settings().SSL_VERIFY)
     transport = RetryTransport(
-        HTTPTransport(retries=config.connection_retries),
+        HTTPTransport(retries=config.connection_retries, verify=config.verify, http2=config.http2),
         max_attempts=config.max_attempts,
     )
-    return httpx.Client(timeout=config.timeout, transport=transport, http2=config.http2)
+    return httpx.Client(timeout=config.timeout, transport=transport)
 
 
 def build_url(base_api_url: str, path: str, query_dict: Optional[dict]):

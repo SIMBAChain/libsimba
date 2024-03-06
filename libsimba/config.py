@@ -23,7 +23,7 @@ import logging
 from logging.config import dictConfig, fileConfig
 import os
 
-from typing import Optional
+from typing import Optional, Union
 
 from libsimba.schemas import AuthFlow, AuthProviderName
 from pydantic import field_validator, model_validator
@@ -72,7 +72,9 @@ class Settings(BaseSettings):
     """ If set to true, tokens will be cached on the file system. Otherwise they are cached in memory """
     TOKEN_DIR: str = "./"
     """ If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored."""
-    CONNECTION_TIMEOUT: Optional[float] = 5.0
+    CONNECTION_TIMEOUT: float = 5.0
+    """ A path to a cert file or false to turn off verification """
+    SSL_VERIFY: Union[bool, str] = True
     """ connection timeout in seconds for requests. Default is 5 which is the httpx default"""
     LOG_LEVEL: Optional[str] = None
     """

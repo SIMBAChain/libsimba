@@ -55,6 +55,8 @@ class ConnectionConfig(BaseModel):
     connection_retries: int = 1
     max_attempts: int = 3
     http2: bool = False
+    # a path to a cert file or false to turn off verification
+    verify: Optional[Union[bool, str]] = None
 
 
 class Login(BaseModel):
