@@ -73,9 +73,9 @@ class Settings(BaseSettings):
     TOKEN_DIR: str = "./"
     """ If WRITE_TOKEN_TO_FILE is true, this should be set to where tokens should be stored."""
     CONNECTION_TIMEOUT: float = 5.0
-    """ A path to a cert file or false to turn off verification """
-    SSL_VERIFY: Union[bool, str] = True
     """ connection timeout in seconds for requests. Default is 5 which is the httpx default"""
+    SSL_VERIFY: Union[bool, str] = True
+    """ A path to a cert file or false to turn off verification """
     LOG_LEVEL: Optional[str] = None
     """
     Set the log level of the 'libsimba' logger.
