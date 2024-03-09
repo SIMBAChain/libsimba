@@ -307,6 +307,7 @@ document.write(`
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../auth/index.html">libsimba.auth</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../auth/client_credentials.html">libsimba.client_credentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth/apikey.html">libsimba.apikey</a></li>
 </ul>
 </li>
 </ul>
@@ -460,6 +461,22 @@ document.write(`
 </dd>
 </dl>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="libsimba.simba_request.Pager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libsimba.simba_request.</span></span><span class="sig-name descname"><span class="pre">Pager</span></span><a class="headerlink" href="#libsimba.simba_request.Pager" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libsimba.simba_request.Pager.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.Pager.list" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libsimba.simba_request.Pager.next">
+<span class="sig-name descname"><span class="pre">next</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.Pager.next" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -837,7 +854,7 @@ this is used rather than performing a login.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libsimba.simba_request.SimbaRequest.retrieve_iter_sync">
 <span class="sig-name descname"><span class="pre">retrieve_iter_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="schemas.html#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libsimba.simba_request.SimbaRequest.retrieve_iter_sync" title="Permalink to this definition">#</a></dt>
-<dd><p>Get multiple results as a generator. This will loop through paging if the result is pageed.</p>
+<dd><p>Get multiple results as a generator. This will loop through paging if the result is paged.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1004,6 +1021,11 @@ this is used rather than performing a login.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.simba_request.GetRequest"><code class="docutils literal notranslate"><span class="pre">GetRequest</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.simba_request.GetRequest.get"><code class="docutils literal notranslate"><span class="pre">GetRequest.get()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.simba_request.GetRequest.get_sync"><code class="docutils literal notranslate"><span class="pre">GetRequest.get_sync()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.simba_request.Pager"><code class="docutils literal notranslate"><span class="pre">Pager</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.simba_request.Pager.list"><code class="docutils literal notranslate"><span class="pre">Pager.list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.simba_request.Pager.next"><code class="docutils literal notranslate"><span class="pre">Pager.next()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.simba_request.PatchRequest"><code class="docutils literal notranslate"><span class="pre">PatchRequest</span></code></a><ul class="nav section-nav flex-column">

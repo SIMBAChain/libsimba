@@ -307,6 +307,7 @@ document.write(`
 </li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">libsimba.auth</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="client_credentials.html">libsimba.client_credentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apikey.html">libsimba.apikey</a></li>
 </ul>
 </li>
 </ul>
@@ -366,11 +367,35 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="libsimba-auth">
-<h1>libsimba.auth<a class="headerlink" href="#libsimba-auth" title="Permalink to this heading">#</a></h1>
+  <section id="module-libsimba.auth">
+<span id="libsimba-auth"></span><h1>libsimba.auth<a class="headerlink" href="#module-libsimba.auth" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="libsimba.auth.AuthProvider">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libsimba.auth.</span></span><span class="sig-name descname"><span class="pre">AuthProvider</span></span><a class="headerlink" href="#libsimba.auth.AuthProvider" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libsimba.auth.AuthProvider.login">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_secret</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../libsimba/schemas.html#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../libsimba/schemas.html#libsimba.schemas.AuthToken" title="libsimba.schemas.AuthToken"><span class="pre">AuthToken</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#libsimba.auth.AuthProvider.login" title="Permalink to this definition">#</a></dt>
+<dd><p>Login by adding headers and return a token</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libsimba.auth.AuthProvider.login_sync">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">login_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_secret</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../libsimba/schemas.html#libsimba.schemas.ConnectionConfig" title="libsimba.schemas.ConnectionConfig"><span class="pre">ConnectionConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../libsimba/schemas.html#libsimba.schemas.AuthToken" title="libsimba.schemas.AuthToken"><span class="pre">AuthToken</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#libsimba.auth.AuthProvider.login_sync" title="Permalink to this definition">#</a></dt>
+<dd><p>Login by adding headers  and return a token</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libsimba.auth.AuthProvider.provider">
+<span class="sig-name descname"><span class="pre">provider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../libsimba/schemas.html#libsimba.schemas.AuthProviderName" title="libsimba.schemas.AuthProviderName"><span class="pre">AuthProviderName</span></a></span></span><a class="headerlink" href="#libsimba.auth.AuthProvider.provider" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="client_credentials.html">libsimba.client_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apikey.html">libsimba.apikey</a></li>
 </ul>
 </div>
 </section>
@@ -412,6 +437,23 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.auth.AuthProvider"><code class="docutils literal notranslate"><span class="pre">AuthProvider</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.auth.AuthProvider.login"><code class="docutils literal notranslate"><span class="pre">AuthProvider.login()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.auth.AuthProvider.login_sync"><code class="docutils literal notranslate"><span class="pre">AuthProvider.login_sync()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.auth.AuthProvider.provider"><code class="docutils literal notranslate"><span class="pre">AuthProvider.provider()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

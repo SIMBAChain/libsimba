@@ -20,14 +20,15 @@
 
 import json
 import logging
-from logging.config import dictConfig, fileConfig
 import os
 
+from logging.config import dictConfig, fileConfig
 from typing import Optional, Union
 
 from libsimba.schemas import AuthFlow, AuthProviderName
 from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 ENV_HOME = "SIMBA_HOME"
 ENV_FILENAME = "simbachain.env"
@@ -103,7 +104,9 @@ class Settings(BaseSettings):
         self.AUTH_BASE_URL = auth_base
         return self
 
-    model_config = SettingsConfigDict(env_file=locate_config(), env_prefix="SIMBA_", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=locate_config(), env_prefix="SIMBA_", extra="ignore"
+    )
 
 
 class SettingsObject:

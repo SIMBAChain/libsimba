@@ -27,12 +27,12 @@ from enum import Enum
 from time import sleep
 from typing import Dict, Iterable, Mapping, Optional, Union
 from urllib.parse import urlencode, urlparse, urlunparse
-from libsimba.config import settings
 
 import httpx
 
 from httpx import AsyncHTTPTransport, HTTPTransport
 from libsimba import schemas
+from libsimba.config import settings
 
 
 class Path(str, Enum):
@@ -90,7 +90,9 @@ class Path(str, Enum):
     def create(self, *args) -> str:
         slots = self.value.count("{}")
         if slots != len(args):
-            raise ValueError(f"Incorrect number of args ({len(args)}) supplied to {self.value}")
+            raise ValueError(
+                f"Incorrect number of args ({len(args)}) supplied to {self.value}"
+            )
         return self.value.format(*args)
 
 
@@ -232,14 +234,16 @@ def async_http_client(config: schemas.ConnectionConfig = None) -> httpx.AsyncCli
     :rtype: httpx.AsyncClient
     """
     if not config:
-        config = schemas.ConnectionConfig(timeout=settings().CONNECTION_TIMEOUT, verify=settings().SSL_VERIFY)
+        config = schemas.ConnectionConfig(
+            timeout=settings().CONNECTION_TIMEOUT, verify=settings().SSL_VERIFY
+        )
     transport = RetryTransport(
-        AsyncHTTPTransport(retries=config.connection_retries, verify=config.verify, http2=config.http2),
+        AsyncHTTPTransport(
+            retries=config.connection_retries, verify=config.verify, http2=config.http2
+        ),
         max_attempts=config.max_attempts,
     )
-    return httpx.AsyncClient(
-        timeout=config.timeout, transport=transport
-    )
+    return httpx.AsyncClient(timeout=config.timeout, transport=transport)
 
 
 def http_client(config: schemas.ConnectionConfig = None) -> httpx.Client:
@@ -251,9 +255,13 @@ def http_client(config: schemas.ConnectionConfig = None) -> httpx.Client:
     :rtype: httpx.Client
     """
     if not config:
-        config = schemas.ConnectionConfig(timeout=settings().CONNECTION_TIMEOUT, verify=settings().SSL_VERIFY)
+        config = schemas.ConnectionConfig(
+            timeout=settings().CONNECTION_TIMEOUT, verify=settings().SSL_VERIFY
+        )
     transport = RetryTransport(
-        HTTPTransport(retries=config.connection_retries, verify=config.verify, http2=config.http2),
+        HTTPTransport(
+            retries=config.connection_retries, verify=config.verify, http2=config.http2
+        ),
         max_attempts=config.max_attempts,
     )
     return httpx.Client(timeout=config.timeout, transport=transport)

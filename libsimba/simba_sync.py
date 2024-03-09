@@ -28,16 +28,27 @@ from libsimba.config import settings
 from libsimba.schemas import (
     ConnectionConfig,
     FieldFilter,
-    FilterOp,
     FileDict,
+    FilterOp,
     Login,
     MethodCallArgs,
     SearchFilter,
     TxnHeaders,
 )
 from libsimba.simba_contract_sync import SimbaContractSync
-from libsimba.simba_request import GetRequest, PatchRequest, PostRequest, PutRequest, SimbaRequest
-from libsimba.utils import Path, get_address, get_deployed_artifact_id, get_address_by_name
+from libsimba.simba_request import (
+    GetRequest,
+    PatchRequest,
+    PostRequest,
+    PutRequest,
+    SimbaRequest,
+)
+from libsimba.utils import (
+    Path,
+    get_address,
+    get_address_by_name,
+    get_deployed_artifact_id,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -1584,7 +1595,7 @@ class SimbaSync:
             app_name=app_name,
             encode=encode,
             login=login,
-            config=config
+            config=config,
         )
         deployment_id = res["deployment_id"]
         try:
@@ -1592,7 +1603,11 @@ class SimbaSync:
             address = get_address_by_name(deployed, lib_name)
             library_id = get_deployed_artifact_id(deployed)
         except Exception as ex:
-            logger.warning("[wait_for_deploy_library] :: failed to wait for deployment: {}".format(ex))
+            logger.warning(
+                "[wait_for_deploy_library] :: failed to wait for deployment: {}".format(
+                    ex
+                )
+            )
             address = None
             library_id = None
         return address, library_id
@@ -1646,7 +1661,7 @@ class SimbaSync:
             args=args,
             display_name=display_name,
             login=login,
-            config=config
+            config=config,
         )
         deployment_id = res["deployment_id"]
         try:
@@ -1708,7 +1723,7 @@ class SimbaSync:
             args=args,
             display_name=display_name,
             login=login,
-            config=config
+            config=config,
         )
         deployment_id = res["id"]
         try:
@@ -1932,11 +1947,17 @@ class SimbaSync:
         if nickname or alias:
             params = SearchFilter()
             if nickname:
-                params.add_filter(FieldFilter(field="nickname", op=FilterOp.EQ, value=nickname))
+                params.add_filter(
+                    FieldFilter(field="nickname", op=FilterOp.EQ, value=nickname)
+                )
             if alias:
-                params.add_filter(FieldFilter(field="alias", op=FilterOp.EQ, value=alias))
+                params.add_filter(
+                    FieldFilter(field="alias", op=FilterOp.EQ, value=alias)
+                )
             if network:
-                params.add_filter(FieldFilter(field="networks", op=FilterOp.EQ, value=network))
+                params.add_filter(
+                    FieldFilter(field="networks", op=FilterOp.EQ, value=network)
+                )
         return SimbaRequest(
             endpoint=Path.USER_ACCOUNTS,
             query_params=params,
@@ -1996,11 +2017,11 @@ class SimbaSync:
         :rtype: dict
         """
         payload = {
-          "network_type": network_type,
-          "network_subtype": network_subtype,
-          "network": network,
-          "nickname": nickname,
-          "alias": alias
+            "network_type": network_type,
+            "network_subtype": network_subtype,
+            "network": network,
+            "nickname": nickname,
+            "alias": alias,
         }
         return SimbaRequest(
             method="POST",
@@ -2046,13 +2067,13 @@ class SimbaSync:
         :rtype: dict
         """
         payload = {
-          "network_type": network_type,
-          "network_subtype": network_subtype,
-          "network": network,
-          "nickname": nickname,
-          "alias": alias,
-          "public_key": address,
-          "private_key": private_key
+            "network_type": network_type,
+            "network_subtype": network_subtype,
+            "network": network,
+            "nickname": nickname,
+            "alias": alias,
+            "public_key": address,
+            "private_key": private_key,
         }
         return SimbaRequest(
             method="POST",
@@ -2086,7 +2107,7 @@ class SimbaSync:
         """
         payload = {
             "input_pairs": [list(t) for t in input_pairs],
-            "hash_message": hash_message
+            "hash_message": hash_message,
         }
         return SimbaRequest(
             method="POST",
@@ -2259,11 +2280,15 @@ class SimbaSync:
     def add_event_name(
         self,
         event_name: Optional[str] = None,
-        query_args: Optional[SearchFilter] = None
+        query_args: Optional[SearchFilter] = None,
     ) -> Optional[SearchFilter]:
         if event_name:
             if not query_args:
                 query_args = SearchFilter()
-            if not query_args.has_filter_value(field="event_name", op=FilterOp.EQ, value=event_name):
-                query_args.add_filter(FieldFilter(op=FilterOp.EQ, field="event_name", value=event_name))
+            if not query_args.has_filter_value(
+                field="event_name", op=FilterOp.EQ, value=event_name
+            ):
+                query_args.add_filter(
+                    FieldFilter(op=FilterOp.EQ, field="event_name", value=event_name)
+                )
         return query_args

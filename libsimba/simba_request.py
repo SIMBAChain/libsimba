@@ -21,7 +21,7 @@
 import json
 import logging
 
-from typing import AsyncGenerator, Generator, List, Optional, Union
+from typing import Any, AsyncGenerator, Dict, Generator, List, Optional, Tuple, Union
 
 import httpx
 
@@ -46,6 +46,30 @@ from libsimba.utils import async_http_client, build_url, http_client
 PROVIDERS = {"client_credentials": ClientCredentials()}
 
 logger = logging.getLogger(__name__)
+
+
+class Pager:
+
+    def list(self, page: Dict[str, Any]) -> List[Any]:
+        if page.get("results"):
+            return page["results"]
+        elif page.get("items"):
+            return page["items"]
+        return []
+
+    def next(
+        self, url: str, page: Dict[str, Any], params: Dict[str, Any]
+    ) -> Tuple[Optional[str], Optional[Dict[str, Any]]]:
+        if page.get("results"):
+            return page.get("next"), None
+        elif page.get("items"):
+            curr_page = int(page.get("page", "1"))
+            total_pages = int(page.get("pages", "1"))
+            if curr_page < total_pages:
+                params["page"] = curr_page + 1
+                params["size"] = int(page.get("size", "50"))
+                return url, params
+        return None, None
 
 
 class SimbaRequest(object):
@@ -171,13 +195,12 @@ class SimbaRequest(object):
         :rtype: dict
         """
         headers = headers or {}
-        if headers.get("Authorization") is None:
-            auth_token = PROVIDERS[login.auth_flow].login_sync(
-                client_id=login.client_id,
-                client_secret=login.client_secret,
-                config=config,
-            )
-            headers["Authorization"] = f"Bearer {auth_token.token}"
+        _ = PROVIDERS[login.auth_flow].login_sync(
+            client_id=login.client_id,
+            client_secret=login.client_secret,
+            headers=headers,
+            config=config,
+        )
         return headers
 
     @staticmethod
@@ -199,13 +222,12 @@ class SimbaRequest(object):
         :rtype: dict
         """
         headers = headers or {}
-        if headers.get("Authorization") is None:
-            auth_token = await PROVIDERS[login.auth_flow].login(
-                client_id=login.client_id,
-                client_secret=login.client_secret,
-                config=config,
-            )
-            headers["Authorization"] = f"Bearer {auth_token.token}"
+        _ = await PROVIDERS[login.auth_flow].login(
+            client_id=login.client_id,
+            client_secret=login.client_secret,
+            headers=headers,
+            config=config,
+        )
         return headers
 
     async def download(
@@ -381,7 +403,7 @@ class SimbaRequest(object):
         config: ConnectionConfig = None,
     ) -> Generator[List[dict], None, None]:
         """
-        Get multiple results as a generator. This will loop through paging if the result is pageed.
+        Get multiple results as a generator. This will loop through paging if the result is paged.
 
         :Keyword Arguments:
             * **headers** (`Optional[dict]`) - optional headers
@@ -392,15 +414,21 @@ class SimbaRequest(object):
         headers = SimbaRequest.login(self.curr_login, headers, config=config)
         logger.debug(self.log_me(headers=headers, current_method="retrieve_iter_sync"))
         with http_client(config=config) as client:
+            pager = Pager()
             next_page_url = self.url
+            params = self.query_params
             while next_page_url is not None:
-                r = client.get(next_page_url, headers=headers, follow_redirects=True)
+                r = client.get(
+                    next_page_url, headers=headers, follow_redirects=True, params=params
+                )
                 self._json_response = self._json_response_or_raise(r)
-                results = self._json_response.get("results")
+                results = pager.list(self._json_response)
                 if not results:
                     yield None
                     return
-                next_page_url = self._json_response.get("next")
+                next_page_url, params = pager.next(
+                    url=next_page_url, page=self._json_response, params=params
+                )
                 yield results
 
     def retrieve_sync(
@@ -420,9 +448,10 @@ class SimbaRequest(object):
         headers = SimbaRequest.login(self.curr_login, headers, config=config)
         logger.debug(self.log_me(headers=headers, current_method="retrieve_sync"))
         with http_client(config=config) as client:
+            pager = Pager()
             r = client.get(self.url, headers=headers, follow_redirects=True)
             self._json_response = self._json_response_or_raise(r)
-            results = self.json_response.get("results")
+            results = pager.list(self.json_response)
         return results
 
     async def retrieve_iter(
@@ -444,17 +473,21 @@ class SimbaRequest(object):
         )
         logger.debug(self.log_me(headers=headers, current_method="retrieve_iter"))
         async with async_http_client(config=config) as async_client:
+            pager = Pager()
             next_page_url = self.url
+            params = self.query_params
             while next_page_url is not None:
                 r = await async_client.get(
-                    next_page_url, headers=headers, follow_redirects=True
+                    next_page_url, headers=headers, follow_redirects=True, params=params
                 )
                 self._json_response = self._json_response_or_raise(r)
-                results = self._json_response.get("results")
+                results = pager.list(self._json_response)
                 if not results:
                     yield None
                     break
-                next_page_url = self._json_response.get("next")
+                next_page_url, params = pager.next(
+                    url=next_page_url, page=self._json_response, params=params
+                )
                 yield results
 
     async def retrieve(
@@ -476,9 +509,10 @@ class SimbaRequest(object):
         )
         logger.debug(self.log_me(headers=headers, current_method="retrieve"))
         async with async_http_client(config=config) as async_client:
+            pager = Pager()
             r = await async_client.get(self.url, headers=headers, follow_redirects=True)
             self._json_response = self._json_response_or_raise(r)
-            results = self.json_response.get("results")
+            results = pager.list(self.json_response)
         return results
 
     async def send(
@@ -564,7 +598,7 @@ class SimbaRequest(object):
             response.raise_for_status()
         except (InvalidURL, ConnectError, ProtocolError, ValueError) as e:
             raise SimbaInvalidURLException(str(e))
-        except (RequestError) as e:
+        except RequestError as e:
             raise SimbaRequestException(f"{e} :: {self._response.text}")
         except Exception as e:
             raise LibSimbaException(message=f"{e} :: {self._response.text}")

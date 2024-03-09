@@ -25,22 +25,24 @@ from enum import Enum
 from pathlib import Path
 from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Union
 
-from pydantic import BaseModel, field_validator, model_validator, FieldValidationInfo
+from pydantic import BaseModel, FieldValidationInfo, field_validator, model_validator
 
 
 class AuthFlow(str, Enum):
     CLIENT_CREDENTIALS = "client_credentials"
+    API_KEY = "api-key"
 
 
 class AuthProviderName(str, Enum):
     BLK = "BLK"
     KC = "KC"
     NOOP = "NOOP"
+    PLAT = "PLAT"
 
 
 class AuthToken(BaseModel):
     token: str
-    type: str
+    type: Optional[str] = None
     expires: datetime
 
     @field_validator("expires")
@@ -67,9 +69,12 @@ class Login(BaseModel):
     @field_validator("client_secret")
     def set_secret(cls, v: Optional[str], info: FieldValidationInfo) -> str:
         values = info.data
-        if not v and values.get("auth_flow") == AuthFlow.CLIENT_CREDENTIALS:
+        if not v and values.get("auth_flow") in [
+            AuthFlow.CLIENT_CREDENTIALS,
+            AuthFlow.API_KEY,
+        ]:
             raise ValueError(
-                "Client Secret is required if auth flow is client-credentials"
+                "Client Secret is required if auth flow is client-credentials or api key"
             )
         return v
 
@@ -105,6 +110,8 @@ class SearchFilter(BaseModel):
     fields: Optional[List[str]] = None
     limit: Optional[int] = None
     offset: Optional[int] = None
+    page: Optional[int] = None
+    size: Optional[int] = None
 
     def has_filter(self, field: str):
         for filter in self.filters:
@@ -139,6 +146,10 @@ class SearchFilter(BaseModel):
             q["limit"] = self.limit
         if self.offset:
             q["offset"] = self.offset
+        if self.page:
+            q["page"] = self.page
+        if self.size:
+            q["size"] = self.size
         return q
 
 
@@ -185,7 +196,9 @@ class TxnHeaders(BaseModel):
             headers[TxnHeaderName.VALUE.value] = self.value
         if self.account:
             if self.account[0] is not None:
-                headers[TxnHeaderName.ACCOUNT.value] = f"{self.account[0]}:{self.account[1]}"
+                headers[TxnHeaderName.ACCOUNT.value] = (
+                    f"{self.account[0]}:{self.account[1]}"
+                )
             else:
                 headers[TxnHeaderName.ACCOUNT.value] = self.account[1]
         return headers
