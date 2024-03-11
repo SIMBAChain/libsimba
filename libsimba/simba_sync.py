@@ -2136,6 +2136,311 @@ class SimbaSync:
             login=login,
         ).send_sync(config=config, json_payload=payload, headers=headers or {})
 
+    def account_address_sign(
+        self,
+        blockchain: str,
+        address: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/accounts/{account_id}/sign/``
+
+        Sign a message using the specified account.
+
+        :param org: The organisation.
+        :type org: str
+        :param blockchain: The blockchain.
+        :type blockchain: str
+        :param address: The account address.
+        :type address: str
+        :param input_pairs: A list of tuples defining the data type and data to sign.
+        :type input_pairs: List[Tuple(str, Any)]
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with the signed content.
+        :rtype: dict
+        """
+        payload = {
+            "input_pairs": [list(t) for t in input_pairs],
+            "hash_message": hash_message,
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_ACCOUNT_ADDRESS_SIGN.format(blockchain, address),
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+    def get_org_accounts(
+        self,
+        org: str,
+        nickname: Optional[str] = None,
+        alias: Optional[str] = None,
+        network: Optional[str] = None,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> List[dict]:
+        """
+        GET ``/user/accounts/``
+
+        Get the accounts for the current user. Optionally filter on
+        nickname or alias.
+
+        :param org: The organisation.
+        :type org: str
+
+        :Keyword Arguments:
+            * **nickname** (`Optional[str]`)
+            * **alias** (`Optional[str]`)
+            * **network** (`Optional[str]`)
+            * **headers** (`Optional[dict]`) additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a list of account objects
+        :rtype: list
+        """
+        params = None
+        if nickname or alias:
+            params = SearchFilter()
+            if nickname:
+                params.add_filter(
+                    FieldFilter(field="nickname", op=FilterOp.EQ, value=nickname)
+                )
+            if alias:
+                params.add_filter(
+                    FieldFilter(field="alias", op=FilterOp.EQ, value=alias)
+                )
+            if network:
+                params.add_filter(
+                    FieldFilter(field="networks", op=FilterOp.EQ, value=network)
+                )
+        return SimbaRequest(
+            endpoint=Path.ORG_ACCOUNTS.create(org),
+            query_params=params,
+            login=login,
+        ).retrieve_sync(config=config, headers=headers or {})
+
+    def get_org_account(
+        self,
+        org: str,
+        uid: str,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        GET ``/user/accounts/{id}``
+
+        Get the account for the current user with the given id.
+
+        :param org: The organisation.
+        :type org: str
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: an account object.
+        :rtype: dict
+        """
+        return SimbaRequest(
+            endpoint=Path.ORG_ACCOUNT.format(org, uid),
+            login=login,
+        ).send_sync(config=config, headers=headers or {})
+
+    def create_org_account(
+        self,
+        org: str,
+        network_subtype: str,
+        network: str,
+        nickname: str,
+        alias: str,
+        network_type: Optional[str] = "ethereum",
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/accounts/``
+
+        Create a new account for the current user.
+
+        :param org: The organisation.
+        :type org: str
+        :param network_subtype: The blockchain subtype.
+        :type network_subtype: str
+        :param network: The blockchain name.
+        :type network: str
+        :param nickname: The account nickname.
+        :type nickname: str
+        :param alias: The account alias.
+        :type alias: str
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: an account object.
+        :rtype: dict
+        """
+        payload = {
+            "network_type": network_type,
+            "network_subtype": network_subtype,
+            "network": network,
+            "nickname": nickname,
+            "alias": alias,
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.ORG_ACCOUNTS.create(org),
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+    def set_org_account(
+        self,
+        org: str,
+        network_subtype: str,
+        network: str,
+        nickname: str,
+        alias: str,
+        address: str,
+        private_key: str,
+        network_type: Optional[str] = "ethereum",
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/accounts/set/``
+
+        Create a new account for the current user.
+
+        :param org: The organisation.
+        :type org: str
+        :param network_subtype: The blockchain subtype.
+        :type network_subtype: str
+        :param network: The blockchain name.
+        :type network: str
+        :param nickname: The account nickname.
+        :type nickname: str
+        :param alias: The account alias.
+        :type alias: str
+        :param address: The account address.
+        :type address: str
+        :param private_key: The account private key.
+        :type private_key: str
+
+        :Keyword Arguments:
+            * **network_type** (`Optional[str]`)
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: an account object.
+        :rtype: dict
+        """
+        payload = {
+            "network_type": network_type,
+            "network_subtype": network_subtype,
+            "network": network,
+            "nickname": nickname,
+            "alias": alias,
+            "public_key": address,
+            "private_key": private_key,
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.ORG_ACCOUNT_SET.create(org),
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+    def org_account_sign(
+        self,
+        org: str,
+        uid: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/accounts/{account_id}/sign/``
+
+        Sign a message using the specified account.
+
+        :param org: The organisation.
+        :type org: str
+        :param uid: The account id.
+        :type uid: str
+        :param input_pairs: A list of tuples defining the data type and data to sign.
+        :type input_pairs: List[Tuple(str, Any)]
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with the signed content.
+        :rtype: dict
+        """
+        payload = {
+            "input_pairs": [list(t) for t in input_pairs],
+            "hash_message": hash_message,
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.ORG_ACCOUNT_SIGN.create(org, uid),
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+    def org_account_address_sign(
+        self,
+        org: str,
+        blockchain: str,
+        address: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/accounts/{account_id}/sign/``
+
+        Sign a message using the specified account.
+
+        :param org: The organisation.
+        :type org: str
+        :param blockchain: The blockchain.
+        :type blockchain: str
+        :param address: The account address.
+        :type address: str
+        :param input_pairs: A list of tuples defining the data type and data to sign.
+        :type input_pairs: List[Tuple(str, Any)]
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a Dict with the signed content.
+        :rtype: dict
+        """
+        payload = {
+            "input_pairs": [list(t) for t in input_pairs],
+            "hash_message": hash_message,
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.ORG_ACCOUNT_ADDRESS_SIGN.format(org, blockchain, address),
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
     def subscribe(
         self,
         org: str,

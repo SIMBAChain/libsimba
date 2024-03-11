@@ -79,7 +79,7 @@ class TestSimba(unittest.TestCase):
             txn={"txn": "data"},
         )
         self.mock_send.assert_called_once_with(
-            headers=None,
+            headers={},
             json_payload={"transaction": {"txn": "data"}},
             files=None,
             config=None,
@@ -94,7 +94,7 @@ class TestSimba(unittest.TestCase):
             txn={"txn": "data"},
         )
         self.mock_send.assert_called_once_with(
-            headers=None,
+            headers={},
             json_payload={"transaction": {"txn": "data"}},
             files=None,
             config=None,

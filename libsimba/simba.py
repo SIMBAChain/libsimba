@@ -1035,6 +1035,165 @@ class Simba(SimbaSync):
             login=login,
         ).send(config=config, json_payload=payload)
 
+    async def account_address_sign(
+        self,
+        blockchain: str,
+        address: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        payload = {
+            "input_pairs": [list(t) for t in input_pairs],
+            "hash_message": hash_message,
+        }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_ACCOUNT_ADDRESS_SIGN.create(blockchain, address),
+            login=login,
+        ).send(config=config, json_payload=payload)
+
+    async def get_org_accounts(
+        self,
+        org: str,
+        nickname: Optional[str] = None,
+        alias: Optional[str] = None,
+        network: Optional[str] = None,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> List[dict]:
+        params = None
+        if nickname or alias:
+            params = SearchFilter()
+            if nickname:
+                params.add_filter(
+                    FieldFilter(field="nickname", op=FilterOp.EQ, value=nickname)
+                )
+            if alias:
+                params.add_filter(
+                    FieldFilter(field="alias", op=FilterOp.EQ, value=alias)
+                )
+            if network:
+                params.add_filter(
+                    FieldFilter(field="networks", op=FilterOp.EQ, value=network)
+                )
+        return await SimbaRequest(
+            endpoint=Path.ORG_ACCOUNTS.create(org),
+            query_params=params,
+            login=login,
+        ).retrieve(config=config, headers=headers or {})
+
+    async def get_org_account(
+        self,
+        org: str,
+        uid: str,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        return await SimbaRequest(
+            endpoint=Path.ORG_ACCOUNT.create(org, uid),
+            login=login,
+        ).send(config=config, headers=headers or {})
+
+    async def create_org_account(
+        self,
+        org: str,
+        network_subtype: str,
+        network: str,
+        nickname: str,
+        alias: str,
+        network_type: Optional[str] = "ethereum",
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        payload = {
+            "network_type": network_type,
+            "network_subtype": network_subtype,
+            "network": network,
+            "nickname": nickname,
+            "alias": alias,
+        }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.ORG_ACCOUNTS.create(org),
+            login=login,
+        ).send(config=config, json_payload=payload, headers=headers or {})
+
+    async def set_org_account(
+        self,
+        org: str,
+        network_subtype: str,
+        network: str,
+        nickname: str,
+        alias: str,
+        address: str,
+        private_key: str,
+        network_type: Optional[str] = "ethereum",
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        payload = {
+            "network_type": network_type,
+            "network_subtype": network_subtype,
+            "network": network,
+            "nickname": nickname,
+            "alias": alias,
+            "public_key": address,
+            "private_key": private_key,
+        }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.ORG_ACCOUNT_SET.create(org),
+            login=login,
+        ).send(config=config, json_payload=payload, headers=headers or {})
+
+    async def org_account_sign(
+        self,
+        org: str,
+        uid: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        payload = {
+            "input_pairs": [list(t) for t in input_pairs],
+            "hash_message": hash_message,
+        }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.ORG_ACCOUNT_SIGN.create(org, uid),
+            login=login,
+        ).send(config=config, json_payload=payload)
+
+    async def org_account_address_sign(
+        self,
+        org: str,
+        blockchain: str,
+        address: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        payload = {
+            "input_pairs": [list(t) for t in input_pairs],
+            "hash_message": hash_message,
+        }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.ORG_ACCOUNT_ADDRESS_SIGN.create(org, blockchain, address),
+            login=login,
+        ).send(config=config, json_payload=payload)
+
     async def get_artifacts(
         self,
         org: str,
@@ -1042,7 +1201,7 @@ class Simba(SimbaSync):
         config: ConnectionConfig = None,
     ) -> List[dict]:
         return await SimbaRequest(
-            endpoint=Path.CONTRACT_ARTIFACTS.format(org),
+            endpoint=Path.CONTRACT_ARTIFACTS.create(org),
             login=login,
         ).retrieve(config=config)
 
