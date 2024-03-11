@@ -512,13 +512,15 @@ class Simba(SimbaSync):
         app_id: str,
         contract_name: str,
         method_name: str,
-        inputs: Optional[dict],
+        inputs: Optional[dict] = None,
+        headers: Optional[dict] = None,
         files: FileDict = None,
         txn_headers: TxnHeaders = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
-        headers = txn_headers.as_headers() if txn_headers else {}
+        headers = headers or {}
+        headers.update(txn_headers.as_headers() if txn_headers else {})
         inputs = inputs if inputs else {}
         result = await PostRequest(
             endpoint=Path.CONTRACT_METHOD.format(app_id, contract_name, method_name),
@@ -532,26 +534,29 @@ class Simba(SimbaSync):
         contract_name: str,
         method_name: str,
         args: Optional[MethodCallArgs] = None,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
         return await GetRequest(
             endpoint=Path.CONTRACT_METHOD.format(app_id, contract_name, method_name),
             login=login,
-        ).call(config=config, args=args)
+        ).call(config=config, args=args, headers=headers or {})
 
     async def submit_contract_method_sync(
         self,
         app_id: str,
         contract_name: str,
         method_name: str,
-        inputs: Optional[dict],
+        inputs: Optional[dict] = None,
+        headers: Optional[dict] = None,
         files: FileDict = None,
         txn_headers: TxnHeaders = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
-        headers = txn_headers.as_headers() if txn_headers else {}
+        headers = headers or {}
+        headers.update(txn_headers.as_headers() if txn_headers else {})
         inputs = inputs if inputs else {}
         result = await PostRequest(
             endpoint=Path.SYNC_CONTRACT_METHOD.format(
@@ -567,12 +572,13 @@ class Simba(SimbaSync):
         app_id: str,
         txn_id: str,
         txn: dict,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
         return await PatchRequest(
             endpoint=Path.APP_TXN.format(app_id, txn_id), login=login
-        ).patch(json_payload={"transaction": txn}, config=config)
+        ).patch(json_payload={"transaction": txn}, config=config, headers=headers or {})
 
     async def save_design(
         self,
@@ -921,6 +927,7 @@ class Simba(SimbaSync):
         nickname: Optional[str] = None,
         alias: Optional[str] = None,
         network: Optional[str] = None,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> List[dict]:
@@ -943,18 +950,19 @@ class Simba(SimbaSync):
             endpoint=Path.USER_ACCOUNTS,
             query_params=params,
             login=login,
-        ).retrieve(config=config)
+        ).retrieve(config=config, headers=headers or {})
 
     async def get_account(
         self,
         uid: str,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
         return await SimbaRequest(
             endpoint=Path.USER_ACCOUNT.format(uid),
             login=login,
-        ).send(config=config)
+        ).send(config=config, headers=headers or {})
 
     async def create_account(
         self,
@@ -963,6 +971,7 @@ class Simba(SimbaSync):
         nickname: str,
         alias: str,
         network_type: Optional[str] = "ethereum",
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
@@ -977,7 +986,7 @@ class Simba(SimbaSync):
             method="POST",
             endpoint=Path.USER_ACCOUNTS,
             login=login,
-        ).send(config=config, json_payload=payload)
+        ).send(config=config, json_payload=payload, headers=headers or {})
 
     async def set_account(
         self,
@@ -988,6 +997,7 @@ class Simba(SimbaSync):
         address: str,
         private_key: str,
         network_type: Optional[str] = "ethereum",
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
@@ -1004,13 +1014,14 @@ class Simba(SimbaSync):
             method="POST",
             endpoint=Path.USER_ACCOUNT_SET,
             login=login,
-        ).send(config=config, json_payload=payload)
+        ).send(config=config, json_payload=payload, headers=headers or {})
 
     async def account_sign(
         self,
         uid: str,
         input_pairs: List[Tuple[str, Any]],
         hash_message: Optional[bool] = False,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:

@@ -1131,7 +1131,8 @@ class SimbaSync:
         app_id: str,
         contract_name: str,
         method_name: str,
-        inputs: Optional[dict],
+        inputs: Optional[dict] = None,
+        headers: Optional[dict] = None,
         files: Optional[FileDict] = None,
         txn_headers: TxnHeaders = None,
         login: Login = None,
@@ -1152,6 +1153,7 @@ class SimbaSync:
 
         :Keyword Arguments:
             * **inputs** (`Optional[dict]`) - method parameters as a dictionary
+            * **headers** (`Optional[dict]`) - additional http headers
             * **files** (`Optional[FileDict]`) - optional off chain files to upload
             * **txn_headers** (`Optional[TxnHeaders]`) - optional transaction related headers to include
             * **login** (`Optional[Login]`)
@@ -1159,7 +1161,8 @@ class SimbaSync:
         :return: The transaction
         :rtype: dict
         """
-        headers = txn_headers.as_headers() if txn_headers else {}
+        headers = headers or {}
+        headers.update(txn_headers.as_headers() if txn_headers else {})
         inputs = inputs if inputs else {}
         result = PostRequest(
             endpoint=Path.CONTRACT_METHOD.format(app_id, contract_name, method_name),
@@ -1173,6 +1176,7 @@ class SimbaSync:
         contract_name: str,
         method_name: str,
         args: Optional[MethodCallArgs] = None,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
@@ -1190,23 +1194,25 @@ class SimbaSync:
 
         :Keyword Arguments:
             * **args** (`Optional[MethodCallArgs]`) - optional method parameters as a dict
-            * **txn_headers** (`Optional[TxnHeaders]`) - optional transaction related headers to include
+            * **headers** (`Optional[dict]`) - additional http headers
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: The getter response. The `value` field contains the result.
         :rtype: dict
         """
+        headers = headers or {}
         return GetRequest(
             endpoint=Path.CONTRACT_METHOD.format(app_id, contract_name, method_name),
             login=login,
-        ).call_sync(config=config, args=args)
+        ).call_sync(config=config, args=args, headers=headers)
 
     def submit_contract_method_sync(
         self,
         app_id: str,
         contract_name: str,
         method_name: str,
-        inputs: Optional[dict],
+        inputs: Optional[dict] = None,
+        headers: Optional[dict] = None,
         files: FileDict = None,
         txn_headers: TxnHeaders = None,
         login: Login = None,
@@ -1227,6 +1233,7 @@ class SimbaSync:
 
         :Keyword Arguments:
             * **inputs** (`Optional[dict]`) - method parameters as a dictionary
+            * **headers** (`Optional[dict]`) - additional http headers
             * **files** (`Optional[FileDict]`) - optional off chain files to upload
             * **txn_headers** (`Optional[TxnHeaders]`) - optional transaction related headers to include
             * **login** (`Optional[Login]`)
@@ -1234,7 +1241,8 @@ class SimbaSync:
         :return: The transaction
         :rtype: dict
         """
-        headers = txn_headers.as_headers() if txn_headers else {}
+        headers = headers or {}
+        headers.update(txn_headers.as_headers() if txn_headers else {})
         inputs = inputs if inputs else {}
         result = PostRequest(
             endpoint=Path.SYNC_CONTRACT_METHOD.format(
@@ -1250,6 +1258,7 @@ class SimbaSync:
         app_id: str,
         txn_id: str,
         txn: dict,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ):
@@ -1271,9 +1280,10 @@ class SimbaSync:
         :return: The transaction
         :rtype: dict
         """
+        headers = headers or {}
         return PatchRequest(
             endpoint=Path.APP_TXN.format(app_id, txn_id), login=login
-        ).patch_sync(json_payload={"transaction": txn}, config=config)
+        ).patch_sync(json_payload={"transaction": txn}, config=config, headers=headers)
 
     def save_design(
         self,
@@ -1293,7 +1303,7 @@ class SimbaSync:
         POST/PUT ``/v2/organisations/{organisation}/contract_designs/``
 
         Save a contract design, aka the code. If the design ID is given, this results in an update via a PUT.
-        Otherwise a new design is created via a POST.
+        Otherwise, a new design is created via a POST.
 
         :param org: The organisation to save to.
         :type org: str
@@ -1926,6 +1936,7 @@ class SimbaSync:
         nickname: Optional[str] = None,
         alias: Optional[str] = None,
         network: Optional[str] = None,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> List[dict]:
@@ -1938,6 +1949,8 @@ class SimbaSync:
         :Keyword Arguments:
             * **nickname** (`Optional[str]`)
             * **alias** (`Optional[str]`)
+            * **network** (`Optional[str]`)
+            * **headers** (`Optional[dict]`) additional http headers
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: a list of account objects
@@ -1962,11 +1975,12 @@ class SimbaSync:
             endpoint=Path.USER_ACCOUNTS,
             query_params=params,
             login=login,
-        ).retrieve_sync(config=config)
+        ).retrieve_sync(config=config, headers=headers or {})
 
     def get_account(
         self,
         uid: str,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
@@ -1976,6 +1990,7 @@ class SimbaSync:
         Get the account for the current user with the given id.
 
         :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: an account object.
@@ -1984,7 +1999,7 @@ class SimbaSync:
         return SimbaRequest(
             endpoint=Path.USER_ACCOUNT.format(uid),
             login=login,
-        ).send_sync(config=config)
+        ).send_sync(config=config, headers=headers or {})
 
     def create_account(
         self,
@@ -1993,6 +2008,7 @@ class SimbaSync:
         nickname: str,
         alias: str,
         network_type: Optional[str] = "ethereum",
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
@@ -2011,6 +2027,7 @@ class SimbaSync:
         :type alias: str
 
         :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: an account object.
@@ -2027,7 +2044,7 @@ class SimbaSync:
             method="POST",
             endpoint=Path.USER_ACCOUNTS,
             login=login,
-        ).send_sync(config=config, json_payload=payload)
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
 
     def set_account(
         self,
@@ -2038,6 +2055,7 @@ class SimbaSync:
         address: str,
         private_key: str,
         network_type: Optional[str] = "ethereum",
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
@@ -2061,6 +2079,7 @@ class SimbaSync:
 
         :Keyword Arguments:
             * **network_type** (`Optional[str]`)
+            * **headers** (`Optional[dict]`) - additional http headers
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: an account object.
@@ -2079,13 +2098,14 @@ class SimbaSync:
             method="POST",
             endpoint=Path.USER_ACCOUNT_SET,
             login=login,
-        ).send_sync(config=config, json_payload=payload)
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
 
     def account_sign(
         self,
         uid: str,
         input_pairs: List[Tuple[str, Any]],
         hash_message: Optional[bool] = False,
+        headers: Optional[dict] = None,
         login: Login = None,
         config: ConnectionConfig = None,
     ) -> dict:
@@ -2100,6 +2120,7 @@ class SimbaSync:
         :type input_pairs: List[Tuple(str, Any)]
 
         :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
             * **login** (`Optional[Login]`)
             * **config** (`Optional[ConnectionConfig]`)
         :return: a Dict with the signed content.
@@ -2113,7 +2134,7 @@ class SimbaSync:
             method="POST",
             endpoint=Path.USER_ACCOUNT_SIGN.format(uid),
             login=login,
-        ).send_sync(config=config, json_payload=payload)
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
 
     def subscribe(
         self,
