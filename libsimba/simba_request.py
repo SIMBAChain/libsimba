@@ -79,6 +79,8 @@ class SimbaRequest(object):
         method: str = "GET",
         query_params: Union[dict, SearchFilter] = None,
         login: Login = None,
+        base_url: Optional[str] = None,
+        authenticated: bool = True,
     ):
         """
         Create a SimbaRequest
@@ -99,6 +101,8 @@ class SimbaRequest(object):
             query_params = query_params.filter_query
         self.query_params = query_params
         self.curr_login = login or self.default_login
+        self.base_url = base_url
+        self.authenticated = authenticated
         self.method = method.upper()
         self._status = -1
         self._response = None
@@ -145,7 +149,10 @@ class SimbaRequest(object):
         :return: the URL
         :rtype: str
         """
-        return build_url(settings().API_BASE_URL, self.endpoint, self.query_params)
+        if self.base_url:
+            return build_url(self.base_url, self.endpoint, self.query_params)
+        else:
+            return build_url(settings().API_BASE_URL, self.endpoint, self.query_params)
 
     @property
     def response(self) -> httpx.Response:
@@ -179,7 +186,10 @@ class SimbaRequest(object):
 
     @staticmethod
     def login(
-        login: Login, headers: Optional[dict] = None, config: ConnectionConfig = None
+        login: Login,
+        headers: Optional[dict] = None,
+        config: ConnectionConfig = None,
+        authenticated: bool = True,
     ) -> dict:
         """
         Login. If an Authorization header is found in the headers,
@@ -195,6 +205,8 @@ class SimbaRequest(object):
         :rtype: dict
         """
         headers = headers or {}
+        if not authenticated:
+            return headers
         _ = PROVIDERS[login.auth_flow].login_sync(
             client_id=login.client_id,
             client_secret=login.client_secret,
@@ -205,7 +217,10 @@ class SimbaRequest(object):
 
     @staticmethod
     async def async_login(
-        login: Login, headers: Optional[dict] = None, config: ConnectionConfig = None
+        login: Login,
+        headers: Optional[dict] = None,
+        config: ConnectionConfig = None,
+        authenticated: bool = True,
     ) -> dict:
         """
         Async login. If an Authorization header is found in the headers,
@@ -222,6 +237,8 @@ class SimbaRequest(object):
         :rtype: dict
         """
         headers = headers or {}
+        if not authenticated:
+            return headers
         _ = await PROVIDERS[login.auth_flow].login(
             client_id=login.client_id,
             client_secret=login.client_secret,
@@ -247,7 +264,9 @@ class SimbaRequest(object):
             * **config** (`Optional[ConnectionConfig]`)
         :return: None
         """
-        headers = await SimbaRequest.async_login(self.curr_login, headers)
+        headers = await SimbaRequest.async_login(
+            self.curr_login, headers, config, self.authenticated
+        )
         logger.debug(self.log_me(headers=headers, current_method="download"))
         with open(location, "wb") as output:
             async with async_http_client(config=config) as async_client:
@@ -274,7 +293,9 @@ class SimbaRequest(object):
             * **config** (`Optional[ConnectionConfig]`)
         :return: None
         """
-        headers = SimbaRequest.login(self.curr_login, headers, config=config)
+        headers = SimbaRequest.login(
+            self.curr_login, headers, config=config, authenticated=self.authenticated
+        )
         logger.debug(self.log_me(headers=headers, current_method="download_sync"))
         with open(location, "wb") as output:
             with http_client(config=config) as client:
@@ -300,8 +321,17 @@ class SimbaRequest(object):
         :return: return value dictionary containing, return value, request ID and status
         :rtype: dict
         """
-        headers = SimbaRequest.login(self.curr_login, headers, config=config)
-        params = args.args if args else None
+        headers = SimbaRequest.login(
+            self.curr_login, headers, config=config, authenticated=self.authenticated
+        )
+        params = None
+        if args and args.args:
+            params = {}
+            for k, p in args.args.items():
+                if isinstance(p, (dict, list)):
+                    params[k] = json.dumps(p, separators=(",", ":"))
+                else:
+                    params[k] = p
         logger.debug(
             self.log_me(headers=headers, params=params, current_method="call_sync")
         )
@@ -328,9 +358,16 @@ class SimbaRequest(object):
         :rtype: dict
         """
         headers = await SimbaRequest.async_login(
-            self.curr_login, headers, config=config
+            self.curr_login, headers, config=config, authenticated=self.authenticated
         )
-        params = args.args if args else None
+        params = None
+        if args and args.args:
+            params = {}
+            for k, p in args.args.items():
+                if isinstance(p, (dict, list)):
+                    params[k] = json.dumps(p, separators=(",", ":"))
+                else:
+                    params[k] = p
         logger.debug(self.log_me(headers=headers, params=params, current_method="call"))
         async with async_http_client(config=config) as async_client:
             response = await async_client.get(
@@ -356,7 +393,9 @@ class SimbaRequest(object):
         :return: A dictionary response object
         :rtype: dict
         """
-        headers = SimbaRequest.login(self.curr_login, headers, config=config)
+        headers = SimbaRequest.login(
+            self.curr_login, headers, config=config, authenticated=self.authenticated
+        )
         logger.debug(self.log_me(headers=headers, current_method="send_sync"))
         with http_client(config=config) as client:
             if self.method == "GET":
@@ -411,7 +450,9 @@ class SimbaRequest(object):
         :return: A generator of lists of dicts
         :rtype: Generator[List[dict], None, None]
         """
-        headers = SimbaRequest.login(self.curr_login, headers, config=config)
+        headers = SimbaRequest.login(
+            self.curr_login, headers, config=config, authenticated=self.authenticated
+        )
         logger.debug(self.log_me(headers=headers, current_method="retrieve_iter_sync"))
         with http_client(config=config) as client:
             pager = Pager()
@@ -445,7 +486,9 @@ class SimbaRequest(object):
         :return: A list of objects
         :rtype: List[dict]
         """
-        headers = SimbaRequest.login(self.curr_login, headers, config=config)
+        headers = SimbaRequest.login(
+            self.curr_login, headers, config=config, authenticated=self.authenticated
+        )
         logger.debug(self.log_me(headers=headers, current_method="retrieve_sync"))
         with http_client(config=config) as client:
             pager = Pager()
@@ -469,7 +512,7 @@ class SimbaRequest(object):
         :rtype: AsyncGenerator[List[dict], None]
         """
         headers = await SimbaRequest.async_login(
-            self.curr_login, headers, config=config
+            self.curr_login, headers, config=config, authenticated=self.authenticated
         )
         logger.debug(self.log_me(headers=headers, current_method="retrieve_iter"))
         async with async_http_client(config=config) as async_client:
@@ -505,7 +548,7 @@ class SimbaRequest(object):
         :rtype: List[dict]
         """
         headers = await SimbaRequest.async_login(
-            self.curr_login, headers, config=config
+            self.curr_login, headers, config=config, authenticated=self.authenticated
         )
         logger.debug(self.log_me(headers=headers, current_method="retrieve"))
         async with async_http_client(config=config) as async_client:
@@ -534,7 +577,7 @@ class SimbaRequest(object):
         :rtype: dict
         """
         headers = await SimbaRequest.async_login(
-            self.curr_login, headers, config=config
+            self.curr_login, headers, config=config, authenticated=self.authenticated
         )
         logger.debug(self.log_me(headers=headers, current_method="send"))
         async with async_http_client(config=config) as async_client:
