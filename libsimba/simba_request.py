@@ -654,9 +654,16 @@ class GetRequest(SimbaRequest):
         endpoint: str,
         query_params: Union[dict, SearchFilter] = None,
         login: Login = None,
+        base_url: Optional[str] = None,
+        authenticated: bool = True,
     ):
         super().__init__(
-            endpoint=endpoint, method="GET", query_params=query_params, login=login
+            endpoint=endpoint,
+            method="GET",
+            query_params=query_params,
+            login=login,
+            base_url=base_url,
+            authenticated=authenticated,
         )
 
     def get_sync(
@@ -697,8 +704,16 @@ class PostRequest(SimbaRequest):
         self,
         endpoint: str,
         login: Login = None,
+        base_url: Optional[str] = None,
+        authenticated: bool = True,
     ):
-        super().__init__(endpoint=endpoint, method="POST", login=login)
+        super().__init__(
+            endpoint=endpoint,
+            method="POST",
+            login=login,
+            base_url=base_url,
+            authenticated=authenticated,
+        )
 
     def post_sync(
         self,
@@ -750,8 +765,16 @@ class PutRequest(SimbaRequest):
         self,
         endpoint: str,
         login: Login = None,
+        base_url: Optional[str] = None,
+        authenticated: bool = True,
     ):
-        super().__init__(endpoint=endpoint, method="PUT", login=login)
+        super().__init__(
+            endpoint=endpoint,
+            method="PUT",
+            login=login,
+            base_url=base_url,
+            authenticated=authenticated,
+        )
 
     def put_sync(
         self,
@@ -803,8 +826,16 @@ class PatchRequest(SimbaRequest):
         self,
         endpoint: str,
         login: Login = None,
+        base_url: Optional[str] = None,
+        authenticated: bool = True,
     ):
-        super().__init__(endpoint=endpoint, method="PATCH", login=login)
+        super().__init__(
+            endpoint=endpoint,
+            method="PATCH",
+            login=login,
+            base_url=base_url,
+            authenticated=authenticated,
+        )
 
     def patch_sync(
         self,
@@ -856,8 +887,16 @@ class DeleteRequest(SimbaRequest):
         self,
         endpoint: str,
         login: Login = None,
+        base_url: Optional[str] = None,
+        authenticated: bool = True,
     ):
-        super().__init__(endpoint=endpoint, method="DELETE", login=login)
+        super().__init__(
+            endpoint=endpoint,
+            method="DELETE",
+            login=login,
+            base_url=base_url,
+            authenticated=authenticated,
+        )
 
     def delete_sync(
         self,
