@@ -1295,6 +1295,7 @@ class SimbaSync:
         libraries: dict = None,
         encode: bool = True,
         model: str = None,
+        extras: Optional[dict] = None,
         binary_targets: List[str] = None,
         login: Login = None,
         config: ConnectionConfig = None,
@@ -1341,6 +1342,8 @@ class SimbaSync:
             full["model"] = model
         if binary_targets is not None:
             full["binary_targets"] = binary_targets
+        if extras is not None:
+            full["extras"] = extras
         if not config:
             config = ConnectionConfig()
         if config.timeout < 120:  # while this is sync, we need to be patient
