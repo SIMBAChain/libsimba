@@ -378,6 +378,11 @@ document.write(`
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>An enumeration.</p>
 <dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ADMIN_ACCOUNTS">
+<span class="sig-name descname"><span class="pre">ADMIN_ACCOUNTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/admin/accounts/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ADMIN_ACCOUNTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="libsimba.utils.Path.ADMIN_WALLET_SET">
 <span class="sig-name descname"><span class="pre">ADMIN_WALLET_SET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/admin/users/{}/wallet/set/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ADMIN_WALLET_SET" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
@@ -538,6 +543,31 @@ document.write(`
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_ACCOUNT">
+<span class="sig-name descname"><span class="pre">ORG_ACCOUNT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/accounts/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_ACCOUNT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_ACCOUNTS">
+<span class="sig-name descname"><span class="pre">ORG_ACCOUNTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/accounts/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_ACCOUNTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_ACCOUNT_ADDRESS_SIGN">
+<span class="sig-name descname"><span class="pre">ORG_ACCOUNT_ADDRESS_SIGN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/accounts/{}/sign/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_ACCOUNT_ADDRESS_SIGN" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_ACCOUNT_SET">
+<span class="sig-name descname"><span class="pre">ORG_ACCOUNT_SET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/accounts/set/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_ACCOUNT_SET" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.ORG_ACCOUNT_SIGN">
+<span class="sig-name descname"><span class="pre">ORG_ACCOUNT_SIGN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/accounts/{}/sign/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_ACCOUNT_SIGN" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="libsimba.utils.Path.ORG_APP">
 <span class="sig-name descname"><span class="pre">ORG_APP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/v2/organisations/{}/applications/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.ORG_APP" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
@@ -585,6 +615,11 @@ document.write(`
 <dl class="py attribute">
 <dt class="sig sig-object py" id="libsimba.utils.Path.USER_ACCOUNTS">
 <span class="sig-name descname"><span class="pre">USER_ACCOUNTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/accounts/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_ACCOUNTS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="libsimba.utils.Path.USER_ACCOUNT_ADDRESS_SIGN">
+<span class="sig-name descname"><span class="pre">USER_ACCOUNT_ADDRESS_SIGN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/accounts/{}/sign/{}/'</span></em><a class="headerlink" href="#libsimba.utils.Path.USER_ACCOUNT_ADDRESS_SIGN" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -792,6 +827,7 @@ always closed.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ADMIN_ACCOUNTS"><code class="docutils literal notranslate"><span class="pre">Path.ADMIN_ACCOUNTS</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ADMIN_WALLET_SET"><code class="docutils literal notranslate"><span class="pre">Path.ADMIN_WALLET_SET</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.APP"><code class="docutils literal notranslate"><span class="pre">Path.APP</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.APPS"><code class="docutils literal notranslate"><span class="pre">Path.APPS</span></code></a></li>
@@ -824,6 +860,11 @@ always closed.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.NOTIFICATION_CONFIGS"><code class="docutils literal notranslate"><span class="pre">Path.NOTIFICATION_CONFIGS</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORGANISATION"><code class="docutils literal notranslate"><span class="pre">Path.ORGANISATION</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORGANISATIONS"><code class="docutils literal notranslate"><span class="pre">Path.ORGANISATIONS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_ACCOUNT"><code class="docutils literal notranslate"><span class="pre">Path.ORG_ACCOUNT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_ACCOUNTS"><code class="docutils literal notranslate"><span class="pre">Path.ORG_ACCOUNTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_ACCOUNT_ADDRESS_SIGN"><code class="docutils literal notranslate"><span class="pre">Path.ORG_ACCOUNT_ADDRESS_SIGN</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_ACCOUNT_SET"><code class="docutils literal notranslate"><span class="pre">Path.ORG_ACCOUNT_SET</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_ACCOUNT_SIGN"><code class="docutils literal notranslate"><span class="pre">Path.ORG_ACCOUNT_SIGN</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_APP"><code class="docutils literal notranslate"><span class="pre">Path.ORG_APP</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_APPS"><code class="docutils literal notranslate"><span class="pre">Path.ORG_APPS</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.ORG_TXN"><code class="docutils literal notranslate"><span class="pre">Path.ORG_TXN</span></code></a></li>
@@ -834,6 +875,7 @@ always closed.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.SYNC_CONTRACT_METHOD"><code class="docutils literal notranslate"><span class="pre">Path.SYNC_CONTRACT_METHOD</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNT"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNT</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNTS"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNTS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNT_ADDRESS_SIGN"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNT_ADDRESS_SIGN</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNT_SET"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNT_SET</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ACCOUNT_SIGN"><code class="docutils literal notranslate"><span class="pre">Path.USER_ACCOUNT_SIGN</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libsimba.utils.Path.USER_ADDRESS_BALANCE"><code class="docutils literal notranslate"><span class="pre">Path.USER_ADDRESS_BALANCE</span></code></a></li>

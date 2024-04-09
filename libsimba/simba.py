@@ -1058,6 +1058,59 @@ class Simba(SimbaSync):
             login=login,
         ).send(config=config, json_payload=payload)
 
+    async def admin_get_accounts(
+        self,
+        alias: Optional[str] = None,
+        network: Optional[str] = None,
+        owner_type: Optional[str] = None,
+        owner_identifier: Optional[str] = None,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> List[dict]:
+        """
+        GET ``/v2/organisations/{org}/accounts/``
+
+        Get the accounts for the current user. Optionally filter on
+        nickname or alias.
+
+        :Keyword Arguments:
+            * **nickname** (`Optional[str]`)
+            * **alias** (`Optional[str]`)
+            * **network** (`Optional[str]`)
+            * **owner_identifier** (`Optional[str]`)
+            * **owner_type** (`Optional[str]`)
+            * **headers** (`Optional[dict]`) additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a list of account objects
+        :rtype: list
+        """
+        params = None
+        if alias or network or owner_type:
+            params = SearchFilter()
+            if owner_type:
+                params.add_filter(
+                    FieldFilter(field="owner_type", op=FilterOp.EQ, value=owner_type)
+                )
+                if owner_identifier:
+                    params.add_filter(
+                        FieldFilter(field="owner_identifier", op=FilterOp.EQ, value=owner_identifier)
+                    )
+            if alias:
+                params.add_filter(
+                    FieldFilter(field="alias", op=FilterOp.EQ, value=alias)
+                )
+            if network:
+                params.add_filter(
+                    FieldFilter(field="networks", op=FilterOp.EQ, value=network)
+                )
+        return await SimbaRequest(
+            endpoint=Path.ADMIN_ACCOUNTS,
+            query_params=params,
+            login=login,
+        ).retrieve(config=config, headers=headers or {})
+
     async def get_org_accounts(
         self,
         org: str,

@@ -1960,7 +1960,7 @@ class SimbaSync:
         :rtype: list
         """
         params = None
-        if nickname or alias:
+        if nickname or alias or network:
             params = SearchFilter()
             if nickname:
                 params.add_filter(
@@ -2180,6 +2180,59 @@ class SimbaSync:
             login=login,
         ).send_sync(config=config, json_payload=payload, headers=headers or {})
 
+    def admin_get_accounts(
+        self,
+        alias: Optional[str] = None,
+        network: Optional[str] = None,
+        owner_type: Optional[str] = None,
+        owner_identifier: Optional[str] = None,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> List[dict]:
+        """
+        GET ``/v2/organisations/{org}/accounts/``
+
+        Get the accounts for the current user. Optionally filter on
+        nickname or alias.
+
+        :Keyword Arguments:
+            * **nickname** (`Optional[str]`)
+            * **alias** (`Optional[str]`)
+            * **network** (`Optional[str]`)
+            * **owner_identifier** (`Optional[str]`)
+            * **owner_type** (`Optional[str]`)
+            * **headers** (`Optional[dict]`) additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a list of account objects
+        :rtype: list
+        """
+        params = None
+        if alias or network or owner_type:
+            params = SearchFilter()
+            if owner_type:
+                params.add_filter(
+                    FieldFilter(field="owner_type", op=FilterOp.EQ, value=owner_type)
+                )
+                if owner_identifier:
+                    params.add_filter(
+                        FieldFilter(field="owner_identifier", op=FilterOp.EQ, value=owner_identifier)
+                    )
+            if alias:
+                params.add_filter(
+                    FieldFilter(field="alias", op=FilterOp.EQ, value=alias)
+                )
+            if network:
+                params.add_filter(
+                    FieldFilter(field="networks", op=FilterOp.EQ, value=network)
+                )
+        return SimbaRequest(
+            endpoint=Path.ADMIN_ACCOUNTS,
+            query_params=params,
+            login=login,
+        ).retrieve_sync(config=config, headers=headers or {})
+
     def get_org_accounts(
         self,
         org: str,
@@ -2191,7 +2244,7 @@ class SimbaSync:
         config: ConnectionConfig = None,
     ) -> List[dict]:
         """
-        GET ``/user/accounts/``
+        GET ``/v2/organisations/{org}/accounts/``
 
         Get the accounts for the current user. Optionally filter on
         nickname or alias.
@@ -2210,7 +2263,7 @@ class SimbaSync:
         :rtype: list
         """
         params = None
-        if nickname or alias:
+        if nickname or alias or network:
             params = SearchFilter()
             if nickname:
                 params.add_filter(
@@ -2239,7 +2292,7 @@ class SimbaSync:
         config: ConnectionConfig = None,
     ) -> dict:
         """
-        GET ``/user/accounts/{id}``
+        GET ``/v2/organisations/{org}/accounts/{id}``
 
         Get the account for the current user with the given id.
 
@@ -2271,7 +2324,7 @@ class SimbaSync:
         config: ConnectionConfig = None,
     ) -> dict:
         """
-        POST ``/user/accounts/``
+        POST ``/v2/organisations/{org}/accounts/``
 
         Create a new account for the current user.
 

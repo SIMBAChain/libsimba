@@ -69,6 +69,7 @@ class Path(str, Enum):
     ORGANISATION = "/v2/organisations/{}/"
     ORGANISATIONS = "/v2/organisations/"
     ORG_ACCOUNTS = "/v2/organisations/{}/accounts/"
+    ADMIN_ACCOUNTS = "/admin/accounts/"
     ORG_ACCOUNT = "/v2/organisations/{}/accounts/{}/"
     ORG_ACCOUNT_SIGN = "/v2/organisations/{}/accounts/{}/sign/"
     ORG_ACCOUNT_ADDRESS_SIGN = "/v2/organisations/{}/accounts/{}/sign/{}/"
