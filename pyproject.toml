@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "libsimba"
-version = "1.4.8"
+version = "1.4.9"
 description = "libsimba is a library simplifying the use of SIMBAChain Blocks APIs."
 authors = [
     "SIMBA Chain Inc."

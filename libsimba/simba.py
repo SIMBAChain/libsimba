@@ -1107,7 +1107,7 @@ class Simba(SimbaSync):
                 )
         return await SimbaRequest(
             endpoint=Path.ADMIN_ACCOUNTS,
-            query_params=params,
+            query_params=params.query,
             login=login,
         ).retrieve(config=config, headers=headers or {})
 
