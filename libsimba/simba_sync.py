@@ -2191,7 +2191,7 @@ class SimbaSync:
         config: ConnectionConfig = None,
     ) -> List[dict]:
         """
-        GET ``/v2/organisations/{org}/accounts/``
+        GET ``/admin/accounts/``
 
         Get the accounts for the current user. Optionally filter on
         nickname or alias.
@@ -2229,7 +2229,7 @@ class SimbaSync:
                 )
         return SimbaRequest(
             endpoint=Path.ADMIN_ACCOUNTS,
-            query_params=params,
+            query_params=params.query,
             login=login,
         ).retrieve_sync(config=config, headers=headers or {})
 

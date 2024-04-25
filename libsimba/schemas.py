@@ -152,6 +152,30 @@ class SearchFilter(BaseModel):
             q["size"] = self.size
         return q
 
+    @property
+    def query(self) -> dict:
+        q = {}
+        for filter in self.filters:
+            v = filter.value
+            if isinstance(filter.value, (list, tuple)):
+                v = [str(val) for val in filter.value]
+                v = ",".join(v)
+            if filter.op in [FilterOp.EXACT, FilterOp.EQ]:
+                q[filter.field] = v
+            else:
+                q["{}__{}".format(filter.field, filter.op.value)] = v
+        if self.fields:
+            q["fields"] = ",".join(self.fields)
+        if self.limit:
+            q["limit"] = self.limit
+        if self.offset:
+            q["offset"] = self.offset
+        if self.page:
+            q["page"] = self.page
+        if self.size:
+            q["size"] = self.size
+        return q
+
 
 class TxnHeaderName(str, Enum):
     DYNAMIC_PRICING = "txn-dynamic-pricing"

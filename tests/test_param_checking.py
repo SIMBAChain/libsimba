@@ -1,6 +1,7 @@
 import os
 import json
 import unittest
+from libsimba import SearchFilter, FieldFilter, FilterOp
 from libsimba.param_checking import ParamChecking
 from libsimba.utils import Path
 import respx
@@ -237,3 +238,40 @@ class ParamTestCase(unittest.TestCase):
         formatted = p.create("app", "org", "0x1234")
         self.assertEqual("/v2/apps/app/contract/org/transaction/0x1234/", formatted)
 
+    def test_query_serialization(self):
+        params = SearchFilter()
+        params.add_filter(
+            FieldFilter(field="owner_type", op=FilterOp.EQ, value="User")
+        )
+
+        params.add_filter(
+            FieldFilter(field="owner_identifier", op=FilterOp.EQ, value="franz@kakfa.org")
+        )
+
+        params.add_filter(
+            FieldFilter(field="alias", op=FilterOp.EQ, value="my alias")
+        )
+        params.add_filter(
+            FieldFilter(field="networks", op=FilterOp.EQ, value="quorum-foo-bar")
+        )
+        params.add_filter(
+            FieldFilter(field="num", op=FilterOp.GTE, value=3)
+        )
+        params.add_filter(
+            FieldFilter(field="lst", op=FilterOp.IN, value=[1, 2, 3])
+        )
+        self.assertEqual({
+            "owner_type": "User",
+            "owner_identifier": "franz@kakfa.org",
+            "alias": "my alias",
+            "networks": "quorum-foo-bar",
+            "num__gte": 3, "lst__in": "1,2,3"
+        }, params.query)
+        self.assertEqual({
+            "filter[owner_type]": "User",
+            "filter[owner_identifier]": "franz@kakfa.org",
+            "filter[alias]": "my alias",
+            "filter[networks]": "quorum-foo-bar",
+            "filter[num.gte]": 3,
+            "filter[lst.in]": "1,2,3"
+        }, params.filter_query)
