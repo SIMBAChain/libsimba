@@ -139,6 +139,7 @@ class SimbaRequest(object):
             auth_flow=settings().AUTH_FLOW,
             client_id=settings().AUTH_CLIENT_ID,
             client_secret=settings().AUTH_CLIENT_SECRET,
+            provider=settings().AUTH_PROVIDER,
         )
 
     @property
@@ -208,8 +209,7 @@ class SimbaRequest(object):
         if not authenticated:
             return headers
         _ = PROVIDERS[login.auth_flow].login_sync(
-            client_id=login.client_id,
-            client_secret=login.client_secret,
+            login=login,
             headers=headers,
             config=config,
         )
@@ -240,8 +240,7 @@ class SimbaRequest(object):
         if not authenticated:
             return headers
         _ = await PROVIDERS[login.auth_flow].login(
-            client_id=login.client_id,
-            client_secret=login.client_secret,
+            login=login,
             headers=headers,
             config=config,
         )

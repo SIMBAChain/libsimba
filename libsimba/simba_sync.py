@@ -2674,3 +2674,115 @@ class SimbaSync:
                     FieldFilter(op=FilterOp.EQ, field="event_name", value=event_name)
                 )
         return query_args
+
+    def create_secret(
+        self,
+        name: str,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/user/api_applications/``
+
+        create a user secret.
+
+        :param name: The secret name.
+        :type name: str
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a client secret
+        :rtype: dict
+        """
+        payload = {
+            "name": name,
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_SECRET,
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+    def admin_set_delegate(
+        self,
+        user: str,
+        delegate: bool,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/admin/users/{user}/delegate/``
+
+        Set the user as delegate.
+
+        :param user: The user ID.
+        :type user: str
+        :param delegate: To delegate or not.
+        :type delegate: bool
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a delegate setting.
+        :rtype: dict
+        """
+        payload = {
+            "delegate": delegate,
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.ADMIN_DELEGATE.create(user),
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+    def admin_create_account(
+        self,
+        network: str,
+        alias: str,
+        owner: str,
+        owner_type: str,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/admin/accounts/``
+
+        Create a new account for a user.
+
+        :param network: The blockchain name.
+        :type network: str
+        :param alias: The account alias.
+        :type alias: str
+        :param owner: The account owner.
+        :type owner: str
+        :param owner_type: The account owner type. One of User or Organisation.
+        :type owner_type: str
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: an account object.
+        :rtype: dict
+        """
+
+        payload = {
+          "network": network,
+          "nickname": alias,
+          "alias": alias,
+          "owner": {
+            "type": owner_type,
+            "identifier": owner
+          }
+        }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.ADMIN_ACCOUNTS,
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})

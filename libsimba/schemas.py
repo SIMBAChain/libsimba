@@ -20,7 +20,7 @@
 
 import mimetypes
 
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Union
@@ -48,8 +48,8 @@ class AuthToken(BaseModel):
     @field_validator("expires")
     def do_datetime(cls, v: Union[datetime, str]):
         if isinstance(v, str):
-            return datetime.fromisoformat(v)
-        return v
+            v = datetime.fromisoformat(v)
+        return v.replace(tzinfo=timezone.utc)
 
 
 class ConnectionConfig(BaseModel):
@@ -64,7 +64,8 @@ class ConnectionConfig(BaseModel):
 class Login(BaseModel):
     auth_flow: AuthFlow
     client_id: str
-    client_secret: Optional[str]
+    client_secret: Optional[str] = None
+    provider: Optional[AuthProviderName] = None
 
     @field_validator("client_secret")
     def set_secret(cls, v: Optional[str], info: FieldValidationInfo) -> str:

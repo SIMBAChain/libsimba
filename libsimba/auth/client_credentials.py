@@ -21,13 +21,13 @@ import json
 import logging
 import os
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Optional, Tuple
 
 from httpx import BasicAuth
 from libsimba.auth import AuthProvider
 from libsimba.config import settings
-from libsimba.schemas import AuthProviderName, AuthToken, ConnectionConfig
+from libsimba.schemas import AuthProviderName, AuthToken, ConnectionConfig, Login
 from libsimba.utils import Path, async_http_client, build_url, http_client
 
 
@@ -44,14 +44,21 @@ class ClientCredentials(AuthProvider):
             self.registry: Dict[AuthProviderName, AuthProvider] = {}
             ad = BlocksAuthProvider()
             kc = KcAuthProvider()
+            pc = PlatformAuthProvider()
             self.registry[ad.provider()] = ad
             self.registry[kc.provider()] = kc
+            self.registry[pc.provider()] = pc
 
-    def do_login(self, client_id: str) -> Tuple[Optional[AuthToken], AuthProvider]:
-        provider = self.registry.get(settings().AUTH_PROVIDER)
+    def do_login(
+        self,
+        client_id: str,
+        auth_provider: Optional[AuthProviderName] = None
+    ) -> Tuple[Optional[AuthToken], AuthProvider]:
+        provider_name = auth_provider or settings().AUTH_PROVIDER
+        provider = self.registry.get(provider_name)
         if not provider:
             raise ValueError(
-                f"No provider found for provider type: {settings().AUTH_PROVIDER}"
+                f"No provider found for provider type: {provider}"
             )
         token = self.get_cached_token(client_id=client_id)
         return token, provider
@@ -61,42 +68,38 @@ class ClientCredentials(AuthProvider):
 
     def login_sync(
         self,
-        client_id: str,
-        client_secret: str,
+        login: Login,
         headers: Dict[str, Any],
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
         if not headers.get(self.header):
-            token, provider = self.do_login(client_id=client_id)
+            token, provider = self.do_login(client_id=login.client_id, auth_provider=login.provider)
             if not token:
                 token = provider.login_sync(
-                    client_id=client_id,
-                    client_secret=client_secret,
+                    login=login,
                     headers=headers,
                     config=config,
                 )
             self.add_header(token=token, headers=headers)
-            self.cache_token(client_id=client_id, token=token)
+            self.cache_token(client_id=login.client_id, token=token)
             return token
 
     async def login(
         self,
-        client_id: str,
-        client_secret: str,
+        login: Login,
         headers: Dict[str, Any],
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
         if not headers.get(self.header):
-            token, provider = self.do_login(client_id=client_id)
+            token, provider = self.do_login(client_id=login.client_id, auth_provider=login.provider)
             if not token:
                 token = await provider.login(
-                    client_id=client_id,
-                    client_secret=client_secret,
+                    login=login,
                     headers=headers,
                     config=config,
                 )
             self.add_header(token=token, headers=headers)
-            self.cache_token(client_id=client_id, token=token)
+            self.cache_token(client_id=login.client_id, token=token)
             return token
 
     def token_expired(self, token: AuthToken, offset: int = 60) -> bool:
@@ -109,7 +112,7 @@ class ClientCredentials(AuthProvider):
         :return:
         """
 
-        now_w_offset = datetime.utcnow() + timedelta(seconds=offset)
+        now_w_offset = datetime.now(tz=timezone.utc) + timedelta(seconds=offset)
         expiry = token.expires
         if now_w_offset >= expiry:
             logger.debug(
@@ -231,19 +234,18 @@ class KcAuthProvider(ClientCredentials):
 
     async def login_sync(
         self,
-        client_id: str,
-        client_secret: str,
+        login: Login,
         headers: Dict[str, Any],
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
         data = {
-            "client_id": client_id,
-            "client_secret": client_secret,
+            "client_id": login.client_id,
+            "client_secret": login.client_secret,
             "grant_type": "client_credentials",
             "scope": settings().AUTH_SCOPE or "email profile roles web-origins",
         }
         sso_host = "{}/auth/realms/{}/protocol/openid-connect/token".format(
-            settings().BASE_AUTH_URL, settings().AUTH_REALM
+            settings().AUTH_BASE_URL, settings().AUTH_REALM
         )
         with http_client(config=config) as client:
             r = client.post(
@@ -258,7 +260,7 @@ class KcAuthProvider(ClientCredentials):
                 "token": resp["access_token"],
                 "type": resp["token_type"],
                 "expires": (
-                    datetime.utcnow() + timedelta(seconds=int(resp["expires_in"]))
+                    datetime.now(tz=timezone.utc) + timedelta(seconds=int(resp["expires_in"]))
                 ),
             }
             return AuthToken(**data)
@@ -268,20 +270,19 @@ class KcAuthProvider(ClientCredentials):
 
     async def login(
         self,
-        client_id: str,
-        client_secret: str,
+        login: Login,
         headers: Dict[str, Any],
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
         data = {
-            "client_id": client_id,
-            "client_secret": client_secret,
+            "client_id": login.client_id,
+            "client_secret": login.client_secret,
             "grant_type": "client_credentials",
             "scope": settings().SCOPE or "email profile roles web-origins",
         }
         try:
             sso_host = "{}/auth/realms/{}/protocol/openid-connect/token".format(
-                settings().AUTH_BASE_URL, settings().AUTH_REALM_ID
+                settings().AUTH_BASE_URL, settings().AUTH_REALM
             )
             async with async_http_client(config=config) as client:
                 r = await client.post(
@@ -295,7 +296,7 @@ class KcAuthProvider(ClientCredentials):
                 "token": resp["access_token"],
                 "type": resp["token_type"],
                 "expires": (
-                    datetime.utcnow() + timedelta(seconds=int(resp["expires_in"]))
+                    datetime.now(tz=timezone.utc) + timedelta(seconds=int(resp["expires_in"]))
                 ),
             }
             return AuthToken(**data)
@@ -314,13 +315,12 @@ class BlocksAuthProvider(ClientCredentials):
 
     async def login(
         self,
-        client_id: str,
-        client_secret: str,
+        login: Login,
         headers: Dict[str, Any],
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
         try:
-            auth = BasicAuth(client_id, client_secret)
+            auth = BasicAuth(login.client_id, login.client_secret)
             data = {"grant_type": "client_credentials"}
             async with async_http_client(config=config) as client:
                 token_response = await client.post(
@@ -334,7 +334,7 @@ class BlocksAuthProvider(ClientCredentials):
                 "token": resp["access_token"],
                 "type": resp["token_type"],
                 "expires": (
-                    datetime.utcnow() + timedelta(seconds=int(resp["expires_in"]))
+                    datetime.now(tz=timezone.utc) + timedelta(seconds=int(resp["expires_in"]))
                 ),
             }
             return AuthToken(**data)
@@ -344,13 +344,12 @@ class BlocksAuthProvider(ClientCredentials):
 
     def login_sync(
         self,
-        client_id: str,
-        client_secret: str,
+        login: Login,
         headers: Dict[str, Any],
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
         try:
-            auth = BasicAuth(client_id, client_secret)
+            auth = BasicAuth(login.client_id, login.client_secret)
             data = {"grant_type": "client_credentials"}
             with http_client(config=config) as client:
                 token_response = client.post(
@@ -364,10 +363,77 @@ class BlocksAuthProvider(ClientCredentials):
                 "token": resp["access_token"],
                 "type": resp["token_type"],
                 "expires": (
-                    datetime.utcnow() + timedelta(seconds=int(resp["expires_in"]))
+                    datetime.now(tz=timezone.utc) + timedelta(seconds=int(resp["expires_in"]))
                 ),
             }
             return AuthToken(**data)
         except Exception as e:
             logger.warning("[BlocksAuthProvider] :: Error fetching token: {}".format(e))
+            raise e
+
+
+class PlatformAuthProvider(ClientCredentials):
+
+    def __init__(self):
+        super().__init__(do_init=False)
+
+    def provider(self) -> AuthProviderName:
+        return AuthProviderName.PLAT
+
+    async def login(
+        self,
+        login: Login,
+        headers: Dict[str, Any],
+        config: ConnectionConfig = None,
+    ) -> Optional[AuthToken]:
+        try:
+            data = {
+                "grant_type": "client_credentials",
+                "client_id": login.client_id,
+                "client_secret": login.client_secret
+            }
+            async with async_http_client(config=config) as client:
+                token_response = await client.post(
+                    f"{settings().AUTH_BASE_URL}/oauth/token",
+                    data=data,
+                )
+                token_response.raise_for_status()
+                resp = token_response.json()
+            data = {
+                "token": resp["access_token"],
+                "type": resp["token_type"],
+                "expires": datetime.fromtimestamp(resp["expires_at"], tz=timezone.utc),
+            }
+            return AuthToken(**data)
+        except Exception as e:
+            logger.warning("[PlatformAuthProvider] :: Error fetching token: {}".format(e))
+            raise e
+
+    def login_sync(
+        self,
+        login: Login,
+        headers: Dict[str, Any],
+        config: ConnectionConfig = None,
+    ) -> Optional[AuthToken]:
+        try:
+            data = {
+                "grant_type": "client_credentials",
+                "client_id": login.client_id,
+                "client_secret": login.client_secret
+            }
+            with http_client(config=config) as client:
+                token_response = client.post(
+                    f"{settings().AUTH_BASE_URL}/oauth/token",
+                    data=data,
+                )
+                token_response.raise_for_status()
+                resp = token_response.json()
+            data = {
+                "token": resp["access_token"],
+                "type": resp["token_type"],
+                "expires": datetime.fromtimestamp(resp["expires_at"], tz=timezone.utc),
+            }
+            return AuthToken(**data)
+        except Exception as e:
+            logger.warning("[PlatformAuthProvider] :: Error fetching token: {}".format(e))
             raise e

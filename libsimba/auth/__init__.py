@@ -23,7 +23,7 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 
-from libsimba.schemas import AuthProviderName, AuthToken, ConnectionConfig
+from libsimba.schemas import AuthProviderName, AuthToken, ConnectionConfig, Login
 
 
 logger = logging.getLogger(__name__)
@@ -37,8 +37,7 @@ class AuthProvider(ABC):
     @abstractmethod
     async def login(
         self,
-        client_id: str,
-        client_secret: str,
+        login: Login,
         headers: Dict[str, Any],
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
@@ -47,8 +46,7 @@ class AuthProvider(ABC):
     @abstractmethod
     def login_sync(
         self,
-        client_id: str,
-        client_secret: str,
+        login: Login,
         headers: Dict[str, Any],
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
