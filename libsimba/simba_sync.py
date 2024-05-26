@@ -2217,7 +2217,11 @@ class SimbaSync:
                 )
                 if owner_identifier:
                     params.add_filter(
-                        FieldFilter(field="owner_identifier", op=FilterOp.EQ, value=owner_identifier)
+                        FieldFilter(
+                            field="owner_identifier",
+                            op=FilterOp.EQ,
+                            value=owner_identifier,
+                        )
                     )
             if alias:
                 params.add_filter(
@@ -2706,6 +2710,30 @@ class SimbaSync:
             login=login,
         ).send_sync(config=config, json_payload=payload, headers=headers or {})
 
+    def get_secrets(
+        self,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> List[dict]:
+        """
+        GET ``/user/api_applications/``
+
+        Get user secrets.
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: client secrets
+        :rtype: list
+        """
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.USER_SECRET,
+            login=login,
+        ).retrieve_sync(config=config, headers=headers or {})
+
     def admin_set_delegate(
         self,
         user: str,
@@ -2773,13 +2801,10 @@ class SimbaSync:
         """
 
         payload = {
-          "network": network,
-          "nickname": alias,
-          "alias": alias,
-          "owner": {
-            "type": owner_type,
-            "identifier": owner
-          }
+            "network": network,
+            "nickname": alias,
+            "alias": alias,
+            "owner": {"type": owner_type, "identifier": owner},
         }
         return SimbaRequest(
             method="POST",

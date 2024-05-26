@@ -50,16 +50,12 @@ class ClientCredentials(AuthProvider):
             self.registry[pc.provider()] = pc
 
     def do_login(
-        self,
-        client_id: str,
-        auth_provider: Optional[AuthProviderName] = None
+        self, client_id: str, auth_provider: Optional[AuthProviderName] = None
     ) -> Tuple[Optional[AuthToken], AuthProvider]:
         provider_name = auth_provider or settings().AUTH_PROVIDER
         provider = self.registry.get(provider_name)
         if not provider:
-            raise ValueError(
-                f"No provider found for provider type: {provider}"
-            )
+            raise ValueError(f"No provider found for provider type: {provider}")
         token = self.get_cached_token(client_id=client_id)
         return token, provider
 
@@ -73,7 +69,9 @@ class ClientCredentials(AuthProvider):
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
         if not headers.get(self.header):
-            token, provider = self.do_login(client_id=login.client_id, auth_provider=login.provider)
+            token, provider = self.do_login(
+                client_id=login.client_id, auth_provider=login.provider
+            )
             if not token:
                 token = provider.login_sync(
                     login=login,
@@ -91,7 +89,9 @@ class ClientCredentials(AuthProvider):
         config: ConnectionConfig = None,
     ) -> Optional[AuthToken]:
         if not headers.get(self.header):
-            token, provider = self.do_login(client_id=login.client_id, auth_provider=login.provider)
+            token, provider = self.do_login(
+                client_id=login.client_id, auth_provider=login.provider
+            )
             if not token:
                 token = await provider.login(
                     login=login,
@@ -260,7 +260,8 @@ class KcAuthProvider(ClientCredentials):
                 "token": resp["access_token"],
                 "type": resp["token_type"],
                 "expires": (
-                    datetime.now(tz=timezone.utc) + timedelta(seconds=int(resp["expires_in"]))
+                    datetime.now(tz=timezone.utc)
+                    + timedelta(seconds=int(resp["expires_in"]))
                 ),
             }
             return AuthToken(**data)
@@ -296,7 +297,8 @@ class KcAuthProvider(ClientCredentials):
                 "token": resp["access_token"],
                 "type": resp["token_type"],
                 "expires": (
-                    datetime.now(tz=timezone.utc) + timedelta(seconds=int(resp["expires_in"]))
+                    datetime.now(tz=timezone.utc)
+                    + timedelta(seconds=int(resp["expires_in"]))
                 ),
             }
             return AuthToken(**data)
@@ -334,7 +336,8 @@ class BlocksAuthProvider(ClientCredentials):
                 "token": resp["access_token"],
                 "type": resp["token_type"],
                 "expires": (
-                    datetime.now(tz=timezone.utc) + timedelta(seconds=int(resp["expires_in"]))
+                    datetime.now(tz=timezone.utc)
+                    + timedelta(seconds=int(resp["expires_in"]))
                 ),
             }
             return AuthToken(**data)
@@ -363,7 +366,8 @@ class BlocksAuthProvider(ClientCredentials):
                 "token": resp["access_token"],
                 "type": resp["token_type"],
                 "expires": (
-                    datetime.now(tz=timezone.utc) + timedelta(seconds=int(resp["expires_in"]))
+                    datetime.now(tz=timezone.utc)
+                    + timedelta(seconds=int(resp["expires_in"]))
                 ),
             }
             return AuthToken(**data)
@@ -390,7 +394,7 @@ class PlatformAuthProvider(ClientCredentials):
             data = {
                 "grant_type": "client_credentials",
                 "client_id": login.client_id,
-                "client_secret": login.client_secret
+                "client_secret": login.client_secret,
             }
             async with async_http_client(config=config) as client:
                 token_response = await client.post(
@@ -406,7 +410,9 @@ class PlatformAuthProvider(ClientCredentials):
             }
             return AuthToken(**data)
         except Exception as e:
-            logger.warning("[PlatformAuthProvider] :: Error fetching token: {}".format(e))
+            logger.warning(
+                "[PlatformAuthProvider] :: Error fetching token: {}".format(e)
+            )
             raise e
 
     def login_sync(
@@ -419,7 +425,7 @@ class PlatformAuthProvider(ClientCredentials):
             data = {
                 "grant_type": "client_credentials",
                 "client_id": login.client_id,
-                "client_secret": login.client_secret
+                "client_secret": login.client_secret,
             }
             with http_client(config=config) as client:
                 token_response = client.post(
@@ -435,5 +441,7 @@ class PlatformAuthProvider(ClientCredentials):
             }
             return AuthToken(**data)
         except Exception as e:
-            logger.warning("[PlatformAuthProvider] :: Error fetching token: {}".format(e))
+            logger.warning(
+                "[PlatformAuthProvider] :: Error fetching token: {}".format(e)
+            )
             raise e
