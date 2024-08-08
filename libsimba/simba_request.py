@@ -561,7 +561,7 @@ class SimbaRequest(object):
         self,
         headers: Optional[dict] = None,
         json_payload: Optional[dict] = None,
-        files: FileDict = None,
+        files: Optional[FileDict] = None,
         config: ConnectionConfig = None,
     ) -> dict:
         """
@@ -618,6 +618,12 @@ class SimbaRequest(object):
                         json=json_payload,
                         follow_redirects=True,
                     )
+            elif self.method == "DELETE":
+                response = await async_client.delete(
+                    self.url,
+                    headers=headers,
+                    follow_redirects=True,
+                )
             return self._process_response(response)
 
     def _process_response(self, response: Response) -> dict:
