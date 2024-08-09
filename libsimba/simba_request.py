@@ -637,6 +637,10 @@ class SimbaRequest(object):
             if self._response.status_code:
                 self._status = self._response.status_code
 
+            # response.json does not properly handle DELETE, when response.content is not present
+            if not response.content:
+                response._content = b'{}'
+
             json_response = response.json()
             logger.info(
                 self.log_me(
