@@ -19,6 +19,7 @@
 #  THE SOFTWARE.
 import asyncio
 import base64
+import json
 import logging
 
 from typing import Any, AsyncGenerator, List, Optional, Tuple, Union
@@ -1487,5 +1488,85 @@ class Simba(SimbaSync):
         return await SimbaRequest(
             method="POST",
             endpoint=Path.ADMIN_ACCOUNTS,
+            login=login,
+        ).send(config=config, json_payload=payload, headers=headers or {})
+
+    async def admin_account_sign(
+        self,
+        network: str,
+        alias: str,
+        owner_identifier: str,
+        owner_type: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        user_identifier: Optional[str] = None,
+        user_type: Optional[str] = None,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        if owner_type == "Organisation" and (not user_identifier or not user_type):
+            raise ValueError("Owner is an org but user or user type is not given.")
+        payload = {
+            "account": {
+                "identifier": {
+                    "type": "Alias",
+                    "value": alias
+                },
+                "owner": {
+                    "type": owner_type,
+                    "identifier": owner_identifier
+                }
+            },
+            "data": {
+                "input_pairs": [list(t) for t in input_pairs],
+                "hash_message": hash_message,
+            }
+        }
+        if owner_type == "Organisation":
+            payload["account"]["user"] = {
+                    "type": user_type,
+                    "identifier": user_identifier
+                }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.ADMIN_BLOCKCHAIN_SIGN.create(network),
+            login=login,
+        ).send(config=config, json_payload=payload, headers=headers or {})
+
+    async def admin_account_validate(
+        self,
+        network: str,
+        alias: str,
+        owner_identifier: str,
+        owner_type: str,
+        user_identifier: Optional[str] = None,
+        user_type: Optional[str] = None,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        if owner_type == "Organisation" and (not user_identifier or not user_type):
+            raise ValueError("Owner is an org but user or user type is not given.")
+        payload = {
+            "account": {
+                "identifier": {
+                    "type": "Alias",
+                    "value": alias
+                },
+                "owner": {
+                    "type": owner_type,
+                    "identifier": owner_identifier
+                }
+            }
+        }
+        if owner_type == "Organisation":
+            payload["account"]["user"] = {
+                    "type": user_type,
+                    "identifier": user_identifier
+                }
+        return await SimbaRequest(
+            method="POST",
+            endpoint=Path.ADMIN_BLOCKCHAIN_VALIDATE.create(network),
             login=login,
         ).send(config=config, json_payload=payload, headers=headers or {})

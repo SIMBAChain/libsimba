@@ -59,6 +59,8 @@ class Path(str, Enum):
     USER_FUND_ADDRESS = "/user/account/{}/fund/"
     USER_ADDRESS_BALANCE = "/user/account/{}/balance/{}/"
     ADMIN_WALLET_SET = "/admin/users/{}/wallet/set/"
+    ADMIN_BLOCKCHAIN_SIGN = "/admin/blockchain/{}/sign/"
+    ADMIN_BLOCKCHAIN_VALIDATE = "/admin/blockchain/{}/validate/"
     USER_WALLET_SET = "/user/wallet/set/"
     USER_WALLET = "/user/wallet/"
     USER_ACCOUNTS = "/user/accounts/"

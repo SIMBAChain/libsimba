@@ -2811,3 +2811,139 @@ class SimbaSync:
             endpoint=Path.ADMIN_ACCOUNTS,
             login=login,
         ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+    def admin_account_sign(
+        self,
+        network: str,
+        alias: str,
+        owner_identifier: str,
+        owner_type: str,
+        input_pairs: List[Tuple[str, Any]],
+        hash_message: Optional[bool] = False,
+        user_identifier: Optional[str] = None,
+        user_type: Optional[str] = None,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/admin/blockchain/{name}/sign/``
+
+        Sign on behalf of a user.
+
+        :param network: The blockchain name.
+        :type network: str
+        :param alias: The account alias.
+        :type alias: str
+        :param owner_identifier: The account owner.
+        :type owner_identifier: str
+        :param owner_type: The account owner type. One of User or Organisation.
+        :type owner_type: str
+        :param user_identifier: The requesting user.
+        :type user_identifier: str
+        :param user_type: The requesting user type. One of User or SimbaIdentity. Required if owner is an organisation.
+        :type user_type: Optional[str]
+        :param input_pairs: A list of tuples defining the data type and data to sign.
+        :type input_pairs: List[Tuple(str, Any)]
+        :param hash_message: Whether to hash the message before signing or not
+        :type hash_message: Optional[bool]. Default False
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a signed data structure.
+        :rtype: dict
+        """
+        if owner_type == "Organisation" and (not user_identifier or not user_type):
+            raise ValueError("Owner is an org but user or user type is not given.")
+        payload = {
+            "account": {
+                "identifier": {
+                    "type": "Alias",
+                    "value": alias
+                },
+                "owner": {
+                    "type": owner_type,
+                    "identifier": owner_identifier
+                }
+            },
+            "data": {
+                "input_pairs": [list(t) for t in input_pairs],
+                "hash_message": hash_message,
+            }
+        }
+        if owner_type == "Organisation":
+            payload["account"]["user"] = {
+                    "type": user_type,
+                    "identifier": user_identifier
+                }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.ADMIN_BLOCKCHAIN_SIGN.create(network),
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+    def admin_account_validate(
+        self,
+        network: str,
+        alias: str,
+        owner_identifier: str,
+        owner_type: str,
+        user_identifier: Optional[str] = None,
+        user_type: Optional[str] = None,
+        headers: Optional[dict] = None,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        POST ``/admin/blockchain/{name}/validate/``
+
+        Validate the user has access to the given wallet.
+
+        :param network: The blockchain name.
+        :type network: str
+        :param alias: The account alias.
+        :type alias: str
+        :param owner_identifier: The account owner.
+        :type owner_identifier: str
+        :param owner_type: The account owner type. One of User or Organisation.
+        :type owner_type: str
+        :param user_identifier: The requesting user.
+        :type user_identifier: str
+        :param user_type: The requesting user type. One of User or SimbaIdentity. Required if owner is an organisation.
+        :type user_type: Optional[str]
+
+        :Keyword Arguments:
+            * **headers** (`Optional[dict]`) - additional http headers
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: a signed data structure.
+        :rtype: dict
+        """
+        if owner_type == "Organisation" and (not user_identifier or not user_type):
+            raise ValueError("Owner is an org but user or user type is not given.")
+        payload = {
+            "account": {
+                "identifier": {
+                    "type": "Alias",
+                    "value": alias
+                },
+                "owner": {
+                    "type": owner_type,
+                    "identifier": owner_identifier
+                }
+            }
+        }
+        if owner_type == "Organisation":
+            payload["account"]["user"] = {
+                    "type": user_type,
+                    "identifier": user_identifier
+                }
+        return SimbaRequest(
+            method="POST",
+            endpoint=Path.ADMIN_BLOCKCHAIN_VALIDATE.create(network),
+            login=login,
+        ).send_sync(config=config, json_payload=payload, headers=headers or {})
+
+
