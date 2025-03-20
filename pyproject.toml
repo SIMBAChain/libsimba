@@ -1,14 +1,21 @@
-[tool.poetry]
+[project]
 name = "libsimba"
-version = "1.7.0"
+version = "1.7.1"
 description = "libsimba is a library simplifying the use of SIMBAChain Blocks APIs."
 authors = [
-    "SIMBA Chain Inc."
+    { name = "SIMBA Chain Inc." }
 ]
-
+readme = "README.md"
 packages = [
     { include = "libsimba" }
 ]
+license = "MIT"
+requires-python = ">=3.9,<4.0"
+
+[project.urls]
+homepage = "https://github.com/SIMBAChain/libsimba"
+repository = "https://github.com/SIMBAChain/libsimba"
+documentation = "https://simbachain.github.io/libsimba/"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
