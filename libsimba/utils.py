@@ -44,7 +44,7 @@ class Path(str, Enum):
     APP_CONTRACT = "/v2/apps/{}/contract/{}/"
     APP_CONTRACTS = "/v2/apps/{}/contracts/"
     CONTRACT_TXNS = "/v2/apps/{}/contract/{}/transactions/"
-    CONTRACT_TXN = "/v2/apps/{}/contract/{}/transaction/{}/"
+    CONTRACT_TXN = "/v2/apps/{}/contract/{}/transactions/{}/"
     CONTRACTS = "/v2/apps/{}/contracts/"
     VALIDATE_BUNDLE = "/v2/apps/{}/validate/{}/{}/"
     BUNDLE = "/v2/apps/{}/contract/{}/bundle/{}/"

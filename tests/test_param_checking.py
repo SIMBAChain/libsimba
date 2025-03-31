@@ -236,7 +236,7 @@ class ParamTestCase(unittest.TestCase):
             ex = e
         self.assertIsNotNone(ex)
         formatted = p.create("app", "org", "0x1234")
-        self.assertEqual("/v2/apps/app/contract/org/transaction/0x1234/", formatted)
+        self.assertEqual("/v2/apps/app/contract/org/transactions/0x1234/", formatted)
 
     def test_query_serialization(self):
         params = SearchFilter()

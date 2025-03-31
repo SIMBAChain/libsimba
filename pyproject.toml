@@ -1,6 +1,6 @@
 [project]
 name = "libsimba"
-version = "1.7.1"
+version = "1.7.2"
 description = "libsimba is a library simplifying the use of SIMBAChain Blocks APIs."
 authors = [
     { name = "SIMBA Chain Inc." }
@@ -10,7 +10,6 @@ packages = [
     { include = "libsimba" }
 ]
 license = "MIT"
-requires-python = ">=3.9,<4.0"
 
 [project.urls]
 homepage = "https://github.com/SIMBAChain/libsimba"
@@ -60,6 +59,6 @@ live_async = { cmd = "pytest --pyargs tests/test_live_async.py --junitxml=junit.
 live_sync = { cmd = "pytest --pyargs tests/test_live_sync.py --junitxml=junit.xml --verbose", help = "Run live async tests" }
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0.0", "setuptools"]
 build-backend = "poetry.core.masonry.api"
 
