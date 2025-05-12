@@ -25,7 +25,7 @@ from datetime import datetime
 from email.utils import parsedate_to_datetime
 from enum import Enum
 from time import sleep
-from typing import Dict, Iterable, Mapping, Optional, Union
+from typing import Dict, Iterable, Mapping, Optional, Type, Union
 from urllib.parse import urlencode, urlparse, urlunparse
 
 import httpx
@@ -236,7 +236,9 @@ class RetryTransport(httpx.AsyncBaseTransport, httpx.BaseTransport):
         return response
 
 
-def async_http_client(config: schemas.ConnectionConfig = None) -> httpx.AsyncClient:
+def async_http_client(
+            config: schemas.ConnectionConfig = None
+        ) -> httpx.AsyncClient:
     """
     Create an async HTTPX client
     :param config: a connection config
@@ -250,14 +252,20 @@ def async_http_client(config: schemas.ConnectionConfig = None) -> httpx.AsyncCli
         )
     transport = RetryTransport(
         AsyncHTTPTransport(
-            retries=config.connection_retries, verify=config.verify, http2=config.http2
+            retries=config.connection_retries,
+            verify=config.verify,
+            http2=config.http2
         ),
         max_attempts=config.max_attempts,
     )
-    return httpx.AsyncClient(timeout=config.timeout, transport=transport)
+    return config.async_httpx_class(timeout=config.timeout,
+                                    transport=transport)
 
 
-def http_client(config: schemas.ConnectionConfig = None) -> httpx.Client:
+def http_client(
+            config: schemas.ConnectionConfig = None,
+            cls: Optional[Type[httpx.Client]] = httpx.Client
+        ) -> httpx.Client:
     """
     Create an HTTPX client
     :param config: a connection config
@@ -271,11 +279,13 @@ def http_client(config: schemas.ConnectionConfig = None) -> httpx.Client:
         )
     transport = RetryTransport(
         HTTPTransport(
-            retries=config.connection_retries, verify=config.verify, http2=config.http2
+            retries=config.connection_retries,
+            verify=config.verify,
+            http2=config.http2
         ),
         max_attempts=config.max_attempts,
     )
-    return httpx.Client(timeout=config.timeout, transport=transport)
+    return config.httpx_class(timeout=config.timeout, transport=transport)
 
 
 def build_url(base_api_url: str, path: str, query_dict: Optional[dict]):

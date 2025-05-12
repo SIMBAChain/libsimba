@@ -23,9 +23,11 @@ import mimetypes
 from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
-from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Union
+from typing import IO, Any, AnyStr, Dict, List, Optional, Tuple, Type, Union
 
 from pydantic import BaseModel, FieldValidationInfo, field_validator, model_validator
+
+import httpx
 
 
 class AuthFlow(str, Enum):
@@ -59,6 +61,8 @@ class ConnectionConfig(BaseModel):
     http2: bool = False
     # a path to a cert file or false to turn off verification
     verify: Optional[Union[bool, str]] = None
+    httpx_class: Optional[Type[httpx.Client]] = httpx.Client
+    async_httpx_class: Optional[Type[httpx.AsyncClient]] = httpx.AsyncClient
 
 
 class Login(BaseModel):
