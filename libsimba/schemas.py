@@ -61,8 +61,11 @@ class ConnectionConfig(BaseModel):
     http2: bool = False
     # a path to a cert file or false to turn off verification
     verify: Optional[Union[bool, str]] = None
+    
     httpx_class: Optional[Type[httpx.Client]] = httpx.Client
+    httpx_extra_kwargs: Optional[Dict[str, Any]] = {}
     async_httpx_class: Optional[Type[httpx.AsyncClient]] = httpx.AsyncClient
+    async_httpx_extra_kwargs: Optional[Dict[str, Any]] = {}
 
 
 class Login(BaseModel):

@@ -259,7 +259,8 @@ def async_http_client(
         max_attempts=config.max_attempts,
     )
     return config.async_httpx_class(timeout=config.timeout,
-                                    transport=transport)
+                                    transport=transport,
+                                    **config.async_httpx_extra_kwargs)
 
 
 def http_client(
@@ -285,7 +286,9 @@ def http_client(
         ),
         max_attempts=config.max_attempts,
     )
-    return config.httpx_class(timeout=config.timeout, transport=transport)
+    return config.httpx_class(timeout=config.timeout, 
+                              transport=transport, 
+                              **config.httpx_extra_kwargs)
 
 
 def build_url(base_api_url: str, path: str, query_dict: Optional[dict]):
