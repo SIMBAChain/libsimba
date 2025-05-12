@@ -124,8 +124,10 @@ class RetryTransport(httpx.AsyncBaseTransport, httpx.BaseTransport):
         respect_retry_after_header: bool = True,
         retryable_methods: Iterable[str] = None,
         retry_status_codes: Iterable[int] = None,
+        close_connection_after_use: bool = True,
     ) -> None:
         self.wrapped_transport = wrapped_transport
+        self.close_connection_after_use = close_connection_after_use
         if jitter_ratio < 0 or jitter_ratio > 0.5:
             raise ValueError(
                 f"jitter ratio should be between 0 and 0.5, actual {jitter_ratio}"
@@ -197,7 +199,9 @@ class RetryTransport(httpx.AsyncBaseTransport, httpx.BaseTransport):
         while (
             remaining_attempts > 0 and response.status_code in self.retry_status_codes
         ):
-            response.close()
+            if self.close_connection_after_use:
+                response.close()
+                
             sleep_time = self._calculate_sleep(attempts_made, response.headers)
             sleep(sleep_time)
             response = self.wrapped_transport.handle_request(request)
@@ -257,6 +261,7 @@ def async_http_client(
             http2=config.http2
         ),
         max_attempts=config.max_attempts,
+        close_connection_after_use=config.close_connection_after_use,
     )
     return config.async_httpx_class(timeout=config.timeout,
                                     transport=transport,
@@ -282,9 +287,11 @@ def http_client(
         HTTPTransport(
             retries=config.connection_retries,
             verify=config.verify,
-            http2=config.http2
+            http2=config.http2,
+            close_connection_after_use=config.close_connection_after_use,
         ),
         max_attempts=config.max_attempts,
+        close_connection_after_use=config.close_connection_after_use,
     )
     return config.httpx_class(timeout=config.timeout, 
                               transport=transport, 

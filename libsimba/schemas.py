@@ -62,6 +62,8 @@ class ConnectionConfig(BaseModel):
     # a path to a cert file or false to turn off verification
     verify: Optional[Union[bool, str]] = None
     
+    close_connection_after_use: bool = True
+    
     httpx_class: Optional[Type[httpx.Client]] = httpx.Client
     httpx_extra_kwargs: Optional[Dict[str, Any]] = {}
     async_httpx_class: Optional[Type[httpx.AsyncClient]] = httpx.AsyncClient
