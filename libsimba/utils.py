@@ -288,7 +288,6 @@ def http_client(
             retries=config.connection_retries,
             verify=config.verify,
             http2=config.http2,
-            close_connection_after_use=config.close_connection_after_use,
         ),
         max_attempts=config.max_attempts,
         close_connection_after_use=config.close_connection_after_use,
