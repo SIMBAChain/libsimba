@@ -928,6 +928,32 @@ class SimbaSync:
             login=login,
         ).get_sync(config=config)
 
+    def get_transaction_by_id(
+        self,
+        org_name: str,
+        transaction_id: str,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        """
+        GET ``/v2/organisations/{org_name}/transactions/{transaction_id}/``
+
+        Get a transaction by id.
+
+        :param org_name: Organisation id or name
+        :param transaction_id: The ID of the transaction
+
+        :Keyword Arguments:
+            * **login** (`Optional[Login]`)
+            * **config** (`Optional[ConnectionConfig]`)
+        :return: A transaction
+        :rtype: dict
+        """
+        return GetRequest(
+            endpoint=Path.ORG_TXN.format(org_name, transaction_id),
+            login=login,
+        ).get_sync(config=config)
+
     def get_transactions_by_method(
         self,
         app_id: str,

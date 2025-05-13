@@ -1,6 +1,6 @@
 [project]
 name = "libsimba"
-version = "1.7.6"
+version = "1.7.7"
 description = "libsimba is a library simplifying the use of SIMBAChain Blocks APIs."
 authors = [
     { name = "SIMBA Chain Inc." }

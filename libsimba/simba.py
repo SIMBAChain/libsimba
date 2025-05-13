@@ -418,6 +418,18 @@ class Simba(SimbaSync):
             login=login,
         ).get(config=config)
 
+    async def get_transaction_by_id(
+        self,
+        org_name: str,
+        transaction_id: str,
+        login: Login = None,
+        config: ConnectionConfig = None,
+    ) -> dict:
+        return await GetRequest(
+            endpoint=Path.ORG_TXN.format(org_name, transaction_id),
+            login=login,
+        ).get(config=config)
+        
     async def get_transactions_by_method(
         self,
         app_id: str,
