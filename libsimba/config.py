@@ -118,15 +118,13 @@ libsimba_settings = SettingsObject()
 
 def settings(**kwargs) -> Settings:
     if libsimba_settings.instance is None:
-        log_file_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "logging.conf"
-        )
-        log_file = os.environ.get("SIMBA_LOG_CONFIG", log_file_path)
-        if log_file.endswith(".json"):
-            with open(log_file) as json_conf:
-                dictConfig(json.load(json_conf))
-        else:
-            fileConfig(log_file)
+        log_file = os.environ.get("SIMBA_LOG_CONFIG", None)
+        if log_file:
+            if log_file.endswith(".json"):
+                with open(log_file) as json_conf:
+                    dictConfig(json.load(json_conf))
+            else:
+                fileConfig(log_file, disable_existing_loggers=False)
         # create settings
         libsimba_settings.instance = Settings(**kwargs)
         logger = logging.getLogger("libsimba")
