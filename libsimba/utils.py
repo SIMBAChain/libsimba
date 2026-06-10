@@ -300,7 +300,11 @@ def http_client(
 def build_url(base_api_url: str, path: str, query_dict: Optional[dict]):
     query_dict = query_dict or {}
     url_parts = list(urlparse(base_api_url))
-    url_parts[2] = path
+    if url_parts[2].endswith("/"):
+        url_parts[2] = url_parts[2][:-1]
+    if not path.startswith("/"):
+        path = "/" + path
+    url_parts[2] = url_parts[2] + path
     url_parts[4] = urlencode(query_dict)
     return urlunparse(url_parts)
 

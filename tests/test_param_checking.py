@@ -15,7 +15,7 @@ with open(data) as md_file:
 
 metadata_pattern = re.compile(r".*/v2/apps/[\w-]+/contract/[\w-]+/\?format=json$")
 
-login_pattern = re.compile(r".*/o/token.*")
+login_pattern = re.compile(r".*/oauth/token")
 
 md_mock = respx.mock(assert_all_mocked=True, assert_all_called=False)
 

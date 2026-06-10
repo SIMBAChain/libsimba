@@ -5,7 +5,7 @@ from httpx import Response
 from libsimba import Login, AuthFlow, SimbaRequest
 import pytest
 
-login_pattern = re.compile(r".*/o/token.*")
+login_pattern = re.compile(r".*/oauth/token")
 
 block_mock = respx.mock(assert_all_mocked=True, assert_all_called=False)
 

@@ -403,10 +403,16 @@ class PlatformAuthProvider(ClientCredentials):
                 )
                 token_response.raise_for_status()
                 resp = token_response.json()
+            if resp.get("expires_at"):
+                expires = datetime.fromtimestamp(resp["expires_at"], tz=timezone.utc)
+            else:
+                expires = datetime.now(tz=timezone.utc) + timedelta(
+                seconds=int(resp["expires_in"])
+            )
             data = {
                 "token": resp["access_token"],
                 "type": resp["token_type"],
-                "expires": datetime.fromtimestamp(resp["expires_at"], tz=timezone.utc),
+                "expires": expires,
             }
             return AuthToken(**data)
         except Exception as e:
@@ -434,10 +440,16 @@ class PlatformAuthProvider(ClientCredentials):
                 )
                 token_response.raise_for_status()
                 resp = token_response.json()
+            if resp.get("expires_at"):
+                expires = datetime.fromtimestamp(resp["expires_at"], tz=timezone.utc)
+            else:
+                expires = datetime.now(tz=timezone.utc) + timedelta(
+                seconds=int(resp["expires_in"])
+            )
             data = {
                 "token": resp["access_token"],
                 "type": resp["token_type"],
-                "expires": datetime.fromtimestamp(resp["expires_at"], tz=timezone.utc),
+                "expires": expires,
             }
             return AuthToken(**data)
         except Exception as e:

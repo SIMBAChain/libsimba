@@ -59,7 +59,7 @@ class Settings(BaseSettings):
     """ Base URL of Auth provider """
     AUTH_FLOW: AuthFlow = AuthFlow.CLIENT_CREDENTIALS
     """ Authentication Flow. Currently fixed to client_credentials """
-    AUTH_PROVIDER: AuthProviderName = AuthProviderName.BLK
+    AUTH_PROVIDER: AuthProviderName = AuthProviderName.PLAT
     """ Auth provider. Blocks and KeyCloak are the options. Defaults to Blocks """
     AUTH_CLIENT_SECRET: str = ""
     """ Auth client secret """

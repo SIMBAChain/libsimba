@@ -42,25 +42,25 @@ def make_results(model: str, length: int = 3) -> dict:
     return {"count": length, "next": None, "results": ret}
 
 
-login_pattern = re.compile(r".*/o/token.*")
-org_pattern = re.compile(r".*/v2/organisations/[\w-]+/$")
-blockchains_pattern = re.compile(r".*/v2/organisations/[\w-]+/blockchains/$")
-storage_pattern = re.compile(r".*/v2/organisations/[\w-]+/storage/$")
-apps_pattern = re.compile(r".*/v2/organisations/[\w-]+/applications/$")
-app_pattern = re.compile(r".*/v2/organisations/[\w-]+/applications/[\w-]+/$")
-designs_pattern = re.compile(r".*/v2/organisations/[\w-]+/contract_designs/$")
-artifacts_pattern = re.compile(r".*/v2/organisations/[\w-]+/contract_artifacts/$")
-deployment_pattern = re.compile(r".*/v2/organisations/[\w-]+/deployments/[\w-]+/$")
-deployments_pattern = re.compile(r".*/v2/organisations/[\w-]+/deployments/$")
-libraries_pattern = re.compile(r".*/v2/organisations/[\w-]+/deployments/library/$")
-transaction_pattern = re.compile(r"/v2/organisations/[\w-]+/transactions/[\w-]+/$")
-method_pattern = re.compile(r"/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/$")
-query_method_pattern = re.compile(r"/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/\?.*$")
+login_pattern = re.compile(r".*/oauth/token")
+org_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/$")
+blockchains_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/blockchains/$")
+storage_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/storage/$")
+apps_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/applications/$")
+app_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/applications/[\w-]+/$")
+designs_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/contract_designs/$")
+artifacts_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/contract_artifacts/$")
+deployment_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/deployments/[\w-]+/$")
+deployments_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/deployments/$")
+libraries_pattern = re.compile(r".*/api/platform-service/v2/organisations/[\w-]+/deployments/library/$")
+transaction_pattern = re.compile(r"/api/platform-service/v2/organisations/[\w-]+/transactions/[\w-]+/$")
+method_pattern = re.compile(r"/api/platform-service/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/$")
+query_method_pattern = re.compile(r"/api/platform-service/v2/apps/[\w-]+/contract/[\w-]+/[\w-]+/\?.*$")
 
-abi_pattern = re.compile(r"/services/blockchains/.+/contracts/.+/abi/$")
-accounts_pattern = re.compile(r"/user/accounts/$")
-account_pattern = re.compile(r"/user/accounts/[\w-]+/$")
-accounts_sign_pattern = re.compile(r"/user/accounts/.+/sign/$")
+abi_pattern = re.compile(r"/api/platform-service/services/blockchains/.+/contracts/.+/abi/$")
+accounts_pattern = re.compile(r"/api/platform-service/user/accounts/$")
+account_pattern = re.compile(r"/api/platform-service/user/accounts/[\w-]+/$")
+accounts_sign_pattern = re.compile(r"/api/platform-service/user/accounts/.+/sign/$")
 
 
 block_mock = respx.mock(assert_all_mocked=True, assert_all_called=False)
@@ -72,7 +72,7 @@ login_route = block_mock.route(method="POST", url=login_pattern).mock(
     )
 )
 
-whoami_route = block_mock.route(method="GET", path="/user/whoami/").mock(
+whoami_route = block_mock.route(method="GET", path="/api/platform-service/user/whoami/").mock(
     return_value=Response(200, json=make_type("user"))
 )
 
